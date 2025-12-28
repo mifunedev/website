@@ -66,7 +66,7 @@ const TopNavbar = () => {
                   className="mr-2 rounded-full"
                 />
                 <span className="font-cormorant text-2xl font-medium tracking-wide text-foreground transition-colors duration-200 hover:text-muted-foreground">
-                  RUSKA AI
+                  RUSKA
                 </span>
               </a>
             </motion.div>

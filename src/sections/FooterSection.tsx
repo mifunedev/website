@@ -40,7 +40,7 @@ const FooterSection = () => {
                 />
               </div>
               <span className="ml-3 text-xl font-cormorant font-medium text-foreground">
-                RUSKA AI
+                RUSKA
               </span>
             </div>
             <p className="text-sm font-montserrat text-muted-foreground leading-relaxed">

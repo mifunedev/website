@@ -22,10 +22,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const APP_NAME = "ruska";
-const APP_DEFAULT_TITLE = "Ruska Labs - Be Present";
+const APP_DEFAULT_TITLE = "RUSKA - Steerable Harnesses for DeepAgents";
 const APP_TITLE_TEMPLATE = "%s | Ruska Labs";
 const APP_DESCRIPTION =
-  "Composable Agents Built on LangGraph Powered by MCP";
+  "Steerable Harnesses for DeepAgents";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
