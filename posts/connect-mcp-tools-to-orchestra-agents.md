@@ -230,4 +230,4 @@ This is how production agent systems work: dynamic tool registries, inline confi
 
 Orchestra is free to use during beta—no credit card required.
 
-[Build Now](https://chat.ruska.ai) | [GitHub](https://github.com/enso-labs/orchestra) | [Follow us on X](https://x.com/AiRuska)
+[Build Now](https://chat.ruska.ai) | [GitHub](https://github.com/ruska-ai/orchestra) | [Follow us on X](https://x.com/ruska_ai)

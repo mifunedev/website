@@ -53,7 +53,7 @@ const FooterSection = () => {
             <h3 className="text-foreground font-montserrat font-medium mb-4">Product</h3>
             <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <Link href="https://chat.ruska.ai/register" className="hover:text-foreground transition-colors duration-200">
+                <Link href="https://chat.ruska.ai" className="hover:text-foreground transition-colors duration-200">
                   Get Started
                 </Link>
               </li>

@@ -123,7 +123,7 @@ curl -X POST "https://chat.ruska.ai/api/llm/stream" \\
 - X/Twitter: https://x.com/ruska_ai
 - GitHub: https://github.com/ruska-ai
 - LinkedIn: https://www.linkedin.com/company/ruska-ai
-- Slack: https://join.slack.com/t/ruska-ai-workspace/shared_invite/zt-3l2lnevo6-hOe5ZeoAz~xj7CFAJk2bzg
+- Slack: https://join.slack.com/t/ruska-ai/shared_invite/zt-3l2lnevo6-hOe5ZeoAz~xj7CFAJk2bzg
 
 ## Contact
 For support and inquiries, visit https://ruska.ai or join our Slack community.

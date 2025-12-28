@@ -35,7 +35,7 @@ const SocialPage = () => {
       name: "Slack",
       handle: "Ruska Labs Workspace",
       icon: <FaSlack className="text-xl" />,
-      url: "https://join.slack.com/t/ruska-ai-workspace/shared_invite/zt-3l2lnevo6-hOe5ZeoAz~xj7CFAJk2bzg",
+      url: "https://join.slack.com/t/ruska-ai/shared_invite/zt-3l2lnevo6-hOe5ZeoAz~xj7CFAJk2bzg",
     },
     {
       name: "Website",

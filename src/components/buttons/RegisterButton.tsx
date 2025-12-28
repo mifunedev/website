@@ -20,7 +20,7 @@ export default function RegisterButton({
 
   return (
     <Link
-      href="https://chat.ruska.ai/register"
+      href="https://chat.ruska.ai"
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
     >
       {children}
