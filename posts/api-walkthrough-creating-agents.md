@@ -7,7 +7,7 @@ coverImage: "https://github.com/ruska-ai/static/blob/master/orchestra_api_guide.
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
-  linkedin:
+  linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
 Building production-grade AI agents is hard. This practical guide shows you, step-by-step, how to use Orchestra’s API to:

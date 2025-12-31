@@ -7,7 +7,7 @@ coverImage: "https://github.com/ruska-ai/static/blob/master/cursor_ruska_mcp.png
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
-  linkedin:
+  linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
 MCP (Model Context Protocol) is the open standard for connecting AI agents to external tools. Orchestra exposes a native MCP endpoint—and the best part? **The same config format works everywhere**: in your IDE, in the MCP Inspector, and directly in API calls.
