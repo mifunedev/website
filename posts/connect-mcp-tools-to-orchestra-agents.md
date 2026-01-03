@@ -3,7 +3,7 @@ title: "How to Connect MCP Tools to Orchestra Agents (Cursor, Claude Desktop, or
 date: "2025-12-25"
 excerpt: "A hands-on guide to using Orchestra's MCP endpoint with the MCP Inspector, Cursor, Claude Desktop, and the Orchestra API—complete with streaming examples and troubleshooting."
 categories: ["How-To", "MCP", "API Walkthrough", "Agent Automation"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/cursor_ruska_mcp.png?raw=true"
+coverImage: "https://github.com/ruska-ai/static/blob/master/blog/mcp.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"

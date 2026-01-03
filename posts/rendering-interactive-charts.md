@@ -3,7 +3,7 @@ title: "Rendering Interactive Charts with LangGraph and React"
 date: "2025-12-06"
 excerpt: "A deep dive into using content_and_artifact to stream rich visualizations from Python agents to React UIs."
 categories: ["Python", "LangGraph", "React", "Vite"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/enso_render_chart.png?raw=true"
+coverImage: "https://github.com/ruska-ai/static/blob/master/blog/charts.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://github.com/ruska-ai.png"

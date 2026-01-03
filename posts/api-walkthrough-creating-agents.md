@@ -3,7 +3,7 @@ title: "How to Build and Schedule a Real Production AI Agent with Orchestra’s 
 date: "2025-12-14"
 excerpt: "A hands-on, step-by-step guide to building, verifying, and scheduling a durable AI agent using Orchestra’s API—including tools, assistants, threads, and autonomous scheduling. Curl examples included!"
 categories: ["How-To", "API Walkthrough", "Agent Automation"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/orchestra_api_guide.png?raw=true"
+coverImage: "https://github.com/ruska-ai/static/blob/master/blog/scheduler.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
