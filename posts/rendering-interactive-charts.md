@@ -6,7 +6,8 @@ categories: ["Python", "LangGraph", "React", "Vite"]
 coverImage: "https://github.com/ruska-ai/static/blob/master/blog/charts.png?raw=true"
 author:
   name: "Ryan Eggleston"
-  picture: "https://github.com/ruska-ai.png"
+  picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
+  linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
 Building AI agents that can do more than just talk is the new frontier. At [Enso Labs](https://github.com/ruska-ai/orchestra), we're building **DeepAgents**—composed AI workflows that interact with complex tools and data.
