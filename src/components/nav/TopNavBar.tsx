@@ -34,6 +34,7 @@ const TopNavbar = () => {
   // Define menu items in one place for consistency
   const menuItems = [
     { href: "/blog", label: "Blog" },
+    { href: "/services", label: "Services" },
     { href: "#pricing", label: "Pricing" },
     { href: "#enterprise", label: "Enterprise" },
   ];
