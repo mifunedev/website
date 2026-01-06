@@ -10,7 +10,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 // CTA Button Link - Update this with your actual Calendly/Cal.com link
-const BOOKING_LINK = "https://cal.com/ryaneggz/discovery";
+const BOOKING_LINK = "https://cal.com/ryan-eggleston-wg9oqf/ai-audit";
 const EMAIL = "ryan@ruska.ai";
 
 // FAQ Data
@@ -171,37 +171,71 @@ export default function ServicesPage() {
       </header>
       <main className="bg-background">
         {/* Hero Section */}
-        <section className="relative flex min-h-screen flex-col justify-center px-4 pt-20">
+        <section className="relative flex min-h-screen flex-col px-4 pt-20">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-          <div className="relative mx-auto max-w-4xl text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6 text-5xl font-light leading-tight tracking-tight md:text-6xl lg:text-7xl"
-            >
-              <span className="font-space font-bold text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
-                Claude Code Automation Systems
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mx-auto mb-10 max-w-2xl font-montserrat text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
-            >
-              I set up Claude Code as your AI employee.
-              <br />
-              Then I maintain it.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <CTAButton>Book a Discovery Call</CTAButton>
-            </motion.div>
+          <div className="relative mx-auto flex flex-1 max-w-4xl items-center text-center">
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="mb-6 text-5xl font-light leading-tight tracking-tight md:text-6xl lg:text-7xl"
+              >
+                <span className="font-space font-bold text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+                  Claude Code Automation Systems
+                </span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mx-auto mb-10 max-w-2xl font-montserrat text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
+              >
+                I set up Claude Code as your AI employee.
+                <br />
+                Then I maintain it.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <CTAButton>Book a Discovery Call</CTAButton>
+              </motion.div>
+            </div>
           </div>
+
+          {/* Bottom scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="relative flex justify-center pb-8"
+          >
+            <div className="flex flex-col items-center gap-2">
+              <span className="font-montserrat text-xs uppercase tracking-wider text-gray-600">
+                Scroll to explore
+              </span>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <svg
+                  className="h-6 w-6 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </motion.div>
+            </div>
+          </motion.div>
         </section>
 
         {/* Problem Section */}
@@ -505,7 +539,7 @@ export default function ServicesPage() {
                 <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-green-500/20 to-blue-500/20">
                   <Image
                     src="/images/ruska_logo_200.png"
-                    alt="Ryan Eggers"
+                    alt="Ryan Eggleston"
                     width={128}
                     height={128}
                     className="h-full w-full object-cover"
@@ -514,7 +548,7 @@ export default function ServicesPage() {
                 <div>
                   <p className="mb-6 font-montserrat text-lg leading-relaxed text-muted-foreground">
                     I&apos;m{" "}
-                    <span className="text-foreground">Ryan Eggers</span>,
+                    <span className="text-foreground">Ryan Eggleston</span>,
                     founder of Ruska AI.
                   </p>
                   <p className="mb-6 font-montserrat text-lg leading-relaxed text-muted-foreground">
@@ -542,7 +576,7 @@ export default function ServicesPage() {
                   {/* Social Links */}
                   <div className="flex gap-4">
                     <a
-                      href="https://www.linkedin.com/in/ryaneggz/"
+                      href="https://www.linkedin.com/in/ryan-eggleston/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground transition-colors hover:text-foreground"
@@ -550,7 +584,7 @@ export default function ServicesPage() {
                       <FaLinkedin size={24} />
                     </a>
                     <a
-                      href="https://github.com/enso-labs/orchestra"
+                      href="https://github.com/ruska-ai"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground transition-colors hover:text-foreground"
@@ -625,7 +659,7 @@ export default function ServicesPage() {
                   </span>
                 </p>
                 <CTAButton>Book a Discovery Call</CTAButton>
-                <p className="mt-6 font-montserrat text-sm text-muted-foreground">
+                {/* <p className="mt-6 font-montserrat text-sm text-muted-foreground">
                   Or email me directly:{" "}
                   <a
                     href={`mailto:${EMAIL}`}
@@ -633,7 +667,7 @@ export default function ServicesPage() {
                   >
                     {EMAIL}
                   </a>
-                </p>
+                </p> */}
               </div>
             </motion.div>
           </div>

@@ -35,8 +35,8 @@ const TopNavbar = () => {
   const menuItems = [
     { href: "/blog", label: "Blog" },
     { href: "/services", label: "Services" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#enterprise", label: "Enterprise" },
+    // { href: "#pricing", label: "Pricing" }
+    { href: "/#enterprise", label: "Enterprise" },
   ];
 
   return (
