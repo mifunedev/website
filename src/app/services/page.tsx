@@ -11,7 +11,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 // CTA Button Link - Update this with your actual Calendly/Cal.com link
 const BOOKING_LINK = "https://cal.com/ryan-eggleston-wg9oqf/ai-audit";
-const EMAIL = "ryan@ruska.ai";
+const EMAIL = "reggleston@ruska.ai";
 
 // FAQ Data
 const faqs = [
@@ -659,7 +659,7 @@ export default function ServicesPage() {
                   </span>
                 </p>
                 <CTAButton>Book a Discovery Call</CTAButton>
-                {/* <p className="mt-6 font-montserrat text-sm text-muted-foreground">
+                <p className="mt-6 font-montserrat text-sm text-muted-foreground">
                   Or email me directly:{" "}
                   <a
                     href={`mailto:${EMAIL}`}
@@ -667,7 +667,7 @@ export default function ServicesPage() {
                   >
                     {EMAIL}
                   </a>
-                </p> */}
+                </p>
               </div>
             </motion.div>
           </div>
