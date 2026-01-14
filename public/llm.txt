@@ -35,6 +35,7 @@ Extensible MCP tool ecosystem for browser automation, file access, and more.
 - Google Gemini
 - Groq
 - xAI Grok
+- AWS Bedrock (Claude, Titan, Llama, Mistral, Kimi K2)
 - Local models via Ollama
 
 ## Key Technologies
