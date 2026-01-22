@@ -1,5 +1,5 @@
 ---
-title: "SWE Toolkit (2026): A Practical Guide to Agentic Coding Workflows That Ship"
+title: "SWE Toolkit (2026): A Practical Guide to Agentic Coding Workflows"
 date: "2026-01-21"
 excerpt: "The 4 tools I use to turn vague ideas into merged PRs: a multi-agent planning council (/team), a ticket-to-PR automator (/ticket), an autonomous execution loop (Ralph), and a ruthlessly curated AGENTS.md that keeps the agent in the 'Smart Zone' of the context window."
 categories: ["Agentic Coding", "Developer Productivity", "Workflow", "AI Engineering"]
@@ -216,5 +216,6 @@ If you want to see how we’re building these workflows in the open, check out [
 - `/team`: [`.claude/commands/team.md`](https://github.com/ruska-ai/orchestra/blob/development/.claude/commands/team.md)
 - `/ticket`: [`.claude/commands/ticket.md`](https://github.com/ruska-ai/orchestra/blob/development/.claude/commands/ticket.md)
 - Context hygiene: [`AGENTS.md`](https://github.com/ruska-ai/orchestra/blob/development/AGENTS.md)
+- Ralph in Orchestra: [`.ralph/`](https://github.com/ruska-ai/orchestra/tree/development/.ralph)
 - Ralph baseline: [`github.com/snarktank/ralph`](https://github.com/snarktank/ralph)
 
