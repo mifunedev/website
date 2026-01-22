@@ -1,15 +1,11 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import rehypeHighlight from "rehype-highlight";
-import remarkGfm from "remark-gfm";
 import "./code-highlight.css";
 import TopNavbar from "@/components/nav/TopNavBar";
 import { ImageWithPreview } from "@/components/ui/ImageWithPreview";
+import { MarkdownContent } from "@/components/ui/MarkdownContent";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
 import { formatDate } from "@/utils/format";
 
@@ -138,12 +134,7 @@ export default function BlogPost({ params }: Props) {
         )}
 
         <div className="prose prose-lg max-w-none dark:prose-invert">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, rehypeHighlight]}
-          >
-            {post.content}
-          </ReactMarkdown>
+          <MarkdownContent content={post.content} />
         </div>
       </article>
     </main>
