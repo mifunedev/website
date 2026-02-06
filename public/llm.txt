@@ -42,6 +42,13 @@ AGENTS.md works in two modes:
 - Agent mode: Attach AGENTS.md to an assistant's files — it overrides the instructions field for every thread
 - Thread mode: Include AGENTS.md in a thread's input.files — it applies instructions for that conversation only
 
+### Memories
+Persistent per-user context that is automatically injected into every agent conversation.
+- Memories are stored via LangGraph BaseStore, namespaced by user ID
+- Automatically retrieved and injected as `/memories.md` into agent context during conversations
+- API: GET /api/memories (list), GET /api/memories/:id, POST /api/memories, PUT /api/memories/:id, DELETE /api/memories/:id
+- Also configurable via the Settings UI in the web interface
+
 ## Supported AI Models
 - Anthropic Claude
 - OpenAI GPT
@@ -79,6 +86,13 @@ AGENTS.md works in two modes:
 ### Schedules
 - POST /api/schedules - Create a scheduled task
 - GET /api/schedules - List schedules
+
+### Memories
+- GET /api/memories - List memories (supports limit, offset, query params)
+- GET /api/memories/:id - Get a specific memory
+- POST /api/memories - Create a memory
+- PUT /api/memories/:id - Update a memory
+- DELETE /api/memories/:id - Delete a memory
 
 ## Quick Start Example
 
