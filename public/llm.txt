@@ -29,6 +29,19 @@ Build and share reusable system prompts for consistent agent behavior.
 ### Tools
 Extensible MCP tool ecosystem for browser automation, file access, and more.
 
+### AGENTS.md
+Configure AI agent behavior through a simple markdown file convention. Attach a file named `AGENTS.md` to an assistant or include it in a thread's files, and Orchestra automatically uses its content as the agent's instructions. Similar to Claude Code's CLAUDE.md or OpenAI Codex's AGENTS.md.
+
+Supported formats:
+- Plain string: `"AGENTS.md": "# Instructions\nBe helpful."`
+- Dict with string content: `"AGENTS.md": {"content": "# Instructions"}`
+- Dict with list content: `"AGENTS.md": {"content": ["# Instructions", "Be helpful."]}`
+- List of strings: `"AGENTS.md": ["# Instructions", "Be helpful."]`
+
+AGENTS.md works in two modes:
+- Agent mode: Attach AGENTS.md to an assistant's files — it overrides the instructions field for every thread
+- Thread mode: Include AGENTS.md in a thread's input.files — it applies instructions for that conversation only
+
 ## Supported AI Models
 - Anthropic Claude
 - OpenAI GPT
