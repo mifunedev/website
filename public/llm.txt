@@ -29,6 +29,13 @@ Build and share reusable system prompts for consistent agent behavior.
 ### Tools
 Extensible MCP tool ecosystem for browser automation, file access, and more.
 
+### Memories
+Persistent per-user context that is automatically injected into every agent conversation.
+- Memories are stored via LangGraph BaseStore, namespaced by user ID
+- Automatically retrieved and injected as `/memories.md` into agent context during conversations
+- API: GET /api/memories (list), GET /api/memories/:id, POST /api/memories, PUT /api/memories/:id, DELETE /api/memories/:id
+- Also configurable via the Settings UI in the web interface
+
 ## Supported AI Models
 - Anthropic Claude
 - OpenAI GPT
@@ -66,6 +73,13 @@ Extensible MCP tool ecosystem for browser automation, file access, and more.
 ### Schedules
 - POST /api/schedules - Create a scheduled task
 - GET /api/schedules - List schedules
+
+### Memories
+- GET /api/memories - List memories (supports limit, offset, query params)
+- GET /api/memories/:id - Get a specific memory
+- POST /api/memories - Create a memory
+- PUT /api/memories/:id - Update a memory
+- DELETE /api/memories/:id - Delete a memory
 
 ## Quick Start Example
 
