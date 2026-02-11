@@ -312,35 +312,223 @@ export default function ServicesPage() {
         />
         {/* Hero Section */}
         <section className="relative flex min-h-screen flex-col px-4 pt-20">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-          <div className="relative mx-auto flex flex-1 max-w-4xl items-center text-center">
-            <div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="mb-6 text-5xl font-light leading-tight tracking-tight md:text-6xl lg:text-7xl"
-              >
-                <span className="font-space font-bold text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
-                  Ruska Automation as a Service
-                </span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="mx-auto mb-10 max-w-2xl font-montserrat text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
-              >
-                I build AI automation systems for your business.
-                <br />
-                Then I keep them running and improving.
-              </motion.p>
+          {/* Grid background */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+          {/* Ambient glow */}
+          <div className="absolute left-1/2 top-1/4 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/10 blur-[120px]" />
+
+          <div className="relative mx-auto flex flex-1 max-w-7xl items-center">
+            <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-16">
+              {/* Left Column */}
+              <div className="text-center lg:text-left">
+                {/* Badge chip */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                  </span>
+                  <span className="font-montserrat text-sm font-medium text-green-400">
+                    Accepting New Clients
+                  </span>
+                </motion.div>
+
+                {/* Two-tone headline */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl"
+                >
+                  <span className="font-montserrat text-foreground">AI Automation</span>
+                  <br />
+                  <span className="font-space text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+                    Built &amp; Maintained
+                  </span>
+                  <br />
+                  <span className="font-montserrat text-foreground">For Your Business</span>
+                </motion.h1>
+
+                {/* Subtitle */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="mx-auto mb-8 max-w-xl font-montserrat text-lg font-light leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl"
+                >
+                  I build production-ready AI automation systems, then stay on retainer to keep them running, secure, and improving. You focus on your business&mdash;I handle the machines.
+                </motion.p>
+
+                {/* Dual CTAs */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="mb-8 flex flex-col items-center gap-4 sm:flex-row lg:items-start"
+                >
+                  <CTAButton>Book a Free Discovery Call</CTAButton>
+                  <a
+                    href="#how-it-works"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-8 py-4 font-montserrat text-lg font-medium text-foreground transition-all duration-200 hover:border-green-500/50 hover:bg-green-500/5"
+                  >
+                    See How It Works
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </a>
+                </motion.div>
+
+                {/* Trust indicators */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-wrap justify-center gap-x-6 gap-y-2 lg:justify-start"
+                >
+                  {["Free Discovery Call", "No Lock-In Contracts", "You Own Everything"].map((item) => (
+                    <span key={item} className="flex items-center gap-2 font-montserrat text-sm text-muted-foreground">
+                      <svg className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                    </span>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Right Column — Automation Flow Visual */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="relative hidden lg:block"
               >
-                <CTAButton>Book a Discovery Call</CTAButton>
+                {/* Background glow */}
+                <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 blur-3xl" />
+
+                {/* Terminal card */}
+                <div className="relative rounded-2xl border border-border bg-card/80 backdrop-blur-sm">
+                  {/* Terminal header */}
+                  <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+                    <div className="h-3 w-3 rounded-full bg-red-500/80" />
+                    <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+                    <div className="h-3 w-3 rounded-full bg-green-500/80" />
+                    <span className="ml-2 font-mono text-xs text-muted-foreground">automation-pipeline.ruska</span>
+                  </div>
+
+                  {/* Flow nodes */}
+                  <div className="space-y-0 p-6">
+                    {[
+                      {
+                        label: "Trigger Detected",
+                        detail: "New support ticket received",
+                        icon: (
+                          <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                        ),
+                        borderColor: "border-green-500/50",
+                        bgColor: "bg-green-500/5",
+                        pulse: true,
+                        delay: 0.6,
+                      },
+                      {
+                        label: "AI Agent Processing",
+                        detail: "Classifying, routing, drafting response",
+                        icon: (
+                          <svg className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        ),
+                        borderColor: "border-blue-500/50",
+                        bgColor: "bg-blue-500/5",
+                        pulse: false,
+                        delay: 0.8,
+                      },
+                      {
+                        label: "CRM Updated",
+                        detail: "Ticket logged, customer notified",
+                        icon: (
+                          <svg className="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3zm5 2h6m-6 4h6" />
+                          </svg>
+                        ),
+                        borderColor: "border-purple-500/50",
+                        bgColor: "bg-purple-500/5",
+                        pulse: false,
+                        delay: 1.0,
+                      },
+                      {
+                        label: "Resolved in 30s",
+                        detail: "Previously took 45 minutes",
+                        icon: (
+                          <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ),
+                        borderColor: "border-green-500/50",
+                        bgColor: "bg-green-500/5",
+                        pulse: false,
+                        delay: 1.2,
+                      },
+                    ].map((node, index) => (
+                      <div key={node.label}>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: node.delay }}
+                          className={`flex items-center gap-4 rounded-xl border ${node.borderColor} ${node.bgColor} p-4`}
+                        >
+                          <div className="relative flex-shrink-0">
+                            {node.icon}
+                            {node.pulse && (
+                              <span className="absolute -right-1 -top-1 flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                              </span>
+                            )}
+                          </div>
+                          <div>
+                            <p className="font-montserrat text-sm font-semibold text-foreground">{node.label}</p>
+                            <p className="font-montserrat text-xs text-muted-foreground">{node.detail}</p>
+                          </div>
+                        </motion.div>
+                        {/* Connector line */}
+                        {index < 3 && (
+                          <div className="ml-6 flex h-4 items-center">
+                            <div className="h-full w-px bg-border" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Floating badge — bottom left */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.4 }}
+                  className="absolute -bottom-4 -left-4 rounded-xl border border-border bg-card px-4 py-2 shadow-lg"
+                >
+                  <p className="font-montserrat text-xs font-medium text-muted-foreground">Automations Live</p>
+                  <p className="font-montserrat text-lg font-bold text-green-500">3</p>
+                </motion.div>
+
+                {/* Floating badge — top right */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.6 }}
+                  className="absolute -right-4 -top-4 rounded-xl border border-border bg-card px-4 py-2 shadow-lg"
+                >
+                  <p className="font-montserrat text-xs font-medium text-muted-foreground">Time Saved</p>
+                  <p className="font-montserrat text-lg font-bold text-green-500">90%</p>
+                </motion.div>
               </motion.div>
             </div>
           </div>
@@ -349,7 +537,7 @@ export default function ServicesPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 1.8 }}
             className="relative flex justify-center pb-8"
           >
             <div className="flex flex-col items-center gap-2">
@@ -609,7 +797,7 @@ export default function ServicesPage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="relative px-4 py-24">
+        <section id="how-it-works" className="relative scroll-mt-20 px-4 py-24">
           <div className="mx-auto max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -805,13 +993,12 @@ export default function ServicesPage() {
               className="rounded-3xl border border-border bg-card p-8 md:p-12"
             >
               <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-                {/* Headshot placeholder - replace with actual image */}
                 <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-green-500/20 to-blue-500/20">
                   <Image
-                    src="/images/ruska_logo_200.png"
+                    src="/images/ryan-eggleston.png"
                     alt="Ryan Eggleston"
-                    width={128}
-                    height={128}
+                    width={200}
+                    height={200}
                     className="h-full w-full object-cover"
                   />
                 </div>
