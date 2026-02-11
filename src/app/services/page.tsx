@@ -10,7 +10,8 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 // CTA Button Link - Update this with your actual Calendly/Cal.com link
-const BOOKING_LINK = "https://cal.com/ryan-eggleston-wg9oqf/ai-audit";
+const COMPANY_TAG = 'ruska-ai'
+const BOOKING_LINK = `https://cal.com/${COMPANY_TAG}/ai-audit`;
 const EMAIL = "reggleston@ruska.ai";
 
 // FAQ Data
