@@ -86,6 +86,22 @@ const automationCategories = [
   },
 ];
 
+// Technology Ecosystem
+const techEcosystem: { name: string; descriptor: string; icon: string }[] = [
+  { name: "Claude Code", descriptor: "AI coding agent", icon: "🤖" },
+  { name: "OpenClaw", descriptor: "Open-source AI agents", icon: "🦀" },
+  { name: "Orchestra", descriptor: "Agent orchestration platform", icon: "🎵" },
+  { name: "Anthropic Claude", descriptor: "Foundation models", icon: "🧠" },
+  { name: "LangGraph", descriptor: "Multi-agent workflows", icon: "🔗" },
+  { name: "MCP", descriptor: "Tool protocol standard", icon: "🔌" },
+  { name: "Python", descriptor: "AI/ML backend", icon: "🐍" },
+  { name: "Docker", descriptor: "Containerization", icon: "🐳" },
+  { name: "Supabase", descriptor: "Postgres & vector storage", icon: "⚡" },
+  { name: "Next.js", descriptor: "Full-stack React", icon: "▲" },
+  { name: "PostgreSQL", descriptor: "Relational database", icon: "🐘" },
+  { name: "Tailwind CSS", descriptor: "Utility-first CSS", icon: "🎨" },
+];
+
 // Solution Pillars
 const solutionPillars = [
   {
@@ -385,6 +401,46 @@ export default function ServicesPage() {
               <span className="text-foreground">10+ hours/week</span> on
               repetitive work, it can probably be automated.
             </motion.p>
+          </div>
+        </section>
+
+        {/* Technology Ecosystem Section */}
+        <section className="relative overflow-hidden px-4 py-24">
+          <div className="mx-auto max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-16 text-center"
+            >
+              <h2 className="mb-4 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                Our Technology Ecosystem
+              </h2>
+              <p className="font-montserrat text-lg text-muted-foreground">
+                We integrate with tools you already know and trust
+              </p>
+            </motion.div>
+            <div className="marquee-container relative">
+              <div className="marquee-track flex gap-6">
+                {[...techEcosystem, ...techEcosystem].map((tool, index) => (
+                  <div
+                    key={`${tool.name}-${index}`}
+                    className="flex min-w-[200px] flex-shrink-0 items-center gap-3 rounded-xl border border-border bg-card px-5 py-4"
+                  >
+                    <span className="text-2xl">{tool.icon}</span>
+                    <div>
+                      <p className="font-montserrat text-sm font-semibold text-foreground">
+                        {tool.name}
+                      </p>
+                      <p className="font-montserrat text-xs text-muted-foreground">
+                        {tool.descriptor}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
