@@ -451,7 +451,7 @@ export default function ServicesPage() {
                   </span>
                 </h3>
                 <p className="font-montserrat text-muted-foreground">
-                  I build your Claude Code automation system.
+                  I build your custom automation system using proven AI tools and secure infrastructure.
                   <br />
                   Typically 2-4 weeks depending on complexity.
                 </p>
@@ -488,7 +488,7 @@ export default function ServicesPage() {
                 <h3 className="mb-3 font-montserrat text-2xl font-semibold text-foreground">
                   Retainer{" "}
                   <span className="text-muted-foreground">
-                    ($1,000 - $3,000/mo)
+                    ($990 - $3,000/mo)
                   </span>
                 </h3>
                 <p className="font-montserrat text-muted-foreground">
