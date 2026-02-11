@@ -566,9 +566,10 @@ export default function ServicesPage() {
                     needed reliable infrastructure for AI automation.
                   </p>
                   <p className="mb-8 font-montserrat text-lg leading-relaxed text-muted-foreground">
-                    Now I help businesses implement Claude Code systems that
-                    actually work in production—not just demos that break after
-                    a week.
+                    Now I help businesses implement production-ready AI
+                    automation using tools like Claude Code, OpenClaw, and
+                    Orchestra. You get the benefits of cutting-edge AI without
+                    the headaches of managing it yourself.
                   </p>
                   <p className="mb-8 font-montserrat text-muted-foreground">
                     Based in Saint George, UT. I prefer working with local
