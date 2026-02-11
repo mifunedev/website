@@ -360,7 +360,7 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="mx-auto mb-8 max-w-xl font-montserrat text-lg font-light leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl"
                 >
-                  I build production-ready AI automation systems, then stay on retainer to keep them running, secure, and improving. You focus on your business&mdash;I handle the machines.
+                  I don&apos;t vibe code&mdash;I architect and orchestrate AI agent systems at enterprise scale. Built on real engineering experience, not last week&apos;s tutorial.
                 </motion.p>
 
                 {/* Dual CTAs */}
@@ -389,7 +389,7 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="flex flex-wrap justify-center gap-x-6 gap-y-2 lg:justify-start"
                 >
-                  {["Free Discovery Call", "No Lock-In Contracts", "You Own Everything"].map((item) => (
+                  {["Enterprise-Grade Engineering", "Not Vibe Coded", "You Own Everything"].map((item) => (
                     <span key={item} className="flex items-center gap-2 font-montserrat text-sm text-muted-foreground">
                       <svg className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -598,6 +598,10 @@ export default function ServicesPage() {
                   <li className="flex items-start gap-3">
                     <span className="mt-1 text-red-400">•</span>
                     <span>You need automation that works reliably, not just impressive demos</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 text-red-400">•</span>
+                    <span>Most &ldquo;AI solutions&rdquo; are vibe-coded prototypes that break in production</span>
                   </li>
                 </ul>
                 <p className="font-montserrat text-xl font-medium text-foreground">
@@ -1006,7 +1010,7 @@ export default function ServicesPage() {
                   <p className="mb-6 font-montserrat text-lg leading-relaxed text-muted-foreground">
                     I&apos;m{" "}
                     <span className="text-foreground">Ryan Eggleston</span>,
-                    founder of Ruska AI.
+                    founder of Ruska AI. I was shipping production software long before AI wrote its first line of code.
                   </p>
                   <p className="mb-6 font-montserrat text-lg leading-relaxed text-muted-foreground">
                     I built{" "}
@@ -1018,14 +1022,15 @@ export default function ServicesPage() {
                     >
                       Orchestra
                     </Link>
-                    , an open-source agent orchestration platform, because I
-                    needed reliable infrastructure for AI automation.
+                    , an open-source agent orchestration platform, because production AI needs real infrastructure&mdash;not cobbled-together prompts.
                   </p>
                   <p className="mb-8 font-montserrat text-lg leading-relaxed text-muted-foreground">
-                    Now I help businesses implement production-ready AI
-                    automation using tools like Claude Code, OpenClaw, and
-                    Orchestra. You get the benefits of cutting-edge AI without
-                    the headaches of managing it yourself.
+                    I don&apos;t vibe code. I architect multi-agent systems that run reliably at scale, using tools like{" "}
+                    <Link href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">Claude Code</Link>,{" "}
+                    <Link href="https://openclaw.ai" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">OpenClaw</Link>,{" "}
+                    <Link href="https://github.com/langchain-ai/langgraph" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">LangGraph</Link>, and{" "}
+                    <Link href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">MCP</Link>.
+                    {" "}Every system I build is engineered for production: tested, monitored, and maintainable.
                   </p>
                   <p className="mb-8 font-montserrat text-muted-foreground">
                     Based in Saint George, UT. I prefer working with local
