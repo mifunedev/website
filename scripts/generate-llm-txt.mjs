@@ -127,6 +127,27 @@ curl -X POST "https://chat.ruska.ai/api/llm/stream" \\
 
 ## Contact
 For support and inquiries, visit https://ruska.ai or join our Slack community.
+
+## Services - Automation as a Service
+
+Ruska AI offers managed AI automation for small and medium businesses. We leverage tools including Claude Code, OpenClaw, and our Orchestra platform to build production-ready automation systems.
+
+### What We Automate
+- Customer Support
+- Data Processing
+- Lead Management
+- Property Management
+- Content Operations
+- Internal Ops
+
+### How It Works
+1. Discovery Call (Free) - We assess your workflows and identify automation opportunities
+2. Setup ($2,500 - $5,000) - We build your custom automation system
+3. Retainer ($990 - $3,000/mo) - We maintain, improve, and add new automations
+
+### Contact for Services
+- Book a call: https://cal.com/ruska-ai/ai-audit
+- Email: reggleston@ruska.ai
 `;
 
 function generateLlmTxt() {

@@ -29,33 +29,12 @@ Build and share reusable system prompts for consistent agent behavior.
 ### Tools
 Extensible MCP tool ecosystem for browser automation, file access, and more.
 
-### AGENTS.md
-Configure AI agent behavior through a simple markdown file convention. Attach a file named `AGENTS.md` to an assistant or include it in a thread's files, and Orchestra automatically uses its content as the agent's instructions. Similar to Claude Code's CLAUDE.md or OpenAI Codex's AGENTS.md.
-
-Supported formats:
-- Plain string: `"AGENTS.md": "# Instructions\nBe helpful."`
-- Dict with string content: `"AGENTS.md": {"content": "# Instructions"}`
-- Dict with list content: `"AGENTS.md": {"content": ["# Instructions", "Be helpful."]}`
-- List of strings: `"AGENTS.md": ["# Instructions", "Be helpful."]`
-
-AGENTS.md works in two modes:
-- Agent mode: Attach AGENTS.md to an assistant's files — it overrides the instructions field for every thread
-- Thread mode: Include AGENTS.md in a thread's input.files — it applies instructions for that conversation only
-
-### Memories
-Persistent per-user context that is automatically injected into every agent conversation.
-- Memories are stored via LangGraph BaseStore, namespaced by user ID
-- Automatically retrieved and injected as `/memories.md` into agent context during conversations
-- API: GET /api/memories (list), GET /api/memories/:id, POST /api/memories, PUT /api/memories/:id, DELETE /api/memories/:id
-- Also configurable via the Settings UI in the web interface
-
 ## Supported AI Models
 - Anthropic Claude
 - OpenAI GPT
 - Google Gemini
 - Groq
 - xAI Grok
-- AWS Bedrock (Claude, Titan, Llama, Mistral, Kimi K2)
 - Local models via Ollama
 
 ## Key Technologies
@@ -86,13 +65,6 @@ Persistent per-user context that is automatically injected into every agent conv
 ### Schedules
 - POST /api/schedules - Create a scheduled task
 - GET /api/schedules - List schedules
-
-### Memories
-- GET /api/memories - List memories (supports limit, offset, query params)
-- GET /api/memories/:id - Get a specific memory
-- POST /api/memories - Create a memory
-- PUT /api/memories/:id - Update a memory
-- DELETE /api/memories/:id - Delete a memory
 
 ## Quick Start Example
 
@@ -146,3 +118,24 @@ curl -X POST "https://chat.ruska.ai/api/llm/stream" \
 
 ## Contact
 For support and inquiries, visit https://ruska.ai or join our Slack community.
+
+## Services - Automation as a Service
+
+Ruska AI offers managed AI automation for small and medium businesses. We leverage tools including Claude Code, OpenClaw, and our Orchestra platform to build production-ready automation systems.
+
+### What We Automate
+- Customer Support
+- Data Processing
+- Lead Management
+- Property Management
+- Content Operations
+- Internal Ops
+
+### How It Works
+1. Discovery Call (Free) - We assess your workflows and identify automation opportunities
+2. Setup ($2,500 - $5,000) - We build your custom automation system
+3. Retainer ($990 - $3,000/mo) - We maintain, improve, and add new automations
+
+### Contact for Services
+- Book a call: https://cal.com/ruska-ai/ai-audit
+- Email: reggleston@ruska.ai
