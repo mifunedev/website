@@ -279,6 +279,37 @@ export default function ServicesPage() {
         <TopNavBar />
       </header>
       <main className="bg-background">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "Ruska AI - Automation as a Service",
+              description:
+                "AI automation systems built and maintained for your business. Trusted AI integration partner for SMBs.",
+              url: "https://ruska.ai/services",
+              founder: {
+                "@type": "Person",
+                name: "Ryan Eggleston",
+              },
+              areaServed: "United States",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Saint George",
+                addressRegion: "UT",
+              },
+              priceRange: "$990 - $5,000",
+              knowsAbout: [
+                "AI automation",
+                "Claude Code",
+                "OpenClaw",
+                "workflow automation",
+                "agent orchestration",
+              ],
+            }),
+          }}
+        />
         {/* Hero Section */}
         <section className="relative flex min-h-screen flex-col px-4 pt-20">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
