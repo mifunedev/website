@@ -699,11 +699,50 @@ export default function ServicesPage() {
               </motion.div>
             </div>
 
+            {/* Trust-Building Blocks */}
+            <div className="mt-12 grid gap-6 md:grid-cols-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="rounded-2xl border border-green-500/30 bg-green-500/5 p-8"
+              >
+                <h3 className="mb-3 font-montserrat text-xl font-semibold text-foreground">
+                  You Own Everything
+                </h3>
+                <p className="font-montserrat text-muted-foreground">
+                  Every automation, every integration, every line of
+                  configuration&mdash;it&apos;s yours. If we part ways, you keep
+                  everything. No lock-in, no hostage data, no proprietary black
+                  boxes.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="rounded-2xl border border-green-500/30 bg-green-500/5 p-8"
+              >
+                <h3 className="mb-3 font-montserrat text-xl font-semibold text-foreground">
+                  Full Transparency
+                </h3>
+                <p className="font-montserrat text-muted-foreground">
+                  You&apos;ll always know exactly what I&apos;m building, why,
+                  and how much it costs. No surprise invoices, no scope creep
+                  without your approval. I send regular progress updates and you
+                  have full visibility into every system.
+                </p>
+              </motion.div>
+            </div>
+
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-12 text-center font-montserrat text-muted-foreground"
             >
               <span className="text-green-400">Founding clients</span> get
