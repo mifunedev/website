@@ -81,17 +81,17 @@ const solutionPillars = [
   {
     icon: "🔍",
     title: "Identify",
-    description: "Map your workflows. Find automation opportunities.",
+    description: "Map your workflows. Find automation opportunities that actually move the needle.",
   },
   {
     icon: "🛠️",
     title: "Build",
-    description: "Create Claude Code systems that run in production.",
+    description: "Create production-ready automation systems using proven AI tools and infrastructure.",
   },
   {
     icon: "🔄",
     title: "Maintain",
-    description: "Stay on retainer to improve and add new automations.",
+    description: "Stay on retainer to monitor, improve, and add new automations as your business grows.",
   },
 ];
 
@@ -323,9 +323,9 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center font-montserrat text-lg text-muted-foreground"
             >
-              Not chatbots.{" "}
+              Not chatbots. Not consultants who hand you a report and disappear.{" "}
               <span className="text-foreground">
-                Real automation that handles workflows end-to-end.
+                Real automation systems built with battle-tested tools, secured properly, and maintained long-term.
               </span>
             </motion.p>
           </div>
