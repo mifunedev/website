@@ -121,6 +121,88 @@ const solutionPillars = [
   },
 ];
 
+// Service Offerings
+const serviceOfferings: {
+  icon: string;
+  title: string;
+  timeline: string;
+  description: string;
+  bullets: string[];
+}[] = [
+  {
+    icon: "⚙️",
+    title: "Custom Automation Setup",
+    timeline: "2-4 weeks",
+    description:
+      "Build production-ready AI automation tailored to your workflows.",
+    bullets: [
+      "Custom workflow mapping",
+      "API & tool integration",
+      "Testing & deployment",
+    ],
+  },
+  {
+    icon: "🔗",
+    title: "Workflow Integration",
+    timeline: "1-2 weeks",
+    description:
+      "Connect your automation to the tools you already use.",
+    bullets: [
+      "Multi-platform sync",
+      "Real-time triggers",
+      "Error handling & retries",
+    ],
+  },
+  {
+    icon: "📊",
+    title: "Monitoring & Analytics",
+    timeline: "1 week",
+    description:
+      "Track automation performance and ROI with clear dashboards.",
+    bullets: [
+      "Usage analytics",
+      "Performance metrics",
+      "Cost optimization",
+    ],
+  },
+  {
+    icon: "🔒",
+    title: "Security & Data Privacy",
+    timeline: "1-2 weeks",
+    description:
+      "Enterprise-grade security built into every system.",
+    bullets: [
+      "Encrypted connections",
+      "Audit trails",
+      "Data handling policies",
+    ],
+  },
+  {
+    icon: "🖥️",
+    title: "Infrastructure Management",
+    timeline: "Ongoing",
+    description:
+      "Reliable hosting, scaling, and disaster recovery handled for you.",
+    bullets: [
+      "Auto-scaling",
+      "24/7 monitoring",
+      "Backup systems",
+    ],
+  },
+  {
+    icon: "🚀",
+    title: "Continuous Improvement",
+    timeline: "Ongoing",
+    description:
+      "New automations and optimizations as your business evolves.",
+    bullets: [
+      "Feature additions",
+      "Performance tuning",
+      "New tool adoption",
+    ],
+  },
+];
+
 // FAQ Item Component
 function FAQItem({ faq, index }: { faq: (typeof faqs)[0]; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -354,6 +436,57 @@ export default function ServicesPage() {
                 Real automation systems built with battle-tested tools, secured properly, and maintained long-term.
               </span>
             </motion.p>
+          </div>
+        </section>
+
+        {/* Service Offerings Section */}
+        <section className="relative px-4 py-24">
+          <div className="mx-auto max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-16 text-center"
+            >
+              <h2 className="mb-4 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                What&apos;s Included
+              </h2>
+            </motion.div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {serviceOfferings.map((offering, index) => (
+                <motion.div
+                  key={offering.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="rounded-xl border border-border bg-card p-6"
+                >
+                  <div className="mb-3 text-3xl">{offering.icon}</div>
+                  <h3 className="mb-1 font-montserrat text-lg font-bold text-foreground">
+                    {offering.title}
+                  </h3>
+                  <p className="mb-3 font-montserrat text-sm font-medium text-green-400">
+                    {offering.timeline}
+                  </p>
+                  <p className="mb-4 font-montserrat text-sm text-muted-foreground">
+                    {offering.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {offering.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex items-center gap-2 font-montserrat text-sm text-muted-foreground"
+                      >
+                        <span className="text-green-500">✓</span>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
