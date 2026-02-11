@@ -17,24 +17,34 @@ const EMAIL = "reggleston@ruska.ai";
 // FAQ Data
 const faqs = [
   {
-    question: "What's Claude Code?",
+    question: "What exactly is Automation as a Service?",
     answer:
-      "It's Anthropic's AI that can actually do work—write code, process data, handle workflows. Think of it as an AI employee, not a chat window.",
+      "I build AI-powered automation systems for your business, then maintain them. You get the benefits of AI automation without hiring a team or managing the infrastructure yourself.",
   },
   {
-    question: "How is this different from ChatGPT?",
+    question: "Why do I need an integration partner?",
     answer:
-      "ChatGPT is for conversation. Claude Code is for work. I build systems that run autonomously, not just answer questions.",
+      "AI is moving fast—new models, tools, and security concerns every month. Most SMBs don't have in-house expertise to vet tools, manage infrastructure, or keep systems secure. I handle all of that so you can focus on your business.",
   },
   {
-    question: "Can't I just do this myself?",
+    question: "What tools and technologies does Ruska use?",
     answer:
-      "You could. But it takes time to learn and more time to maintain. I handle all of that so you can focus on your business.",
+      "I leverage best-in-class AI tools like Claude Code, OpenClaw, and our own Orchestra platform. The tech stack adapts to your needs—you get results, not vendor lock-in.",
   },
   {
-    question: "Why a retainer?",
+    question: "Can't I just use ChatGPT for this?",
     answer:
-      "AI systems need tuning. Your business changes, you'll want new automations. Retainer means I'm always improving it, not setting and forgetting.",
+      "ChatGPT is great for answering questions, but it's not built for production automation. I build systems that run reliably in the background—handling workflows, processing data, and taking action without someone sitting at a chat window.",
+  },
+  {
+    question: "Why a retainer instead of project-based pricing?",
+    answer:
+      "AI systems aren't set-and-forget. Your business changes, new tools emerge, and automations need tuning. A retainer means I'm continuously improving your systems, not handing off a project and disappearing.",
+  },
+  {
+    question: "How do you handle security and data privacy?",
+    answer:
+      "I treat your data like it's mine. All systems follow security best practices: encrypted connections, minimal data exposure, audit trails, and clear data handling policies.",
   },
   {
     question: "Do you have case studies?",
