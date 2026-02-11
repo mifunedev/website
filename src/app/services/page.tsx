@@ -183,7 +183,7 @@ export default function ServicesPage() {
                 className="mb-6 text-5xl font-light leading-tight tracking-tight md:text-6xl lg:text-7xl"
               >
                 <span className="font-space font-bold text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
-                  Claude Code Automation Systems
+                  Ruska Automation as a Service
                 </span>
               </motion.h1>
               <motion.p
@@ -192,9 +192,9 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="mx-auto mb-10 max-w-2xl font-montserrat text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
               >
-                I set up Claude Code as your AI employee.
+                I build AI automation systems for your business.
                 <br />
-                Then I maintain it.
+                Then I keep them running and improving.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
