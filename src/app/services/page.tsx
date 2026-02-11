@@ -253,29 +253,29 @@ export default function ServicesPage() {
               </h2>
               <div className="rounded-3xl border border-border bg-card p-8 md:p-12">
                 <p className="mb-8 font-montserrat text-xl leading-relaxed text-foreground md:text-2xl">
-                  You want AI automation for your business.
+                  AI is moving too fast for most businesses to keep up.
                 </p>
                 <ul className="mb-8 space-y-4 font-montserrat text-lg text-muted-foreground">
                   <li className="flex items-start gap-3">
                     <span className="mt-1 text-red-400">•</span>
-                    <span>You don&apos;t know where to start</span>
+                    <span>New AI tools launch every week—you don&apos;t know which ones to trust</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="mt-1 text-red-400">•</span>
-                    <span>You tried ChatGPT—it didn&apos;t stick</span>
+                    <span>You don&apos;t have in-house AI or security expertise</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="mt-1 text-red-400">•</span>
-                    <span>You need something that actually runs reliably</span>
+                    <span>Managing infrastructure and keeping systems secure takes specialized knowledge</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="mt-1 text-red-400">•</span>
-                    <span>You don&apos;t have time to figure it out yourself</span>
+                    <span>You need automation that works reliably, not just impressive demos</span>
                   </li>
                 </ul>
                 <p className="font-montserrat text-xl font-medium text-foreground">
-                  Most AI tools are chat windows.{" "}
-                  <span className="text-green-500">You need a worker.</span>
+                  You need a trusted partner who lives and breathes this stuff.{" "}
+                  <span className="text-green-500">That&apos;s where I come in.</span>
                 </p>
               </div>
             </motion.div>
