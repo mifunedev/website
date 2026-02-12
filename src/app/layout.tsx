@@ -25,7 +25,7 @@ const APP_NAME = "ruska";
 const APP_DEFAULT_TITLE = "RUSKA - Steerable Harnesses for DeepAgents";
 const APP_TITLE_TEMPLATE = "%s | Ruska Labs";
 const APP_DESCRIPTION =
-  "Steerable Harnesses for DeepAgents";
+  "AI Agent Orchestration Platform. Build, deploy, and manage AI automation with Orchestra by Ruska AI.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -34,6 +34,16 @@ export const metadata: Metadata = {
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
+  keywords: [
+    "AI automation",
+    "agent orchestration",
+    "Claude Code",
+    "OpenClaw",
+    "Orchestra",
+    "Ruska AI",
+    "LangGraph",
+    "MCP",
+  ],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -54,7 +64,7 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: {
       default: APP_DEFAULT_TITLE,
       template: APP_TITLE_TEMPLATE,
