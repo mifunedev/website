@@ -6,15 +6,15 @@ import { apiClient } from "@/utils/client";
 import { socialIcons } from "@/config/app";
 
 const FooterSection = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await apiClient.subscribeToNewsletter({email});
-      setEmail('');
+      await apiClient.subscribeToNewsletter({ email });
+      setEmail("");
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -24,51 +24,66 @@ const FooterSection = () => {
   };
 
   return (
-    <footer className="bg-background border-t border-border text-muted-foreground">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <footer className="border-t border-border bg-background text-muted-foreground">
+      <div className="mx-auto max-w-7xl px-4 py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand Column */}
           <div className="col-span-1">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 relative">
+            <div className="mb-4 flex items-center">
+              <div className="relative h-10 w-10">
                 <Image
                   src="/images/ruska_logo_200.png"
                   alt="Orchestra Logo"
                   fill
-                  className="object-contain rounded-full"
+                  className="rounded-full object-contain"
                 />
               </div>
-              <span className="ml-3 text-xl font-cormorant font-medium text-foreground">
+              <span className="font-cormorant ml-3 text-xl font-medium text-foreground">
                 RUSKA
               </span>
             </div>
-            <p className="text-sm font-montserrat text-muted-foreground leading-relaxed">
-              Build your AI digital workforce with intelligent agents powered by LangChain DeepAgents.
+            <p className="font-montserrat text-sm leading-relaxed text-muted-foreground">
+              Build your AI digital workforce with intelligent agents powered by
+              LangChain DeepAgents.
             </p>
           </div>
 
           {/* Product Column */}
           <div>
-            <h3 className="text-foreground font-montserrat font-medium mb-4">Product</h3>
+            <h3 className="mb-4 font-montserrat font-medium text-foreground">
+              Product
+            </h3>
             <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <Link href="https://chat.ruska.ai" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="https://chat.ruska.ai/login"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   Get Started
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="https://chat.ruska.ai/login"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   Login
                 </Link>
               </li>
               <li>
-                <Link href="/#features" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="/#features"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="/#pricing" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="/#pricing"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   Pricing
                 </Link>
               </li>
@@ -77,25 +92,41 @@ const FooterSection = () => {
 
           {/* Resources Column */}
           <div>
-            <h3 className="text-foreground font-montserrat font-medium mb-4">Resources</h3>
+            <h3 className="mb-4 font-montserrat font-medium text-foreground">
+              Resources
+            </h3>
             <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <Link href="/blog" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="/blog"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/ruska-ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors duration-200">
+                <a
+                  href="https://github.com/ruska-ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   GitHub Projects
                 </a>
               </li>
               <li>
-                <Link href="/#faq" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="/#faq"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   Community
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="hover:text-foreground transition-colors duration-200">
+                <Link
+                  href="/#faq"
+                  className="transition-colors duration-200 hover:text-foreground"
+                >
                   FAQ
                 </Link>
               </li>
@@ -104,14 +135,16 @@ const FooterSection = () => {
 
           {/* Newsletter Column */}
           <div>
-            <h3 className="text-foreground font-montserrat font-medium mb-4">Stay Updated</h3>
-            <p className="text-sm font-montserrat text-muted-foreground mb-4">
+            <h3 className="mb-4 font-montserrat font-medium text-foreground">
+              Stay Updated
+            </h3>
+            <p className="mb-4 font-montserrat text-sm text-muted-foreground">
               Get the latest updates and news.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-2">
               <input
                 type="email"
-                className="w-full rounded-lg border border-border bg-input px-4 py-2 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors font-montserrat"
+                className="w-full rounded-lg border border-border bg-input px-4 py-2 font-montserrat text-sm text-foreground placeholder-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 placeholder="Enter your email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
@@ -120,7 +153,7 @@ const FooterSection = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-lg bg-foreground text-background px-4 py-2 text-sm font-montserrat font-medium hover:bg-muted-foreground transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-foreground px-4 py-2 font-montserrat text-sm font-medium text-background transition-colors duration-200 hover:bg-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {loading ? "Subscribing..." : "Subscribe"}
               </button>
@@ -129,10 +162,10 @@ const FooterSection = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-border pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             {/* Copyright */}
-            <p className="text-sm font-montserrat text-muted-foreground">
+            <p className="font-montserrat text-sm text-muted-foreground">
               © {new Date().getFullYear()} Ruska Labs. All rights reserved.
             </p>
 
@@ -146,7 +179,7 @@ const FooterSection = () => {
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    className="text-muted-foreground transition-colors duration-200 hover:text-foreground"
                     aria-label={social.tooltip}
                   >
                     <Icon size={20} />
