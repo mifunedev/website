@@ -3,3 +3,7 @@
 ## W0 — 2026-06-02T23:31Z
 - US-001 DONE: pricing.ts recast — AI Partner base (highlight), DFY upsell, Managed top; free intake tier (price Free, no period/roiHint); ladderStage optional + positionLabel added; mechanics bullets (AOA spelled out, same-day SLA scoped to clients); tsc clean.
 
+## W1 — 2026-06-02T23:35Z
+- US-002 DONE: /pricing ladder intake->partner->DFY->managed; ROI-Framing guarded; standalone "What's in every AI Partner month" block; 3rd trust block (grid-cols-3); jump-straight purged; CTA button "Book a free AI Workflow Audit"; positionLabel by Step label.
+- US-003 DONE: homepage Offer header "Start with an AI Partner..."; BASE/UPSELL/TOP chips; highlight on AI Partner. tsc clean.
+

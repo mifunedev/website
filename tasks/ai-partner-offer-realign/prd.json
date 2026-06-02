@@ -39,8 +39,8 @@
         "Verify in browser using agent-browser skill"
       ],
       "priority": 2,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "W1: tsc clean; gates clean; landmarks present."
     },
     {
       "id": "US-003",
@@ -55,8 +55,8 @@
         "Verify in browser using agent-browser skill"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "W1: tsc clean; gates clean; landmarks present."
     },
     {
       "id": "US-004",

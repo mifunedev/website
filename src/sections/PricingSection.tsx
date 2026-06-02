@@ -20,11 +20,11 @@ export default function PricingSection() {
             The Offer
           </p>
           <h2 className="text-4xl md:text-5xl font-montserrat font-semibold text-foreground mb-6">
-            We install managed AI workers{" "}
-            <span className="text-green-500">in 30 days.</span>
+            Start with an AI Partner.{" "}
+            <span className="text-green-500">Scale to a managed workforce.</span>
           </h2>
           <p className="text-xl font-montserrat text-muted-foreground max-w-2xl mx-auto">
-            Choose the engagement that fits where your business is today.
+            Begin as the base with a recurring AI Partner engagement, add done-for-you builds as the upsell, and step up to a fully managed AI workforce at the top.
           </p>
         </motion.div>
 
@@ -52,6 +52,15 @@ export default function PricingSection() {
                     <div className="px-4 py-1.5 rounded-full bg-green-500 text-black text-xs font-montserrat font-bold shadow-lg whitespace-nowrap">
                       {tier.badge}
                     </div>
+                  </div>
+                )}
+
+                {/* Position label chip */}
+                {tier.positionLabel && (
+                  <div className="mb-2">
+                    <span className="inline-block rounded-full bg-green-500/10 text-green-400 text-xs font-montserrat uppercase tracking-wide px-3 py-1">
+                      {tier.positionLabel}
+                    </span>
                   </div>
                 )}
 

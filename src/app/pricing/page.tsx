@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 const hiringComparisons: Record<string, string> = {
   "ai-workflow-audit":
-    "Cheaper than one week of a VA's time. Most audits pay for themselves in the first automation identified.",
+    "A free 10-minute intake — complete it once, arrive at your first session with 1–3 prioritized AI opportunities already on the table.",
   "ai-partner":
-    "A part-time AI consultant costs $5k–$10k/mo. AI Partner gives you expert guidance at a fraction of that.",
+    "Done-with-you at $1,500/mo is a fraction of a $5k–$10k/mo AI consultant. Two sessions a month, and you own every automation we build.",
   "done-for-you-deployment":
     "Hiring a skilled admin or SDR runs $40k–$60k/yr before benefits. One AI worker does the same job for a one-time deployment fee.",
   "managed-ai-workforce":
@@ -46,14 +46,14 @@ export default function PricingPage() {
               </span>
             </h1>
             <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg text-muted-foreground">
-              Every engagement starts with an Audit. From there, you move through the ladder at your own pace — or jump straight to Done-For-You if you already know what you need.
+              Every engagement starts with a <strong className="text-green-400">free</strong> AI Workflow Audit. From there, you move through the ladder at your own pace — the intake feeds straight into your AI Partner engagement.
             </p>
             <p className="mx-auto max-w-2xl font-montserrat text-sm text-muted-foreground">
-              The{" "}
+              The intake is a quick free form you complete before your first session — no homepage card, no commitment. The{" "}
               <a href="/" className="text-green-400 hover:underline">
-                3 homepage packages
+                3 homepage offers
               </a>{" "}
-              are entry points into this ladder — each maps to a tier below so you always know where you are and where you can go next.
+              (AI Partner, Done-For-You, Managed) map to steps 2–4 below.
             </p>
           </div>
         </section>
@@ -85,6 +85,11 @@ export default function PricingPage() {
                       }`}
                     >
                       Step {index + 1}
+                      {tier.positionLabel ? (
+                        <span className="ml-2 font-montserrat text-xs uppercase tracking-wider opacity-60">
+                          {tier.positionLabel}
+                        </span>
+                      ) : null}
                       {tier.badge ? (
                         <span className="ml-3 rounded-full bg-green-500/20 px-3 py-0.5 text-xs text-green-400">
                           {tier.badge}
@@ -167,17 +172,57 @@ export default function PricingPage() {
                             </p>
                           </div>
                         ) : null}
-                        <div className="rounded-xl border border-border bg-background/50 p-4">
-                          <p className="mb-1 font-montserrat text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                            ROI Framing
-                          </p>
-                          <p className="font-montserrat text-sm font-medium text-foreground">
-                            {tier.roiHint}
-                          </p>
-                        </div>
+                        {tier.roiHint ? (
+                          <div className="rounded-xl border border-border bg-background/50 p-4">
+                            <p className="mb-1 font-montserrat text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                              ROI Framing
+                            </p>
+                            <p className="font-montserrat text-sm font-medium text-foreground">
+                              {tier.roiHint}
+                            </p>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   </div>
+
+                  {/* AI Partner month details — shown immediately after Step 2 card */}
+                  {tier.id === "ai-partner" ? (
+                    <div className="mt-6 rounded-2xl border border-green-500/20 bg-green-500/5 p-8">
+                      <h3 className="mb-4 font-montserrat text-lg font-semibold text-green-400">
+                        What&apos;s in every AI Partner month
+                      </h3>
+                      <ul className="space-y-3">
+                        {[
+                          "Two 45-minute done-with-you sessions — we build on your screen so your team owns it",
+                          "Unlimited async support with same-day replies for AI Partner clients",
+                          "A day-one win — at least one automation live after session one",
+                          "Audit, Optimize, Automate — fix the process first, then systematically automate it",
+                          "A running, quantified deliverables log — every automation named, measured, and yours",
+                        ].map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2 font-montserrat text-sm text-muted-foreground"
+                          >
+                            <svg
+                              className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
 
                   {/* Arrow connector between steps */}
                   {index < pricingPageTiers.length - 1 ? (
@@ -202,7 +247,7 @@ export default function PricingPage() {
             </div>
 
             {/* Trust Blocks */}
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
               <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-8">
                 <h3 className="mb-3 font-montserrat text-xl font-semibold text-foreground">
                   You Own Everything
@@ -226,20 +271,33 @@ export default function PricingPage() {
                   visibility into every system.
                 </p>
               </div>
+
+              <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-8">
+                <h3 className="mb-3 font-montserrat text-xl font-semibold text-foreground">
+                  Measurable Deliverables
+                </h3>
+                <p className="font-montserrat text-muted-foreground">
+                  Every month you receive a quantified log of everything we
+                  built together — automations named, hours saved estimated,
+                  and outcomes recorded. You always know what your investment
+                  produced.
+                </p>
+              </div>
             </div>
 
             {/* Closing CTA */}
             <div className="mt-12 text-center">
               <p className="mb-6 font-montserrat text-muted-foreground">
-                Every engagement starts with an{" "}
-                <span className="text-green-400">AI Workflow Audit</span> — the
-                fastest way to find where AI saves you time and money.
+                Every engagement starts with a{" "}
+                <span className="text-green-400">free AI Workflow Audit</span>{" "}
+                — the fastest way to find where AI saves you time and money,
+                before you spend a dollar.
               </p>
               <a
                 href="/#audit"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black transition-all duration-200 hover:bg-green-400"
               >
-                Book an AI Workflow Audit
+                Book a free AI Workflow Audit
                 <svg
                   className="h-5 w-5"
                   fill="none"
