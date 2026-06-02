@@ -3,7 +3,6 @@ import HeroSection from "@/sections/HeroSection";
 import PainSection from "@/sections/PainSection";
 import PricingSection from "@/sections/PricingSection";
 import ProductShowcaseSection from "@/sections/ProductShowcaseSection";
-import SocialProofSection from "@/sections/SocialProofSection";
 import AboutSection from "@/sections/AboutSection";
 import FAQSection from "@/sections/FAQSection";
 import EnterpriseSection from "@/sections/EnterpriseSection";
@@ -21,7 +20,6 @@ export default function Home() {
         <PainSection />
         <PricingSection />
         <ProductShowcaseSection />
-        <SocialProofSection />
         <AboutSection />
         <FAQSection />
         <EnterpriseSection />

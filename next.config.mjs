@@ -49,6 +49,9 @@ const withPWA = withPWAInit({
     async redirects() {
       return [
         { source: '/services', destination: '/pricing', permanent: true },
+        // Workflow Academy case study hidden until a real case study ships.
+        // Temporary (307) so it can be re-enabled by removing this entry.
+        { source: '/case-studies', destination: '/', permanent: false },
       ];
     },
   };

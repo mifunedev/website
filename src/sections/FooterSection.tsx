@@ -63,11 +63,6 @@ const FooterSection = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/case-studies" className="hover:text-foreground transition-colors duration-200">
-                  Case Studies
-                </Link>
-              </li>
-              <li>
                 <Link href="/#audit" className="hover:text-foreground transition-colors duration-200">
                   Book Audit
                 </Link>

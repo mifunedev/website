@@ -24,3 +24,10 @@
 - FOLLOW-UPS (open items): real Mifune logo/favicon/OG asset; mobile hamburger nav (5 items overflow risk at 375px); cal.com/mifune slug; Mifune Slack; founder headshot; exact prices/AI Partner monthly; privacy-consent line + GA4 submit event
 - ALL 16 stories pass.
 
+## Hide Workflow Academy case study — 2026-06-02T23:02Z
+- Removed SocialProofSection (the Workflow Academy teaser) from homepage page.tsx (file kept, now orphaned)
+- Removed "Case Studies" from nav (TopNavBar) + footer + sitemap
+- Added temporary 307 redirect /case-studies -> / in next.config (page file kept for reversibility)
+- Verified: /case-studies 307->/, homepage has no Workflow Academy / Case Studies mentions, build green, tsc clean
+- Reversible: delete the /case-studies redirect entry + re-add SocialProofSection/nav/footer/sitemap when a real case study ships
+
