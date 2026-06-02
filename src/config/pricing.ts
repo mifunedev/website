@@ -2,76 +2,79 @@ export type PricingTier = {
   id: string;
   name: string;
   badge?: string;
-  price: string; // "$500–$2,500" | "Custom"
+  price: string; // "$1,500" | "$2,500–$10,000" | "Free" | "Custom"
   period?: string; // "/mo" | "one-time" | undefined
   description: string;
   bullets: string[];
   cta: string;
   ctaHref: string; // homepage tiers → "#audit"
   highlight: boolean;
-  ladderStage: string; // maps to the /pricing value-ladder, e.g. "deployment" | "department" | "managed"
-  roiHint?: string; // money framing, e.g. "Replaces ~$40k/yr admin hire"
+  ladderStage?: string; // optional — maps to value-ladder stage
+  positionLabel?: "intake" | "base" | "upsell" | "top";
+  roiHint?: string; // money framing, e.g. "Cheaper than a $5k–$10k/mo AI consultant"
 };
 
+// TODO: confirm AI Partner price + ladder with client
 export const homepageTiers: PricingTier[] = [
   {
-    id: "starter-ai-worker",
-    name: "Starter AI Worker",
+    id: "ai-partner",
+    name: "AI Partner",
+    badge: "START HERE",
+    price: "$1,500",
+    period: "/mo",
+    description:
+      "Your recurring AI implementation partner — two done-with-you sessions a month where we build the AI workers that run your business on your screen, so your team owns every piece.",
+    bullets: [
+      "Two 45-minute done-with-you sessions a month — built on your screen",
+      "Fix the process first, then automate it — Audit, Optimize, Automate",
+      "At least one automation live after session one",
+      "Unlimited async support with same-day replies for AI Partner clients",
+      "A running, quantified log of everything we build",
+      "You learn to drive — you own it all",
+    ],
+    cta: "Book a Free AI Workflow Audit",
+    ctaHref: "#audit",
+    highlight: true,
+    positionLabel: "base",
+    roiHint: "Cheaper than a $5k–$10k/mo AI consultant",
+  },
+  {
+    id: "done-for-you-deployment",
+    name: "Done-For-You Deployment",
     price: "$2,500–$10,000",
     period: "one-time",
     description:
-      "One AI worker deployed into your most time-consuming workflow — built, tested, and handed off to you in 30 days.",
+      "The upsell when you'd rather we build it for you — we design, build, and deploy a production-ready AI worker into your workflow, tested and documented.",
     bullets: [
-      "Single AI worker configured for your workflow",
-      "CRM, email, or docs integration",
-      "Human approval before sensitive actions",
-      "30-day deployment window",
+      "Custom AI worker built for your specific workflow",
+      "CRM, email, and docs integration",
+      "Human-in-the-loop approval flows",
+      "Handoff documentation and training included",
       "You own everything",
     ],
-    cta: "Book an AI Workflow Audit",
+    cta: "Book a Free AI Workflow Audit",
     ctaHref: "#audit",
     highlight: false,
-    ladderStage: "deployment",
-    roiHint: "Replaces ~$40k/yr junior admin hire",
+    positionLabel: "upsell",
+    roiHint: "One-time build that pays for itself in recovered hours",
   },
   {
-    id: "ai-operations-system",
-    name: "AI Operations System",
-    badge: "MOST POPULAR",
-    price: "$3,000–$7,000",
-    period: "/mo",
-    description:
-      "A coordinated team of AI workers covering sales, ops, and customer success — managed ongoing so your stack stays current.",
-    bullets: [
-      "Up to 3 AI workers deployed",
-      "Ongoing monitoring and tuning",
-      "Weekly performance reports",
-      "New automations as your business grows",
-      "Priority support",
-    ],
-    cta: "Book an AI Workflow Audit",
-    ctaHref: "#audit",
-    highlight: true,
-    ladderStage: "department",
-    roiHint: "Replaces a ~$120k/yr ops department",
-  },
-  {
-    id: "ai-workforce-partner",
-    name: "AI Workforce Partner",
+    id: "managed-ai-workforce",
+    name: "Managed AI Workforce",
     price: "Custom",
     description:
-      "A fully managed AI workforce running on OpenHarness — enterprise infrastructure, continuous improvement, and a dedicated partner.",
+      "A fully managed AI workforce running on OpenHarness — enterprise infrastructure, continuous improvement, and a dedicated partner so your team focuses on high-value work.",
     bullets: [
-      "Unlimited AI workers",
-      "OpenHarness managed deployment",
+      "Unlimited AI workers on OpenHarness",
+      "Managed cloud deployment and monitoring",
+      "Ongoing optimization and new automations",
       "Custom integrations",
-      "Dedicated partner access",
-      "SLA and audit logging",
+      "Dedicated partner + SLA and audit logging",
     ],
-    cta: "Book an AI Workflow Audit",
+    cta: "Book a Free AI Workflow Audit",
     ctaHref: "#audit",
     highlight: false,
-    ladderStage: "managed",
+    positionLabel: "top",
     roiHint: "Replaces multiple full-time hires at a fraction of the cost",
   },
 ];
@@ -80,42 +83,44 @@ export const pricingPageTiers: PricingTier[] = [
   {
     id: "ai-workflow-audit",
     name: "AI Workflow Audit",
-    price: "$500–$2,500",
-    period: "one-time",
+    badge: "INTAKE",
+    price: "Free",
+    period: undefined,
     description:
-      "A structured 2-hour deep-dive into your workflows — identifying the highest-ROI automation opportunities and delivering a prioritized action plan.",
+      "A quick intake that surfaces your highest-ROI AI opportunities before your first session — no commitment, no credit card.",
     bullets: [
-      "2-hour workflow mapping session",
-      "Prioritized automation opportunities",
-      "ROI estimate per workflow",
-      "Recommended AI worker stack",
-      "Written action plan delivered in 48 hours",
+      "10-minute intake questionnaire",
+      "Surfaces 1–3 AI opportunities before our first session",
+      "Prioritized by ROI",
+      "Feeds straight into your AI Partner engagement",
     ],
-    cta: "Book Your Audit",
+    cta: "Start Your Free Audit",
     ctaHref: "#audit",
     highlight: false,
-    ladderStage: "audit",
-    roiHint: "Cheaper than one week of manual busywork",
+    positionLabel: "intake",
+    roiHint: undefined,
   },
   {
     id: "ai-partner",
     name: "AI Partner",
-    price: "$1,500–$3,000",
+    badge: "START HERE",
+    price: "$1,500",
     period: "/mo",
     description:
-      "Recurring advisory and hands-on guidance — your AI strategy partner for tool selection, prompt engineering, and workflow design.",
+      "Your recurring AI implementation partner — two done-with-you sessions a month where we build the AI workers that run your business on your screen, so your team owns every piece.",
     bullets: [
-      "Monthly strategy session",
-      "Tool vetting and recommendations",
-      "Prompt engineering support",
-      "Workflow design reviews",
-      "Async support via email/chat",
+      "Two 45-minute done-with-you sessions a month — built on your screen",
+      "Fix the process first, then automate it — Audit, Optimize, Automate",
+      "At least one automation live after session one",
+      "Unlimited async support with same-day replies for AI Partner clients",
+      "A running, quantified log of everything we build",
+      "You learn to drive — you own it all",
     ],
-    cta: "Book Your Audit",
+    cta: "Book a Free AI Workflow Audit",
     ctaHref: "#audit",
-    highlight: false,
-    ladderStage: "advisory",
-    roiHint: "Cheaper than a part-time AI consultant",
+    highlight: true,
+    positionLabel: "base",
+    roiHint: "Cheaper than a $5k–$10k/mo AI consultant",
   },
   {
     id: "done-for-you-deployment",
@@ -123,37 +128,37 @@ export const pricingPageTiers: PricingTier[] = [
     price: "$2,500–$10,000",
     period: "one-time",
     description:
-      "We build and deploy production-ready AI workers into your workflows — tested, documented, and yours to keep.",
+      "The upsell when you'd rather we build it for you — we design, build, and deploy a production-ready AI worker into your workflow, tested and documented.",
     bullets: [
-      "Custom AI worker built for your workflow",
-      "Production deployment in 30 days",
+      "Custom AI worker built for your specific workflow",
       "CRM, email, and docs integration",
       "Human-in-the-loop approval flows",
-      "Handoff documentation included",
+      "Handoff documentation and training included",
+      "You own everything",
     ],
-    cta: "Book Your Audit",
+    cta: "Book a Free AI Workflow Audit",
     ctaHref: "#audit",
-    highlight: true,
-    ladderStage: "deployment",
-    roiHint: "Replaces ~$40k/yr in admin labor",
+    highlight: false,
+    positionLabel: "upsell",
+    roiHint: "One-time build that pays for itself in recovered hours",
   },
   {
     id: "managed-ai-workforce",
     name: "Managed AI Workforce",
     price: "Custom",
     description:
-      "A fully managed AI workforce on OpenHarness — built, monitored, and continuously improved so your team can focus on high-value work.",
+      "A fully managed AI workforce running on OpenHarness — enterprise infrastructure, continuous improvement, and a dedicated partner so your team focuses on high-value work.",
     bullets: [
       "Unlimited AI workers on OpenHarness",
-      "Managed cloud deployment",
-      "Ongoing monitoring and optimization",
-      "Custom integrations and new automations",
-      "Dedicated partner + SLA",
+      "Managed cloud deployment and monitoring",
+      "Ongoing optimization and new automations",
+      "Custom integrations",
+      "Dedicated partner + SLA and audit logging",
     ],
-    cta: "Book Your Audit",
+    cta: "Book a Free AI Workflow Audit",
     ctaHref: "#audit",
     highlight: false,
-    ladderStage: "managed",
+    positionLabel: "top",
     roiHint: "Replaces multiple full-time hires at a fraction of the cost",
   },
 ];

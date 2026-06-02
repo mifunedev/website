@@ -19,8 +19,8 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "W0: tsc clean; AI Partner base, free intake, atomic highlight verified."
     },
     {
       "id": "US-002",

@@ -1,2 +1,5 @@
 # progress
 
+## W0 — 2026-06-02T23:31Z
+- US-001 DONE: pricing.ts recast — AI Partner base (highlight), DFY upsell, Managed top; free intake tier (price Free, no period/roiHint); ladderStage optional + positionLabel added; mechanics bullets (AOA spelled out, same-day SLA scoped to clients); tsc clean.
+
