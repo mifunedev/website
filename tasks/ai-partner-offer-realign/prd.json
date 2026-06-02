@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "project": "Mifune Website",
+  "branchName": "feat/36-mifune-website-refactor",
+  "description": "Recast the offer so the recurring AI Partner is the visible base (homepage + /pricing), Done-For-You is the upsell, and Managed AI Workforce on OpenHarness is the top; encode the four AI Partner mechanics and reframe the audit as a free intake. Refinement on the existing PR #37 branch (no new branch). Tracks #38.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Recast src/config/pricing.ts (offer source of truth)",
+      "description": "As a developer, I want pricing.ts to encode the AI-Partner-base ladder so both pricing surfaces render the new offer from one place.",
+      "acceptanceCriteria": [
+        "Extend PricingTier with optional positionLabel?: 'intake'|'base'|'upsell'|'top'; make ladderStage OPTIONAL (ladderStage?: string)",
+        "Rewrite every tier object fresh (no stale Starter/Ops/DFY copy or '30 days' descriptions)",
+        "homepageTiers length 3 order [ai-partner, done-for-you-deployment, managed-ai-workforce]; ai-partner highlight:true badge 'START HERE' price '$1,500' period '/mo' positionLabel 'base'; homepageTiers.filter(t=>t.highlight).length===1",
+        "AI Partner bullets encode mechanics and spell out 'Audit, Optimize, Automate' (no bare 'AOA'); async SLA worded 'same-day replies for AI Partner clients'",
+        "pricingPageTiers length 4 order [ai-workflow-audit, ai-partner, done-for-you-deployment, managed-ai-workforce]; ids UNCHANGED from shipped; ai-workflow-audit price 'Free', period undefined, roiHint undefined, badge 'INTAKE', positionLabel 'intake'; pricingPageTiers.filter(t=>t.highlight).length===1 (ai-partner)",
+        "Add comment '// TODO: confirm AI Partner price + ladder with client' above homepageTiers",
+        "grep -ni '30 days' src/config/pricing.ts returns nothing; no Voxer/Notion/JotForm names",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Update src/app/pricing/page.tsx (single agent, one file)",
+      "description": "As a prospect, I want the /pricing ladder to read intake -> AI Partner -> DFY -> managed with the partner mechanics shown in depth.",
+      "acceptanceCriteria": [
+        "hiringComparisons keys equal pricingPageTiers.map(t=>t.id); rewrite ai-workflow-audit (free-intake) and ai-partner (done-with-you) copy",
+        "HIGH FIX: guard the lower 'ROI Framing' div (~L170-177) with {tier.roiHint ? (...) : null} so the free audit tier renders NO empty box",
+        "Add a standalone section with the EXACT heading 'What\\'s in every AI Partner month' immediately after the AI Partner (Step 2) card, before the next connector (not inside bullets): two 45-min done-with-you sessions, async + same-day replies, day-one win, Audit/Optimize/Automate, quantified deliverables log",
+        "Add a 3rd trust block 'Measurable Deliverables'; change trust grid md:grid-cols-2 -> md:grid-cols-3",
+        "Reframe supporting paragraphs (~L49 and ~L51-57): 'free AI Workflow Audit', REMOVE 'jump straight to Done-For-You', fix the '3 packages map to a tier below' claim (intake has no homepage card)",
+        "Closing CTA paragraph AND button say 'free' (button: 'Book a free AI Workflow Audit')",
+        "Render positionLabel (INTAKE/BASE/UPSELL/TOP) next to the Step N label; Step 1-4 read intake->partner->DFY->managed; 'Free' tier shows no stray period text",
+        "grep -ni 'jump straight' src/app/pricing/page.tsx returns nothing; grep -nE 'purple-|blue-|font-cormorant|text-gold-500|CTAButton|cal\\.com' returns nothing",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Update src/sections/PricingSection.tsx (homepage Offer)",
+      "description": "As a visitor, I want the homepage Offer to lead with AI Partner as the base.",
+      "acceptanceCriteria": [
+        "Header -> 'Start with an AI Partner. Scale to a managed workforce.' with a base->upsell->top subhead",
+        "Render homepageTiers (3 cards); 'START HERE' badge + highlight on AI Partner; add green positionLabel chip (BASE/UPSELL/TOP) above each tier name (reuse green chip styling, no new colors)",
+        "Each card shows price + roiHint; all CTAs inline href='#audit'; keep the /pricing link",
+        "grep -ni '30 days' src/sections/PricingSection.tsx returns nothing; no CTAButton/RegisterButton/purple/blue/cormorant/gold",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Update src/sections/HeroSection.tsx (lead with the partner)",
+      "description": "As a business-owner visitor, I want the hero to position Mifune as my AI implementation partner.",
+      "acceptanceCriteria": [
+        "Subhead -> partner framing mentioning 'partner' + 'two short sessions a month' (on your screen, you own them)",
+        "Primary CTA label -> 'Book a Free AI Workflow Audit' (href stays '#audit'); secondary CTA stays href '#pain'",
+        "Remove the 'Up and running in 30 days' trust chip; chips e.g. 'Two sessions a month' / 'A win on day one' / 'You own everything'",
+        "Copy only - keep hero structure + right-column flow visual; no banned classes",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Update src/sections/EnterpriseSection.tsx (audit form = free intake, copy only)",
+      "description": "As a prospect, I want the form to read as a quick free intake. Wiring must not change.",
+      "acceptanceCriteria": [
+        "Headline -> 'Book your free AI Workflow Audit'; subcopy -> '10-minute intake surfaces 1-3 AI opportunities before our first session'",
+        "Relabel the Message field -> 'What work eats the most time each week?' (update textarea placeholder to match)",
+        "Rewrite the hardcoded auditBenefits array to free-intake framing; grep -niE 'paid|1-on-1' src/sections/EnterpriseSection.tsx returns nothing",
+        "WIRING UNCHANGED: Referrer: 'audit-form' present; apiClient.contactFormSubmit call unchanged; field state names (Name/Email/Phone/Message) unchanged; id='audit' unchanged",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Update src/sections/FAQSection.tsx (rewrite stale answers + add 2 Q&As)",
+      "description": "As a buyer, I want FAQs consistent with the free-intake / AI Partner model.",
+      "acceptanceCriteria": [
+        "Rewrite answers calling the audit 'paid' (~indices 0,2), the 'one-time engagement'/minimum-commitment answer (~index 6), and any 'live in 30 days' entry-point promise to reflect FREE intake + recurring AI Partner",
+        "Add 2 Q&As: 'What\\'s the difference between done-with-you and done-for-you?' and 'What happens in a typical month?'",
+        "grep -niE 'paid AI Workflow Audit|one-time engagement' src/sections/FAQSection.tsx returns nothing; FAQItem reused (no new component); total <= 9 FAQs",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Update src/sections/ProductShowcaseSection.tsx (visible-value deliverable)",
+      "description": "As a visitor, I want 'what you get' to include the measurable-deliverables mechanism.",
+      "acceptanceCriteria": [
+        "Add one deliverable entry 'A quantified log of everything we build together' in the green idiom; no new imports/components; no banned classes",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Update src/sections/CTASection.tsx (drop the 30-day deployment promise)",
+      "description": "As a visitor, I want the closing CTA consistent with the recurring-partner framing.",
+      "acceptanceCriteria": [
+        "Revise the body line 'We deploy managed AI workers ... in 30 days' (~L52-55) and the trust note (~L94) to keep 'Free audit call / No commitment' and drop the 30-day deployment promise",
+        "grep -ni '30 days' src/sections/CTASection.tsx returns nothing; CTA stays inline href '#audit'; no banned classes/components",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
