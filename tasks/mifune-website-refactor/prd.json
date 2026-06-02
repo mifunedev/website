@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "project": "Mifune Website",
+  "branchName": "feat/36-mifune-website-refactor",
+  "description": "Reposition the Ruska AI / Orchestra marketing site into Mifune — managed AI workers for non-technical business owners. Promote the /services green idiom to the homepage, encode the value-ladder funnel, wire the audit form to Airtable, and complete the brand migration.",
+  "userStories": [
+    {
+      "id": "US-000",
+      "title": "Fix Airtable to persist the audit form Message field",
+      "description": "As a sales operator, I want the audit form's Message to land in Airtable so leads carry qualification data.",
+      "acceptanceCriteria": [
+        "src/app/api/utils/airtable.ts no longer contains `delete body.Message`",
+        "A POST to /api/contact with {Name,Email,Phone,Message,Referrer} forwards all five fields in `{ fields: body }`",
+        "Note in `notes` whether the Airtable base app6sU4AprV9uZze6/Contacts has Message + Referrer columns",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-001",
+      "title": "Brand chrome sweep (Ruska -> Mifune)",
+      "description": "As a visitor, I want all site chrome (titles, metadata, manifest, social handles, OG images, nav/footer wordmark) to say Mifune with no stale Ruska leaks.",
+      "acceptanceCriteria": [
+        "Rebrand: layout.tsx (APP_NAME, titles, template, description, keywords, OG/twitter, themeColor->green), TopNavBar+FooterSection wordmark/logo/copyright (drop font-cormorant), config/app.ts handles+MEDIUM_RSS_URL, robots.ts+sitemap.ts base URL ruska.ai->mifune.dev, blog/[slug]/page.tsx:34 fallback->mifune.dev, opengraph-image.tsx + services/opengraph-image.tsx text, services/layout.tsx 3 Ruska strings, socials/page.tsx ~12 handles/URLs, v1.page.tsx + blog/page.tsx + WaitlistButton.tsx chrome strings",
+        "services/page.tsx chrome-only: COMPANY_TAG->mifune, BOOKING_LINK->cal.com/mifune/ai-audit, EMAIL->hello@mifune.dev, JSON-LD; no copy/layout change",
+        "manifest.json name/short_name=Mifune; theme_color=#22c55e",
+        "Slack join.slack.com/t/ruska-ai set to # / removed in config/app.ts + socials/page.tsx",
+        "grep -rIn -iE 'ruska|orchestra' src public --include='*.tsx' --include='*.ts' --include='*.json' | grep -viE 'openharness|/blog/|posts/|ProjectSection|github.com/ruska-ai' returns only the intentional chat.ruska.ai dev link (US-014)",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Pricing config + Pain section (additive scaffolding)",
+      "description": "As a developer, I want a single typed pricing source and a new Pain section so later stories share a contract without breaking the build.",
+      "acceptanceCriteria": [
+        "New src/config/pricing.ts exports PricingTier type (incl. ladderStage + optional roiHint), homepageTiers (length 3: Starter AI Worker / AI Operations System [badge MOST POPULAR] / AI Workforce Partner), pricingPageTiers (length 4: AI Workflow Audit / AI Partner / Done-For-You Deployment / Managed AI Workforce [Custom])",
+        "homepageTiers each set ladderStage mapping to a pricingPageTiers counterpart and carry roiHint money framing",
+        "New src/sections/PainSection.tsx id=pain with 4 cards (Leads go cold->AI Sales Assistant / CRM gets messy->AI Operations Assistant / Projects drift->AI Project Manager / Customers get ignored->AI Customer Success Assistant); card markup inlined in green idiom; does NOT import FeatureCard",
+        "PainSection contains no font-cormorant/purple-/blue-/gold-500 and is not yet imported anywhere",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Rewrite HeroSection (managed AI workers idiom)",
+      "description": "As a business-owner visitor, I want a hero that says 'Deploy AI workers into your business without hiring more staff' with a Book an AI Workflow Audit CTA.",
+      "acceptanceCriteria": [
+        "HeroSection.tsx rewritten in services-hero idiom (grid+glow+two-tone headline)",
+        "Primary CTA is inline <a href=\"#audit\"> using green button style only (NOT services CTAButton, NOT RegisterButton, no target=_blank, no cal.com)",
+        "Secondary CTA 'See Example AI Workers' href=#pain (no dead target)",
+        "No font-cormorant/purple-/blue-/gold-500/chat.ruska.ai",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill: primary CTA scrolls to #audit"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Rewrite PricingSection as homepage Offer (3 packages)",
+      "description": "As a visitor, I want a simple 3-package offer so I can self-select before booking.",
+      "acceptanceCriteria": [
+        "PricingSection.tsx renders homepageTiers from src/config/pricing.ts as exactly 3 cards (green idiom, MOST POPULAR badge on middle tier)",
+        "Each card shows price/range + roiHint",
+        "All CTAs inline href=#audit; visible link to /pricing present",
+        "No #enterprise/RegisterButton/CTAButton/font-cormorant/purple/blue/gold",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill: 3 cards render, CTA scrolls to #audit"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Rewrite ProductShowcaseSection as 'What you actually get'",
+      "description": "As a visitor, I want a plain deliverables checklist (no architecture diagrams) so I know what I receive.",
+      "acceptanceCriteria": [
+        "ProductShowcaseSection.tsx rewritten as a green checklist of the 5 spec deliverables (AI worker configured / human approval before sensitive actions / CRM-email-docs integration / weekly performance report / ongoing monitoring)",
+        "Reuses the offerings-card pattern from services/page.tsx; no purple/blue/gold/cormorant",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Rewrite SocialProofSection as case-study teaser",
+      "description": "As a visitor, I want a 'Case Study Coming Soon: The Workflow Academy' card linking to /case-studies.",
+      "acceptanceCriteria": [
+        "SocialProofSection.tsx rewritten into a single coming-soon card with spec copy linking to /case-studies",
+        "Green idiom; no purple/blue/gold/cormorant",
+        "Must not ship before US-012 (the /case-studies route) exists",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Rewrite AboutSection as Trust + OpenHarness credibility",
+      "description": "As a visitor, I want a trust block plus an OpenHarness credibility callout so I trust the operator.",
+      "acceptanceCriteria": [
+        "AboutSection.tsx rewritten, id=about, green idiom (drop indigo background)",
+        "Contains trust copy ('Built by a senior software leader who manages real AI agent infrastructure') + OpenHarness callout ('Powered by OpenHarness — an isolated operating environment for reliable AI workers')",
+        "Keep /images/ryan_egg.png as placeholder (note: launch-blocker pending real asset)",
+        "No indigo/purple/blue/gold/cormorant",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Rewrite CTASection (hire-vs-AI framing)",
+      "description": "As a visitor, I want a closing band 'Before hiring another employee, let us deploy an AI worker' with a #audit CTA.",
+      "acceptanceCriteria": [
+        "CTASection.tsx rewritten with spec CTA copy; CTA is inline href=#audit",
+        "Drop text-gold-500 (undefined class -> invisible) in favor of text-green-500",
+        "No text-gold-500/RegisterButton/CTAButton/purple/blue/cormorant",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Rewrite FAQSection (buyer-facing)",
+      "description": "As a business-owner visitor, I want buyer-facing FAQs so common objections are handled.",
+      "acceptanceCriteria": [
+        "FAQSection.tsx Q&As rewritten buyer-facing (model on services/page.tsx:18-59); reuse FAQItem accordion pattern",
+        "Remove any chat.ruska.ai/github.com/ruska-ai marketing links; green idiom",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010a",
+      "title": "Homepage assembly + nav",
+      "description": "As a visitor, I want the homepage in the new order with a working Book Audit nav button.",
+      "acceptanceCriteria": [
+        "src/app/page.tsx import list + order: TopNavBar -> Hero -> Pain -> Pricing(Offer) -> ProductShowcase -> SocialProof -> About -> FAQ -> Enterprise(audit form) -> CTA -> Footer",
+        "FeaturesOverviewSection import removed; AboutSection import added",
+        "TopNavBar menuItems: AI Workers(/#pain) / Case Studies(/case-studies) / Pricing(/pricing) / About(/#about) / Book Audit (green button -> /#audit); bases off US-001 output",
+        "Mobile (375px): no horizontal overflow; collapse to existing mobile pattern or note none exists",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill: nav items navigate to targets; no 375px overflow"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010b",
+      "title": "Wire the audit intake form to Airtable",
+      "description": "As a prospect, I want to submit an audit request and get clear confirmation. Depends on US-000.",
+      "acceptanceCriteria": [
+        "EnterpriseSection.tsx: rename id=enterprise -> id=audit; rewrite to audit form (Name required, Email required, Phone, Message required)",
+        "Copy only the handleSubmit API-call logic from ContactSection.tsx:24-39; build inputs fresh; call apiClient.contactFormSubmit({Name,Email,Phone,Message,Referrer:'audit-form'})",
+        "Replace console.log-only handleSubmit; NO alert() — inline green success banner + red error banner driven by checking res.ok",
+        "Repo-wide zero #enterprise / id=enterprise matches remain",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill: valid submit shows success UX and a row appears in Airtable Contacts with Message + Referrer=audit-form (validates US-000); if AIRTABLE_API_KEY unset, assert error banner and note e2e deferred (no silent pass)"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "Add /pricing route (full value ladder)",
+      "description": "As a prospect comparing options, I want a /pricing page showing the 4-tier ladder vs hiring.",
+      "acceptanceCriteria": [
+        "New src/app/pricing/page.tsx renders pricingPageTiers (4 tiers: Audit -> AI Partner -> Done-For-You -> Managed[Custom]) using the services-page How-It-Works stepped-card pattern",
+        "Includes 'position against hiring' framing (VA/admin/SDR comparison) + 'You Own Everything' and 'Full Transparency' trust blocks",
+        "States the 3 homepage packages are entry points into this ladder (naming coherence)",
+        "CTAs are inline anchors to #audit / /#audit; no CTAButton/cal.com/target=_blank; green idiom",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill: 4 tiers render in ladder order"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "Add /case-studies route (coming-soon)",
+      "description": "As a prospect, I want a /case-studies page so the nav link resolves and signals momentum.",
+      "acceptanceCriteria": [
+        "New src/app/case-studies/page.tsx: 'Coming Soon: The Workflow Academy' placeholder in the services-page idiom with the metrics-to-capture list",
+        "Green idiom",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-013",
+      "title": "/services redirect + sitemap routes",
+      "description": "As a crawler/old-link visitor, I want /services to redirect to /pricing and the sitemap to list new routes.",
+      "acceptanceCriteria": [
+        "next.config.mjs: add async redirects() as a key INSIDE the nextConfig object (NOT inside withPWAInit options) returning {source:'/services',destination:'/pricing',permanent:true}; ship only after /pricing exists (US-011)",
+        "src/app/sitemap.ts: replace /services with /pricing; add /case-studies",
+        "/services redirects (308) to /pricing — verify by HTTP status code, no loop",
+        "/sitemap.xml lists /pricing + /case-studies, not /services",
+        "Typecheck passes; npm run build succeeds with PWA wrap intact"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-014",
+      "title": "Footer Developers column + RegisterButton demotion",
+      "description": "As a developer visitor, I want OpenHarness/dev links in a footer Developers column so the marketing surface stays clean.",
+      "acceptanceCriteria": [
+        "FooterSection.tsx: add Developers column (Blog, GitHub github.com/ruska-ai, Launch OpenHarness); bases off US-001 output",
+        "Remove/repoint /login link (404) and dead /#features anchor; pricing link -> /pricing",
+        "RegisterButton.tsx demoted to footer 'Launch OpenHarness' link (chat.ruska.ai survives only here); not imported by any marketing section",
+        "grep -rln 'RegisterButton' src/sections src/components/nav shows no marketing-section usage",
+        "chat.ruska.ai/github.com/ruska-ai survive ONLY in footer/blog/dev contexts",
+        "Typecheck passes",
+        "Verify in browser using agent-browser skill: footer Developers links resolve (no 404)"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
