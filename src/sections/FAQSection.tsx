@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "How fast can an AI worker go live in my business?",
     answer:
-      "Most deployments are live within 30 days. We start with a paid AI Workflow Audit to map exactly what gets automated and how. From there, build and integration typically takes two to four weeks depending on the complexity of your existing tools.",
+      "Every engagement starts with a free AI Workflow Audit — a 10-minute intake that surfaces 1–3 automation opportunities before your first session. From there, your AI Partner engagement begins: we build together in two ~45-minute sessions per month, and you typically have your first automation running after session one.",
   },
   {
     question: "Do I own the AI workers and my data?",
@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "What is the difference between an audit and a deployment?",
     answer:
-      "The AI Workflow Audit is a paid discovery engagement: we map your current workflows, identify the highest-value automation opportunities, and deliver a written implementation plan. A deployment is the build itself — we take that plan and install the AI workers in your systems. You can stop after the audit with a clear roadmap, or continue into deployment.",
+      "The AI Workflow Audit is a free intake: a short questionnaire that maps your highest-value automation opportunities and feeds directly into your AI Partner engagement. A deployment is the build itself — during your sessions we install the AI workers in your systems following the Audit, Optimize, Automate framework. You leave every session with working automation, not just a plan.",
   },
   {
     question: "How is this different from hiring a virtual assistant?",
@@ -37,7 +37,17 @@ const faqs = [
   {
     question: "Is there a minimum commitment?",
     answer:
-      "The AI Workflow Audit is a one-time engagement with no further obligation. Ongoing managed services run month-to-month after the initial deployment period. We want you to stay because the results justify it, not because of a contract.",
+      "The AI Workflow Audit is free with no obligation. If you move into an AI Partner engagement, it runs month-to-month — no long-term contract. We want you to stay because the results justify it, not because of a lock-in.",
+  },
+  {
+    question: "What's the difference between done-with-you and done-for-you?",
+    answer:
+      "AI Partner is done-with-you: we build the automations on your screen, in your tools, during our sessions together. You see every decision, learn to drive, and own everything when we're done. Done-For-You Deployment is the upsell: when you'd rather hand us a scoped build and have us deliver it without your hands on the keyboard. Both use the same Audit, Optimize, Automate framework — the difference is who does the building.",
+  },
+  {
+    question: "What happens in a typical month?",
+    answer:
+      "Two ~45-minute done-with-you sessions where we build or improve automations live on your screen. Unlimited async support with same-day replies in between. A day-one win — at least one automation running after your first session. And a quantified deliverables log so you always know exactly what we built and what it's saving you.",
   },
 ];
 

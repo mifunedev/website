@@ -24,6 +24,11 @@ const deliverables: { title: string; description: string }[] = [
       "Plain-language reports show you exactly what the AI worker did, how much time it saved, and where to improve.",
   },
   {
+    title: "A quantified log of everything we build together",
+    description:
+      "See exactly what was shipped each session — value you can measure.",
+  },
+  {
     title: "Ongoing monitoring and improvements",
     description:
       "We stay on retainer to tune, expand, and maintain your AI workers as your business grows.",

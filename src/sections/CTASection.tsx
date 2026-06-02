@@ -50,9 +50,8 @@ export default function CTASection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mx-auto mb-10 max-w-2xl font-montserrat text-xl text-muted-foreground"
           >
-            Stop replacing VAs, admin assistants, and SDR hires with more
-            headcount. We deploy managed AI workers that handle the work in
-            30&nbsp;days — without the salary, benefits, or onboarding overhead.
+            Before you hire another employee, let us deploy an AI worker — built
+            with you, owned by you.
           </motion.p>
 
           {/* CTA */}
@@ -91,7 +90,7 @@ export default function CTASection() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-6 font-montserrat text-sm text-muted-foreground"
           >
-            Free audit call &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; Results in 30 days
+            Free audit call &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; You own everything
           </motion.p>
         </motion.div>
       </div>

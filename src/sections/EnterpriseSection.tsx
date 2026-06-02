@@ -7,10 +7,10 @@ import { Contact } from "@/types";
 type Status = "idle" | "loading" | "success" | "error";
 
 const auditBenefits = [
-  "Identify your top 3 automation opportunities in 30 minutes",
-  "Understand which AI tools are right for your business",
-  "Get a custom roadmap — no tech background required",
-  "Free 1-on-1 session with an AI implementation specialist",
+  "A 10-minute intake — no prep, no tech knowledge needed",
+  "1–3 prioritised AI opportunities surfaced before our first session",
+  "A clear picture of which workflows to fix first (and why)",
+  "Your answers feed straight into your AI Partner engagement",
 ];
 
 export default function EnterpriseSection() {
@@ -63,14 +63,13 @@ export default function EnterpriseSection() {
             Free AI Workflow Audit
           </p>
           <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-foreground mb-6">
-            Book Your{" "}
+            Book your{" "}
             <span className="font-space text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
-              AI Workflow Audit
+              free AI Workflow Audit
             </span>
           </h2>
           <p className="text-xl font-montserrat text-muted-foreground max-w-2xl mx-auto">
-            Tell us what slows you down and we&apos;ll show you exactly where AI
-            can save you 10+ hours a week.
+            A 10-minute intake surfaces 1–3 AI opportunities before our first session.
           </p>
         </motion.div>
 
@@ -269,14 +268,14 @@ export default function EnterpriseSection() {
                     htmlFor="audit-message"
                     className="block font-montserrat text-sm text-muted-foreground mb-2"
                   >
-                    What would you automate first?{" "}
+                    What work eats the most time each week?{" "}
                     <span className="text-green-500">*</span>
                   </label>
                   <textarea
                     id="audit-message"
                     required
                     rows={4}
-                    placeholder="e.g. Following up on leads, scheduling appointments, processing invoices..."
+                    placeholder="e.g. chasing invoices, updating the CRM, weekly reporting…"
                     value={Message}
                     onChange={(e) => setMessage(e.target.value)}
                     disabled={loading}

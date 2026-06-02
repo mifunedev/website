@@ -50,7 +50,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mx-auto mb-8 max-w-xl font-montserrat text-lg font-light leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl"
             >
-              Mifune sets up and manages OpenHarness-powered AI workers that handle follow-ups, admin work, CRM updates, reporting, and repeatable operations.
+              Your AI implementation partner. In two short sessions a month we build the AI workers that run your follow-ups, admin, CRM, and reporting — on your screen, so your team owns them.
             </motion.p>
 
             {/* Dual CTAs */}
@@ -64,7 +64,7 @@ const HeroSection = () => {
                 href="#audit"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400"
               >
-                Book an AI Workflow Audit
+                Book a Free AI Workflow Audit
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -87,7 +87,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-wrap justify-center gap-x-6 gap-y-2 lg:justify-start"
             >
-              {["No new hires needed", "Up and running in 30 days", "You own everything"].map((item) => (
+              {["No new hires needed", "Two sessions a month", "A win on day one", "You own everything"].map((item) => (
                 <span key={item} className="flex items-center gap-2 font-montserrat text-sm text-muted-foreground">
                   <svg className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
