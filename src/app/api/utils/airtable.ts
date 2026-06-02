@@ -15,7 +15,6 @@ export default class AirtableApi {
   }
 
   public async create(body: any) {
-    delete body.Message; // If to Prompt Engineers AI contact list.
     // Forward the request to Airtable
     const response = await fetch(this.url, {
       method: "POST",

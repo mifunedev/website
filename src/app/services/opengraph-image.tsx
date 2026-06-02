@@ -38,7 +38,7 @@ export default function ServicesOGImage() {
               letterSpacing: "0.05em",
             }}
           >
-            Ruska Automation as a Service
+            Mifune — AI Workers for Your Business
           </div>
           <div
             style={{

@@ -34,13 +34,13 @@ const FooterSection = () => {
               <div className="w-10 h-10 relative">
                 <Image
                   src="/images/ruska_logo_200.png"
-                  alt="Orchestra Logo"
+                  alt="Mifune Logo"
                   fill
                   className="object-contain rounded-full"
                 />
               </div>
-              <span className="ml-3 text-xl font-cormorant font-medium text-foreground">
-                RUSKA
+              <span className="ml-3 text-xl font-montserrat font-medium text-foreground">
+                Mifune
               </span>
             </div>
             <p className="text-sm font-montserrat text-muted-foreground leading-relaxed">
@@ -133,7 +133,7 @@ const FooterSection = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             <p className="text-sm font-montserrat text-muted-foreground">
-              © {new Date().getFullYear()} Ruska Labs. All rights reserved.
+              © {new Date().getFullYear()} Mifune. All rights reserved.
             </p>
 
             {/* Social Icons */}

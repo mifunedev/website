@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllPostSlugs } from "@/lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ruska.ai";
+  const baseUrl = "https://mifune.dev";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

@@ -61,13 +61,13 @@ const TopNavbar = () => {
               <a href="/" className="ml-2 flex items-center">
                 <Image
                   src="/images/ruska_logo_200.png"
-                  alt="Orchestra Logo"
+                  alt="Mifune Logo"
                   width={24}
                   height={24}
                   className="mr-2 rounded-full"
                 />
-                <span className="font-cormorant text-2xl font-medium tracking-wide text-foreground transition-colors duration-200 hover:text-muted-foreground">
-                  RUSKA
+                <span className="font-montserrat text-2xl font-medium tracking-wide text-foreground transition-colors duration-200 hover:text-muted-foreground">
+                  Mifune
                 </span>
               </a>
             </motion.div>

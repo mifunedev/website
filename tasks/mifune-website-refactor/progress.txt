@@ -1,2 +1,7 @@
 # progress
 
+## Wave 0 — 2026-06-02T22:41Z
+- US-000 DONE: removed `delete body.Message` in airtable.ts (tsc clean)
+- US-001 DONE: rebranded ~14 chrome files Ruska→Mifune; grep gate clean; manifest theme #22c55e
+- US-002 DONE: created src/config/pricing.ts (3+4 tiers) + src/sections/PainSection.tsx (green idiom, no FeatureCard)
+
