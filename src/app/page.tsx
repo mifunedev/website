@@ -1,11 +1,12 @@
 import TopNavBar from "@/components/nav/TopNavBar";
 import HeroSection from "@/sections/HeroSection";
-import FeaturesOverviewSection from "@/sections/FeaturesOverviewSection";
-import ProductShowcaseSection from "@/sections/ProductShowcaseSection";
+import PainSection from "@/sections/PainSection";
 import PricingSection from "@/sections/PricingSection";
-import EnterpriseSection from "@/sections/EnterpriseSection";
+import ProductShowcaseSection from "@/sections/ProductShowcaseSection";
 import SocialProofSection from "@/sections/SocialProofSection";
+import AboutSection from "@/sections/AboutSection";
 import FAQSection from "@/sections/FAQSection";
+import EnterpriseSection from "@/sections/EnterpriseSection";
 import CTASection from "@/sections/CTASection";
 import FooterSection from "@/sections/FooterSection";
 
@@ -17,12 +18,13 @@ export default function Home() {
       </header>
       <main>
         <HeroSection />
-        <FeaturesOverviewSection />
-        <ProductShowcaseSection />
+        <PainSection />
         <PricingSection />
-        <EnterpriseSection />
+        <ProductShowcaseSection />
         <SocialProofSection />
+        <AboutSection />
         <FAQSection />
+        <EnterpriseSection />
         <CTASection />
         <FooterSection />
       </main>

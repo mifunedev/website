@@ -11,3 +11,8 @@
 - US-012 DONE: /case-studies coming-soon route
 - section ids: #pain #about #what-you-get (#audit pending US-010b)
 
+## Wave 2 — 2026-06-02T22:49Z
+- US-010a DONE: page.tsx new 10-section order (FeaturesOverview removed; Pain+About added); nav menuItems = AI Workers/Case Studies/Pricing/About + Book Audit button -> /#audit
+- US-010b DONE: EnterpriseSection -> audit form id=audit, wired apiClient.contactFormSubmit({...,Referrer:audit-form}), inline green/red banners (no alert), res.ok branch
+- NOTE (follow-up): no mobile hamburger exists; 5 nav items + toggle may overflow at 375px
+

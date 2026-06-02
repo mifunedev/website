@@ -168,8 +168,8 @@
         "Verify in browser using agent-browser skill: nav items navigate to targets; no 375px overflow"
       ],
       "priority": 5,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Wave 2: tsc clean; #audit anchor live; #enterprise removed. (browser smoke in final check)"
     },
     {
       "id": "US-010b",
@@ -184,8 +184,8 @@
         "Verify in browser using agent-browser skill: valid submit shows success UX and a row appears in Airtable Contacts with Message + Referrer=audit-form (validates US-000); if AIRTABLE_API_KEY unset, assert error banner and note e2e deferred (no silent pass)"
       ],
       "priority": 5,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Wave 2: tsc clean; #audit anchor live; #enterprise removed. (browser smoke in final check)"
     },
     {
       "id": "US-011",

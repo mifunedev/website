@@ -15,7 +15,7 @@ const TopNavbar = () => {
       setShowSolidBackground(currentScroll > 50);
 
       // Detect which section is currently in view
-      const sections = ["contact"];
+      const sections = ["pain", "about", "audit"];
       sections.forEach((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -33,10 +33,10 @@ const TopNavbar = () => {
 
   // Define menu items in one place for consistency
   const menuItems = [
-    { href: "/blog", label: "Blog" },
-    { href: "/services", label: "Services" },
-    // { href: "#pricing", label: "Pricing" }
-    { href: "/#enterprise", label: "Enterprise" },
+    { href: "/#pain", label: "AI Workers" },
+    { href: "/case-studies", label: "Case Studies" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/#about", label: "About" },
   ];
 
   return (
@@ -79,21 +79,26 @@ const TopNavbar = () => {
                   key={item.href}
                   href={item.href}
                   whileHover={{ scale: 1.05 }}
-                  className="font-montserrat text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                  className={`font-montserrat text-sm transition-colors duration-200 ${
+                    activeSection === item.href.replace("/#", "")
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   {item.label}
                 </motion.a>
               ))}
 
-              {/* App Link - visible on all screens */}
-              {/* <motion.a
-                href="https://chat.ruska.ai"
+              {/* Book Audit CTA button */}
+              <motion.a
+                href="/#audit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="rounded-full bg-foreground px-4 py-2 font-montserrat text-sm font-medium tracking-wide text-background shadow-lg transition-all duration-200 hover:opacity-90"
+                className="rounded-full bg-green-500 px-4 py-2 font-montserrat text-sm font-medium tracking-wide text-black shadow-lg transition-all duration-200 hover:bg-green-400"
               >
-                Build Now
-              </motion.a> */}
+                Book Audit
+              </motion.a>
+
               <ModeToggle />
             </div>
           </div>
