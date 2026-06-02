@@ -1,90 +1,98 @@
 "use client";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import RegisterButton from "@/components/buttons/RegisterButton";
-import { MdAutoAwesome } from "react-icons/md";
 
 export default function CTASection() {
   return (
-    <section className="relative bg-gradient-to-b from-background via-purple-500/5 to-background dark:from-black dark:via-purple-950/30 dark:to-black px-4 py-24">
-      <div className="mx-auto max-w-5xl">
+    <section className="relative bg-background px-4 py-24">
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="h-96 w-96 rounded-full bg-green-500/10 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-900/40 dark:to-blue-900/40 p-12 text-center md:p-16"
+          className="overflow-hidden rounded-3xl border border-green-500/30 bg-card p-12 text-center md:p-16"
         >
-          {/* Background Glow Effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-3xl" />
+          {/* Eyebrow */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-6 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground"
+          >
+            The smarter hire
+          </motion.p>
 
-          {/* Content */}
-          <div className="relative z-10">
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/20 px-4 py-2"
-            >
-              <MdAutoAwesome className="h-5 w-5 text-green-600 dark:text-green-300" />
-              <span className="font-montserrat text-sm font-medium text-green-700 dark:text-green-200">
-                Open-Source & Enterprise Ready
-              </span>
-            </motion.div>
+          {/* Headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-6 font-montserrat text-4xl font-bold text-foreground md:text-5xl lg:text-6xl"
+          >
+            Before hiring another employee,{" "}
+            <span className="text-green-500">
+              let us deploy an AI worker.
+            </span>
+          </motion.h2>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-cormorant mb-6 text-4xl font-light text-foreground md:text-5xl lg:text-6xl"
-            >
-              Ready to Build Your
-              <br />
-              <span className="text-gold-500">AI Digital Workforce?</span>
-            </motion.h2>
+          {/* Supporting line */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mx-auto mb-10 max-w-2xl font-montserrat text-xl text-muted-foreground"
+          >
+            Stop replacing VAs, admin assistants, and SDR hires with more
+            headcount. We deploy managed AI workers that handle the work in
+            30&nbsp;days — without the salary, benefits, or onboarding overhead.
+          </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mx-auto mb-10 max-w-2xl font-montserrat text-xl text-muted-foreground"
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <a
+              href="#audit"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400"
             >
-              Join hundreds of developers and teams using Orchestra to automate
-              their workflows with intelligent AI agents. Self-host for free or
-              let us deploy it for you.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row justify-center gap-4"
-            >
-              <RegisterButton className="px-10 py-4 text-lg">
-                Start Building Free
-              </RegisterButton>
-              <Link
-                href="#enterprise"
-                className="inline-flex items-center justify-center rounded-xl border border-gray-600 px-10 py-4 font-montserrat text-lg font-medium text-foreground transition-all duration-200 hover:bg-gray-800/50 hover:border-gray-500"
+              Book an AI Workflow Audit
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Talk to Sales
-              </Link>
-            </motion.div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-6 font-montserrat text-sm text-muted-foreground"
-            >
-              Apache 2.0 License • Self-Host or Cloud • Enterprise Support Available
-            </motion.p>
-          </div>
+          {/* Trust note */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-6 font-montserrat text-sm text-muted-foreground"
+          >
+            Free audit call &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; Results in 30 days
+          </motion.p>
         </motion.div>
       </div>
     </section>

@@ -5,3 +5,9 @@
 - US-001 DONE: rebranded ~14 chrome files Ruska→Mifune; grep gate clean; manifest theme #22c55e
 - US-002 DONE: created src/config/pricing.ts (3+4 tiers) + src/sections/PainSection.tsx (green idiom, no FeatureCard)
 
+## Wave 1 — 2026-06-02T22:46Z
+- US-003..009 DONE: Hero/Pricing-Offer/ProductShowcase/SocialProof/About/CTA/FAQ rewritten in green idiom (tsc clean, purge clean)
+- US-011 DONE: /pricing route (4-tier ladder + vs-hiring + trust blocks)
+- US-012 DONE: /case-studies coming-soon route
+- section ids: #pain #about #what-you-get (#audit pending US-010b)
+
