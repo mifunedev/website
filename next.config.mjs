@@ -46,6 +46,11 @@ const withPWA = withPWAInit({
         },
       ],
     },
+    async redirects() {
+      return [
+        { source: '/services', destination: '/pricing', permanent: true },
+      ];
+    },
   };
   
   export default withPWA(nextConfig);

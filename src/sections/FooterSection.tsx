@@ -27,7 +27,7 @@ const FooterSection = () => {
     <footer className="bg-background border-t border-border text-muted-foreground">
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
           {/* Brand Column */}
           <div className="col-span-1">
             <div className="flex items-center mb-4">
@@ -53,23 +53,23 @@ const FooterSection = () => {
             <h3 className="text-foreground font-montserrat font-medium mb-4">Product</h3>
             <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <Link href="https://chat.ruska.ai" className="hover:text-foreground transition-colors duration-200">
-                  Get Started
+                <Link href="/#pain" className="hover:text-foreground transition-colors duration-200">
+                  AI Workers
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="hover:text-foreground transition-colors duration-200">
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link href="/#features" className="hover:text-foreground transition-colors duration-200">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href="/#pricing" className="hover:text-foreground transition-colors duration-200">
+                <Link href="/pricing" className="hover:text-foreground transition-colors duration-200">
                   Pricing
+                </Link>
+              </li>
+              <li>
+                <Link href="/case-studies" className="hover:text-foreground transition-colors duration-200">
+                  Case Studies
+                </Link>
+              </li>
+              <li>
+                <Link href="/#audit" className="hover:text-foreground transition-colors duration-200">
+                  Book Audit
                 </Link>
               </li>
             </ul>
@@ -80,24 +80,41 @@ const FooterSection = () => {
             <h3 className="text-foreground font-montserrat font-medium mb-4">Resources</h3>
             <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <Link href="/blog" className="hover:text-foreground transition-colors duration-200">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <a href="https://github.com/ruska-ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors duration-200">
-                  GitHub Projects
-                </a>
-              </li>
-              <li>
-                <Link href="/#faq" className="hover:text-foreground transition-colors duration-200">
-                  Community
+                <Link href="/#about" className="hover:text-foreground transition-colors duration-200">
+                  About
                 </Link>
               </li>
               <li>
                 <Link href="/#faq" className="hover:text-foreground transition-colors duration-200">
                   FAQ
                 </Link>
+              </li>
+              <li>
+                <Link href="/socials" className="hover:text-foreground transition-colors duration-200">
+                  Socials
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Developers Column */}
+          <div>
+            <h3 className="text-foreground font-montserrat font-medium mb-4">Developers</h3>
+            <ul className="space-y-2 font-montserrat text-sm">
+              <li>
+                <Link href="/blog" className="hover:text-green-500 transition-colors duration-200">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <a href="https://github.com/ruska-ai" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors duration-200">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="https://chat.ruska.ai" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400 transition-colors duration-200">
+                  Launch OpenHarness
+                </a>
               </li>
             </ul>
           </div>

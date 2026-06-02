@@ -16,3 +16,11 @@
 - US-010b DONE: EnterpriseSection -> audit form id=audit, wired apiClient.contactFormSubmit({...,Referrer:audit-form}), inline green/red banners (no alert), res.ok branch
 - NOTE (follow-up): no mobile hamburger exists; 5 nav items + toggle may overflow at 375px
 
+## Wave 3 + Final — 2026-06-02T22:54Z
+- US-013 DONE: /services 308->/pricing (redirects() inside nextConfig, PWA intact); sitemap lists /pricing + /case-studies
+- US-014 DONE: footer Developers column (Blog/GitHub/Launch OpenHarness); RegisterButton demoted (no marketing usage); /login + dead anchors removed
+- Deleted dead non-routable src/app/v1.page.tsx snapshot (stale brand)
+- VALIDATION: tsc clean; npm run build green (23 pages); runtime smoke -> /,/pricing,/case-studies,/blog,/socials all 200; /services 308; homepage has Mifune hero + #audit/#pain anchors; only intentional footer dev links + ruska_logo placeholder remain
+- FOLLOW-UPS (open items): real Mifune logo/favicon/OG asset; mobile hamburger nav (5 items overflow risk at 375px); cal.com/mifune slug; Mifune Slack; founder headshot; exact prices/AI Partner monthly; privacy-consent line + GA4 submit event
+- ALL 16 stories pass.
+

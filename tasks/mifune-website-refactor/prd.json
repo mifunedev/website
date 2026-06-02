@@ -229,8 +229,8 @@
         "Typecheck passes; npm run build succeeds with PWA wrap intact"
       ],
       "priority": 6,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Wave 3: npm run build green (23 pages, PWA intact); /services 308->/pricing verified on running server."
     },
     {
       "id": "US-014",
@@ -246,8 +246,8 @@
         "Verify in browser using agent-browser skill: footer Developers links resolve (no 404)"
       ],
       "priority": 6,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Wave 3: npm run build green (23 pages, PWA intact); /services 308->/pricing verified on running server."
     }
   ]
 }
