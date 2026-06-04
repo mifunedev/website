@@ -63,9 +63,9 @@ export default function CTASection() {
           >
             <a
               href="#audit"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400 whitespace-nowrap"
             >
-              Book an AI Workflow Audit
+              Book Your Free Audit
               <svg
                 className="h-5 w-5"
                 fill="none"

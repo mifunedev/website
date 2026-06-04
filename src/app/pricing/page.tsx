@@ -141,7 +141,7 @@ export default function PricingPage() {
 
                         <a
                           href="/#audit"
-                          className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black transition-all duration-200 hover:bg-green-400"
+                          className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-base font-medium text-black transition-all duration-200 hover:bg-green-400 whitespace-nowrap"
                         >
                           {tier.cta}
                           <svg
@@ -295,9 +295,9 @@ export default function PricingPage() {
               </p>
               <a
                 href="/#audit"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black transition-all duration-200 hover:bg-green-400"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black transition-all duration-200 hover:bg-green-400 whitespace-nowrap"
               >
-                Book a free AI Workflow Audit
+                Book Your Free Audit
                 <svg
                   className="h-5 w-5"
                   fill="none"
