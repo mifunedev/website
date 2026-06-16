@@ -5,9 +5,35 @@ import Link from "next/link";
 import { apiClient } from "@/utils/client";
 import { socialIcons } from "@/config/app";
 
+const technologies = [
+  "LangGraph",
+  "LangChain",
+  "DeepAgents",
+  "Claude Code",
+  "OpenAI Codex",
+  "Hermes",
+  "Pi",
+  "DSPy",
+  "FastAPI",
+  "Python",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Tailwind CSS",
+  "MCP",
+  "A2A",
+  "PostgreSQL + pgvector",
+  "Redis",
+  "Playwright",
+  "Ollama",
+];
+
+const technologyRail = [...technologies, ...technologies];
+
 const FooterSection = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isTechnologyRailPaused, setIsTechnologyRailPaused] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -44,7 +70,7 @@ const FooterSection = () => {
               </span>
             </div>
             <p className="text-sm font-montserrat text-muted-foreground leading-relaxed">
-              Build your AI digital workforce with intelligent agents powered by LangChain DeepAgents.
+              Build dependable agent systems on the tools your team already trusts.
             </p>
           </div>
 
@@ -127,6 +153,74 @@ const FooterSection = () => {
             </form>
           </div>
         </div>
+
+        {/* Technologies Slider */}
+        <section
+          className="mb-12 overflow-hidden rounded-2xl border border-border bg-card/40 px-4 py-5"
+          aria-labelledby="footer-technologies-heading"
+        >
+          <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="font-montserrat text-xs uppercase tracking-[0.28em] text-muted-foreground">
+                Technologies we use
+              </p>
+              <h3
+                id="footer-technologies-heading"
+                className="font-cormorant text-2xl font-medium text-foreground"
+              >
+                A broader stack than any single framework
+              </h3>
+            </div>
+            <div className="flex max-w-xl flex-col gap-3 sm:items-end">
+              <p className="font-montserrat text-sm text-muted-foreground sm:text-right">
+                From agent runtimes to production infrastructure, Orchestra is built across the modern AI engineering ecosystem.
+              </p>
+              <button
+                type="button"
+                aria-pressed={isTechnologyRailPaused}
+                onClick={() => setIsTechnologyRailPaused((paused) => !paused)}
+                className="rounded-full border border-border px-3 py-1 font-montserrat text-xs text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background motion-reduce:hidden"
+              >
+                {isTechnologyRailPaused ? "Resume slider" : "Pause slider"}
+              </button>
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] motion-reduce:overflow-visible motion-reduce:[mask-image:none]">
+            <div
+              className={`flex w-max animate-[footer-tech-scroll_58s_linear_infinite] gap-3 hover:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:animate-none ${
+                isTechnologyRailPaused ? "[animation-play-state:paused]" : ""
+              }`}
+            >
+              {technologyRail.map((technology, index) => {
+                const isDuplicate = index >= technologies.length;
+
+                return (
+                  <span
+                    key={`${technology}-${index}`}
+                    aria-hidden={isDuplicate}
+                    className={`rounded-full border border-border bg-background/80 px-4 py-2 font-montserrat text-sm text-foreground shadow-sm ${
+                      isDuplicate ? "motion-reduce:hidden" : ""
+                    }`}
+                  >
+                    {technology}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <style jsx global>{`
+          @keyframes footer-tech-scroll {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
+          }
+        `}</style>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border">
