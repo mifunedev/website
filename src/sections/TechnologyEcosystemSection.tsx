@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEye, FaTimes } from "react-icons/fa";
 
 type Technology = {
   name: string;
@@ -42,7 +41,8 @@ const secondRowTechnologies = technologies.slice(11);
 // legible in both themes, a green-tinted initials fallback when no logo is
 // provided or the remote logo 404s, and a hover tooltip carrying the one-line
 // description. The tech name is always rendered as visible text so information
-// is never carried by the tooltip alone.
+// is never carried by the tooltip alone. Tiles are kept small and dense so two
+// rows of marks read as a quiet logo ticker rather than a heavy grid.
 //
 // The fallback is driven by a client `failed` flag rather than DOM mutation so
 // it survives SSR: a logo that 404s during server render (before hydration)
@@ -53,12 +53,10 @@ const secondRowTechnologies = technologies.slice(11);
 const TechCard = ({
   tech,
   duplicate = false,
-  compact = false,
   className = "",
 }: {
   tech: Technology;
   duplicate?: boolean;
-  compact?: boolean;
   className?: string;
 }) => {
   const initials = tech.name.substring(0, 2).toUpperCase();
@@ -75,16 +73,11 @@ const TechCard = ({
         .filter(Boolean)
         .join(" ")}
     >
-      <div
-        className={[
-          "mx-auto flex h-28 flex-col items-center justify-center rounded-xl border border-border bg-white shadow-sm transition-all duration-300 hover:border-green-500 hover:shadow-lg dark:bg-muted",
-          compact ? "w-[4.5rem] gap-1.5 p-2" : "w-28 gap-2 p-3",
-        ].join(" ")}
-      >
+      <div className="mx-auto flex h-24 w-24 flex-col items-center justify-center gap-1.5 rounded-xl border border-border bg-white p-2 shadow-sm transition-all duration-300 hover:border-green-500 hover:shadow-lg dark:bg-muted">
         {tech.logo && !failed ? (
           // Constant white chip keeps near-black brand marks legible on the
           // dark card surface; this tile never flips theme.
-          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white p-1">
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-white p-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={tech.logo}
@@ -99,16 +92,11 @@ const TechCard = ({
             />
           </div>
         ) : (
-          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-green-100 text-xs font-bold text-green-700 dark:bg-green-500/15 dark:text-green-300">
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-green-100 text-xs font-bold text-green-700 dark:bg-green-500/15 dark:text-green-300">
             {initials}
           </div>
         )}
-        <span
-          className={[
-            "text-center font-montserrat font-medium leading-tight text-foreground",
-            compact ? "text-[11px]" : "text-xs",
-          ].join(" ")}
-        >
+        <span className="text-center font-montserrat text-[11px] font-medium leading-tight text-foreground">
           {tech.name}
         </span>
       </div>
@@ -125,23 +113,21 @@ const TechCard = ({
 
 // One scrolling carousel row. The rail is the row's techs duplicated so the
 // CSS keyframes can translate exactly one set's width (-50%) for a seamless
-// loop. Inter-card spacing is a per-card right margin (mr-4) rather than a
+// loop. Inter-card spacing is a per-card right margin (mr-3) rather than a
 // flex gap, so the duplicated set is an exact 50% of the rail and -50% lands
 // precisely on the seam (a flex gap would leave the loop half a gap short and
 // jump every cycle). The duplicated half is aria-hidden and hidden under
 // reduced motion, where the row collapses to a static wrapped layout (gap-y-4
-// restores the vertical rhythm the removed flex gap used to provide). Hover
-// and the explicit Pause/Resume control both pause the animation. The row
-// uses overflow-x-clip (not overflow-hidden) for the horizontal mask; the
-// extra top padding gives the -top-9 tooltip room to render within the box.
+// restores the vertical rhythm the removed flex gap used to provide). Hovering
+// the rail pauses the animation. The row uses overflow-x-clip (not
+// overflow-hidden) for the horizontal mask; the extra top padding gives the
+// -top-9 tooltip room to render within the box.
 const TechCarouselRow = ({
   technologies: rowTechnologies,
   reverse = false,
-  paused = false,
 }: {
   technologies: Technology[];
   reverse?: boolean;
-  paused?: boolean;
 }) => {
   const rail = [...rowTechnologies, ...rowTechnologies];
 
@@ -152,14 +138,14 @@ const TechCarouselRow = ({
           reverse
             ? "animate-tech-ecosystem-scroll-reverse"
             : "animate-tech-ecosystem-scroll"
-        } ${paused ? "[animation-play-state:paused]" : ""}`}
+        }`}
       >
         {rail.map((tech, index) => (
           <TechCard
             key={`${tech.name}-${index}`}
             tech={tech}
             duplicate={index >= rowTechnologies.length}
-            className="mr-4"
+            className="mr-3"
           />
         ))}
       </div>
@@ -168,9 +154,6 @@ const TechCarouselRow = ({
 };
 
 const TechnologyEcosystemSection = () => {
-  const [isTechnologyRailPaused, setIsTechnologyRailPaused] = useState(false);
-  const [showAllTech, setShowAllTech] = useState(false);
-
   return (
     <section
       id="technology"
@@ -209,77 +192,10 @@ const TechnologyEcosystemSection = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="rounded-3xl border border-border bg-card p-6 md:p-8"
         >
-          <div className="mb-6 flex flex-wrap items-center justify-end gap-2">
-            {!showAllTech && (
-              <button
-                type="button"
-                aria-pressed={isTechnologyRailPaused}
-                onClick={() => setIsTechnologyRailPaused((paused) => !paused)}
-                className="rounded-full border border-border px-3 py-1.5 font-montserrat text-xs text-muted-foreground transition-colors hover:border-green-500 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-background motion-reduce:hidden"
-              >
-                {isTechnologyRailPaused ? "Resume slider" : "Pause slider"}
-              </button>
-            )}
-            <button
-              type="button"
-              aria-expanded={showAllTech}
-              onClick={() => setShowAllTech((shown) => !shown)}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 font-montserrat text-xs font-medium text-muted-foreground transition-colors hover:border-green-500 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-background"
-            >
-              {showAllTech ? (
-                <>
-                  <FaTimes aria-hidden className="h-3 w-3" />
-                  <span>Hide</span>
-                </>
-              ) : (
-                <>
-                  <FaEye aria-hidden className="h-3 w-3" />
-                  <span>View All</span>
-                </>
-              )}
-            </button>
+          <div className="space-y-4">
+            <TechCarouselRow technologies={firstRowTechnologies} />
+            <TechCarouselRow technologies={secondRowTechnologies} reverse />
           </div>
-
-          {showAllTech ? (
-            // Two static rows (11 + 10) inside a single horizontal-scroll
-            // container: centered when they fit the panel, left-anchored scroll
-            // on narrow screens. It never wraps to a third row. pt-10 gives the
-            // row-one tooltips room so the scroll box does not clip them.
-            <div className="overflow-x-auto">
-              <div className="mx-auto flex w-max flex-col gap-4 pb-2 pt-10">
-                <div className="flex justify-center gap-2">
-                  {firstRowTechnologies.map((tech, index) => (
-                    <TechCard
-                      key={`${tech.name}-${index}`}
-                      tech={tech}
-                      compact
-                    />
-                  ))}
-                </div>
-                <div className="flex justify-center gap-2">
-                  {secondRowTechnologies.map((tech, index) => (
-                    <TechCard
-                      key={`${tech.name}-${index}`}
-                      tech={tech}
-                      compact
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <TechCarouselRow
-                technologies={firstRowTechnologies}
-                paused={isTechnologyRailPaused}
-              />
-              <TechCarouselRow
-                technologies={secondRowTechnologies}
-                reverse
-                paused={isTechnologyRailPaused}
-              />
-            </div>
-          )}
         </motion.div>
       </div>
     </section>
