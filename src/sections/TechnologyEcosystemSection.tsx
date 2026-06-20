@@ -37,11 +37,12 @@ const technologies: Technology[] = [
 const firstRowTechnologies = technologies.slice(0, 11);
 const secondRowTechnologies = technologies.slice(11);
 
-// A single logo card: light surface (the one intentional light surface here,
-// since most brand logos are dark) with a green-tinted initials fallback when
-// no logo is provided or the remote logo 404s, plus a hover tooltip carrying
-// the one-line description. The tech name is always rendered as visible text so
-// information is never carried by the tooltip alone.
+// A single logo card: theme-aware surface (white in light, an elevated muted
+// gray in dark) with a constant white logo chip so near-black brand marks stay
+// legible in both themes, a green-tinted initials fallback when no logo is
+// provided or the remote logo 404s, and a hover tooltip carrying the one-line
+// description. The tech name is always rendered as visible text so information
+// is never carried by the tooltip alone.
 //
 // The fallback is driven by a client `failed` flag rather than DOM mutation so
 // it survives SSR: a logo that 404s during server render (before hydration)
@@ -52,12 +53,12 @@ const secondRowTechnologies = technologies.slice(11);
 const TechCard = ({
   tech,
   duplicate = false,
-  fluid = false,
+  compact = false,
   className = "",
 }: {
   tech: Technology;
   duplicate?: boolean;
-  fluid?: boolean;
+  compact?: boolean;
   className?: string;
 }) => {
   const initials = tech.name.substring(0, 2).toUpperCase();
@@ -67,8 +68,7 @@ const TechCard = ({
     <div
       aria-hidden={duplicate}
       className={[
-        "group relative",
-        fluid ? "w-full" : "flex-shrink-0",
+        "group relative flex-shrink-0",
         duplicate ? "motion-reduce:hidden" : "",
         className,
       ]
@@ -76,33 +76,39 @@ const TechCard = ({
         .join(" ")}
     >
       <div
-        className={`mx-auto flex h-28 ${
-          fluid ? "w-full max-w-[7rem]" : "w-28"
-        } flex-col items-center justify-center gap-2 rounded-xl border border-border bg-white p-3 shadow-sm transition-all duration-300 hover:border-green-500 hover:shadow-lg`}
+        className={[
+          "mx-auto flex h-28 flex-col items-center justify-center rounded-xl border border-border bg-white shadow-sm transition-all duration-300 hover:border-green-500 hover:shadow-lg dark:bg-muted",
+          compact ? "w-[4.5rem] gap-1.5 p-2" : "w-28 gap-2 p-3",
+        ].join(" ")}
       >
-        <div className="flex h-10 w-10 items-center justify-center">
-          {tech.logo && !failed ? (
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={tech.logo}
-                alt={`${tech.name} logo`}
-                className="max-h-full max-w-full object-contain"
-                onError={() => setFailed(true)}
-                ref={(node) => {
-                  if (node && node.complete && node.naturalWidth === 0) {
-                    setFailed(true);
-                  }
-                }}
-              />
-            </>
-          ) : (
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 text-xs font-bold text-green-700">
-              {initials}
-            </div>
-          )}
-        </div>
-        <span className="text-center font-montserrat text-xs font-medium leading-tight text-gray-900">
+        {tech.logo && !failed ? (
+          // Constant white chip keeps near-black brand marks legible on the
+          // dark card surface; this tile never flips theme.
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white p-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={tech.logo}
+              alt={`${tech.name} logo`}
+              className="max-h-full max-w-full object-contain"
+              onError={() => setFailed(true)}
+              ref={(node) => {
+                if (node && node.complete && node.naturalWidth === 0) {
+                  setFailed(true);
+                }
+              }}
+            />
+          </div>
+        ) : (
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-green-100 text-xs font-bold text-green-700 dark:bg-green-500/15 dark:text-green-300">
+            {initials}
+          </div>
+        )}
+        <span
+          className={[
+            "text-center font-montserrat font-medium leading-tight text-foreground",
+            compact ? "text-[11px]" : "text-xs",
+          ].join(" ")}
+        >
           {tech.name}
         </span>
       </div>
@@ -235,10 +241,31 @@ const TechnologyEcosystemSection = () => {
           </div>
 
           {showAllTech ? (
-            <div className="grid grid-cols-2 justify-items-center gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
-              {technologies.map((tech, index) => (
-                <TechCard key={`${tech.name}-${index}`} tech={tech} fluid />
-              ))}
+            // Two static rows (11 + 10) inside a single horizontal-scroll
+            // container: centered when they fit the panel, left-anchored scroll
+            // on narrow screens. It never wraps to a third row. pt-10 gives the
+            // row-one tooltips room so the scroll box does not clip them.
+            <div className="overflow-x-auto">
+              <div className="mx-auto flex w-max flex-col gap-4 pb-2 pt-10">
+                <div className="flex justify-center gap-2">
+                  {firstRowTechnologies.map((tech, index) => (
+                    <TechCard
+                      key={`${tech.name}-${index}`}
+                      tech={tech}
+                      compact
+                    />
+                  ))}
+                </div>
+                <div className="flex justify-center gap-2">
+                  {secondRowTechnologies.map((tech, index) => (
+                    <TechCard
+                      key={`${tech.name}-${index}`}
+                      tech={tech}
+                      compact
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           ) : (
             <div className="space-y-4">
