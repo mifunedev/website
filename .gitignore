@@ -42,3 +42,6 @@ public/fallback-*.js
 public/workbox-*.js
 
 .env*
+
+# claude code agent artifacts (screenshots, scratch)
+.claude/
