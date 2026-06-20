@@ -6,6 +6,9 @@ const withPWA = withPWAInit({
     reloadOnOnline: true,
     swcMinify: true,
     dest: "public",
+    // PWA service worker breaks HMR and 404s /_next/static chunks in `next dev`.
+    // Disable it outside production so dev (and the dev-served public tunnel) hot-reloads cleanly.
+    disable: process.env.NODE_ENV !== "production",
     fallbacks: {
       //image: "/static/images/fallback.png",
       document: "/offline", // if you want to fallback to a custom page rather than /_offline
