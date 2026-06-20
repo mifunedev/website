@@ -3,14 +3,14 @@ title: "Rendering Interactive Charts with LangGraph and React"
 date: "2025-12-06"
 excerpt: "A deep dive into using content_and_artifact to stream rich visualizations from Python agents to React UIs."
 categories: ["Python", "LangGraph", "React", "Vite"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/blog/charts.png?raw=true"
+coverImage: "https://github.com/mifunedev/static/blob/master/blog/charts.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
   linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
-Building AI agents that can do more than just talk is the new frontier. At [Enso Labs](https://github.com/ruska-ai/orchestra), we're building **DeepAgents**—composed AI workflows that interact with complex tools and data.
+Building AI agents that can do more than just talk is the new frontier. At [Enso Labs](https://github.com/mifunedev/orchestra), we're building **DeepAgents**—composed AI workflows that interact with complex tools and data.
 
 One common challenge developers face is displaying rich data, like interactive charts, within a chat interface. LLMs are great at text, but they can't natively generate a Plotly chart or a React component.
 
@@ -153,6 +153,6 @@ This pattern unlocks powerful capabilities for AI Agents:
 
 We're building **Orchestra** to make patterns like this easy to deploy.
 
-Check out our code on [GitHub](https://github.com/ruska-ai) or follow us for more updates on our [Socials](/socials).
+Check out our code on [GitHub](https://github.com/mifunedev) or follow us for more updates on our [Socials](/socials).
 
 Happy coding!

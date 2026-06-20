@@ -29,7 +29,7 @@ const SocialPage = () => {
       name: "Github",
       handle: "Mifune",
       icon: <FaGithub className="text-xl" />,
-      url: "https://github.com/ruska-ai",
+      url: "https://github.com/mifunedev",
     },
     {
       name: "Slack",

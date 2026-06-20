@@ -1047,7 +1047,7 @@ export default function ServicesPage() {
                       <FaLinkedin size={24} />
                     </a>
                     <a
-                      href="https://github.com/ruska-ai"
+                      href="https://github.com/mifunedev"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground transition-colors hover:text-foreground"

@@ -23,7 +23,7 @@ export const socialIcons = [
     Icon: FaGithub,
     tooltip: "mifune-dev",
     key: "github",
-    link: "https://github.com/ruska-ai",
+    link: "https://github.com/mifunedev",
   },
   {
     Icon: FaSlack,

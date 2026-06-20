@@ -22,7 +22,7 @@ export default function RegisterButton({
 
   return (
     <Link
-      href="https://chat.ruska.ai"
+      href="https://oh.mifune.dev"
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
     >
       {children}

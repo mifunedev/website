@@ -3,7 +3,7 @@ title: "Remote Agent Development with Cloudflare Tunnels and Claude Code Hooks"
 date: "2025-12-30"
 excerpt: "Set up persistent Cloudflare Tunnels for remote access to your dev environment, then supercharge it with Claude Code hooks for an automated agent feedback loop."
 categories: ["How-To", "Developer Productivity", "Claude Code", "Remote Development"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/blog/hooks_tunnels.png?raw=true"
+coverImage: "https://github.com/mifunedev/static/blob/master/blog/hooks_tunnels.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
@@ -453,4 +453,4 @@ You now have a persistent remote development environment with automated feedback
 
 Cloudflare Tunnels are free for personal use. Claude Code hooks are available now.
 
-[Get Claude Code](https://claude.ai/code) | [Cloudflare Tunnel Docs](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) | [Orchestra on GitHub](https://github.com/ruska-ai/orchestra)
+[Get Claude Code](https://claude.ai/code) | [Cloudflare Tunnel Docs](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) | [Orchestra on GitHub](https://github.com/mifunedev/orchestra)

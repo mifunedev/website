@@ -3,7 +3,7 @@ title: "How to Build and Schedule a Real Production AI Agent with Orchestra’s 
 date: "2025-12-14"
 excerpt: "A hands-on, step-by-step guide to building, verifying, and scheduling a durable AI agent using Orchestra’s API—including tools, assistants, threads, and autonomous scheduling. Curl examples included!"
 categories: ["How-To", "API Walkthrough", "Agent Automation"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/blog/scheduler.png?raw=true"
+coverImage: "https://github.com/mifunedev/static/blob/master/blog/scheduler.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
@@ -196,6 +196,6 @@ Orchestra will rerun your agent every Monday at 9am, with full thread memory.
 
 Orchestra is adding persistent file systems and execution of user scripts—letting agents natively use Python “skills” and manage local data, _without_ wasting prompt tokens.
 
-And for teams: our official self-hosted Docker image is now live! [Get it here.](https://github.com/ruska-ai/orchestra/pkgs/container/orchestra)
+And for teams: our official self-hosted Docker image is now live! [Get it here.](https://github.com/mifunedev/orchestra/pkgs/container/orchestra)
 
-Ready to start? [Explore Orchestra on GitHub.](https://github.com/ruska-ai/orchestra)
+Ready to start? [Explore Orchestra on GitHub.](https://github.com/mifunedev/orchestra)

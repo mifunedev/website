@@ -18,7 +18,7 @@ const projects = [
       "https://github.com/ryaneggz/static/blob/main/pe-oss-gh-page.png?raw=true",
     description:
       "Open-source AI projects to help you build better chatbots, faster. Get started with our pre-built templates, or dive into the code to customize your own.",
-    link: "https://github.com/ruska-ai",
+    link: "https://github.com/mifunedev",
   },
   {
     title: "Prompt Engineers AI - Legacy",

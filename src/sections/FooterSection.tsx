@@ -102,12 +102,12 @@ const FooterSection = () => {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/ruska-ai" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors duration-200">
+                <a href="https://github.com/mifunedev" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors duration-200">
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="https://chat.ruska.ai" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400 transition-colors duration-200">
+                <a href="https://oh.mifune.dev" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400 transition-colors duration-200">
                   Launch OpenHarness
                 </a>
               </li>
