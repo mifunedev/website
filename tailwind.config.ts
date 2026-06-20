@@ -79,6 +79,9 @@ const config: Config = {
         "pulse-grow-shrink": "pulse-grow-shrink 2s infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "tech-ecosystem-scroll": "tech-ecosystem-scroll 54s linear infinite",
+        "tech-ecosystem-scroll-reverse":
+          "tech-ecosystem-scroll-reverse 48s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -96,6 +99,14 @@ const config: Config = {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
+        },
+        "tech-ecosystem-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "tech-ecosystem-scroll-reverse": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0)" },
         },
       },
       transitionDelay: {
