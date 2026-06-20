@@ -3,7 +3,7 @@ title: "How to Connect MCP Tools to Orchestra Agents (Cursor, Claude Desktop, or
 date: "2025-12-25"
 excerpt: "A hands-on guide to using Orchestra's MCP endpoint with the MCP Inspector, Cursor, Claude Desktop, and the Orchestra API—complete with streaming examples and troubleshooting."
 categories: ["How-To", "MCP", "API Walkthrough", "Agent Automation"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/blog/mcp.png?raw=true"
+coverImage: "https://github.com/mifunedev/static/blob/master/blog/mcp.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
@@ -230,4 +230,4 @@ This is how production agent systems work: dynamic tool registries, inline confi
 
 Orchestra is free to use during beta—no credit card required.
 
-[Build Now](https://chat.ruska.ai) | [GitHub](https://github.com/ruska-ai/orchestra) | [Follow us on X](https://x.com/ruska_ai)
+[Build Now](https://chat.ruska.ai) | [GitHub](https://github.com/mifunedev/orchestra) | [Follow us on X](https://x.com/ruska_ai)

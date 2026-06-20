@@ -10,9 +10,9 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 // CTA Button Link - Update this with your actual Calendly/Cal.com link
-const COMPANY_TAG = 'ruska-ai'
+const COMPANY_TAG = 'mifune'
 const BOOKING_LINK = `https://cal.com/${COMPANY_TAG}/ai-audit`;
-const EMAIL = "reggleston@ruska.ai";
+const EMAIL = "hello@mifune.dev";
 
 // FAQ Data
 const faqs = [
@@ -285,10 +285,10 @@ export default function ServicesPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              name: "Ruska AI - Automation as a Service",
+              name: "Mifune - Managed AI Workers for Your Business",
               description:
                 "AI automation systems built and maintained for your business. Trusted AI integration partner for SMBs.",
-              url: "https://ruska.ai/services",
+              url: "https://mifune.dev/services",
               founder: {
                 "@type": "Person",
                 name: "Ryan Eggleston",
@@ -1047,7 +1047,7 @@ export default function ServicesPage() {
                       <FaLinkedin size={24} />
                     </a>
                     <a
-                      href="https://github.com/ruska-ai"
+                      href="https://github.com/mifunedev"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground transition-colors hover:text-foreground"

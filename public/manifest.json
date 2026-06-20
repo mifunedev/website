@@ -1,22 +1,22 @@
-{ 
-    "name": "Orchestra",
-    "short_name": "Orchestra",
-    "theme_color": "#00ff00",
-    "background_color": "#ffffff", 
-    "display": "browser", 
-    "orientation": "any", 
-    "scope": "/", 
-    "start_url": "/", 
-    "icons": [ 
-        { 
-            "src": "/icons-192.png", 
-            "type": "image/png", 
-            "sizes": "192x192" 
+{
+    "name": "Mifune",
+    "short_name": "Mifune",
+    "theme_color": "#22c55e",
+    "background_color": "#ffffff",
+    "display": "browser",
+    "orientation": "any",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/icons-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
         },
-        { 
-            "src": "/icons-256.png", 
-            "type": "image/png", 
-            "sizes": "256x256" 
-        } 
-    ] 
+        {
+            "src": "/icons-256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        }
+    ]
 }

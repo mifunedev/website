@@ -9,39 +9,39 @@ const SocialPage = () => {
   const socials = [
     {
       name: "LinkedIn",
-      handle: "Ruska Labs",
+      handle: "Mifune",
       icon: <FaLinkedin className="text-xl" />,
-      url: "https://www.linkedin.com/company/ruska-ai",
+      url: "https://www.linkedin.com/company/mifune-dev",
     },
     {
       name: "YouTube",
-      handle: "@ruska-ai",
+      handle: "@mifune-dev",
       icon: <FaYoutube className="text-xl" />,
-      url: "https://www.youtube.com/@ruska-ai",
+      url: "https://www.youtube.com/@mifune-dev",
     },
     {
       name: "X",
-      handle: "@ruska_ai",
+      handle: "@mifune_dev",
       icon: <FaXTwitter className="text-xl" />,
-      url: "https://x.com/ruska_ai",
+      url: "https://x.com/mifune_dev",
     },
     {
       name: "Github",
-      handle: "Ruska Labs",
+      handle: "Mifune",
       icon: <FaGithub className="text-xl" />,
-      url: "https://github.com/ruska-ai",
+      url: "https://github.com/mifunedev",
     },
     {
       name: "Slack",
-      handle: "Ruska Labs Workspace",
+      handle: "Mifune Workspace (coming soon)",
       icon: <FaSlack className="text-xl" />,
-      url: "https://join.slack.com/t/ruska-ai/shared_invite/zt-3l2lnevo6-hOe5ZeoAz~xj7CFAJk2bzg",
+      url: "#",
     },
     {
       name: "Website",
-      handle: "ruska.ai",
+      handle: "mifune.dev",
       icon: <FaGlobe className="text-xl" />,
-      url: "https://ruska.ai",
+      url: "https://mifune.dev",
     },
   ];
 

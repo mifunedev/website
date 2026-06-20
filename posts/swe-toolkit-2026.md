@@ -3,7 +3,7 @@ title: "SWE Toolkit (2026): A Practical Guide to Agentic Coding Workflows"
 date: "2026-01-21"
 excerpt: "The 4 tools I use to turn vague ideas into merged PRs: a multi-agent planning council (/team), a ticket-to-PR automator (/ticket), an autonomous execution loop (Ralph), and a ruthlessly curated AGENTS.md that keeps the agent in the 'Smart Zone' of the context window."
 categories: ["Agentic Coding", "Developer Productivity", "Workflow", "AI Engineering"]
-coverImage: "https://github.com/ruska-ai/static/blob/master/blog/swe-toolkit.png?raw=true"
+coverImage: "https://github.com/mifunedev/static/blob/master/blog/swe-toolkit.png?raw=true"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
@@ -50,7 +50,7 @@ flowchart TD
 
 The point isn’t to “ask AI what to do.” The point is to **maximize surface area**, gather options, and then deliberately converge.
 
-- **Reference**: `/team` command spec lives at [`.claude/commands/team.md`](https://github.com/ruska-ai/orchestra/blob/development/.claude/commands/team.md)
+- **Reference**: `/team` command spec lives at [`.claude/commands/team.md`](https://github.com/mifunedev/orchestra/blob/development/.claude/commands/team.md)
 
 #### When I reach for `/team`
 
@@ -82,7 +82,7 @@ Once the problem has a home (a GitHub issue), I want my workflow to stop being a
 
 If you’ve ever lost an hour to “branch naming + worktree + boilerplate PR body,” this is the fix.
 
-- **Reference**: `/ticket` command spec lives at [`.claude/commands/ticket.md`](https://github.com/ruska-ai/orchestra/blob/development/.claude/commands/ticket.md)
+- **Reference**: `/ticket` command spec lives at [`.claude/commands/ticket.md`](https://github.com/mifunedev/orchestra/blob/development/.claude/commands/ticket.md)
 
 #### Why this matters for agentic workflows
 
@@ -113,7 +113,7 @@ Key mechanics:
 
 This is how you get reliable momentum without the “context window cliff” where the agent forgets what it was doing halfway through.
 
-- **Reference**: Ralph lives in this repo under [`/.ralph`](https://github.com/ruska-ai/orchestra/tree/development/.ralph)
+- **Reference**: Ralph lives in this repo under [`/.ralph`](https://github.com/mifunedev/orchestra/tree/development/.ralph)
 - **Reference**: It’s based on the excellent starting point from [`github.com/snarktank/ralph`](https://github.com/snarktank/ralph)
 
 #### The hidden superpower: you can make the loop observable
@@ -151,7 +151,7 @@ And it should *not* contain:
 - outdated instructions
 - one-off story notes
 
-- **Reference**: see [`/AGENTS.md`](https://github.com/ruska-ai/orchestra/blob/development/AGENTS.md)
+- **Reference**: see [`/AGENTS.md`](https://github.com/mifunedev/orchestra/blob/development/AGENTS.md)
 
 ---
 
@@ -207,15 +207,15 @@ Fix those, and your success rate spikes.
 
 Agentic coding in 2026 is about **workflow design**, not model worship. The models will keep changing. The habits that ship—contracts, observability, and clean context—stay useful.
 
-If you want to see how we’re building these workflows in the open, check out [Orchestra on GitHub](https://github.com/ruska-ai/orchestra).
+If you want to see how we’re building these workflows in the open, check out [Orchestra on GitHub](https://github.com/mifunedev/orchestra).
 
 ---
 
 ## References
 
-- `/team`: [`.claude/commands/team.md`](https://github.com/ruska-ai/orchestra/blob/development/.claude/commands/team.md)
-- `/ticket`: [`.claude/commands/ticket.md`](https://github.com/ruska-ai/orchestra/blob/development/.claude/commands/ticket.md)
-- Context hygiene: [`AGENTS.md`](https://github.com/ruska-ai/orchestra/blob/development/AGENTS.md)
-- Ralph in Orchestra: [`.ralph/`](https://github.com/ruska-ai/orchestra/tree/development/.ralph)
+- `/team`: [`.claude/commands/team.md`](https://github.com/mifunedev/orchestra/blob/development/.claude/commands/team.md)
+- `/ticket`: [`.claude/commands/ticket.md`](https://github.com/mifunedev/orchestra/blob/development/.claude/commands/ticket.md)
+- Context hygiene: [`AGENTS.md`](https://github.com/mifunedev/orchestra/blob/development/AGENTS.md)
+- Ralph in Orchestra: [`.ralph/`](https://github.com/mifunedev/orchestra/tree/development/.ralph)
 - Ralph baseline: [`github.com/snarktank/ralph`](https://github.com/snarktank/ralph)
 

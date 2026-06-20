@@ -87,7 +87,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         </p>
 
         <AuthorInfo
-          name={post.author?.name || "Orchestra Team"}
+          name={post.author?.name || "Mifune Team"}
           published={new Date(post.date)}
           img={post.author?.picture}
         />

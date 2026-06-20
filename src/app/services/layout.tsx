@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Automation as a Service | Ruska AI",
+  title: "Automation as a Service | Mifune",
   description:
     "AI automation systems built and maintained for your business. Saint George, UT and beyond.",
   keywords: [
@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     "workflow automation",
   ],
   openGraph: {
-    title: "Automation as a Service | Ruska AI",
+    title: "Automation as a Service | Mifune",
     description:
       "AI automation systems built and maintained for your business. Trusted AI integration partner for SMBs.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Automation as a Service | Ruska AI",
+    title: "Automation as a Service | Mifune",
     description:
       "AI automation systems built and maintained for your business. Trusted AI integration partner for SMBs.",
   },

@@ -3,11 +3,19 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const TopNavbar = () => {
   const [showSolidBackground, setShowSolidBackground] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,7 +23,7 @@ const TopNavbar = () => {
       setShowSolidBackground(currentScroll > 50);
 
       // Detect which section is currently in view
-      const sections = ["contact"];
+      const sections = ["pain", "about", "audit"];
       sections.forEach((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -33,10 +41,9 @@ const TopNavbar = () => {
 
   // Define menu items in one place for consistency
   const menuItems = [
-    { href: "/blog", label: "Blog" },
-    { href: "/services", label: "Services" },
-    // { href: "#pricing", label: "Pricing" }
-    { href: "/#enterprise", label: "Enterprise" },
+    { href: "/#pain", label: "AI Workers" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/#about", label: "About" },
   ];
 
   return (
@@ -61,40 +68,89 @@ const TopNavbar = () => {
               <a href="/" className="ml-2 flex items-center">
                 <Image
                   src="/images/ruska_logo_200.png"
-                  alt="Orchestra Logo"
+                  alt="Mifune Logo"
                   width={24}
                   height={24}
                   className="mr-2 rounded-full"
                 />
-                <span className="font-cormorant text-2xl font-medium tracking-wide text-foreground transition-colors duration-200 hover:text-muted-foreground">
-                  RUSKA
+                <span className="font-montserrat text-2xl font-medium tracking-wide text-foreground transition-colors duration-200 hover:text-muted-foreground">
+                  Mifune
                 </span>
               </a>
             </motion.div>
 
-            {/* Menu items - visible on all screens */}
-            <div className="flex items-center space-x-3 sm:space-x-4">
+            {/* Desktop menu — hidden below sm breakpoint */}
+            <div className="hidden items-center space-x-3 sm:flex sm:space-x-4">
               {menuItems.map((item) => (
                 <motion.a
                   key={item.href}
                   href={item.href}
                   whileHover={{ scale: 1.05 }}
-                  className="font-montserrat text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                  className={`font-montserrat text-sm transition-colors duration-200 ${
+                    activeSection === item.href.replace("/#", "")
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   {item.label}
                 </motion.a>
               ))}
 
-              {/* App Link - visible on all screens */}
-              {/* <motion.a
-                href="https://chat.ruska.ai"
+              {/* Book Audit CTA button */}
+              <motion.a
+                href="/#audit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="rounded-full bg-foreground px-4 py-2 font-montserrat text-sm font-medium tracking-wide text-background shadow-lg transition-all duration-200 hover:opacity-90"
+                className="rounded-full bg-green-500 px-4 py-2 font-montserrat text-sm font-medium tracking-wide text-black shadow-lg transition-all duration-200 hover:bg-green-400"
               >
-                Build Now
-              </motion.a> */}
+                Book Audit
+              </motion.a>
+
               <ModeToggle />
+            </div>
+
+            {/* Mobile menu — visible below sm breakpoint */}
+            <div className="flex items-center gap-2 sm:hidden">
+              <ModeToggle />
+
+              <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    aria-label="Toggle navigation menu"
+                    className="flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {menuOpen ? (
+                      <X className="h-5 w-5" />
+                    ) : (
+                      <Menu className="h-5 w-5" />
+                    )}
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {menuItems.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <a
+                        href={item.href}
+                        className={`font-montserrat text-sm ${
+                          activeSection === item.href.replace("/#", "")
+                            ? "text-foreground"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {item.label}
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                  <DropdownMenuItem asChild>
+                    <a
+                      href="/#audit"
+                      className="mt-1 w-full rounded-full bg-green-500 px-4 py-2 text-center font-montserrat text-sm font-medium tracking-wide text-black transition-all duration-200 hover:bg-green-400"
+                    >
+                      Book Audit
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>

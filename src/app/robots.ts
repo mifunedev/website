@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://ruska.ai/sitemap.xml",
+    sitemap: "https://mifune.dev/sitemap.xml",
   };
 }

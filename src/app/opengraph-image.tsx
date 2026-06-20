@@ -38,7 +38,7 @@ export default function OGImage() {
               letterSpacing: "0.1em",
             }}
           >
-            RUSKA
+            Mifune
           </div>
           <div
             style={{
@@ -47,7 +47,7 @@ export default function OGImage() {
               fontWeight: 400,
             }}
           >
-            AI Agent Orchestration Platform
+            Managed AI Workers for Your Business
           </div>
         </div>
       </div>

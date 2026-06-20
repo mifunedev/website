@@ -21,11 +21,11 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
 });
 
-const APP_NAME = "ruska";
-const APP_DEFAULT_TITLE = "RUSKA - Steerable Harnesses for DeepAgents";
-const APP_TITLE_TEMPLATE = "%s | Ruska Labs";
+const APP_NAME = "mifune";
+const APP_DEFAULT_TITLE = "Mifune - Managed AI Workers for Your Business";
+const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
-  "AI Agent Orchestration Platform. Build, deploy, and manage AI automation with Orchestra by Ruska AI.";
+  "Deploy managed AI workers into your business without hiring more staff. Mifune builds and maintains AI automation for non-technical business owners.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
   description: APP_DESCRIPTION,
   keywords: [
     "AI automation",
-    "agent orchestration",
-    "Claude Code",
-    "OpenClaw",
-    "Orchestra",
-    "Ruska AI",
-    "LangGraph",
-    "MCP",
+    "managed AI workers",
+    "AI implementation",
+    "business automation",
+    "AI workflow audit",
+    "OpenHarness",
+    "done-for-you AI",
+    "AI partner",
   ],
   manifest: "/manifest.json",
   appleWebApp: {
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000",
+  themeColor: "#22c55e",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,

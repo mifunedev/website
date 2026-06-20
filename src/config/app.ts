@@ -9,32 +9,32 @@ export const MEDIUM_RSS_URL = "https://medium.com/feed/@ryaneggz";
 export const socialIcons = [
   {
     Icon: FaYoutube,
-    tooltip: "@ruska-ai",
+    tooltip: "@mifune-dev",
     key: "youtube",
-    link: "https://www.youtube.com/@ruska-ai",
+    link: "https://www.youtube.com/@mifune-dev",
   },
   {
     Icon: FaXTwitter,
-    tooltip: "@ruska_ai",
+    tooltip: "@mifune_dev",
     key: "x",
-    link: "https://x.com/ruska_ai",
+    link: "https://x.com/mifune_dev",
   },
   {
     Icon: FaGithub,
-    tooltip: "ruska-ai",
+    tooltip: "mifune-dev",
     key: "github",
-    link: "https://github.com/ruska-ai",
+    link: "https://github.com/mifunedev",
   },
   {
     Icon: FaSlack,
-    tooltip: "Ruska AI Slack",
+    tooltip: "Mifune Slack",
     key: "slack",
-    link: "https://join.slack.com/t/ruska-ai/shared_invite/zt-3l2lnevo6-hOe5ZeoAz~xj7CFAJk2bzg",
+    link: "#",
   },
   {
     Icon: FaLinkedin,
-    tooltip: "Ruska Labs",
+    tooltip: "Mifune",
     key: "linkedin",
-    link: "https://www.linkedin.com/company/ruska-ai",
+    link: "https://www.linkedin.com/company/mifune-dev",
   },
 ];

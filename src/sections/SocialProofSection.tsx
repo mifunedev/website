@@ -1,30 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { MdCode, MdFlashOn, MdHub } from "react-icons/md";
-import { FaGithub } from "react-icons/fa";
+import Link from "next/link";
 
-const techStack = [
-  {
-    name: "LangGraph",
-    description: "Enterprise-grade agent orchestration",
-    icon: MdCode
-  },
-  {
-    name: "MCP",
-    description: "Model Context Protocol integration",
-    icon: MdFlashOn
-  },
-  {
-    name: "A2A",
-    description: "Agent-to-Agent communication",
-    icon: MdHub
-  },
-  {
-    name: "Developer-First",
-    description: "Built for developers, by developers",
-    icon: FaGithub
-  }
+const metrics = [
+  "Hours saved per week",
+  "Follow-up speed",
+  "Tasks automated",
+  "Revenue opportunities recovered",
 ];
 
 export default function SocialProofSection() {
@@ -39,70 +21,86 @@ export default function SocialProofSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-cormorant font-light text-foreground mb-6">
-            Built on Proven Technology
+          <p className="font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+            Case Studies
+          </p>
+          <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-foreground mb-6">
+            Real Results from Real Businesses
           </h2>
           <p className="text-xl font-montserrat text-muted-foreground max-w-3xl mx-auto">
-            Orchestra is powered by industry-leading frameworks and protocols, giving you enterprise-grade reliability and cutting-edge capabilities.
+            See how managed AI workers are already changing operations for business owners like you.
           </p>
         </motion.div>
 
-        {/* Tech Stack Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {techStack.map((tech, index) => {
-            const Icon = tech.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border text-center shadow-sm"
-              >
-                <div className="inline-flex p-3 rounded-xl bg-purple-500/10 mb-4">
-                  <Icon className="w-8 h-8 text-purple-600 dark:text-purple-400" />
-                </div>
-                <h3 className="text-lg font-cormorant font-semibold text-card-foreground mb-2">
-                  {tech.name}
-                </h3>
-                <p className="text-sm font-montserrat text-muted-foreground">
-                  {tech.description}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Community CTA */}
+        {/* Coming Soon Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="max-w-2xl mx-auto rounded-2xl border border-green-500/30 bg-green-500/10 p-8"
         >
-          <div className="inline-flex flex-col md:flex-row items-center gap-8 p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-500/5 to-blue-500/5 dark:from-purple-900/30 dark:to-blue-900/30 border border-purple-500/20">
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-cormorant font-semibold text-foreground mb-3">
-                Join Early Adopters Building the Future
-              </h3>
-              <p className="text-lg font-montserrat text-muted-foreground">
-                Be part of the community shaping the next generation of AI automation
-              </p>
-            </div>
-            <div className="flex gap-6 text-center flex-shrink-0">
-              <div>
-                <div className="text-3xl md:text-4xl font-cormorant font-bold text-foreground">100+</div>
-                <div className="text-sm font-montserrat text-muted-foreground">Beta Users</div>
-              </div>
-              <div className="w-px bg-border" />
-              <div>
-                <div className="text-3xl md:text-4xl font-cormorant font-bold text-foreground">1000+</div>
-                <div className="text-sm font-montserrat text-muted-foreground">Agents Created</div>
-              </div>
-            </div>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2 mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            </span>
+            <span className="font-montserrat text-sm font-medium text-green-400">
+              Coming Soon
+            </span>
           </div>
+
+          {/* Headline */}
+          <h3 className="font-montserrat text-2xl md:text-3xl font-bold text-foreground mb-4">
+            Case Study Coming Soon:{" "}
+            <span className="font-space text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+              The Workflow Academy
+            </span>
+          </h3>
+
+          {/* Sub-heading */}
+          <p className="font-montserrat text-lg text-muted-foreground mb-8">
+            How The Workflow Academy reclaimed X hours/week with an AI Operations Assistant.
+          </p>
+
+          {/* Metrics list */}
+          <ul className="space-y-3 mb-8">
+            {metrics.map((metric) => (
+              <li key={metric} className="flex items-center gap-3 font-montserrat text-muted-foreground">
+                <svg
+                  className="h-4 w-4 flex-shrink-0 text-green-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                {metric}
+              </li>
+            ))}
+          </ul>
+
+          {/* Link to /case-studies */}
+          <Link
+            href="/case-studies"
+            className="inline-flex items-center gap-2 font-montserrat text-sm font-medium text-green-400 hover:text-green-300 transition-colors duration-200"
+          >
+            View all case studies
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
         </motion.div>
       </div>
     </section>
