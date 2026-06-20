@@ -11,30 +11,31 @@ type Technology = {
 };
 
 const technologies: Technology[] = [
-  { name: "LangGraph", logo: "https://cdn.simpleicons.org/langgraph", description: "Stateful multi-agent graphs" },
+  { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", description: "Advanced language models" },
+  { name: "Anthropic", logo: "https://cdn.simpleicons.org/anthropic", description: "Constitutional AI assistant" },
+  { name: "AWS", logo: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg", description: "Cloud platform" },
+  { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", description: "Containerization" },
+  { name: "Google Cloud", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg", description: "AI/ML services" },
+  { name: "Kubernetes", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg", description: "Orchestration" },
   { name: "LangChain", logo: "https://cdn.simpleicons.org/langchain", description: "LLM application framework" },
-  { name: "DeepAgents", description: "Deep agent runtime" },
-  { name: "Claude Code", logo: "https://cdn.simpleicons.org/anthropic", description: "Anthropic coding agent" },
-  { name: "OpenAI Codex", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", description: "OpenAI coding agent" },
-  { name: "Hermes", description: "Open-weight LLM" },
-  { name: "Pi", description: "Coding-agent runtime" },
-  { name: "DSPy", description: "Declarative LM programming" },
-  { name: "FastAPI", logo: "https://cdn.simpleicons.org/fastapi", description: "Python API framework" },
-  { name: "Python", logo: "https://cdn.simpleicons.org/python", description: "Backend language" },
-  { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript", description: "Typed JavaScript" },
-  { name: "React", logo: "https://cdn.simpleicons.org/react", description: "UI library" },
-  { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs", description: "React framework" },
-  { name: "Tailwind CSS", logo: "https://cdn.simpleicons.org/tailwindcss", description: "Utility-first CSS" },
-  { name: "MCP", logo: "https://cdn.simpleicons.org/modelcontextprotocol", description: "Model Context Protocol" },
-  { name: "A2A", description: "Agent-to-Agent protocol" },
-  { name: "PostgreSQL + pgvector", logo: "https://cdn.simpleicons.org/postgresql", description: "Vector-enabled SQL" },
-  { name: "Redis", logo: "https://cdn.simpleicons.org/redis", description: "In-memory data store" },
-  { name: "Playwright", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg", description: "Browser automation" },
-  { name: "Ollama", logo: "https://cdn.simpleicons.org/ollama", description: "Local model runtime" },
+  { name: "Microsoft Azure", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg", description: "Enterprise cloud" },
+  { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", description: "Document database" },
+  { name: "Vercel", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", description: "Frontend cloud platform" },
+  { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", description: "Server runtime" },
+  { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", description: "Relational database" },
+  { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", description: "AI/ML backend" },
+  { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", description: "UI framework" },
+  { name: "Slack", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg", description: "Team integration" },
+  { name: "Supabase", logo: "https://supabase.com/dashboard/img/supabase-logo.svg", description: "Postgres & vector storage" },
+  { name: "Tailwind CSS", logo: "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg", description: "Utility-first CSS" },
+  { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", description: "Type-safe JavaScript" },
+  { name: "Vite", logo: "https://vitejs.dev/logo.svg", description: "Next-gen frontend tooling" },
+  { name: "Microsoft Teams", logo: "https://upload.wikimedia.org/wikipedia/commons/9/94/Microsoft_Office_Teams_%282019%E2%80%932025%29.svg", description: "Team collaboration" },
+  { name: "Zoho", logo: "https://cdn.simpleicons.org/zoho", description: "Business apps suite" },
 ];
 
-const firstRowTechnologies = technologies.slice(0, 10);
-const secondRowTechnologies = technologies.slice(10);
+const firstRowTechnologies = technologies.slice(0, 11);
+const secondRowTechnologies = technologies.slice(11);
 
 // A single logo card: light surface (the one intentional light surface here,
 // since most brand logos are dark) with a green-tinted initials fallback when
