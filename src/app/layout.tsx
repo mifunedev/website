@@ -75,8 +75,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    // Match the navbar (bg-background) light/dark --background tokens from globals.css
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // hsl(0 0% 100%)
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" }, // hsl(240 10% 3.9%)
   ],
   width: "device-width",
   initialScale: 1,
