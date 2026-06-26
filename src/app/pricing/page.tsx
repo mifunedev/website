@@ -4,9 +4,12 @@ import FooterSection from "@/sections/FooterSection";
 import { pricingPageTiers } from "@/config/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing | Mifune",
+  title: "Pricing",
   description:
     "The full Mifune value ladder — from AI Workflow Audit to a fully Managed AI Workforce. Compare every tier to the cost of a hire.",
+  alternates: {
+    canonical: "/pricing",
+  },
 };
 
 const hiringComparisons: Record<string, string> = {

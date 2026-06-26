@@ -3,7 +3,7 @@ import TopNavBar from "@/components/nav/TopNavBar";
 import FooterSection from "@/sections/FooterSection";
 
 export const metadata: Metadata = {
-  title: "Case Studies | Mifune",
+  title: "Case Studies",
   description:
     "Real results from AI workers deployed inside client businesses. Coming soon.",
 };

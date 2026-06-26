@@ -1,8 +1,18 @@
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
 import TopNavbar from "@/components/nav/TopNavBar";
 import Loading from "@/components/loaders/Loading";
 import BlogCard from "@/components/cards/BlogCard";
 import { getSortedPosts } from "@/lib/posts";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Deep dives into AI orchestration, agent development, and the future of intelligent workflows — from the team building managed AI workers at Mifune.",
+  alternates: {
+    canonical: "/blog",
+  },
+};
 
 // Server Component
 export default function BlogIndex() {

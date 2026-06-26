@@ -8,6 +8,9 @@ import { ImageWithPreview } from "@/components/ui/ImageWithPreview";
 import { MarkdownContent } from "@/components/ui/MarkdownContent";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
 import { formatDate } from "@/utils/format";
+import JsonLd from "@/components/seo/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/config/app";
 
 interface Props {
   params: {
@@ -53,11 +56,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    keywords: post.categories,
+    authors: post.author ? [{ name: post.author.name }] : undefined,
     openGraph: {
       title: post.title,
       description: description,
       type: "article",
       url: `${siteUrl}/blog/${post.slug}`,
+      publishedTime: post.date,
+      authors: post.author ? [post.author.name] : undefined,
       images: [
         {
           url: imageUrl,
@@ -85,6 +95,14 @@ export default function BlogPost({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd data={blogPostingSchema(post)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: SITE_URL },
+          { name: "Blog", url: `${SITE_URL}/blog` },
+          { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
+        ])}
+      />
       <TopNavbar />
       <div className="absolute inset-0 h-[50vh] bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       <article className="container relative z-10 mx-auto max-w-5xl px-4 py-32">
