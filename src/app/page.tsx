@@ -6,7 +6,7 @@ import ProductShowcaseSection from "@/sections/ProductShowcaseSection";
 import OpenSourceSection from "@/sections/OpenSourceSection";
 import AboutSection from "@/sections/AboutSection";
 import FAQSection from "@/sections/FAQSection";
-import EnterpriseSection from "@/sections/EnterpriseSection";
+import AuditWizard from "@/sections/AuditWizard";
 import CTASection from "@/sections/CTASection";
 import FooterSection from "@/sections/FooterSection";
 import JsonLd from "@/components/seo/JsonLd";
@@ -28,7 +28,7 @@ export default function Home() {
         <OpenSourceSection />
         <AboutSection />
         <FAQSection />
-        <EnterpriseSection />
+        <AuditWizard />
         <CTASection />
         <FooterSection />
       </main>
