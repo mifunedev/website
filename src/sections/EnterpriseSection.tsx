@@ -296,12 +296,12 @@ export default function EnterpriseSection() {
                       Sending…
                     </span>
                   ) : (
-                    "Book My Free Audit"
+                    "Get My Free Audit"
                   )}
                 </motion.button>
 
                 <p className="text-center font-montserrat text-xs text-muted-foreground">
-                  No spam, ever. We&apos;ll only use your details to schedule the audit.
+                  No spam, ever. We&apos;ll review your workflows and email your audit within one business day.
                 </p>
               </form>
             </div>

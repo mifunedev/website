@@ -57,7 +57,7 @@ export default function FAQSection() {
             <span className="text-green-500">Ask Us First</span>
           </h2>
           <p className="font-montserrat text-xl text-muted-foreground">
-            Straight answers before you book a call.
+            Straight answers before you reach out.
           </p>
         </motion.div>
 

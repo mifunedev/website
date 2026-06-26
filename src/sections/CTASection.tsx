@@ -65,7 +65,7 @@ export default function CTASection() {
               href="#audit"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400 whitespace-nowrap"
             >
-              Book Your Free Audit
+              Get Your Free Audit
               <svg
                 className="h-5 w-5"
                 fill="none"
@@ -90,7 +90,7 @@ export default function CTASection() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-6 font-montserrat text-sm text-muted-foreground"
           >
-            Free audit call &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; You own everything
+            Reply within 1 business day &nbsp;·&nbsp; No call required &nbsp;·&nbsp; You own everything
           </motion.p>
         </motion.div>
       </div>

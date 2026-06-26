@@ -90,7 +90,7 @@ const FooterSection = () => {
               </li>
               <li>
                 <Link href="/#audit" className="hover:text-foreground transition-colors duration-200">
-                  Book Audit
+                  Free Audit
                 </Link>
               </li>
             </ul>
