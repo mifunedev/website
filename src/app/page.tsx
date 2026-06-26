@@ -4,6 +4,7 @@ import PainSection from "@/sections/PainSection";
 import PricingSection from "@/sections/PricingSection";
 import ProductShowcaseSection from "@/sections/ProductShowcaseSection";
 import OpenSourceSection from "@/sections/OpenSourceSection";
+import WatchSection from "@/sections/WatchSection";
 import AboutSection from "@/sections/AboutSection";
 import FAQSection from "@/sections/FAQSection";
 import AuditWizard from "@/sections/AuditWizard";
@@ -26,6 +27,7 @@ export default function Home() {
         <PricingSection />
         <ProductShowcaseSection />
         <OpenSourceSection />
+        <WatchSection />
         <AboutSection />
         <FAQSection />
         <AuditWizard />

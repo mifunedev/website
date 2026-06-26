@@ -47,6 +47,10 @@ const withPWA = withPWAInit({
           protocol: "https",
           hostname: "secure.meetupstatic.com",
         },
+        {
+          protocol: "https",
+          hostname: "i.ytimg.com",
+        },
       ],
     },
     async redirects() {
