@@ -47,7 +47,7 @@ export default function OGImage() {
               fontWeight: 400,
             }}
           >
-            Managed AI Workers for Your Business
+            AI Workers for Your Business, Built &amp; Managed
           </div>
         </div>
       </div>

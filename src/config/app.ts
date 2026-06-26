@@ -3,6 +3,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export const NODE_ENV = process.env.NEXT_PUBLIC_NODE_ENV || "production";
 export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mifune.dev";
 export const MEDIUM_RSS_URL = "https://medium.com/feed/@ryaneggz";
 
 // Social Config

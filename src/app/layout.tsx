@@ -3,8 +3,10 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import InitialLoadActiveUsers from "@/components/users/InitialLoadActiveUsers";
-import { GA_ID, NODE_ENV } from "@/config/app";
+import { GA_ID, NODE_ENV, SITE_URL } from "@/config/app";
 import { ThemeProvider } from "@/components/theme-provider";
+import JsonLd from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 // import { botScript } from "@/config/bot";
 
 // Primary font - Montserrat for clean, minimal UI elements
@@ -22,13 +24,17 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const APP_NAME = "mifune";
-const APP_DEFAULT_TITLE = "Mifune - Managed AI Workers for Your Business";
+const APP_DEFAULT_TITLE = "Mifune – AI Workers for Your Business, Built & Managed";
 const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
-  "Deploy managed AI workers into your business without hiring more staff. Mifune builds and maintains AI automation for non-technical business owners.";
+  "Free AI Workflow Audit with real feedback in one business day — no meetings, no BS. We build and manage AI workers in your business; you own everything.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: APP_DEFAULT_TITLE,
     template: APP_TITLE_TEMPLATE,
@@ -54,9 +60,25 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   openGraph: {
     type: "website",
     siteName: APP_NAME,
+    url: SITE_URL,
+    locale: "en_US",
     title: {
       default: APP_DEFAULT_TITLE,
       template: APP_TITLE_TEMPLATE,
@@ -93,6 +115,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <body className="font-montserrat">
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

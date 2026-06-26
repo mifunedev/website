@@ -4,9 +4,12 @@ import FooterSection from "@/sections/FooterSection";
 import { pricingPageTiers } from "@/config/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing | Mifune",
+  title: "Pricing",
   description:
     "The full Mifune value ladder — from AI Workflow Audit to a fully Managed AI Workforce. Compare every tier to the cost of a hire.",
+  alternates: {
+    canonical: "/pricing",
+  },
 };
 
 const hiringComparisons: Record<string, string> = {
@@ -297,7 +300,7 @@ export default function PricingPage() {
                 href="/#audit"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black transition-all duration-200 hover:bg-green-400 whitespace-nowrap"
               >
-                Book Your Free Audit
+                Get Your Free Audit
                 <svg
                   className="h-5 w-5"
                   fill="none"

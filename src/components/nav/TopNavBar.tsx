@@ -96,14 +96,14 @@ const TopNavbar = () => {
                 </motion.a>
               ))}
 
-              {/* Book Audit CTA button */}
+              {/* Free Audit CTA button */}
               <motion.a
                 href="/#audit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="rounded-full bg-green-500 px-4 py-2 font-montserrat text-sm font-medium tracking-wide text-black shadow-lg transition-all duration-200 hover:bg-green-400"
               >
-                Book Audit
+                Free Audit
               </motion.a>
 
               <ModeToggle />
@@ -146,7 +146,7 @@ const TopNavbar = () => {
                       href="/#audit"
                       className="mt-1 w-full rounded-full bg-green-500 px-4 py-2 text-center font-montserrat text-sm font-medium tracking-wide text-black transition-all duration-200 hover:bg-green-400"
                     >
-                      Book Audit
+                      Free Audit
                     </a>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -10,8 +10,9 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 // CTA Button Link - Update this with your actual Calendly/Cal.com link
-const COMPANY_TAG = 'mifune'
-const BOOKING_LINK = `https://cal.com/${COMPANY_TAG}/ai-audit`;
+// Email-first funnel: every CTA routes to the on-site audit intake form,
+// not a direct calendar booking. Discovery calls come after we qualify by email.
+const AUDIT_LINK = "/#audit";
 const EMAIL = "hello@mifune.dev";
 
 // FAQ Data
@@ -247,7 +248,7 @@ function CTAButton({
 }) {
   return (
     <motion.a
-      href={BOOKING_LINK}
+      href={AUDIT_LINK}
       target="_blank"
       rel="noopener noreferrer"
       whileHover={{ scale: 1.02 }}
@@ -370,7 +371,7 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="mb-8 flex flex-col items-center gap-4 sm:flex-row lg:items-start"
                 >
-                  <CTAButton>Book a Free Discovery Call</CTAButton>
+                  <CTAButton>Get a Free Audit</CTAButton>
                   <a
                     href="#how-it-works"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-border px-8 py-4 font-montserrat text-lg font-medium text-foreground transition-all duration-200 hover:border-green-500/50 hover:bg-green-500/5"
@@ -1114,14 +1115,15 @@ export default function ServicesPage() {
                   ?
                 </h2>
                 <p className="mx-auto mb-10 max-w-xl font-montserrat text-xl text-muted-foreground">
-                  Book a free discovery call. We&apos;ll map your workflows and see
-                  if automation makes sense.
+                  Start with a free AI Workflow Audit. Tell us your workflows and
+                  we&apos;ll email back where automation makes sense — within one
+                  business day.
                   <br />
                   <span className="text-foreground">
-                    No pressure. No commitment.
+                    No pressure. No commitment. No call required to start.
                   </span>
                 </p>
-                <CTAButton>Book a Discovery Call</CTAButton>
+                <CTAButton>Get a Free Audit</CTAButton>
                 <p className="mt-6 font-montserrat text-sm text-muted-foreground">
                   Or email me directly:{" "}
                   <a
