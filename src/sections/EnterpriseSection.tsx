@@ -18,12 +18,21 @@ export default function EnterpriseSection() {
   const [Email, setEmail] = useState("");
   const [Phone, setPhone] = useState("");
   const [Message, setMessage] = useState("");
+  const [Website, setWebsite] = useState(""); // honeypot — humans never see or fill this
   const [status, setStatus] = useState<Status>("idle");
 
   const loading = status === "loading";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot: real users never fill the hidden Website field — bots do.
+    // Show success so they don't retry, but never hit the API.
+    if (Website.trim()) {
+      setStatus("success");
+      return;
+    }
+
     setStatus("loading");
 
     const payload: Contact = {
@@ -34,11 +43,11 @@ export default function EnterpriseSection() {
       Referrer: "audit-form",
     };
 
-    const res = await apiClient.contactFormSubmit(payload);
-
-    if (res.ok) {
-      setStatus("success");
-    } else {
+    try {
+      const res = await apiClient.contactFormSubmit(payload);
+      setStatus(res.ok ? "success" : "error");
+    } catch {
+      // Network/timeout/CORS — never leave the form stuck on the spinner.
       setStatus("error");
     }
   };
@@ -63,7 +72,7 @@ export default function EnterpriseSection() {
             Free AI Workflow Audit
           </p>
           <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-foreground mb-6">
-            Book your{" "}
+            Get your{" "}
             <span className="font-space text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.6)]">
               free AI Workflow Audit
             </span>
@@ -152,6 +161,7 @@ export default function EnterpriseSection() {
               {/* Success banner */}
               {status === "success" && (
                 <motion.div
+                  role="alert"
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="mb-6 flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-4"
@@ -170,7 +180,9 @@ export default function EnterpriseSection() {
                     />
                   </svg>
                   <p className="font-montserrat text-sm text-green-400">
-                    Thanks — we&apos;ll be in touch within one business day.
+                    Got it — we&apos;ll email your audit to{" "}
+                    <span className="font-semibold">{Email || "your inbox"}</span>{" "}
+                    within one business day. If it&apos;s not there, check your spam folder.
                   </p>
                 </motion.div>
               )}
@@ -178,6 +190,7 @@ export default function EnterpriseSection() {
               {/* Error banner */}
               {status === "error" && (
                 <motion.div
+                  role="alert"
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="mb-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-4"
@@ -196,7 +209,14 @@ export default function EnterpriseSection() {
                     />
                   </svg>
                   <p className="font-montserrat text-sm text-red-400">
-                    Something went wrong. Please try again or email us directly.
+                    Something went wrong. Please try again, or email us at{" "}
+                    <a
+                      href="mailto:hello@mifune.dev"
+                      className="font-semibold underline hover:text-red-300"
+                    >
+                      hello@mifune.dev
+                    </a>
+                    .
                   </p>
                 </motion.div>
               )}
@@ -283,9 +303,25 @@ export default function EnterpriseSection() {
                   />
                 </div>
 
+                {/* Honeypot — invisible to humans; bots that fill it are dropped client-side */}
+                <div
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", opacity: 0 }}
+                >
+                  <label htmlFor="audit-website">Website</label>
+                  <input
+                    id="audit-website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={Website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </div>
+
                 <motion.button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || status === "success"}
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
                   className="w-full rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400 disabled:opacity-60 disabled:cursor-not-allowed"
