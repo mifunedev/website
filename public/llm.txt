@@ -110,7 +110,7 @@ curl -X POST "https://chat.ruska.ai/api/llm/stream" \
 ```
 
 ## Social Links
-- YouTube: https://www.youtube.com/@ruska-ai
+- YouTube: https://www.youtube.com/@ryaneggz
 - X/Twitter: https://x.com/ruska_ai
 - GitHub: https://github.com/ruska-ai
 - LinkedIn: https://www.linkedin.com/company/ruska-ai

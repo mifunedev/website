@@ -34,7 +34,7 @@ export default function OpenSourceShowcase({
         </motion.div>
 
         {/* Repo cards */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {repos.map((repo, index) => (
             <motion.a
               key={repo.fullName}

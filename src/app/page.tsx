@@ -23,10 +23,10 @@ export default function Home() {
       </header>
       <main>
         <HeroSection />
+        <OpenSourceSection />
         <PainSection />
         <PricingSection />
         <ProductShowcaseSection />
-        <OpenSourceSection />
         <WatchSection />
         <AboutSection />
         <FAQSection />

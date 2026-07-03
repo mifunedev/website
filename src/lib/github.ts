@@ -43,6 +43,14 @@ const FLAGSHIP: CuratedRepo[] = [
     fallbackStars: 13,
     fallbackLanguage: "Python",
   },
+  {
+    owner: "mifunedev",
+    name: "a2a-langgraph",
+    tagline:
+      "Agent-to-agent protocol experiments built on LangGraph for interoperable, conversational AI workers.",
+    fallbackStars: 29,
+    fallbackLanguage: "Python",
+  },
 ];
 
 async function fetchRepo(repo: CuratedRepo): Promise<FlagshipRepo> {
