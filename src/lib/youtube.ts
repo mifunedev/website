@@ -12,13 +12,13 @@
  * teaser instead of a broken grid, and the build never breaks.
  */
 
-export const YOUTUBE_HANDLE = "@mifune-dev";
+export const YOUTUBE_HANDLE = "@ryaneggz";
 export const YOUTUBE_CHANNEL_URL = `https://www.youtube.com/${YOUTUBE_HANDLE}`;
 
 /**
  * The channel's UC… ID. Set `YOUTUBE_CHANNEL_ID` in the environment once the
- * @mifune-dev channel is live (the public handle currently 404s while it's being
- * built). The env value wins; until it's set the section shows the teaser state.
+ * @ryaneggz channel is live. The env value wins; until it's set the section
+ * shows the teaser state.
  */
 export const YOUTUBE_CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID?.trim() || "";
 

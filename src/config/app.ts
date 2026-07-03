@@ -10,9 +10,9 @@ export const MEDIUM_RSS_URL = "https://medium.com/feed/@ryaneggz";
 export const socialIcons = [
   {
     Icon: FaYoutube,
-    tooltip: "@mifune-dev",
+    tooltip: "@ryaneggz",
     key: "youtube",
-    link: "https://www.youtube.com/@mifune-dev",
+    link: "https://www.youtube.com/@ryaneggz",
   },
   {
     Icon: FaXTwitter,

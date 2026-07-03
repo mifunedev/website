@@ -15,9 +15,9 @@ const SocialPage = () => {
     },
     {
       name: "YouTube",
-      handle: "@mifune-dev",
+      handle: "@ryaneggz",
       icon: <FaYoutube className="text-xl" />,
-      url: "https://www.youtube.com/@mifune-dev",
+      url: "https://www.youtube.com/@ryaneggz",
     },
     {
       name: "X",
