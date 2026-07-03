@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const AboutSection = () => {
@@ -109,6 +110,23 @@ const AboutSection = () => {
             data stays private, and you own every configuration from day
             one.
           </p>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href="/blog/openharness-getting-started"
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-green-500/40 bg-green-500/10 px-5 py-2 font-montserrat text-sm font-medium text-green-500 transition-colors hover:bg-green-500/20"
+            >
+              Get started with OpenHarness →
+            </Link>
+            <span className="font-montserrat text-sm text-muted-foreground">
+              Want it built for you?{" "}
+              <Link
+                href="/#audit"
+                className="text-foreground underline-offset-4 transition-colors hover:text-green-500 hover:underline"
+              >
+                Get a free audit
+              </Link>
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

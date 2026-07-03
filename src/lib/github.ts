@@ -43,14 +43,6 @@ const FLAGSHIP: CuratedRepo[] = [
     fallbackStars: 13,
     fallbackLanguage: "Python",
   },
-  {
-    owner: "ryaneggz",
-    name: "mifune",
-    tagline:
-      "The Pi + Mom agent shell that turns OpenHarness into a hands-on, self-improving coding agent.",
-    fallbackStars: 1,
-    fallbackLanguage: "TypeScript",
-  },
 ];
 
 async function fetchRepo(repo: CuratedRepo): Promise<FlagshipRepo> {
