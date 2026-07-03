@@ -128,6 +128,11 @@ const FooterSection = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/blog/openharness-getting-started" className="hover:text-green-500 transition-colors duration-200">
+                  Getting Started
+                </Link>
+              </li>
+              <li>
                 <a href="https://github.com/mifunedev" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors duration-200">
                   GitHub
                 </a>
