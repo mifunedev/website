@@ -60,7 +60,7 @@ const FooterSection = () => {
               </li>
               <li>
                 <Link href={OFFERING_URLS.pricing} className={footerLinkClass}>
-                  Open Harness Options
+                  Deploy
                 </Link>
               </li>
             </ul>

@@ -16,11 +16,6 @@ import { OFFERING_URLS } from "@/config/offerings";
 
 const menuItems = [
   {
-    href: OFFERING_URLS.cloud,
-    label: "Cloud",
-    external: true,
-  },
-  {
     href: OFFERING_URLS.openSource,
     label: "Open Source",
     external: true,
@@ -32,7 +27,7 @@ const menuItems = [
   },
   {
     href: OFFERING_URLS.pricing,
-    label: "Open Harness Options",
+    label: "Deploy",
     external: false,
   },
   { href: OFFERING_URLS.support, label: "Support", external: false },
