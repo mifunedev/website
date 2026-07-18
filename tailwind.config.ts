@@ -51,6 +51,16 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        oh: {
+          paper: "var(--oh-paper)",
+          raised: "var(--oh-raised)",
+          ink: "var(--oh-ink)",
+          muted: "var(--oh-muted)",
+          rule: "var(--oh-rule)",
+          accent: "var(--oh-accent)",
+          focus: "var(--oh-focus)",
+          solid: "var(--oh-solid)",
+        },
         chart: {
           1: "hsl(var(--chart-1))",
           2: "hsl(var(--chart-2))",
@@ -103,8 +113,8 @@ const config: Config = {
         "1000": "1000ms",
       },
       fontFamily: {
-        montserrat: ['var(--font-montserrat)', 'sans-serif'],
-        space: ['var(--font-space)', 'sans-serif'],
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
+        space: ["var(--font-space)", "sans-serif"],
       },
     },
   },

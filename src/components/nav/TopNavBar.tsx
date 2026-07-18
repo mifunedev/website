@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ExternalLink, Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
   DropdownMenu,
@@ -11,150 +12,196 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { OFFERING_URLS } from "@/config/offerings";
+
+const menuItems = [
+  {
+    href: OFFERING_URLS.cloud,
+    label: "Cloud",
+    external: true,
+  },
+  {
+    href: OFFERING_URLS.openSource,
+    label: "Open Source",
+    external: true,
+  },
+  {
+    href: OFFERING_URLS.docs,
+    label: "Docs",
+    external: true,
+  },
+  {
+    href: OFFERING_URLS.pricing,
+    label: "Open Harness Options",
+    external: false,
+  },
+  { href: OFFERING_URLS.support, label: "Support", external: false },
+];
 
 const TopNavbar = () => {
+  const pathname = usePathname();
   const [showSolidBackground, setShowSolidBackground] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.pageYOffset;
-      setShowSolidBackground(currentScroll > 50);
-
-      // Detect which section is currently in view
-      const sections = ["pain", "about", "audit"];
-      sections.forEach((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-          }
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setShowSolidBackground(window.scrollY > 40);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Define menu items in one place for consistency
-  const menuItems = [
-    { href: "/#pain", label: "AI Workers" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/#about", label: "About" },
-  ];
-
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ease-in-out ${
+      <a
+        href="#main-content"
+        className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-md bg-background px-4 py-3 font-montserrat text-sm font-semibold text-foreground shadow-xl transition-transform focus:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
+        Skip to main content
+      </a>
+      <nav
+        aria-label="Primary navigation"
+        className={`fixed left-0 top-0 z-50 w-full transition-colors duration-200 ${
           showSolidBackground
-            ? "border-b border-border/10 bg-background/90 py-2 shadow-lg backdrop-blur-lg dark:shadow-black/20"
-            : "bg-transparent py-4"
+            ? "border-b border-border bg-background/90 shadow-lg backdrop-blur-lg"
+            : "bg-background/40 backdrop-blur-sm"
         }`}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <motion.div
-              className="flex items-center"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4">
+          <div className="flex min-w-0 shrink-0 items-center">
+            <Link
+              href="/"
+              aria-current={pathname === "/" ? "page" : undefined}
+              className="flex min-h-11 shrink-0 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              aria-label="Mifune home"
             >
-              <a href="/" className="ml-2 flex items-center">
-                <Image
-                  src="/images/ruska_logo_200.png"
-                  alt="Mifune Logo"
-                  width={24}
-                  height={24}
-                  className="mr-2 rounded-full"
-                />
-                <span className="font-montserrat text-2xl font-medium tracking-wide text-foreground transition-colors duration-200 hover:text-muted-foreground">
-                  Mifune
-                </span>
-              </a>
-            </motion.div>
+              <Image
+                src="/images/ruska_logo_200.png"
+                alt=""
+                width={28}
+                height={28}
+                className="mr-2 rounded-full"
+              />
+              <span className="font-montserrat text-xl font-medium tracking-wide text-foreground sm:text-2xl">
+                Mifune
+              </span>
+            </Link>
+          </div>
 
-            {/* Desktop menu — hidden below sm breakpoint */}
-            <div className="hidden items-center space-x-3 sm:flex sm:space-x-4">
-              {menuItems.map((item) => (
-                <motion.a
+          <div className="hidden min-w-0 items-center gap-0.5 lg:flex xl:gap-1">
+            {menuItems.map((item) => {
+              const isCurrent = !item.external && pathname === item.href;
+
+              return (
+                <a
                   key={item.href}
                   href={item.href}
-                  whileHover={{ scale: 1.05 }}
-                  className={`font-montserrat text-sm transition-colors duration-200 ${
-                    activeSection === item.href.replace("/#", "")
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                  aria-current={isCurrent ? "page" : undefined}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 font-montserrat text-sm font-medium transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus xl:px-3 ${
+                    isCurrent
+                      ? "bg-green-500/10 text-foreground shadow-[inset_0_-2px_0_0_var(--oh-accent)]"
+                      : "text-muted-foreground"
                   }`}
                 >
                   {item.label}
-                </motion.a>
-              ))}
+                  {item.external ? (
+                    <>
+                      <ExternalLink
+                        className="h-3.5 w-3.5"
+                        aria-hidden="true"
+                      />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </>
+                  ) : null}
+                </a>
+              );
+            })}
 
-              {/* Free Audit CTA button */}
-              <motion.a
-                href="/#audit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="rounded-full bg-green-500 px-4 py-2 font-montserrat text-sm font-medium tracking-wide text-black shadow-lg transition-all duration-200 hover:bg-green-400"
-              >
-                Free Audit
-              </motion.a>
+            <a
+              href={OFFERING_URLS.cloud}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1.5 inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-oh-solid px-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:ml-2 xl:px-4"
+            >
+              Open Console
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
 
+            <div className="ml-1">
               <ModeToggle />
             </div>
+          </div>
 
-            {/* Mobile menu — visible below sm breakpoint */}
-            <div className="flex items-center gap-2 sm:hidden">
-              <ModeToggle />
+          <div className="flex items-center gap-2 lg:hidden">
+            <ModeToggle />
+            <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="Toggle navigation menu"
+                  className="flex h-11 w-11 items-center justify-center rounded-md border border-input bg-background text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                >
+                  {menuOpen ? (
+                    <X className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <Menu className="h-5 w-5" aria-hidden="true" />
+                  )}
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-60 p-2">
+                {menuItems.map((item) => {
+                  const isCurrent = !item.external && pathname === item.href;
 
-              <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    aria-label="Toggle navigation menu"
-                    className="flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {menuOpen ? (
-                      <X className="h-5 w-5" />
-                    ) : (
-                      <Menu className="h-5 w-5" />
-                    )}
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
-                  {menuItems.map((item) => (
+                  return (
                     <DropdownMenuItem key={item.href} asChild>
                       <a
                         href={item.href}
-                        className={`font-montserrat text-sm ${
-                          activeSection === item.href.replace("/#", "")
-                            ? "text-foreground"
+                        aria-current={isCurrent ? "page" : undefined}
+                        {...(item.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className={`flex min-h-11 w-full items-center justify-between px-3 font-montserrat text-sm ${
+                          isCurrent
+                            ? "bg-green-500/10 font-semibold text-foreground"
                             : "text-muted-foreground"
                         }`}
                       >
                         {item.label}
+                        {item.external ? (
+                          <>
+                            <ExternalLink
+                              className="h-4 w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="sr-only">
+                              (opens in a new tab)
+                            </span>
+                          </>
+                        ) : null}
                       </a>
                     </DropdownMenuItem>
-                  ))}
-                  <DropdownMenuItem asChild>
-                    <a
-                      href="/#audit"
-                      className="mt-1 w-full rounded-full bg-green-500 px-4 py-2 text-center font-montserrat text-sm font-medium tracking-wide text-black transition-all duration-200 hover:bg-green-400"
-                    >
-                      Free Audit
-                    </a>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+                  );
+                })}
+                <DropdownMenuItem asChild>
+                  <a
+                    href={OFFERING_URLS.cloud}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-oh-solid px-4 font-montserrat text-sm font-semibold text-black focus:bg-green-400 focus:text-black"
+                  >
+                    Open Console
+                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-      </motion.nav>
+      </nav>
     </>
   );
 };

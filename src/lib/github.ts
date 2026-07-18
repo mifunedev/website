@@ -6,8 +6,6 @@
  */
 
 export const GITHUB_ORG_URL = "https://github.com/mifunedev";
-export const OPEN_HARNESS_REPO_URL = "https://github.com/mifunedev/openharness";
-export const OPEN_HARNESS_FALLBACK_STARS = 24;
 
 export interface FlagshipRepo {
   name: string;
@@ -34,7 +32,7 @@ const FLAGSHIP: CuratedRepo[] = [
     name: "openharness",
     tagline:
       "We provide the sandbox, you choose the harness — the open foundation every managed AI worker runs inside.",
-    fallbackStars: OPEN_HARNESS_FALLBACK_STARS,
+    fallbackStars: 21,
     fallbackLanguage: "TypeScript",
   },
   {

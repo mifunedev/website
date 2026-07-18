@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { ExternalLink } from "lucide-react";
+import { OFFERING_URLS } from "@/config/offerings";
 
 interface RegisterButtonProps {
   children: React.ReactNode;
@@ -9,23 +10,27 @@ interface RegisterButtonProps {
 export default function RegisterButton({
   children,
   className = "",
-  variant = "primary"
+  variant = "primary",
 }: RegisterButtonProps) {
-  // RegisterButton is scoped to dev/footer use only (Launch OpenHarness).
-  // It is NOT for use in marketing CTAs (see prd.md CTA rule).
-  const baseStyles = "inline-flex items-center justify-center px-8 py-3 rounded-full font-montserrat font-medium tracking-wide transition-all duration-200";
+  const baseStyles =
+    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-8 py-3 font-montserrat font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus";
 
   const variantStyles = {
-    primary: "bg-green-500 text-black hover:bg-green-400 shadow-lg hover:shadow-xl",
-    secondary: "bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-black"
+    primary: "bg-green-500 text-black hover:bg-green-400 shadow-lg",
+    secondary:
+      "bg-transparent border-2 border-green-500 text-oh-accent hover:bg-green-500 hover:text-black",
   };
 
   return (
-    <Link
-      href="https://oh.mifune.dev"
+    <a
+      href={OFFERING_URLS.cloud}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
     >
       {children}
-    </Link>
+      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+      <span className="sr-only">(opens in a new tab)</span>
+    </a>
   );
 }
