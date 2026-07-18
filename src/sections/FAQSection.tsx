@@ -1,71 +1,70 @@
 "use client";
-
+import { motion } from "framer-motion";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { MdExpandMore } from "react-icons/md";
 import { faqs, type Faq } from "@/data/faqs";
 
 function FAQItem({ faq, index }: { faq: Faq; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
-  const triggerId = `homepage-faq-${index}-trigger`;
-  const panelId = `homepage-faq-${index}-panel`;
 
   return (
-    <div className="border-b border-border last:border-0">
-      <h3>
-        <button
-          id={triggerId}
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls={panelId}
-          onClick={() => setIsOpen((open) => !open)}
-          className="flex min-h-11 w-full items-center justify-between gap-4 py-5 text-left font-montserrat text-base font-semibold text-foreground transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-oh-focus sm:text-lg"
-        >
-          <span>{faq.question}</span>
-          <ChevronDown
-            className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform ${
-              isOpen ? "rotate-180" : ""
-            }`}
-            aria-hidden="true"
-          />
-        </button>
-      </h3>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="border-b border-border last:border-0"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex w-full items-center justify-between gap-4 py-6 text-left transition-colors hover:text-foreground"
+      >
+        <h3 className="font-montserrat text-lg font-semibold text-foreground md:text-xl">
+          {faq.question}
+        </h3>
+        <MdExpandMore
+          className={`h-6 w-6 flex-shrink-0 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
       <div
-        id={panelId}
-        role="region"
-        aria-labelledby={triggerId}
-        hidden={!isOpen}
-        className="pb-6 pr-8"
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 pb-6" : "max-h-0"}`}
       >
         <p className="font-montserrat leading-relaxed text-muted-foreground">
           {faq.answer}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function FAQSection() {
   return (
-    <section
-      id="faq"
-      className="relative scroll-mt-24 bg-background px-4 py-24"
-    >
+    <section id="faq" className="relative bg-background px-4 py-24">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-12 text-center">
-          <p className="mb-4 font-montserrat text-sm font-medium uppercase tracking-[0.22em] text-oh-accent">
-            Common questions
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16 text-center"
+        >
+          <p className="mb-4 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            Common Questions
           </p>
-          <h2 className="text-balance font-montserrat text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-            Open Harness, clearly explained.
+          <h2 className="mb-6 font-montserrat text-4xl font-bold text-foreground md:text-5xl">
+            What Business Owners{" "}
+            <span className="text-green-500">Ask Us First</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg text-muted-foreground">
-            What the workspace does, who operates it, and how Mifune can help.
+          <p className="font-montserrat text-xl text-muted-foreground">
+            Straight answers before you reach out.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="rounded-2xl border border-border bg-card px-5 sm:px-8">
+        {/* FAQ List */}
+        <div className="rounded-3xl border border-border bg-card p-6 md:p-8">
           {faqs.map((faq, index) => (
-            <FAQItem key={faq.question} faq={faq} index={index} />
+            <FAQItem key={index} faq={faq} index={index} />
           ))}
         </div>
       </div>

@@ -1,19 +1,22 @@
 import { socialIcons, SITE_URL } from "@/config/app";
-import { OFFERING_URLS } from "@/config/offerings";
 import type { Post } from "@/types/post";
+
+/**
+ * Single source of truth for the site's Schema.org / JSON-LD structured data.
+ * Brand facts (name, logo, socials, founder) are pulled from config/app.ts so the
+ * SERP entity, blog rich results, and breadcrumbs stay consistent with the site.
+ */
 
 const ORG_NAME = "Mifune";
 const ORG_LEGAL_NAME = "Mifune Dev";
-const ORG_EMAIL = OFFERING_URLS.supportEmail;
+const ORG_EMAIL = "hello@mifune.dev";
 const LOGO_URL = `${SITE_URL}/pe-logo.png`;
 const ORG_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
-const CLOUD_SERVICE_ID = `${SITE_URL}/#openharness-cloud`;
-const OPEN_SOURCE_ID = `${OFFERING_URLS.openSource}#software`;
-const SUPPORT_SERVICE_ID = `${SITE_URL}/services/#service`;
 
+// Only real, resolvable profile URLs belong in sameAs (drops placeholder "#" links).
 const sameAs = socialIcons
-  .map((social) => social.link)
+  .map((s) => s.link)
   .filter((link) => link.startsWith("http"));
 
 function toAbsolute(src: string): string {
@@ -38,7 +41,7 @@ export function organizationSchema(): Record<string, unknown> {
       url: LOGO_URL,
     },
     description:
-      "Mifune maintains the MIT-licensed Open Harness coding-agent workspace, operates Open Harness Cloud, and offers forward-deployed engineering support for Cloud customers.",
+      "Mifune builds and manages AI workers inside your business — done-with-you AI automation for non-technical business owners.",
     email: ORG_EMAIL,
     founder: {
       "@type": "Person",
@@ -62,65 +65,7 @@ export function websiteSchema(): Record<string, unknown> {
     "@id": WEBSITE_ID,
     name: ORG_NAME,
     url: SITE_URL,
-    description:
-      "Mifune workspaces for coding agents: managed Open Harness Cloud, MIT-licensed Open Harness, and engineering support for Cloud customers.",
     publisher: { "@id": ORG_ID },
-  };
-}
-
-export function cloudServiceSchema(): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": CLOUD_SERVICE_ID,
-    name: "Open Harness Cloud",
-    serviceType: "Managed coding-agent workspace",
-    category: "Coding agent workspace",
-    description:
-      "A managed path to an isolated, persistent Open Harness workspace for coding agents, with Mifune operating the environment.",
-    url: OFFERING_URLS.cloud,
-    provider: { "@id": ORG_ID },
-    subjectOf: {
-      "@type": "WebSite",
-      name: "Open Harness Documentation",
-      url: OFFERING_URLS.docs,
-    },
-  };
-}
-
-export function openHarnessSoftwareSchema(): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
-    "@id": OPEN_SOURCE_ID,
-    name: "Open Harness",
-    description:
-      "MIT-licensed source for an isolated, persistent Docker workspace that keeps one coding-agent project and its toolchain off the host.",
-    url: OFFERING_URLS.openSource,
-    codeRepository: OFFERING_URLS.openSource,
-    license: `${OFFERING_URLS.openSource}/blob/main/LICENSE`,
-    runtimePlatform: "Docker",
-    isAccessibleForFree: true,
-    author: { "@id": ORG_ID },
-  };
-}
-
-export function supportServiceSchema(): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": SUPPORT_SERVICE_ID,
-    name: "Open Harness Cloud Engineering Support",
-    serviceType: "Forward-deployed engineering support",
-    category: "Engineering support for managed coding-agent workspaces",
-    description:
-      "Mifune engineering help for Open Harness Cloud customers to plan, implement, integrate, troubleshoot, and hand off a deployment.",
-    url: `${SITE_URL}/services`,
-    provider: { "@id": ORG_ID },
-    audience: {
-      "@type": "Audience",
-      audienceType: "Open Harness Cloud customers",
-    },
   };
 }
 
@@ -151,7 +96,7 @@ export function blogPostingSchema(post: Post): Record<string, unknown> {
       name: ORG_NAME,
       logo: { "@type": "ImageObject", url: LOGO_URL },
     },
-    ...(post.categories?.length
+    ...(post.categories && post.categories.length
       ? { keywords: post.categories.join(", ") }
       : {}),
   };
@@ -163,9 +108,9 @@ export function breadcrumbSchema(
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
+    itemListElement: items.map((item, i) => ({
       "@type": "ListItem",
-      position: index + 1,
+      position: i + 1,
       name: item.name,
       item: item.url,
     })),

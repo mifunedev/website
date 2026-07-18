@@ -37,16 +37,6 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 240 5.9% 90%;
     --sidebar-ring: 240 10% 3.9%;
-
-    /* Open Harness owned-brand surfaces */
-    --oh-paper: #f6f3ec;
-    --oh-raised: #eae6db;
-    --oh-ink: #0a0a0a;
-    --oh-muted: #5e5e5e;
-    --oh-rule: #d8d2c2;
-    --oh-accent: #15803d;
-    --oh-focus: #166534;
-    --oh-solid: #22c55e;
   }
 
   .dark {
@@ -82,15 +72,6 @@
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 240 4.9% 83.9%;
-
-    --oh-paper: #000000;
-    --oh-raised: #0a0a0a;
-    --oh-ink: #f5f5f5;
-    --oh-muted: #a3a3a3;
-    --oh-rule: #262626;
-    --oh-accent: #4ade80;
-    --oh-focus: #86efac;
-    --oh-solid: #22c55e;
   }
 }
 
@@ -105,33 +86,6 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  :where(a, button, summary, input, textarea, select):focus-visible {
-    outline: 2px solid var(--oh-focus);
-    outline-offset: 3px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto !important;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Keep the accessible semantic focus color even when utility classes remove
-   the browser outline. The light role is deliberately darker than #22c55e. */
-:where(a, button, summary, input, textarea, select):focus-visible {
-  outline: 2px solid var(--oh-focus) !important;
-  outline-offset: 3px !important;
 }
 
 /* Custom/Existing Styles */
@@ -253,20 +207,8 @@ h3 {
 /* Technology Ecosystem Marquee */
 .marquee-container {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .marquee-track {

@@ -21,11 +21,7 @@ export default function CaseStudiesPage() {
       <header>
         <TopNavBar />
       </header>
-      <main
-        id="main-content"
-        tabIndex={-1}
-        className="scroll-mt-20 bg-background"
-      >
+      <main className="bg-background">
         {/* Hero / Coming-soon section */}
         <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-20">
           {/* Grid background */}
@@ -58,7 +54,7 @@ export default function CaseStudiesPage() {
 
             <p className="mx-auto mb-10 max-w-2xl font-montserrat text-lg font-light leading-relaxed text-muted-foreground lg:text-xl">
               How The Workflow Academy reclaimed{" "}
-              <span className="font-medium text-foreground">
+              <span className="text-foreground font-medium">
                 hours every week
               </span>{" "}
               with an AI Operations Assistant — eliminating manual follow-ups,

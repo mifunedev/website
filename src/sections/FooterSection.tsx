@@ -1,152 +1,255 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Mail } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import { apiClient } from "@/utils/client";
 import { socialIcons } from "@/config/app";
-import { OFFERING_URLS } from "@/config/offerings";
 
-const footerLinkClass =
-  "inline-flex min-h-11 items-center gap-1 rounded-md font-montserrat text-sm text-muted-foreground transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus";
+const technologies = [
+  "LangGraph",
+  "LangChain",
+  "DeepAgents",
+  "Claude Code",
+  "OpenAI Codex",
+  "Hermes",
+  "Pi",
+  "DSPy",
+  "FastAPI",
+  "Python",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Tailwind CSS",
+  "MCP",
+  "A2A",
+  "PostgreSQL + pgvector",
+  "Redis",
+  "Playwright",
+  "Ollama",
+];
+
+const technologyRail = [...technologies, ...technologies];
 
 const FooterSection = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isTechnologyRailPaused, setIsTechnologyRailPaused] = useState(false);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiClient.subscribeToNewsletter({email});
+      setEmail('');
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      alert(error);
+      setLoading(false);
+    }
+  };
+
   return (
-    <footer className="border-t border-border bg-background text-muted-foreground">
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid gap-10 border-b border-border pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div className="max-w-sm">
-            <Link
-              href="/"
-              className="inline-flex min-h-11 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
-              aria-label="Mifune home"
-            >
-              <Image
-                src="/images/ruska_logo_200.png"
-                alt=""
-                width={36}
-                height={36}
-                className="rounded-full"
-              />
-              <span className="ml-3 font-montserrat text-xl font-medium text-foreground">
+    <footer className="bg-background border-t border-border text-muted-foreground">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+          {/* Brand Column */}
+          <div className="col-span-1">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 relative">
+                <Image
+                  src="/images/ruska_logo_200.png"
+                  alt="Mifune Logo"
+                  fill
+                  className="object-contain rounded-full"
+                />
+              </div>
+              <span className="ml-3 text-xl font-montserrat font-medium text-foreground">
                 Mifune
               </span>
-            </Link>
-            <p className="mt-4 font-montserrat text-sm leading-relaxed text-muted-foreground">
-              Mifune operates managed workspaces for coding agents and leads
-              optional engineering support for Cloud customers.
+            </div>
+            <p className="text-sm font-montserrat text-muted-foreground leading-relaxed">
+              Build dependable AI workflows on a broad, production-ready agent stack.
             </p>
-            <OpenHarnessBrandBar
-              density="compact"
-              status=" · Maintained by Mifune"
-              className="mt-6 w-fit border-t border-border pt-5 text-foreground"
-            />
           </div>
 
+          {/* Product Column */}
           <div>
-            <h2 className="mb-2 font-montserrat text-sm font-semibold text-foreground">
-              Product
-            </h2>
-            <ul>
+            <h3 className="text-foreground font-montserrat font-medium mb-4">Product</h3>
+            <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <a
-                  href={OFFERING_URLS.cloud}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={footerLinkClass}
-                >
-                  Open Harness Cloud
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                <Link href="/#pain" className="hover:text-foreground transition-colors duration-200">
+                  AI Workers
+                </Link>
               </li>
               <li>
-                <Link href={OFFERING_URLS.pricing} className={footerLinkClass}>
-                  Open Harness Options
+                <Link href="/pricing" className="hover:text-foreground transition-colors duration-200">
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link href="/#audit" className="hover:text-foreground transition-colors duration-200">
+                  Free Audit
                 </Link>
               </li>
             </ul>
           </div>
 
+          {/* Resources Column */}
           <div>
-            <h2 className="mb-2 font-montserrat text-sm font-semibold text-foreground">
-              Open Harness
-            </h2>
-            <ul>
+            <h3 className="text-foreground font-montserrat font-medium mb-4">Resources</h3>
+            <ul className="space-y-2 font-montserrat text-sm">
               <li>
-                <a
-                  href={OFFERING_URLS.openSource}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={footerLinkClass}
-                >
-                  Open source
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={OFFERING_URLS.docs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={footerLinkClass}
-                >
-                  Documentation
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li>
-                <Link
-                  href="/blog/openharness-getting-started"
-                  className={footerLinkClass}
-                >
-                  Getting started
+                <Link href="/#about" className="hover:text-foreground transition-colors duration-200">
+                  About
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className={footerLinkClass}>
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="mb-2 font-montserrat text-sm font-semibold text-foreground">
-              Mifune engineering
-            </h2>
-            <ul>
-              <li>
-                <Link href={OFFERING_URLS.support} className={footerLinkClass}>
-                  Cloud engineering support
+                <Link href="/#faq" className="hover:text-foreground transition-colors duration-200">
+                  FAQ
                 </Link>
               </li>
               <li>
-                <a
-                  href={OFFERING_URLS.supportContact}
-                  className={footerLinkClass}
-                >
-                  <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                  {OFFERING_URLS.supportEmail}
-                </a>
-              </li>
-              <li>
-                <Link href="/socials" className={footerLinkClass}>
+                <Link href="/socials" className="hover:text-foreground transition-colors duration-200">
                   Socials
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Developers Column */}
+          <div>
+            <h3 className="text-foreground font-montserrat font-medium mb-4">Developers</h3>
+            <ul className="space-y-2 font-montserrat text-sm">
+              <li>
+                <Link href="/blog" className="hover:text-green-500 transition-colors duration-200">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/openharness-getting-started" className="hover:text-green-500 transition-colors duration-200">
+                  Getting Started
+                </Link>
+              </li>
+              <li>
+                <a href="https://github.com/mifunedev" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors duration-200">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="https://oh.mifune.dev" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-400 transition-colors duration-200">
+                  Launch OpenHarness
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter Column */}
+          <div>
+            <h3 className="text-foreground font-montserrat font-medium mb-4">Stay Updated</h3>
+            <p className="text-sm font-montserrat text-muted-foreground mb-4">
+              Get the latest updates and news.
+            </p>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+              <input
+                type="email"
+                className="w-full rounded-lg border border-border bg-input px-4 py-2 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors font-montserrat"
+                placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded-lg bg-foreground text-background px-4 py-2 text-sm font-montserrat font-medium hover:bg-muted-foreground transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Subscribing..." : "Subscribe"}
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-montserrat text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Mifune. All rights reserved.
-          </p>
-          <div className="flex items-center gap-1">
-            {socialIcons
-              .filter((social) => social.link.startsWith("http"))
-              .map((social) => {
+        {/* Technologies Slider */}
+        <section
+          className="mb-12 overflow-hidden rounded-2xl border border-border bg-card/40 px-4 py-5"
+          aria-labelledby="footer-technologies-heading"
+        >
+          <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="font-montserrat text-xs uppercase tracking-[0.28em] text-green-500">
+                Technologies we use
+              </p>
+              <h3
+                id="footer-technologies-heading"
+                className="font-montserrat text-xl font-medium text-foreground"
+              >
+                A broader stack than any single framework
+              </h3>
+            </div>
+            <div className="flex max-w-xl flex-col gap-3 sm:items-end">
+              <p className="font-montserrat text-sm text-muted-foreground sm:text-right">
+                From agent runtimes to production infrastructure, Mifune builds across the modern AI engineering ecosystem.
+              </p>
+              <button
+                type="button"
+                aria-pressed={isTechnologyRailPaused}
+                onClick={() => setIsTechnologyRailPaused((paused) => !paused)}
+                className="rounded-full border border-border px-3 py-1 font-montserrat text-xs text-muted-foreground transition-colors hover:border-green-500 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-background motion-reduce:hidden"
+              >
+                {isTechnologyRailPaused ? "Resume slider" : "Pause slider"}
+              </button>
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] motion-reduce:overflow-visible motion-reduce:[mask-image:none]">
+            <div
+              className={`flex w-max animate-[footer-tech-scroll_58s_linear_infinite] gap-3 hover:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:animate-none ${
+                isTechnologyRailPaused ? "[animation-play-state:paused]" : ""
+              }`}
+            >
+              {technologyRail.map((technology, index) => {
+                const isDuplicate = index >= technologies.length;
+
+                return (
+                  <span
+                    key={`${technology}-${index}`}
+                    aria-hidden={isDuplicate}
+                    className={`rounded-full border border-border bg-background/80 px-4 py-2 font-montserrat text-sm text-foreground shadow-sm transition-colors hover:border-green-500 hover:text-green-500 ${
+                      isDuplicate ? "motion-reduce:hidden" : ""
+                    }`}
+                  >
+                    {technology}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <style jsx global>{`
+          @keyframes footer-tech-scroll {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
+          }
+        `}</style>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Copyright */}
+            <p className="text-sm font-montserrat text-muted-foreground">
+              © {new Date().getFullYear()} Mifune. All rights reserved.
+            </p>
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-4">
+              {socialIcons.map((social) => {
                 const Icon = social.Icon;
                 return (
                   <a
@@ -154,13 +257,14 @@ const FooterSection = () => {
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
-                    aria-label={`${social.tooltip} (opens in a new tab)`}
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    aria-label={social.tooltip}
                   >
-                    <Icon size={19} aria-hidden="true" />
+                    <Icon size={20} />
                   </a>
                 );
               })}
+            </div>
           </div>
         </div>
       </div>

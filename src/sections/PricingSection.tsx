@@ -1,161 +1,143 @@
-import { ArrowRight, Check, ExternalLink, Headphones } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
-import { cloudOptions, supportOffering } from "@/config/offerings";
+"use client";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { MdCheck } from "react-icons/md";
+import { homepageTiers } from "@/config/pricing";
 
 export default function PricingSection() {
   return (
-    <section
-      id="options"
-      className="relative scroll-mt-24 bg-background px-4 py-24"
-    >
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto mb-14 max-w-3xl text-center">
-          <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-oh-accent">
-            Open Harness options
+    <section id="pricing" className="relative py-24 px-4 bg-background">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <p className="font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+            The Offer
           </p>
-          <h2 className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl md:text-5xl">
-            Managed Cloud first. Self-host when you want control.
+          <h2 className="text-4xl md:text-5xl font-montserrat font-semibold text-foreground mb-6">
+            Start with an AI Partner.{" "}
+            <span className="text-green-500">Scale to a managed workforce.</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Choose Mifune-managed Open Harness Cloud or operate the MIT-licensed
-            project yourself. Cloud customers can add Mifune engineering support
-            when adoption needs hands-on help.
+          <p className="text-xl font-montserrat text-muted-foreground max-w-2xl mx-auto">
+            Begin as the base with a recurring AI Partner engagement, add done-for-you builds as the upsell, and step up to a fully managed AI workforce at the top.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="space-y-5">
-          {cloudOptions.map((offering) => {
-            const isCloud = offering.id === "cloud";
-
-            return (
-              <article
-                key={offering.id}
-                className={`relative min-w-0 overflow-hidden rounded-2xl border ${
-                  isCloud
-                    ? "border-green-500/40 bg-green-500/10 p-6 shadow-xl sm:p-9"
-                    : "border-border bg-card p-6 sm:p-8"
+        {/* Pricing Cards — 3 columns */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {homepageTiers.map((tier, index) => (
+            <motion.div
+              key={tier.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="flex"
+            >
+              <div
+                className={`relative flex flex-col w-full p-8 rounded-3xl border shadow-xl ${
+                  tier.highlight
+                    ? "bg-green-500/10 border-green-500/30"
+                    : "bg-card border-border"
                 }`}
               >
-                {isCloud ? (
-                  <div className="pointer-events-none absolute right-0 top-0 h-52 w-52 rounded-full bg-green-500/10 blur-3xl" />
-                ) : null}
-                <div className="relative">
-                  <OpenHarnessBrandBar
-                    density="card"
-                    context={
-                      isCloud
-                        ? "CLOUD · MANAGED BY MIFUNE"
-                        : "OPEN SOURCE · MAINTAINED BY MIFUNE"
-                    }
-                    className={`mb-7 border-b pb-5 ${
-                      isCloud
-                        ? "border-green-500/30 text-foreground"
-                        : "border-border text-foreground"
-                    }`}
-                  />
-
-                  <div
-                    className={`grid gap-7 ${
-                      isCloud
-                        ? "lg:grid-cols-[minmax(0,1.25fr)_minmax(16rem,0.75fr)] lg:items-end"
-                        : "lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.65fr)] lg:items-end"
-                    }`}
-                  >
-                    <div className="min-w-0">
-                      <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-oh-accent">
-                        {offering.eyebrow}
-                      </p>
-                      <h3
-                        className={`font-montserrat font-semibold text-foreground ${
-                          isCloud
-                            ? "text-3xl sm:text-4xl"
-                            : "text-2xl sm:text-3xl"
-                        }`}
-                      >
-                        {offering.name}
-                      </h3>
-                      <p
-                        className={`mt-4 max-w-3xl font-montserrat leading-relaxed text-muted-foreground ${
-                          isCloud
-                            ? "text-base sm:text-lg"
-                            : "text-sm sm:text-base"
-                        }`}
-                      >
-                        {offering.description}
-                      </p>
-                    </div>
-
-                    <div className="min-w-0">
-                      <ul className="grid gap-3">
-                        {offering.bullets.map((bullet) => (
-                          <li
-                            key={bullet}
-                            className="flex items-start gap-2 font-montserrat text-sm text-muted-foreground"
-                          >
-                            <Check
-                              className="mt-0.5 h-4 w-4 shrink-0 text-oh-accent"
-                              aria-hidden="true"
-                            />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <a
-                        href={offering.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-center font-montserrat text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                          isCloud
-                            ? "bg-oh-solid text-black hover:bg-green-400"
-                            : "border border-border bg-background text-foreground hover:border-green-500/50 hover:text-oh-accent"
-                        }`}
-                      >
-                        {offering.cta}
-                        <ExternalLink
-                          className="h-4 w-4 shrink-0"
-                          aria-hidden="true"
-                        />
-                        <span className="sr-only">(opens in a new tab)</span>
-                      </a>
+                {/* Badge */}
+                {tier.badge && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <div className="px-4 py-1.5 rounded-full bg-green-500 text-black text-xs font-montserrat font-bold shadow-lg whitespace-nowrap">
+                      {tier.badge}
                     </div>
                   </div>
+                )}
+
+                {/* Position label chip */}
+                {tier.positionLabel && (
+                  <div className="mb-2">
+                    <span className="inline-block rounded-full bg-green-500/10 text-green-400 text-xs font-montserrat uppercase tracking-wide px-3 py-1">
+                      {tier.positionLabel}
+                    </span>
+                  </div>
+                )}
+
+                {/* Tier name */}
+                <h3
+                  className={`font-montserrat text-xl font-semibold mb-4 ${
+                    tier.badge ? "mt-3" : ""
+                  } ${tier.highlight ? "text-green-400" : "text-foreground"}`}
+                >
+                  {tier.name}
+                </h3>
+
+                {/* Price */}
+                <div className="mb-2">
+                  <span className="font-montserrat text-3xl font-bold text-foreground">
+                    {tier.price}
+                  </span>
+                  {tier.period && (
+                    <span className="font-montserrat text-sm text-muted-foreground ml-1">
+                      {tier.period}
+                    </span>
+                  )}
                 </div>
-              </article>
-            );
-          })}
+
+                {/* ROI Hint */}
+                {tier.roiHint && (
+                  <p className="font-montserrat text-sm font-medium text-green-500 mb-4">
+                    {tier.roiHint}
+                  </p>
+                )}
+
+                {/* Description */}
+                <p className="font-montserrat text-sm text-muted-foreground mb-6">
+                  {tier.description}
+                </p>
+
+                {/* Bullets */}
+                <ul className="space-y-3 mb-8 flex-1">
+                  {tier.bullets.map((bullet, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5">
+                        <MdCheck className="w-3 h-3 text-green-400" />
+                      </div>
+                      <span className="font-montserrat text-sm text-muted-foreground">
+                        {bullet}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <a
+                  href="#audit"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-base font-medium text-black transition-all duration-200 hover:bg-green-400 shadow-lg"
+                >
+                  {tier.cta}
+                </a>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <aside className="mt-5 rounded-2xl border border-border bg-card px-6 py-5 sm:px-8">
-          <OpenHarnessBrandBar
-            density="compact"
-            context="FOR CLOUD · MIFUNE ENGINEERING"
-            className="mb-5 border-b border-border pb-4 text-foreground"
-          />
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                Optional for Cloud customers
-              </p>
-              <h3 className="mt-2 font-montserrat text-xl font-semibold text-foreground">
-                {supportOffering.name}
-              </h3>
-              <p className="mt-2 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                Mifune engineers work alongside your team on an agreed Cloud
-                deployment scope. Support is an add-on, not a third operating
-                path.
-              </p>
-            </div>
-            <a
-              href={supportOffering.href}
-              className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-center font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
-            >
-              <Headphones className="h-4 w-4" aria-hidden="true" />
-              Explore Mifune engineering support
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        </aside>
+        {/* Full pricing ladder link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-12"
+        >
+          <Link
+            href="/pricing"
+            className="font-montserrat text-sm font-medium text-green-500 hover:text-green-400 transition-colors duration-200"
+          >
+            See the full path to a managed AI workforce →
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

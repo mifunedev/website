@@ -1,32 +1,33 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/config/app";
-
-const description =
-  "Mifune engineering support for Open Harness Cloud customers who want help planning, implementing, integrating, troubleshooting, or handing off a deployment.";
 
 export const metadata: Metadata = {
-  title: "Open Harness Cloud Engineering Support",
-  description,
+  title: "Automation as a Service",
+  description:
+    "AI automation systems built and maintained for your business. Saint George, UT and beyond.",
   alternates: {
     canonical: "/services",
   },
   keywords: [
-    "Open Harness Cloud support",
-    "forward-deployed engineering",
-    "Open Harness implementation",
-    "Open Harness integration",
-    "Open Harness deployment support",
+    "automation as a service",
+    "AI automation",
+    "AI integration",
+    "trusted AI partner",
+    "Saint George",
+    "Utah",
+    "business automation",
+    "workflow automation",
   ],
   openGraph: {
-    title: "Open Harness Cloud Engineering Support | Mifune",
-    description,
-    url: `${SITE_URL}/services`,
+    title: "Automation as a Service",
+    description:
+      "AI automation systems built and maintained for your business. Trusted AI integration partner for SMBs.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open Harness Cloud Engineering Support | Mifune",
-    description,
+    title: "Automation as a Service",
+    description:
+      "AI automation systems built and maintained for your business. Trusted AI integration partner for SMBs.",
   },
 };
 

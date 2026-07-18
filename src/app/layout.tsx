@@ -3,29 +3,31 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import InitialLoadActiveUsers from "@/components/users/InitialLoadActiveUsers";
-import JsonLd from "@/components/seo/JsonLd";
-import { ThemeProvider } from "@/components/theme-provider";
 import { GA_ID, NODE_ENV, SITE_URL } from "@/config/app";
+import { ThemeProvider } from "@/components/theme-provider";
+import JsonLd from "@/components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
+// import { botScript } from "@/config/bot";
 
-const montserrat = Montserrat({
+// Primary font - Montserrat for clean, minimal UI elements
+const montserrat = Montserrat({ 
   subsets: ["latin"],
   display: "swap",
   variable: "--font-montserrat",
 });
 
+// Futuristic font for "Be Present" headline
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-space",
 });
 
-const APP_NAME = "Mifune";
-const APP_DEFAULT_TITLE =
-  "Run coding agents in a sandbox, not on your machine.";
+const APP_NAME = "mifune";
+const APP_DEFAULT_TITLE = "Mifune – AI Workers for Your Business, Built & Managed";
 const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
-  "Open Harness connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose Mifune-managed Open Harness Cloud.";
+  "Free AI Workflow Audit with real feedback in one business day — no meetings, no BS. We build and manage AI workers in your business; you own everything.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -39,19 +41,21 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   keywords: [
-    "coding agent workspace",
-    "persistent Docker workspace",
-    "Open Harness",
-    "Open Harness Cloud",
-    "managed coding agent workspace",
-    "self-hosted Open Harness",
-    "coding agent engineering support",
+    "AI automation",
+    "managed AI workers",
+    "AI implementation",
+    "business automation",
+    "AI workflow audit",
+    "OpenHarness",
+    "done-for-you AI",
+    "AI partner",
   ],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: APP_NAME,
+    title: APP_DEFAULT_TITLE,
+    // startUpImage: [],
   },
   formatDetection: {
     telephone: false,
@@ -75,23 +79,31 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     url: SITE_URL,
     locale: "en_US",
-    title: APP_DEFAULT_TITLE,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
     description: APP_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: APP_DEFAULT_TITLE,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
     description: APP_DESCRIPTION,
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f3ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    // Match the navbar (bg-background) light/dark --background tokens from globals.css
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // hsl(0 0% 100%)
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" }, // hsl(240 10% 3.9%)
   ],
   width: "device-width",
   initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -99,12 +111,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html
-      lang="en"
-      className={`${montserrat.variable} ${spaceGrotesk.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${montserrat.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <body className="font-montserrat">
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
@@ -116,13 +125,13 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        {NODE_ENV === "production" && GA_ID ? (
-          <>
-            <GoogleAnalytics gaId={GA_ID} />
-            <InitialLoadActiveUsers />
-          </>
-        ) : null}
       </body>
+      {NODE_ENV === "production" && GA_ID && (
+        <>
+          <GoogleAnalytics gaId={GA_ID} />
+          <InitialLoadActiveUsers />
+        </>
+      )}
     </html>
   );
 }
