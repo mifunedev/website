@@ -19,7 +19,11 @@ export default function OGImage() {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "#0a0a0a",
+          backgroundImage:
+            "linear-gradient(#22c55e14 1px, transparent 1px), linear-gradient(90deg, #22c55e14 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
           fontFamily: "sans-serif",
+          padding: "72px",
         }}
       >
         <div
@@ -27,31 +31,44 @@ export default function OGImage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "24px",
+            textAlign: "center",
           }}
         >
           <div
             style={{
-              fontSize: "96px",
-              fontWeight: 800,
-              color: "#22c55e",
-              letterSpacing: "0.1em",
+              fontSize: "24px",
+              color: "#4ade80",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              marginBottom: "24px",
             }}
           >
-            Mifune
+            Open Harness · Maintained by Mifune
           </div>
           <div
             style={{
-              fontSize: "32px",
-              color: "#a1a1aa",
-              fontWeight: 400,
+              fontSize: "72px",
+              lineHeight: 1.05,
+              fontWeight: 800,
+              color: "#f4f4f5",
+              maxWidth: "1000px",
             }}
           >
-            AI Workers for Your Business, Built &amp; Managed
+            Run coding agents in a sandbox, not on your machine.
+          </div>
+          <div
+            style={{
+              fontSize: "24px",
+              color: "#a1a1aa",
+              marginTop: "32px",
+            }}
+          >
+            Open Harness Cloud · MIT-licensed open source · Mifune engineering
           </div>
         </div>
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }
