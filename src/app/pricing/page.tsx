@@ -20,20 +20,20 @@ const description =
   "Compare Open Harness workspace options by who operates the environment: Mifune through Open Harness Cloud or your team through the MIT-licensed open-source project.";
 
 export const metadata: Metadata = {
-  title: "Open Harness Options",
+  title: "Deploy Open Harness",
   description,
   alternates: {
     canonical: "/pricing",
   },
   openGraph: {
-    title: "Open Harness Options | Mifune",
+    title: "Deploy Open Harness",
     description,
     url: `${SITE_URL}/pricing`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open Harness Options | Mifune",
+    title: "Deploy Open Harness",
     description,
   },
 };
@@ -46,7 +46,7 @@ export default function PricingPage() {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Mifune", url: SITE_URL },
-          { name: "Open Harness Options", url: `${SITE_URL}/pricing` },
+          { name: "Deploy Open Harness", url: `${SITE_URL}/pricing` },
         ])}
       />
       <header>

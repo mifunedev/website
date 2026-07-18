@@ -44,9 +44,11 @@
     --oh-ink: #0a0a0a;
     --oh-muted: #5e5e5e;
     --oh-rule: #d8d2c2;
+    --oh-control-border: #8a8375;
     --oh-accent: #15803d;
     --oh-focus: #166534;
     --oh-solid: #22c55e;
+    --oh-success-text: #166534;
   }
 
   .dark {
@@ -88,9 +90,11 @@
     --oh-ink: #f5f5f5;
     --oh-muted: #a3a3a3;
     --oh-rule: #262626;
+    --oh-control-border: #626262;
     --oh-accent: #4ade80;
     --oh-focus: #86efac;
     --oh-solid: #22c55e;
+    --oh-success-text: #4ade80;
   }
 }
 
