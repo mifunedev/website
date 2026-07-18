@@ -22,8 +22,6 @@ const outcomes = [
   },
 ];
 
-const agents = ["Claude Code", "Codex", "Pi", "Other CLI"];
-
 export default function OpenHarnessValueSection() {
   return (
     <section
@@ -76,17 +74,6 @@ export default function OpenHarnessValueSection() {
               </article>
             );
           })}
-        </div>
-
-        <div className="mt-8 flex min-w-0 flex-col gap-4 border-y border-oh-rule py-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="shrink-0 font-montserrat text-lg font-bold text-oh-ink">
-            Pick your agent.
-          </p>
-          <ul className="flex min-w-0 flex-wrap gap-x-5 gap-y-3 font-mono text-xs text-oh-muted sm:justify-end sm:text-sm">
-            {agents.map((agent) => (
-              <li key={agent}>{agent}</li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

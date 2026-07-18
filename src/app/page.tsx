@@ -6,11 +6,13 @@ import {
   faqPageSchema,
   openHarnessSoftwareSchema,
 } from "@/lib/schema";
+import AgentPickerSection from "@/sections/AgentPickerSection";
 import CTASection from "@/sections/CTASection";
 import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 import HeroSection from "@/sections/HeroSection";
 import OpenHarnessValueSection from "@/sections/OpenHarnessValueSection";
+import OpenSourceSection from "@/sections/OpenSourceSection";
 import PricingSection from "@/sections/PricingSection";
 
 export default function Home() {
@@ -24,6 +26,8 @@ export default function Home() {
       </header>
       <main id="main-content" tabIndex={-1} className="scroll-mt-20">
         <HeroSection />
+        <OpenSourceSection />
+        <AgentPickerSection />
         <OpenHarnessValueSection />
         <PricingSection />
         <FAQSection />
