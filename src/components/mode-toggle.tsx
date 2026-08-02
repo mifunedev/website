@@ -10,9 +10,26 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { THEME_AUTO_STORAGE_KEY } from "@/lib/time-of-day-theme";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+
+  // Every selection here is an explicit choice, so it must permanently end the
+  // time-of-day default — including the case where the user picks the same
+  // value the clock had already auto-applied. Clearing the marker is what makes
+  // that airtight instead of heuristic.
+  const chooseTheme = React.useCallback(
+    (theme: string) => {
+      try {
+        window.localStorage.removeItem(THEME_AUTO_STORAGE_KEY);
+      } catch {
+        // Storage unavailable: next-themes' own setTheme is best-effort too.
+      }
+      setTheme(theme);
+    },
+    [setTheme],
+  );
 
   return (
     <DropdownMenu>
@@ -30,16 +47,19 @@ export function ModeToggle() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem
           className="min-h-11"
-          onClick={() => setTheme("light")}
+          onClick={() => chooseTheme("light")}
         >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem className="min-h-11" onClick={() => setTheme("dark")}>
+        <DropdownMenuItem
+          className="min-h-11"
+          onClick={() => chooseTheme("dark")}
+        >
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
           className="min-h-11"
-          onClick={() => setTheme("system")}
+          onClick={() => chooseTheme("system")}
         >
           System
         </DropdownMenuItem>

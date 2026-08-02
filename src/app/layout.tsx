@@ -7,6 +7,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GA_ID, NODE_ENV, SITE_URL } from "@/config/app";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
+import { buildTimeOfDayThemeScript } from "@/lib/time-of-day-theme";
+
+const timeOfDayThemeScript = buildTimeOfDayThemeScript();
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -86,10 +89,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f3ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+  // Deliberately NOT keyed on `prefers-color-scheme`. The rendered theme is
+  // resolved from the client's local hour (plus any explicit choice), which
+  // the OS preference cannot predict — an OS-light visitor at 20:00 would
+  // otherwise get eggshell mobile chrome above a dark page. A single value
+  // matching the SSR/no-JS default (dark) can never contradict conditionally.
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
 };
@@ -105,6 +110,14 @@ export default function RootLayout({
       className={`${montserrat.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/*
+          Must stay synchronous, in <head>, and ahead of next-themes' own
+          script (which renders inside <body>) so the time-of-day default is
+          committed before anything paints. No transition is introduced.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: timeOfDayThemeScript }} />
+      </head>
       <body className="font-montserrat">
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
