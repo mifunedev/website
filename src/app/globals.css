@@ -46,6 +46,11 @@
     --oh-rule: #d8d2c2;
     --oh-control-border: #8a8375;
     --oh-accent: #15803d;
+    /* The accent, at the strength a raised surface needs. --oh-accent clears
+       4.5:1 on --oh-paper (4.53:1) but not on --oh-raised (4.02:1), and a
+       10% red alert overlay on that same surface drags it to 3.58:1. Darker
+       is the only lever that fixes both without restyling the surface. */
+    --oh-accent-raised: #166534;
     --oh-focus: #166534;
     --oh-solid: #22c55e;
     --oh-success-text: #166534;
@@ -92,6 +97,10 @@
     --oh-rule: #262626;
     --oh-control-border: #626262;
     --oh-accent: #4ade80;
+    /* Dark mode never had the problem — the accent already measures 11.36:1 on
+       --oh-raised and 10.51:1 through the alert overlay — so this deliberately
+       tracks --oh-accent rather than darkening anything. */
+    --oh-accent-raised: #4ade80;
     --oh-focus: #86efac;
     --oh-solid: #22c55e;
     --oh-success-text: #4ade80;

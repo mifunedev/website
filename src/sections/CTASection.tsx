@@ -111,7 +111,7 @@ export default function CTASection() {
           </ul>
 
           <aside className="mt-10 rounded-2xl border border-oh-rule bg-oh-raised p-5 sm:p-6">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent-raised">
               What happens next
             </p>
             <p className="mt-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base">
@@ -155,7 +155,7 @@ export default function CTASection() {
               Something went wrong. Please try again, or email{" "}
               <a
                 href={`mailto:${OFFERING_URLS.supportEmail}`}
-                className="font-semibold underline underline-offset-4 hover:text-oh-accent"
+                className="font-semibold underline underline-offset-4 hover:text-oh-accent-raised"
               >
                 {OFFERING_URLS.supportEmail}
               </a>

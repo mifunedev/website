@@ -58,6 +58,7 @@ const config: Config = {
           muted: "var(--oh-muted)",
           rule: "var(--oh-rule)",
           accent: "var(--oh-accent)",
+          "accent-raised": "var(--oh-accent-raised)",
           focus: "var(--oh-focus)",
           solid: "var(--oh-solid)",
         },
