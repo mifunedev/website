@@ -1,11 +1,37 @@
 #!/usr/bin/env node
+/**
+ * Generates public/llm.txt. Run by `prebuild`, so `npm run build` refreshes it.
+ *
+ * Prices are imported from src/config/cloud-pricing.ts — the single source of
+ * every published price — rather than re-hardcoded here, so llm.txt cannot
+ * drift from the site. That import is a TypeScript module loaded by plain
+ * `node`, which relies on Node's built-in type stripping: unflagged from
+ * v22.18.0 and v23.6.0. package.json therefore declares `engines.node`
+ * ">=22.18.0"; on an older runtime this script fails loudly with
+ * ERR_UNKNOWN_FILE_EXTENSION rather than emitting a stale file.
+ *
+ * Node also logs a MODULE_TYPELESS_PACKAGE_JSON warning for the .ts import
+ * (this package is CommonJS-by-default and Next.js requires it to stay that
+ * way). It is informational and does not affect the output.
+ */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  cloudNodePlans,
+  formatHourlyUsd,
+} from "../src/config/cloud-pricing.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
+
+const HOURLY_RATES = cloudNodePlans
+  .map(
+    (plan) =>
+      `- ${plan.label} (${plan.vcpu} vCPU / ${plan.ramGb} GB RAM / ${plan.diskGb} GB SSD): ${formatHourlyUsd(plan.hourlyUsd)}`,
+  )
+  .join("\n");
 
 const LLM_TXT_CONTENT = `# Mifune — Open Harness workspaces for coding agents
 
@@ -35,7 +61,15 @@ Mifune maintains the Apache-2.0 licensed open-source Open Harness project, opera
 Open Harness Cloud gives coding agents an isolated, persistent workspace while Mifune operates the managed environment.
 
 - Cloud Console: https://console.mifune.dev
-- Open Harness Options: https://mifune.dev/pricing
+- Pricing: https://mifune.dev/pricing
+
+Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free; destroying a node is how you stop paying for it. AI usage is not included: you sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account and pay that provider directly.
+
+Hourly rates, per whole hour a node is running:
+
+${HOURLY_RATES}
+
+There is no monthly price, no free tier, and no trial. Signing in is free; a card is required before the first node.
 
 ### 2. Open Harness Open Source — self-hosted path
 
@@ -54,7 +88,7 @@ Mifune engineers can work alongside a Cloud customer's team to plan, implement, 
 ## Website
 
 - Homepage: https://mifune.dev
-- Open Harness Options: https://mifune.dev/pricing
+- Pricing: https://mifune.dev/pricing
 - Open Harness documentation: https://oh.mifune.dev
 - Blog: https://mifune.dev/blog
 `;

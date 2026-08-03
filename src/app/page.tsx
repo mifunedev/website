@@ -30,7 +30,13 @@ export default function Home() {
         <AgentPickerSection />
         <OpenHarnessValueSection />
         <PricingSection />
-        <FAQSection />
+        <FAQSection
+          faqs={faqs}
+          eyebrow="Common questions"
+          heading="Open Harness, clearly explained."
+          subheading="What the workspace does, who operates it, and how Mifune can help."
+          idPrefix="homepage-faq"
+        />
         <CTASection />
       </main>
       <FooterSection />

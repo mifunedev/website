@@ -2,12 +2,20 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { faqs, type Faq } from "@/data/faqs";
+import { type Faq } from "@/data/faqs";
 
-function FAQItem({ faq, index }: { faq: Faq; index: number }) {
+function FAQItem({
+  faq,
+  index,
+  idPrefix,
+}: {
+  faq: Faq;
+  index: number;
+  idPrefix: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const triggerId = `homepage-faq-${index}-trigger`;
-  const panelId = `homepage-faq-${index}-panel`;
+  const triggerId = `${idPrefix}-${index}-trigger`;
+  const panelId = `${idPrefix}-${index}-panel`;
 
   return (
     <div className="border-b border-border last:border-0">
@@ -44,7 +52,30 @@ function FAQItem({ faq, index }: { faq: Faq; index: number }) {
   );
 }
 
-export default function FAQSection() {
+type FAQSectionProps = {
+  faqs: Faq[];
+  eyebrow: string;
+  heading: string;
+  /**
+   * Required, not optional: every caller states its own third line. A default
+   * here would render the homepage's copy verbatim under another page's
+   * heading.
+   */
+  subheading: string;
+  /**
+   * Namespaces the trigger and panel ids, so `aria-controls` cannot collide if
+   * two instances ever render on one route.
+   */
+  idPrefix: string;
+};
+
+export default function FAQSection({
+  faqs,
+  eyebrow,
+  heading,
+  subheading,
+  idPrefix,
+}: FAQSectionProps) {
   return (
     <section
       id="faq"
@@ -53,19 +84,24 @@ export default function FAQSection() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-12 text-center">
           <p className="mb-4 font-montserrat text-sm font-medium uppercase tracking-[0.22em] text-oh-accent">
-            Common questions
+            {eyebrow}
           </p>
           <h2 className="text-balance font-montserrat text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-            Open Harness, clearly explained.
+            {heading}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg text-muted-foreground">
-            What the workspace does, who operates it, and how Mifune can help.
+            {subheading}
           </p>
         </div>
 
         <div className="rounded-2xl border border-border bg-card px-5 sm:px-8">
           {faqs.map((faq, index) => (
-            <FAQItem key={faq.question} faq={faq} index={index} />
+            <FAQItem
+              key={faq.question}
+              faq={faq}
+              index={index}
+              idPrefix={idPrefix}
+            />
           ))}
         </div>
       </div>

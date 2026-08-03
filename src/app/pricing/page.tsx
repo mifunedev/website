@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ExternalLink, Mail } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
 import JsonLd from "@/components/seo/JsonLd";
@@ -9,12 +10,16 @@ import {
   formatHourlyUsd,
   isDefault,
 } from "@/config/cloud-pricing";
-import { OFFERING_URLS, supportOffering } from "@/config/offerings";
+import { OFFERING_URLS } from "@/config/offerings";
+import { pricingFaqs } from "@/data/faqs";
 import {
   breadcrumbSchema,
   cloudServiceSchema,
+  faqPageSchema,
   openHarnessSoftwareSchema,
 } from "@/lib/schema";
+import CTASection from "@/sections/CTASection";
+import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 
 const title = "Open Harness Cloud pricing";
@@ -69,6 +74,7 @@ export default function PricingPage() {
     <>
       <JsonLd data={cloudServiceSchema()} />
       <JsonLd data={openHarnessSoftwareSchema()} />
+      <JsonLd data={faqPageSchema(pricingFaqs)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Mifune", url: SITE_URL },
@@ -242,6 +248,16 @@ export default function PricingPage() {
                 </article>
               ))}
             </div>
+
+            <p className="mt-8 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground">
+              Cloud customers can add hands-on help with adoption from our team:{" "}
+              <Link
+                href={OFFERING_URLS.support}
+                className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              >
+                Mifune engineering support <span aria-hidden="true">→</span>
+              </Link>
+            </p>
           </div>
         </section>
 
@@ -314,42 +330,15 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section
-          className="px-4 py-20"
-          aria-labelledby="support-option-heading"
-        >
-          <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-card p-6 sm:p-10">
-            <OpenHarnessBrandBar
-              density="compact"
-              context="FOR CLOUD · MIFUNE ENGINEERING"
-              className="mb-6 border-b border-border pb-4 text-foreground"
-            />
-            <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-              <div>
-                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-oh-accent">
-                  Optional for Cloud customers
-                </p>
-                <h2
-                  id="support-option-heading"
-                  className="font-montserrat text-3xl font-semibold text-foreground"
-                >
-                  Add Mifune engineering support
-                </h2>
-                <p className="mt-4 max-w-3xl font-montserrat leading-relaxed text-muted-foreground">
-                  {supportOffering.description} This is a scoped service for
-                  Cloud adoption, not another workspace option.
-                </p>
-              </div>
-              <a
-                href={OFFERING_URLS.supportContact}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 text-center font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
-              >
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                Discuss your Cloud deployment
-              </a>
-            </div>
-          </div>
-        </section>
+        <FAQSection
+          faqs={pricingFaqs}
+          eyebrow="Common questions"
+          heading="Pricing questions, answered."
+          subheading="What you pay for, what you don’t, and what happens before your first node."
+          idPrefix="pricing-faq"
+        />
+
+        <CTASection referrer="pricing-page-deployment-form" />
       </main>
       <FooterSection />
     </>
