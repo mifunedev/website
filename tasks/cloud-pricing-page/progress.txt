@@ -103,3 +103,47 @@ upstream blob at the cited commit (not against the header comment),
 byte-identical homepage fragments confirmed from two independent builds,
 no monthly price in any rendered page, no duplicate ids, aria targets
 all resolve, no orphaned imports.
+
+## Deploy fix — the Netlify preview build failed on Node 18
+
+Caught by the deploy preview for PR #60, after every local gate passed.
+
+  TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts"
+  for /opt/build/repo/src/config/cloud-pricing.ts
+
+prebuild (`node scripts/generate-llm-txt.mjs`) imports cloud-pricing.ts
+directly, which needs Node's unflagged type stripping (v22.18.0+).
+Netlify built on v18.20.8.
+
+US-007 declared `engines.node >=22.18.0` and 3e4aaef's message called
+that "the form Netlify-class builders read to select a version". That
+claim is false, and the log disproves it in two steps: npm printed
+EBADENGINE for this very package and then carried on, and the build
+proceeded on 18. Netlify selects the version from `.nvmrc`,
+`.node-version`, or `NODE_VERSION` only — each overriding the version
+the site is pinned to in the UI — and pins a site to the build image's
+default otherwise. engines is a declaration; npm only warns on it.
+
+The accepted trade in US-007 was that prebuild "fails loudly rather than
+shipping a stale llm.txt". It did fail loudly — on the deploy. Failing
+loudly in the one environment nobody was watching is not protection; it
+is an outage with a good error message. What was missing was not a
+louder failure, it was enforcement of the requirement.
+
+Fixed by adding `.nvmrc` = 22. Pinning rather than removing the .ts
+import is the stronger fix on evidence: every gate on this branch — lint,
+tsc, build, the rendered-HTML checks, the browser pass — was run on Node
+v22.23.1. The deploy now runs the version the work was verified on,
+instead of a Node 18 nothing was ever tested against. `engines` stays as
+the declaration of the requirement; `.nvmrc` is what enforces it, and
+the script header now says so instead of crediting engines.
+
+Verified after the fix: prebuild regenerates public/llm.txt
+byte-identical (`git diff --exit-code`), so this changes plumbing and
+not one published character. lint 0, tsc 0, build 0, prettier clean.
+Rendered /pricing still carries $0.0384 / $0.0692 / $0.5046 and zero
+monthly figures. public/sw.js build-ID churn excluded, as before.
+
+Control retained for the record: `node --no-experimental-strip-types
+scripts/generate-llm-txt.mjs` still reproduces the exact deploy error on
+Node 22, so the failure is understood rather than merely gone.
