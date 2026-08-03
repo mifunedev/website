@@ -1,10 +1,17 @@
 /**
- * Client-local time-of-day theme default.
+ * Client-local automatic theme default.
  *
  * The browser's own wall-clock hour is the client-timezone signal:
  * `new Date().getHours()` already resolves in the visitor's zone and is
  * DST-correct by construction. No `Intl` lookup, no geo-IP, no server clock,
  * no build-time constant.
+ *
+ * Two rules compose into the automatic default, and the order matters:
+ *
+ * 1. `prefers-color-scheme: dark` is a *declared* preference — the only channel
+ *    a platform gives a user to say "light surfaces hurt me". It wins outright.
+ * 2. The hour is an *inferred* preference, and may only ever upgrade light →
+ *    dark, never dark → light.
  *
  * This module is the single source of the boundary constants. The inline
  * bootstrap script is built from those same constants (see
@@ -17,21 +24,44 @@ export const DAY_START_HOUR = 7;
 /** 18:00 inclusive — start of the dark window. */
 export const NIGHT_START_HOUR = 18;
 
-/** next-themes' storage key. Must match the `storageKey` the provider uses. */
-export const THEME_STORAGE_KEY = "theme";
+/**
+ * next-themes' storage key.
+ *
+ * It holds an explicit user choice and **nothing else**. The automatic default
+ * is never written to storage, which is precisely what stops it propagating
+ * between tabs: `storage` events fire in every *other* document of the origin,
+ * and next-themes listens for them, so anything the automatic path persisted
+ * would retheme an already-open tab with no reload and no user action.
+ *
+ * Because only choices land here, "key absent" is an exact, self-describing
+ * test for "no human has chosen" — no companion marker key is needed to tell a
+ * seeded default apart from a real selection.
+ */
+export const THEME_CHOICE_STORAGE_KEY = "theme-choice";
 
 /**
- * Companion key holding the value the bootstrap script last auto-applied.
+ * Keys written by the previous seeding design, read once for migration.
  *
- * next-themes re-applies `defaultTheme` in a mount effect, so a script that
- * only sets the class is overwritten right after hydration. Seeding
- * `localStorage["theme"]` is therefore structurally required here — and this
- * marker is what keeps a required seed from freezing the default forever:
- * while `theme === theme-auto`, no human has actually chosen anything, so the
- * hour is re-resolved on every load. Any explicit selection clears the marker
- * and permanently ends the time rule.
+ * They are read and never removed. Removing `theme` would emit a `storage`
+ * event that a tab still running the old bundle would answer by writing its own
+ * default straight back — resurrecting the key without its marker, where it
+ * then reads as a permanent explicit choice. Leaving both in place is inert:
+ * nothing in the current design writes or watches either one.
  */
-export const THEME_AUTO_STORAGE_KEY = "theme-auto";
+export const LEGACY_THEME_STORAGE_KEY = "theme";
+export const LEGACY_THEME_AUTO_STORAGE_KEY = "theme-auto";
+
+/**
+ * Attribute the bootstrap stamps on `<html>` with the theme it auto-applied.
+ *
+ * This is how the resolved default reaches React without going through
+ * storage. `ThemeProvider` reads it during the client render and passes it as
+ * next-themes' `defaultTheme`, so next-themes' own mount effect re-applies the
+ * value already on screen instead of overwriting it.
+ *
+ * Absent means an explicit choice was in play, so nothing was auto-applied.
+ */
+export const AUTO_THEME_ATTRIBUTE = "data-theme-auto";
 
 export type TimeOfDayTheme = "light" | "dark";
 
@@ -39,11 +69,11 @@ export type TimeOfDayTheme = "light" | "dark";
  * Mobile browser-chrome colours, matching the `--background` tokens in
  * `globals.css` (`0 0% 100%` light, `240 10% 3.9%` dark).
  *
- * The static `viewport.themeColor` cannot track a theme resolved from the
- * client clock, so the bootstrap script keeps the `<meta name="theme-color">`
- * in sync. Without this the feature would introduce a mismatch it did not have
- * before: pre-change the page was always dark, so dark chrome matched; a light
- * 14:00 page under dark chrome is a regression this feature would have caused.
+ * The static `viewport.themeColor` cannot track a theme resolved on the client,
+ * so the bootstrap script keeps the `<meta name="theme-color">` in sync.
+ * Without this the feature would introduce a mismatch it did not have before:
+ * pre-change the page was always dark, so dark chrome matched; a light 14:00
+ * page under dark chrome is a regression this feature would have caused.
  */
 export const THEME_COLORS: Record<TimeOfDayTheme, string> = {
   light: "#ffffff",
@@ -66,53 +96,74 @@ export function resolveTimeOfDayTheme(hour: number): TimeOfDayTheme {
 }
 
 /**
- * Build the synchronous inline `<head>` script that applies the time-of-day
- * default before anything paints and before next-themes' own script runs.
+ * The full automatic default: a declared OS-dark preference outranks the hour,
+ * so the clock can only ever darken a light result, never lighten a dark one.
+ */
+export function resolveAutoTheme(
+  hour: number,
+  prefersDark: boolean,
+): TimeOfDayTheme {
+  return prefersDark ? "dark" : resolveTimeOfDayTheme(hour);
+}
+
+/**
+ * Build the synchronous inline script that settles the theme before anything
+ * paints.
+ *
+ * It must render **after** next-themes' own inline script, which applies
+ * `localStorage[storageKey] || defaultTheme` and would otherwise overwrite the
+ * automatic result with the server-serialised default. `ThemeProvider` owns
+ * that ordering by rendering this script as its first child; both are
+ * parser-blocking and no paintable markup precedes either.
  *
  * Precedence, evaluated once per document load:
  *
- * - `theme` absent            → resolve by hour, write both keys, apply.
- * - `theme === theme-auto`    → still an unmade choice → re-resolve by hour,
- *                               write both keys, apply.
- * - otherwise                 → a real explicit choice → touch neither storage
- *                               nor the class; next-themes owns both.
+ * - explicit `light` / `dark` → apply it; next-themes agrees on mount.
+ * - explicit `system`         → apply the OS preference, as next-themes will.
+ * - no choice                 → resolve from OS preference + hour, apply it,
+ *                               and stamp `data-theme-auto`. **No storage is
+ *                               written**, so no other tab is disturbed.
  *
  * In every branch the resolved colour is mirrored into
  * `<meta name="theme-color">`, which Next renders ahead of this script, so the
  * mobile chrome cannot disagree with the painted page.
  *
- * The whole body is exception-wrapped: if `localStorage` is unavailable or
- * throws, the script does nothing at all and the page falls through to
- * next-themes' pre-existing `defaultTheme` behaviour.
- *
- * `theme-auto` is written before `theme` on purpose. If the second write
- * fails (quota, denied storage) the surviving state is `theme` absent, which
- * simply re-resolves next load — the opposite order would leave a seeded
- * `theme` with no marker and freeze it as a fake explicit choice.
+ * Storage access is wrapped separately from the rest of the body: if
+ * `localStorage` is unavailable or throws, the automatic default still applies
+ * rather than the page falling through to next-themes' static default.
  */
 export function buildTimeOfDayThemeScript(): string {
   return [
     "(function(){try{",
-    `var K=${JSON.stringify(THEME_STORAGE_KEY)},A=${JSON.stringify(THEME_AUTO_STORAGE_KEY)};`,
+    `var C=${JSON.stringify(THEME_CHOICE_STORAGE_KEY)},L=${JSON.stringify(LEGACY_THEME_STORAGE_KEY)},M=${JSON.stringify(LEGACY_THEME_AUTO_STORAGE_KEY)};`,
+    `var ATTR=${JSON.stringify(AUTO_THEME_ATTRIBUTE)};`,
     `var DAY=${DAY_START_HOUR},NIGHT=${NIGHT_START_HOUR};`,
-    `var C=${JSON.stringify(THEME_COLORS)};`,
-    "var s=window.localStorage;",
-    "var raw=s.getItem(K),auto=s.getItem(A),t;",
-    "if(raw!==null&&raw!==auto){",
-    // An explicit choice: never touch storage or the class (next-themes owns
-    // both). Only mirror the resolved colour into the chrome meta.
-    "t=raw==='light'?'light':raw==='dark'?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');",
-    "}else{",
+    `var COLORS=${JSON.stringify(THEME_COLORS)};`,
+    "var e=document.documentElement,s=null,c=null;",
+    "try{s=window.localStorage;}catch(err){}",
+    "if(s){",
+    "c=s.getItem(C);",
+    "if(c===null){",
+    // A legacy value that differs from the legacy marker was a real choice; a
+    // value equal to it was only ever a seeded default, so it stays unmigrated
+    // and this visitor simply returns to the automatic path.
+    "var lg=s.getItem(L);",
+    "if(lg!==null&&lg!==s.getItem(M)){s.setItem(C,lg);c=lg;}",
+    "}}",
+    "var d=!!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);",
+    "var t;",
+    "if(c==='light'||c==='dark'){t=c;}",
+    "else if(c!==null){t=d?'dark':'light';}",
+    "else{",
     "var h=new Date().getHours();",
-    "t=(h>=NIGHT||h<DAY)?'dark':'light';",
-    "s.setItem(A,t);s.setItem(K,t);",
-    "var e=document.documentElement;",
+    "t=(d||h>=NIGHT||h<DAY)?'dark':'light';",
+    "e.setAttribute(ATTR,t);",
+    "}",
     "e.classList.remove('light','dark');",
     "e.classList.add(t);",
     "e.style.colorScheme=t;",
-    "}",
     "var m=document.querySelector('meta[name=\"theme-color\"]');",
-    "if(m&&C[t])m.setAttribute('content',C[t]);",
+    "if(m&&COLORS[t])m.setAttribute('content',COLORS[t]);",
     "}catch(err){}})();",
   ].join("");
 }
