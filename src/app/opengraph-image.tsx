@@ -64,7 +64,8 @@ export default function OGImage() {
               marginTop: "32px",
             }}
           >
-            Open Harness Cloud · MIT-licensed open source · Mifune engineering
+            Open Harness Cloud · Apache-2.0 licensed open source · Mifune
+            engineering
           </div>
         </div>
       </div>

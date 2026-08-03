@@ -11,7 +11,7 @@ export const faqs: Faq[] = [
   {
     question: "What is Open Harness?",
     answer:
-      "Open Harness is an MIT-licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one sandbox and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
+      "Open Harness is an Apache-2.0 licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one sandbox and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
   },
   {
     question: "What problem does it solve?",

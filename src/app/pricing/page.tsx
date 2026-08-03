@@ -17,7 +17,7 @@ import {
 import FooterSection from "@/sections/FooterSection";
 
 const description =
-  "Compare Open Harness workspace options by who operates the environment: Mifune through Open Harness Cloud or your team through the MIT-licensed open-source project.";
+  "Compare Open Harness workspace options by who operates the environment: Mifune through Open Harness Cloud or your team through the Apache-2.0 licensed open-source project.";
 
 export const metadata: Metadata = {
   title: "Deploy Open Harness",
@@ -72,8 +72,8 @@ export default function PricingPage() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
               Choose Mifune-managed Open Harness Cloud when you want Mifune to
-              operate the environment, or self-host the MIT-licensed project
-              when your team wants that responsibility.
+              operate the environment, or self-host the Apache-2.0 licensed
+              project when your team wants that responsibility.
             </p>
             <p className="mt-4 font-montserrat text-sm text-muted-foreground">
               Need implementation details?{" "}

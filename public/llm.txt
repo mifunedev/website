@@ -17,7 +17,7 @@ Grounded outcomes:
 
 ## Vendor
 
-Mifune maintains the MIT-licensed open-source Open Harness project, operates Open Harness Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
+Mifune maintains the Apache-2.0 licensed open-source Open Harness project, operates Open Harness Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
 
 ## Offering hierarchy
 
@@ -30,7 +30,7 @@ Open Harness Cloud gives coding agents an isolated, persistent workspace while M
 
 ### 2. Open Harness Open Source — self-hosted path
 
-The MIT-licensed project is for teams that want to inspect, adapt, and operate Open Harness themselves, locally or on a remote VM.
+The Apache-2.0 licensed project is for teams that want to inspect, adapt, and operate Open Harness themselves, locally or on a remote VM.
 
 - GitHub: https://github.com/mifunedev/openharness
 - Documentation: https://oh.mifune.dev

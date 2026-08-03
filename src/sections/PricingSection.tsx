@@ -17,9 +17,9 @@ export default function PricingSection() {
             Managed Cloud first. Self-host when you want control.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Choose Mifune-managed Open Harness Cloud or operate the MIT-licensed
-            project yourself. Cloud customers can add Mifune engineering support
-            when adoption needs hands-on help.
+            Choose Mifune-managed Open Harness Cloud or operate the Apache-2.0
+            licensed project yourself. Cloud customers can add Mifune
+            engineering support when adoption needs hands-on help.
           </p>
         </div>
 
