@@ -200,7 +200,8 @@ Reuse the house idioms; introduce no new primitives.
 - **`npm run lint` was broken at baseline in this worktree and is now fixed** (commit `b0eeba9`). ESLint's legacy resolver walked past the project root into the parent checkout's `.eslintrc.json`, double-loading `@next/next` and exiting 1 regardless of code. `"root": true` was added to `.eslintrc.json`. If you see *"Plugin @next/next was conflicted between…"*, that fix has been reverted — restore it rather than working around it.
 - `npm run build` regenerates `public/llm.txt` via `prebuild`; commit it.
 - `public/sw.js` regenerates on every build (PWA plugin) — `git restore` it to keep diffs focused.
-- Prettier with `prettier-plugin-tailwindcss` enforces class order — run `npx prettier --write` before committing.
+- Prettier with `prettier-plugin-tailwindcss` enforces class order — run `npx prettier --write` on the files you touched before committing.
+- **Check prettier on your own files only, never repo-wide.** `npx prettier --check src/ scripts/` fails on **38 files at baseline** on untouched `HEAD` (verified by stashing). That drift is pre-existing and reformatting it would bury a pricing diff under hundreds of unrelated lines. `npx prettier --check <the files you changed>` is the criterion.
 - Use `git -C <abs-path>` — the clones share a shell working directory.
 
 ## 7. Success Metrics

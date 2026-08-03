@@ -1,2 +1,22 @@
 # progress
 
+## US-001 — Apache-2.0 licence sweep — PASS (commit d669291)
+
+15 MIT claims across 9 files replaced with "Apache-2.0 licensed"; the
+delegate's own grep found exactly 15, matching the audited list with no
+extras and no stale entries. public/llm.txt regenerated via prebuild,
+never hand-edited.
+
+Validated by the orchestrator against the diff itself: 15 "+Apache-2.0"
+insertions, zero MIT remaining, 10 files changed, public/sw.js excluded.
+lint 0, tsc 0, prettier clean on every touched file.
+
+Two baseline defects surfaced and handled:
+- npm run lint failed on untouched HEAD (nested-worktree ESLint
+  resolution). Fixed in b0eeba9, committed separately.
+- npx prettier --check src/ scripts/ fails on 38 files on untouched
+  HEAD. Pre-existing drift; PRD criterion narrowed to touched files.
+
+Left alone deliberately: schema.ts:101 links `license` to
+/blob/main/LICENSE upstream — correct only if the relicensed LICENSE
+landed at that path, unverifiable from this repo. Flagged, not changed.
