@@ -20,3 +20,31 @@ Two baseline defects surfaced and handled:
 Left alone deliberately: schema.ts:101 links `license` to
 /blob/main/LICENSE upstream — correct only if the relicensed LICENSE
 landed at that path, unverifiable from this repo. Flagged, not changed.
+
+## US-002/003/004 — pricing source, hero, price cards — PASS (commit 63e1ca1)
+
+/pricing now publishes $0.0384 / $0.0692 / $0.5046 per whole running
+hour, states AI usage is not included above the prices, and explains the
+billing mechanic before showing numbers. No monthly price anywhere.
+
+Orchestrator validation went to the RENDERED HTML, not the source:
+- .next/server/app/pricing.html contains the three hourly prices, the
+  AI-not-included sentence, and the whole-running-UTC-hours language.
+- Zero matches for a monthly price or "/mo" in the rendered output.
+- lint 0, tsc 0, prettier clean on both files, real build exit 0.
+
+Delegate's browser pass was unusually good and is trusted on the points
+only a browser can show: grid still 2 columns at 800px (md genuinely
+skipped), no horizontal scroll at 375/700/800/1280, smallest link 44px,
+accent-on-raised contrast measured rather than assumed.
+
+Orchestrator fix: the breadcrumb JSON-LD still named this page "Deploy
+Open Harness" — structured data contradicting the page, the same class
+of machine-readable defect as the MIT claims US-001 removed. The
+delegate left it on a literal reading of "preserve the three JsonLd
+blocks"; preserving a block means not deleting it, not freezing its
+contents. Corrected to "Pricing".
+
+Open judgement call left for US-007: the delegate dropped the hero's
+"Read the Open Harness docs" link (docs remains linked in nav and
+footer). Recorded rather than reverted.

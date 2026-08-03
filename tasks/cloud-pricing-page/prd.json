@@ -38,8 +38,8 @@
                 "Typecheck passes"
             ],
             "priority": 2,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Verified by orchestrator. Values match upstream node-specs.ts:18-20 and provider-catalog.yaml exactly. Provenance block complete with the b56c2df SHA. No monthly field. Exports DEFAULT_NODE_SPEC + isDefault() so US-004 verifies the badge in-repo, plus formatHourlyUsd() so no page hardcodes a format. Commit 63e1ca1."
         },
         {
             "id": "US-003",
@@ -60,8 +60,8 @@
                 "Verify in browser using agent-browser skill - light and dark themes at 1280px and 375px"
             ],
             "priority": 3,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Verified against RENDERED output, not just source: .next/server/app/pricing.html states 'AI usage is not included - you sign in to Claude or Pi with your own account', carries the whole-running-UTC-hours language, and h1->h2 order holds. Intermediate build between US-003 and US-004 confirmed by the delegate. lint 0, tsc 0, prettier clean. Commit 63e1ca1."
         },
         {
             "id": "US-004",
@@ -83,8 +83,8 @@
                 "Verify in browser using agent-browser skill - light and dark themes at 1280px and 375px, no horizontal scroll"
             ],
             "priority": 4,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Verified against rendered output: exactly $0.0384/$0.0692/$0.5046 present, ZERO monthly price or /mo string anywhere in the HTML. Grid reflow confirmed in-browser at 375/700/800/1280 - 800px still 2 cols, so md is genuinely skipped. No horizontal scroll at any width; smallest link 44px. Orchestrator fix: breadcrumb JSON-LD still named the page 'Deploy Open Harness' - corrected to 'Pricing'. Commit 63e1ca1."
         },
         {
             "id": "US-005",
