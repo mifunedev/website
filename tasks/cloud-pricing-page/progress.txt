@@ -1,6 +1,6 @@
 # progress
 
-## US-001 — Apache-2.0 licence sweep — PASS (commit d669291)
+## US-001 — Apache-2.0 licence sweep — PASS (commit d712cfa)
 
 15 MIT claims across 9 files replaced with "Apache-2.0 licensed"; the
 delegate's own grep found exactly 15, matching the audited list with no
@@ -21,7 +21,7 @@ Left alone deliberately: schema.ts:101 links `license` to
 /blob/main/LICENSE upstream — correct only if the relicensed LICENSE
 landed at that path, unverifiable from this repo. Flagged, not changed.
 
-## US-002/003/004 — pricing source, hero, price cards — PASS (commit 63e1ca1)
+## US-002/003/004 — pricing source, hero, price cards — PASS (commit a6f5421)
 
 /pricing now publishes $0.0384 / $0.0692 / $0.5046 per whole running
 hour, states AI usage is not included above the prices, and explains the
@@ -49,7 +49,7 @@ Open judgement call left for US-007: the delegate dropped the hero's
 "Read the Open Harness docs" link (docs remains linked in nav and
 footer). Recorded rather than reverted.
 
-## US-005/006/007 — FAQ props, CTA referrer, nav and llm.txt — PASS (0aa6c52)
+## US-005/006/007 — FAQ props, CTA referrer, nav and llm.txt — PASS (3e4aaef)
 
 Orchestrator validation against BUILT output:
 - Homepage FAQ ids still homepage-faq-0..5 and its subheading survives;
@@ -76,3 +76,30 @@ Two judgement calls accepted, both reasoned:
   nav, footer, and the self-host section.
 
 ALL SEVEN STORIES PASS. Branch ready for PR against development.
+
+## PR audit — one blocker, fixed before push
+
+An adversarial audit of the finished branch caught that this spec quoted
+the upstream provider costs and the exact margin multiplier. Those are
+server-only figures, and this repo has a different audience and security
+boundary from openharness-cloud — publishing them discloses the cost
+basis and the margin on every SKU.
+
+The violation was in the documentation of the rule forbidding it, which
+is the easiest place for it to hide: US-002's own acceptance criterion
+says provider cost and margin must never appear in this repo, and the
+provenance note under it printed them.
+
+Redacted from the working tree AND from every commit on this branch
+(git filter-branch, branch unpushed at the time — impossible to do once
+published). Verified: no commit in origin/development..HEAD contains any
+provider cost, the multiplier, hourlyProviderCostUsd, or hourlyMarginPct.
+The rule now states why the figures are excluded instead of printing them.
+
+Commit references in these notes were updated to the post-rewrite SHAs.
+
+Everything else in the audit was clean: prices verified against the
+upstream blob at the cited commit (not against the header comment),
+byte-identical homepage fragments confirmed from two independent builds,
+no monthly price in any rendered page, no duplicate ids, aria targets
+all resolve, no orphaned imports.

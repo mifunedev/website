@@ -20,7 +20,7 @@
             ],
             "priority": 1,
             "passes": true,
-            "notes": "Verified by orchestrator against the real diff, not the delegate report. 15 MIT occurrences -> 15 Apache-2.0 insertions across 9 source files + regenerated public/llm.txt; grep for MIT in src/ scripts/ public/llm.txt returns nothing. lint exit 0, tsc --noEmit exit 0, prettier clean on all touched files. public/sw.js reverted (PWA build-ID churn). Commit d669291."
+            "notes": "Verified by orchestrator against the real diff, not the delegate report. 15 MIT occurrences -> 15 Apache-2.0 insertions across 9 source files + regenerated public/llm.txt; grep for MIT in src/ scripts/ public/llm.txt returns nothing. lint exit 0, tsc --noEmit exit 0, prettier clean on all touched files. public/sw.js reverted (PWA build-ID churn). Commit d712cfa."
         },
         {
             "id": "US-002",
@@ -39,7 +39,7 @@
             ],
             "priority": 2,
             "passes": true,
-            "notes": "Verified by orchestrator. Values match upstream node-specs.ts:18-20 and provider-catalog.yaml exactly. Provenance block complete with the b56c2df SHA. No monthly field. Exports DEFAULT_NODE_SPEC + isDefault() so US-004 verifies the badge in-repo, plus formatHourlyUsd() so no page hardcodes a format. Commit 63e1ca1."
+            "notes": "Verified by orchestrator. Values match upstream node-specs.ts:18-20 and provider-catalog.yaml exactly. Provenance block complete with the b56c2df SHA. No monthly field. Exports DEFAULT_NODE_SPEC + isDefault() so US-004 verifies the badge in-repo, plus formatHourlyUsd() so no page hardcodes a format. Commit a6f5421."
         },
         {
             "id": "US-003",
@@ -61,7 +61,7 @@
             ],
             "priority": 3,
             "passes": true,
-            "notes": "Verified against RENDERED output, not just source: .next/server/app/pricing.html states 'AI usage is not included - you sign in to Claude or Pi with your own account', carries the whole-running-UTC-hours language, and h1->h2 order holds. Intermediate build between US-003 and US-004 confirmed by the delegate. lint 0, tsc 0, prettier clean. Commit 63e1ca1."
+            "notes": "Verified against RENDERED output, not just source: .next/server/app/pricing.html states 'AI usage is not included - you sign in to Claude or Pi with your own account', carries the whole-running-UTC-hours language, and h1->h2 order holds. Intermediate build between US-003 and US-004 confirmed by the delegate. lint 0, tsc 0, prettier clean. Commit a6f5421."
         },
         {
             "id": "US-004",
@@ -84,7 +84,7 @@
             ],
             "priority": 4,
             "passes": true,
-            "notes": "Verified against rendered output: exactly $0.0384/$0.0692/$0.5046 present, ZERO monthly price or /mo string anywhere in the HTML. Grid reflow confirmed in-browser at 375/700/800/1280 - 800px still 2 cols, so md is genuinely skipped. No horizontal scroll at any width; smallest link 44px. Orchestrator fix: breadcrumb JSON-LD still named the page 'Deploy Open Harness' - corrected to 'Pricing'. Commit 63e1ca1."
+            "notes": "Verified against rendered output: exactly $0.0384/$0.0692/$0.5046 present, ZERO monthly price or /mo string anywhere in the HTML. Grid reflow confirmed in-browser at 375/700/800/1280 - 800px still 2 cols, so md is genuinely skipped. No horizontal scroll at any width; smallest link 44px. Orchestrator fix: breadcrumb JSON-LD still named the page 'Deploy Open Harness' - corrected to 'Pricing'. Commit a6f5421."
         },
         {
             "id": "US-005",
@@ -105,7 +105,7 @@
             ],
             "priority": 5,
             "passes": true,
-            "notes": "Verified by orchestrator against built HTML: homepage ids still homepage-faq-0..5, homepage subheading still present, /pricing ids pricing-faq-0..4, ZERO cross-route collision. Delegate proved the byte-identical homepage claim properly - built at HEAD first, extracted the balanced <section id=\"faq\"> fragment and cmp'd it (8194 bytes, identical). Node limit says 'three by default' and appears 0 times inside the price cards. Commit 0aa6c52."
+            "notes": "Verified by orchestrator against built HTML: homepage ids still homepage-faq-0..5, homepage subheading still present, /pricing ids pricing-faq-0..4, ZERO cross-route collision. Delegate proved the byte-identical homepage claim properly - built at HEAD first, extracted the balanced <section id=\"faq\"> fragment and cmp'd it (8194 bytes, identical). Node limit says 'three by default' and appears 0 times inside the price cards. Commit 3e4aaef."
         },
         {
             "id": "US-006",
@@ -127,7 +127,7 @@
             ],
             "priority": 6,
             "passes": true,
-            "notes": "Verified by orchestrator. CTASection diff is exactly one optional prop with the default preserved and threaded into payload.Referrer - nothing else changed. Default present in the client chunk; /pricing flight payload carries pricing-page-deployment-form and the homepage carries it 0 times. 'design partner' absent from src/, scripts/, llm.txt. Delegate captured the real Referrer reaching /api/contact via a fetch wrapper (agent-browser's own network filter returned nothing on 0.8.5); the 500 from a missing Airtable key actually proves the handler ran on the posted body. Commit 0aa6c52."
+            "notes": "Verified by orchestrator. CTASection diff is exactly one optional prop with the default preserved and threaded into payload.Referrer - nothing else changed. Default present in the client chunk; /pricing flight payload carries pricing-page-deployment-form and the homepage carries it 0 times. 'design partner' absent from src/, scripts/, llm.txt. Delegate captured the real Referrer reaching /api/contact via a fetch wrapper (agent-browser's own network filter returned nothing on 0.8.5); the 500 from a missing Airtable key actually proves the handler ran on the posted body. Commit 3e4aaef."
         },
         {
             "id": "US-007",
@@ -149,7 +149,7 @@
             ],
             "priority": 7,
             "passes": true,
-            "notes": "Verified by orchestrator. sitemap.ts absent from the diff. llm.txt carries the three rates sourced from cloud-pricing.ts. engines.node '>=22.18.0' present - the delegate chose this over a .mjs/.json sibling to keep cloud-pricing.ts the literal single source, and recorded honestly that npm only WARNS on mismatch, with prebuild failing loudly as the real protection. lint 0, tsc 0, build 0. Commit 0aa6c52. Accepted judgement call: the hero's 'Read the Open Harness docs' link stays dropped - docs remain in nav, footer and the self-host section, and a third hero link competes with the paid path."
+            "notes": "Verified by orchestrator. sitemap.ts absent from the diff. llm.txt carries the three rates sourced from cloud-pricing.ts. engines.node '>=22.18.0' present - the delegate chose this over a .mjs/.json sibling to keep cloud-pricing.ts the literal single source, and recorded honestly that npm only WARNS on mismatch, with prebuild failing loudly as the real protection. lint 0, tsc 0, build 0. Commit 3e4aaef. Accepted judgement call: the hero's 'Read the Open Harness docs' link stays dropped - docs remain in nav, footer and the self-host section, and a third hero link competes with the paid path."
         }
     ]
 }
