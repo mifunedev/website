@@ -48,3 +48,31 @@ contents. Corrected to "Pricing".
 Open judgement call left for US-007: the delegate dropped the hero's
 "Read the Open Harness docs" link (docs remains linked in nav and
 footer). Recorded rather than reverted.
+
+## US-005/006/007 — FAQ props, CTA referrer, nav and llm.txt — PASS (0aa6c52)
+
+Orchestrator validation against BUILT output:
+- Homepage FAQ ids still homepage-faq-0..5 and its subheading survives;
+  /pricing uses pricing-faq-0..4. Zero id collision across routes.
+- CTASection diff is exactly one optional prop, default preserved.
+  Default lives in the client chunk; /pricing payload carries
+  pricing-page-deployment-form, homepage carries it zero times.
+- sitemap.ts absent from the diff, as required.
+- llm.txt carries the three rates, sourced not hardcoded.
+- lint 0, tsc 0, build 0.
+
+The delegate proved the byte-identical homepage claim properly rather
+than asserting it: built at HEAD first, extracted balanced section
+fragments, and cmp'd them (FAQ 8194 bytes, CTA 7143 bytes, both
+identical). The 25 changed lines in the full homepage diff are all
+accounted for — content hashes, the nav/footer relabel, the new price
+line, and the flight payload.
+
+Two judgement calls accepted, both reasoned:
+- engines.node >=22.18.0 over a .mjs/.json sibling, keeping
+  cloud-pricing.ts the literal single source. Recorded honestly that npm
+  only warns; prebuild failing hard is the real protection.
+- Hero "Read the Open Harness docs" link stays dropped. Docs remain in
+  nav, footer, and the self-host section.
+
+ALL SEVEN STORIES PASS. Branch ready for PR against development.

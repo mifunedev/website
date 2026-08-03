@@ -104,8 +104,8 @@
                 "Verify in browser using agent-browser skill - keyboard-expand each entry and confirm aria-expanded and aria-controls are correct"
             ],
             "priority": 5,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Verified by orchestrator against built HTML: homepage ids still homepage-faq-0..5, homepage subheading still present, /pricing ids pricing-faq-0..4, ZERO cross-route collision. Delegate proved the byte-identical homepage claim properly - built at HEAD first, extracted the balanced <section id=\"faq\"> fragment and cmp'd it (8194 bytes, identical). Node limit says 'three by default' and appears 0 times inside the price cards. Commit 0aa6c52."
         },
         {
             "id": "US-006",
@@ -126,8 +126,8 @@
                 "Verify in browser using agent-browser skill - submit the form and confirm the Referrer value reaching /api/contact"
             ],
             "priority": 6,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Verified by orchestrator. CTASection diff is exactly one optional prop with the default preserved and threaded into payload.Referrer - nothing else changed. Default present in the client chunk; /pricing flight payload carries pricing-page-deployment-form and the homepage carries it 0 times. 'design partner' absent from src/, scripts/, llm.txt. Delegate captured the real Referrer reaching /api/contact via a fetch wrapper (agent-browser's own network filter returned nothing on 0.8.5); the 500 from a missing Airtable key actually proves the handler ran on the posted body. Commit 0aa6c52."
         },
         {
             "id": "US-007",
@@ -148,8 +148,8 @@
                 "Verify in browser using agent-browser skill"
             ],
             "priority": 7,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Verified by orchestrator. sitemap.ts absent from the diff. llm.txt carries the three rates sourced from cloud-pricing.ts. engines.node '>=22.18.0' present - the delegate chose this over a .mjs/.json sibling to keep cloud-pricing.ts the literal single source, and recorded honestly that npm only WARNS on mismatch, with prebuild failing loudly as the real protection. lint 0, tsc 0, build 0. Commit 0aa6c52. Accepted judgement call: the hero's 'Read the Open Harness docs' link stays dropped - docs remain in nav, footer and the self-host section, and a third hero link competes with the paid path."
         }
     ]
 }
