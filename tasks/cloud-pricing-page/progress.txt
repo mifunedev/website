@@ -180,3 +180,43 @@ The empty llm.txt diff is the load-bearing check, not a formality: prebuild
 regenerates it by parsing src/config/cloud-pricing.ts, so a byte-identical
 result proves the price source still parses and still yields the same three
 numbers after the edit.
+
+## 2026-08-04 — PRD amended: R4 narrowed, calculator moved out
+
+No code changed in this commit. The operator asked why the new pricing options
+were not visible, and the answer is that they do not exist yet: upstream #125
+shipped the repricing MECHANISM and deliberately changed no price, so the
+five-rung catalog these cards would show is still plan-only. That is recorded
+upstream. What is recorded here is that this spec now disagrees with the
+direction requested — so the spec is what this commit fixes.
+
+Three amendments, all layered onto the shipped record rather than replacing it:
+
+- §1 gains an amendment block. R4 is NARROWED, not repealed: no monthly SKU
+  exists, none is pending, large monthly stays retired. What changed is
+  DISPLAY — a 730-hour monthly estimate computed from the hourly rate and
+  always labelled an estimate.
+- §4 non-goals: the single cell banning "hourly/monthly toggle, cost
+  calculator, competitor table" is split into four rows, so the calculator can
+  move out without also un-banning the other two. Its two stated objections
+  were MET, not waived, and the row says how — client state confined to one
+  child with the page still a server component, and integer whole-hour presets
+  instead of a slider, since a slider lets a visitor express a fractional hour
+  the meter cannot produce.
+- §8 decision 2 amended; new decision 3 records that the three cards are
+  REPLACED, not supplemented.
+
+US-004's criterion "No monthly price appears anywhere on the page" is marked
+[x] with an annotation, not deleted. It held at ship time, and the annotation
+names what supersedes it. A shipped criterion that later work falsifies is
+evidence, not an error to tidy away. The §7 success metric asserting the same
+thing is annotated the same way, with its replacement stated: every monthly
+figure must sit in the same sentence as "there is no monthly plan".
+
+prd.json's top-level description carried the same "No monthly price is
+published per decision R4" claim and is corrected to match. The JSON and the
+markdown disagreeing is how a spec quietly stops being read.
+
+tasks/fleet-pricing-calculator/prd.md is the spec for the replacement. It needs
+its own GitHub issue before /ralph can convert it — /ralph hard-fails without
+--issue <N>.

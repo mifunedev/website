@@ -2,7 +2,7 @@
     "schemaVersion": 1,
     "project": "Mifune Website",
     "branchName": "feat/59-cloud-pricing-page",
-    "description": "Cloud Pricing Page - correct the licence claim and publish OpenHarness Cloud hourly prices ($0.0384 / $0.0692 / $0.5046) with a plain explanation of the billing mechanic. No monthly price is published per decision R4. Blocked on mifunedev/openharness-cloud#114 and operator gates #115, #116, #117 - except US-001, which is independent. Full spec: tasks/cloud-pricing-page/prd.md",
+    "description": "Cloud Pricing Page - correct the licence claim and publish OpenHarness Cloud hourly prices ($0.0384 / $0.0692 / $0.5046) with a plain explanation of the billing mechanic. No monthly SKU is published per decision R4; as of 2026-08-04 R4 is narrowed, not repealed - a 730-hour monthly ESTIMATE derived from the hourly rate is displayed per tasks/fleet-pricing-calculator/prd.md, which also supersedes the cost-calculator non-goal and replaces the three price cards. Blocked on mifunedev/openharness-cloud#114 and operator gates #115, #116, #117 - except US-001, which is independent. Full spec: tasks/cloud-pricing-page/prd.md",
     "userStories": [
         {
             "id": "US-001",

@@ -12,6 +12,13 @@
 
 Publish **hourly prices only**, and explain the billing mechanic plainly. Per decision R4, no monthly price is published: small and medium monthly are dominated SKUs (strictly worse for the customer than staying hourly at any usage), and large monthly is **retired** — it is only ever chosen above its break-even, which is exactly where it costs Mifune money. There is no monthly price to publish, now or later, until a repriced committed-use tier exists.
 
+> **Amended 2026-08-04 — R4 is narrowed, not repealed.** Everything above still holds for a monthly
+> **SKU**: none exists, none is pending, and large monthly stays retired. What changed is *display*.
+> `tasks/fleet-pricing-calculator/prd.md` adds a 730-hour monthly **estimate**, computed from the
+> hourly rate and always labelled an estimate, because "what will I pay a month" is the largest
+> objection to hourly pricing and this page answered it nowhere. Every monthly figure the site emits
+> must carry "there is no monthly plan" **in the same sentence** — see that PRD's FR-6.
+
 | spec | vCPU / RAM / disk | hourly |
 |---|---|---|
 | Small (default) | 2 / 4 GB / 50 GB | **$0.0384** |
@@ -102,7 +109,7 @@ The one exception: the sentence to delete at `:108` is the second half of the in
 - [ ] Small badged **"Default"** — verifiable against the `DEFAULT_NODE_SPEC` / `isDefault` that US-002 adds to `cloud-pricing.ts`, not against the upstream repo — never "Most popular" (no data supports it)
 - [ ] Badge uses an eyebrow `<span>` + `border-oh-accent/40`, **not** the `bg-green-500/10` treatment at `pricing/page.tsx:121`
 - [ ] **Self-host section** follows the cards: Apache-2.0, genuinely free; retains who-operates-it / best-fit; CTA → `OFFERING_URLS.openSource`
-- [ ] **No monthly price appears anywhere on the page**
+- [x] **No monthly price appears anywhere on the page** — *held at ship time. Superseded 2026-08-04: `tasks/fleet-pricing-calculator/prd.md` deletes this card grid entirely and displays a monthly **estimate**. No monthly **SKU** appears, then or now.*
 - [ ] Card `<h3>` is the spec name, not the price
 - [ ] Grid reflows `grid-cols-1 → sm:grid-cols-2` (Large `sm:col-span-2`) `→ lg:grid-cols-3`, skipping `md`
 - [ ] `text-oh-accent-raised` used on any `bg-oh-raised` surface
@@ -171,9 +178,11 @@ The one exception: the sentence to delete at `:108` is the second half of the in
 
 | Not doing | Why |
 |---|---|
-| Publishing any monthly price | Withdrawn per R4 |
-| JSON-LD `offers` / `PriceSpecification` | A rich result surfaces a price stripped of its mechanic — the exact failure this design prevents |
-| Hourly/monthly toggle, cost calculator, competitor table | No annual plan exists; a calculator needs client state and UTC-bucket metering makes hourly inputs wrong at bucket edges; competitor data is unsourced |
+| Publishing any monthly **SKU** | Withdrawn per R4. A monthly *estimate* is now displayed — see the §1 amendment |
+| JSON-LD `offers` / `PriceSpecification` | A rich result surfaces a price stripped of its mechanic — the exact failure this design prevents. **Still a non-goal**, and more so now: a monthly estimate in a rich result is worse, not better |
+| Hourly/monthly toggle | No annual plan exists |
+| Competitor comparison table | Competitor data is unsourced |
+| ~~Cost calculator~~ — **moved out 2026-08-04** | Now `tasks/fleet-pricing-calculator/prd.md`. The two stated objections were met, not waived: client state is confined to one child component with the page still a server component and every rate still rendering server-side; and the bucket-edge objection is answered by restricting the hours control to **integer whole-hour presets**, since a slider would let a visitor express a fractional hour the meter cannot produce |
 | Self-host as a "$0" card in the price grid | A licence and a machine do not belong in the same row |
 | A separate 6-step "how it works" or "not included" band | Folded into the hero and the billing-facts strip |
 | Marketing the browser IDE | `README.md:778` lists it as an MVP non-goal |
@@ -210,9 +219,24 @@ Reuse the house idioms; introduce no new primitives.
 - Zero price strings on the site that do not trace to `cloud-pricing.ts`.
 - A visitor can learn what a node costs without signing up — the current answer is "no".
 - The rendered `/pricing` contains the substrings `whole`, `not included`, and **no** monthly price.
+  *(Amended 2026-08-04: the first two still hold and are re-asserted by the calculator PRD. The third
+  becomes "no monthly **SKU** price" — a labelled 730-hour estimate is now expected in the output, and
+  the replacement metric is that every monthly figure sits in the same sentence as "no monthly plan".)*
 - Lead attribution distinguishes pricing-page enquiries from homepage enquiries.
 
 ## 8. Resolved decisions
 
 1. **The hero's "Talk to us" line carries no response time.** `CTASection` already promises a reply within 24 hours at the point of commitment. The hero line is wayfinding to an in-page anchor, not a promise surface — repeating the commitment above the fold only doubles the places it can be broken.
 2. **No monthly price will be published later either.** Large monthly is retired, not suspended (see §1), so there is no pending SKU this page is holding a slot for.
+
+   > **Amended 2026-08-04.** Still true of a monthly **SKU** — nothing is being held a slot for. A
+   > monthly **estimate** derived from the hourly rate is now displayed per
+   > `tasks/fleet-pricing-calculator/prd.md`. The distinction is load-bearing and must appear in the
+   > copy itself, not only here: a figure a visitor can compute from a published rate is not a price
+   > we are offering to charge.
+
+3. **The three price cards were replaced, not supplemented** (2026-08-04). The calculator is the
+   pricing section, so there is one place to look. This also removes the `lg:grid-cols-3` grid and its
+   `spec === "large"` column-span special case at `page.tsx:202`, which would not have survived the
+   upstream move from three node rungs to five
+   (`mifunedev/openharness-cloud` `.oh/tasks/node-catalog-repricing/prd.md`).
