@@ -8,12 +8,22 @@
  *   commit: b56c2dfe673aa3ac3f95b8018568130666f6ae7c   ("task: delete the unreachable theme reader, keep the tested rule (#111)", 2026-08-02)
  *   specs:  packages/shared/src/node-specs.ts:18-23
  *   prices: packages/shared/src/provider-catalog.yaml
+ *           → `plans.<spec>.hourlyCustomerPriceUsd`
  *
  * `openharness-cloud` is a separate repository and is not reachable from a
  * `website` checkout, so these values are transcribed rather than imported.
  * Field names mirror the upstream `node-specs.ts` so a side-by-side diff is
- * legible. Do not recompute an hourly rate from provider cost: provider cost
- * and margin are server-only upstream and must never appear in this repo.
+ * legible.
+ *
+ * TRANSCRIBE, NEVER RECOMPUTE. Provider cost is server-only upstream and must
+ * never appear in this repo, so an hourly rate must be copied from the field
+ * named above and nothing else. That field is now a literal — upstream
+ * openharness-cloud#123 made the customer price a stated catalog input and
+ * turned gross margin into a value derived from it, replacing the older
+ * `hourlyMarginPct` from which price used to be computed. The published rates
+ * are unchanged by that work; only the field to read them from has a new name.
+ * If a future reader finds `hourlyMarginPct` upstream, they are on a commit
+ * older than #123 and should not multiply anything.
  *
  * There is no monthly price field, and none is pending — monthly was withdrawn
  * per decision R4.

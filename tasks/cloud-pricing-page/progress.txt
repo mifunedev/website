@@ -147,3 +147,36 @@ monthly figures. public/sw.js build-ID churn excluded, as before.
 Control retained for the record: `node --no-experimental-strip-types
 scripts/generate-llm-txt.mjs` still reproduces the exact deploy error on
 Node 22, so the failure is understood rather than merely gone.
+
+## 2026-08-03 — provenance updated for the upstream field rename
+
+Not a price change. The three published rates are unchanged and remain
+$0.0384 / $0.0692 / $0.5046.
+
+Upstream openharness-cloud#123 (PR #125) inverts how the price is stored:
+`ProviderPlan.hourlyMarginPct` is removed, `hourlyCustomerPriceUsd` takes its
+place as a stated catalog input, and gross margin becomes a value derived from
+the price and asserted against a floor. The published numbers are byte-identical
+either way — the current prices were already exactly `cost x 1.5` and are now
+simply written down instead of computed.
+
+That matters for this file specifically, because this is a TRANSCRIPTION and the
+field being transcribed from changed its name. The provenance block now:
+
+- names the exact source field, `plans.<spec>.hourlyCustomerPriceUsd`, rather
+  than just the file it lives in
+- keeps and sharpens the do-not-recompute rule, which is now stronger than
+  before: the upstream value is a literal, so there is no arithmetic to perform
+  and no reason to reach for a cost figure that must never enter this repo
+- tells a future reader who finds `hourlyMarginPct` upstream that they are on a
+  commit older than #123 and should not multiply anything
+
+Verified after the edit:
+    npm run lint    → 0 warnings, 0 errors
+    npm run build   → EXIT 0, /pricing still prerendered static (307 B)
+    git diff public/llm.txt → EMPTY
+
+The empty llm.txt diff is the load-bearing check, not a formality: prebuild
+regenerates it by parsing src/config/cloud-pricing.ts, so a byte-identical
+result proves the price source still parses and still yields the same three
+numbers after the edit.
