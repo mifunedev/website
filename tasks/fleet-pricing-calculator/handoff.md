@@ -1,156 +1,121 @@
-# Handoff: fleet pricing calculator (issue #61)
+# Handoff: the node ladder, across two surfaces
 
-**Repo:** `mifunedev/website` at `/home/sandbox/harness/.oh/worktrees/project/mifunedev/website`
-**Issue:** [#61](https://github.com/mifunedev/website/issues/61) · **Branch:** `feat/61-fleet-pricing-calculator`
-**Base:** `feat/59-cloud-pricing-page` (stacked — *not* `development`) · **Spec:** `tasks/fleet-pricing-calculator/prd.md`
-
-> **State: all four stories are written, nothing is committed.** The working tree holds the entire
-> implementation. A `git checkout .` loses it. Commit before anything else.
+One initiative, two repos. **New hardware options drive the Console; the pricing calculator is the
+downstream website consequence.** This maps that intent — it is not a build log. The build log is
+`progress.txt` beside this file.
 
 ---
 
-## Context
+## The decision
 
-`/pricing` published three hourly-rate cards that answer *"what does one node cost per hour"* and
-nothing else. The two questions a buyer arrives with — **"what will I pay a month?"** and **"what
-does my mix of nodes cost?"** — were answered nowhere on the site. Separately, the upstream catalog
-is moving from three node specs to five, and a `lg:grid-cols-3` grid with a `plan.spec === "large"`
-column-span special case cannot survive that.
+The node catalog moves from **three t-shirt specs to five RAM-numbered rungs**, on gen-3 hardware,
+with price becoming a stated input rather than a computed output.
 
-The spec (`tasks/fleet-pricing-calculator/prd.md`, 315 lines, US-001→US-004) replaces the cards with
-a fleet calculator: a quantity stepper per tier, whole-hour presets, one summed total, and a
-730-hour monthly reference. It was written and approved in a prior session as **specs-only**; the
-operator approved implementation this session with the definition of done:
+Three changes that had to ship together, because each alone leaves the catalog incoherent
+(`openharness-cloud/.oh/tasks/node-catalog-repricing/prd.md`):
 
-> *"the PR's submitted and apps updating and running in tmux sessions for me to verify finished result"*
+1. **Gen-3 flavors.** `b3-32` beats `b2-30` on every hourly axis — same 8 cores, +2 GB RAM, 28%
+   cheaper per hour.
+2. **Close the ladder gap, add a top rung.** `medium`→`large` was a **7.3× price jump** with nothing
+   between. New rungs at 16 GB and 64 GB bring the largest step down to 2.2×.
+3. **Invert how price is computed.** `pricing.ts` derived `price = cost × (1 + margin)`, which is why a
+   flavor swap turned into a pricing decision. Price becomes the input; margin becomes a value the
+   catalog *asserts*, with a 40% floor enforced by `catalog:check`.
 
----
+| rung | flavor | vCPU / RAM / disk | $/hr | ~/month @ 730 h |
+|---|---|---|---|---|
+| `n4` | `d2-4` | 2 / 4 GB / 50 GB | $0.0450 | $32.85 |
+| `n8` | `d2-8` | 4 / 8 GB / 50 GB | $0.1000 | $73.00 |
+| `n16` | `b3-16` | 4 / 16 GB / 100 GB | $0.2100 | $153.30 |
+| `n32` | `b3-32` | 8 / 32 GB / 200 GB | $0.4500 | $328.50 |
+| `n64` | `r3-64` | 8 / 64 GB / 200 GB | $0.6000 | $438.00 |
 
-## What is built (uncommitted)
-
-```
- M scripts/generate-llm-txt.mjs      +27
- M src/app/pricing/page.tsx          -61 net
- M src/config/cloud-pricing.ts      +126
- M src/data/faqs.ts                  +27
- M src/sections/PricingSection.tsx     7
- ?? src/components/pricing/FleetCalculator.tsx   (untracked — 280 lines)
-                                     5 files changed, 178 insertions(+), 70 deletions(-)
-```
-
-| Story | Where | State |
-|---|---|---|
-| **US-001** arithmetic | `src/config/cloud-pricing.ts` | done — `HOURS_PER_MONTH`, `monthlyHourPresets`, `FleetQuantities`, `emptyFleet()`, `fleetNodeCount()`, `fleetHourlyUsd()`, `fleetTotalUsd()`, `formatUsdTotal()`, `entryPlan`, plus the FR-7 R4 rewrite |
-| **US-002** component | `src/components/pricing/FleetCalculator.tsx` | done — `"use client"`, no price arithmetic, calls US-001 helpers only |
-| **US-003** page swap | `src/app/pricing/page.tsx` | done — grid deleted, `<FleetCalculator />` in place, orphaned `cloudNodePlans`/`formatHourlyUsd`/`isDefault` imports removed |
-| **US-004** propagation | `src/data/faqs.ts`, `scripts/generate-llm-txt.mjs` | done in source — **`public/llm.txt` not yet regenerated** |
-| *(spec-optional)* | `src/sections/PricingSection.tsx` | refactored to import `entryPlan` instead of its duplicate local reduce |
-
-### Implementation decisions a successor should not re-litigate
-
-- **Starts empty.** Initial state is `emptyFleet()`, so the first view is the spec's empty state
-  ("Add a node above to price a fleet." + "Nodes start at $0.0384 an hour."), never `$0.0000/hr`.
-- **Three per-card CTAs collapsed to one** fleet-level `Open the Console`. The spec records that all
-  three pointed at the same `OFFERING_URLS.cloud`, so nothing is lost.
-- **Hero's "Running more than three nodes? Talk to us" left alone.** It duplicates the node cap that
-  `cloud-pricing-page/prd.md` wants in the FAQ only, but it is PR #60's shipped copy and out of this
-  PRD's scope. Flagged to the operator, deliberately not changed.
-- **`MAX_NODES_PER_SPEC = 24`** — required by the US-002 clamp criterion; spec §9 flags it as an
-  implicit published number with no explanatory copy. Unresolved by design.
-- **Sums in integer ten-thousandths, divided once.** Not stylistic: naive float gives
-  `0.0384 × 5 = 0.19199999999999998`, and that error would be multiplied by 730.
+Against today: `n4` **+17%**, `n8` **+45%**, `n32` **−11%**. Repricing is free only while pre-revenue —
+no grandfathering, no migration email, no churn — which is why it lands before Stripe goes live.
 
 ---
 
-## Verification already collected
+## Surface 1 — Console (`mifunedev/openharness-cloud`)
 
-**Gates green:**
+- **US-003 renames the specs.** `NODE_SPECS` → `["n4","n8","n16","n32","n64"]`. T-shirt sizes *"break
+  the moment a rung is added in the middle"*. Reusing `large` for a different machine was rejected
+  outright: `node_hour_large` is a live billing identifier and `billed_node_hours.spec` is
+  `text not null` with no CHECK constraint — it keeps whatever string it was given, permanently.
+  Changing what an existing value *means* in a billing ledger is the defect class
+  `billing-meter-name-mismatch` exists to fix.
+- **The migration touches two tables.** `nodes.spec` *and* `billed_node_hours.spec`, or the ledger
+  stops joining to nodes.
+- **US-006 renders five cards, hourly *and* monthly.** *"Every card shows the hourly rate **and** the
+  730-hour monthly run estimate"* — so the monthly figure is a shared decision across both surfaces,
+  not a website invention.
+- **Labels stay human-readable** — "4 GB", "32 GB", never the raw enum. The website matches this.
 
-```
-npx tsc --noEmit    → EXIT 0
-npm run lint        → EXIT 0   ("✔ No ESLint warnings or errors")
-npx prettier --write <6 touched files>  → only FleetCalculator.tsx changed (class order)
-```
+## Surface 2 — Website (`mifunedev/website`, this PR)
 
-**Arithmetic oracle** (spec §7 gate 5), run under Node v22.23.1 type-stripping — every value matches
-the spec's pinned references:
+The `/pricing` page published three hourly-rate cards in a `lg:grid-cols-3` grid with a
+`plan.spec === "large"` column-span special case. That shape **cannot survive a fourth rung**, and it
+answered only *"what does one node cost per hour"* — not *"what will I pay a month"* or *"what does my
+mix cost"*.
 
-```
-formatUsdTotal:  $0.00  $28.03  $1,234.50
-mixed fleet   :  1.1244  $820.81          (3 small + 2 large @ 730 h)
-730h per spec :  Small $28.03 | Medium $50.52 | Large $368.36
-emptyFleet    :  {"small":0,"medium":0,"large":0}  derived, count 0
-presets       :  730 Always on | 240 Weekdays, 12 h | 160 Weekdays, 8 h — all integer
-```
+So the cards became a fleet calculator: a quantity stepper per rung, integer hour presets, one summed
+total, and a 730-hour monthly reference.
 
-**Verified by rejection, not by exit 0:**
+**FR-5 is the seam between the two surfaces.** Everything renders by mapping `cloudNodePlans`; no
+component enumerates a spec key. That is what made the three-to-five change a **one-file edit** —
+`git diff --name-only` for commit `85abb22` lists `src/config/cloud-pricing.ts` and `public/llm.txt`
+(generated), and nothing under `src/components/`.
 
-- grouping: `$1,000.00` · `$999,999.50` · `$1,234,567.89` (carry groups correctly after rounding)
-- half-cent up: `50.516 → $50.52`, not `$50.51`
-- drift genuinely avoided: naive `0.19199999999999998` vs integer path exactly `0.192`
-
-**In-browser on the running `:3000` dev server** (session `pair`, headed):
-
-- empty state correct, no `$0.0000/hr`; all three rates render unconditionally
-- 3 Small + 2 Large → panel `$1.1244/hr` and `About $820.81 for 730 running hours in a month — an
-  estimate from the hourly rates above, and there is no monthly plan.`
-- row subtotals `3 × $0.0384 = $0.1152/hr` and `2 × $0.5046 = $1.0092/hr`
-- live region: `5 nodes. $1.1244 per hour, or $820.81 for 730 running hours in a month — an
-  estimate, and there is no monthly plan.` (FR-6 satisfied: figure and disclaimer in one sentence)
-- steppers use `aria-disabled="true"` with **no** real `disabled` attribute; focus stays on `−` after
-  clicking it at quantity 0
+**Decision R4 is narrowed, not repealed.** No monthly SKU exists or is pending. What changed is
+*display*: a 730-hour estimate computed from the published hourly rate. FR-6 governs the wording, and
+it is load-bearing in two different ways — in the FAQ because the string feeds `faqPageSchema` and
+structured data strips whatever sits beside it, and in `llm.txt` because a model quoting one bullet
+must not be able to drop the qualifier.
 
 ---
 
-## Remaining work, in order
+## Gates
 
-1. **Commit in three steps** (spec §7): data + docs (US-001) → component + swap (US-002/003) →
-   propagation (US-004). Commit format `<type>: <description>`.
-2. **`npm run build`** → exit 0, then `git restore public/sw.js`. Regenerates `public/llm.txt`;
-   commit the regenerated file, never hand-edit it.
-3. **Assertions against `.next/server/app/pricing.html`** (spec §7 gate 6): all three rates present
-   as *static* text; every monthly figure co-located with `estimate`; `whole` and `not included`
-   still present.
-4. **`npx prettier --check`** on touched files only — repo-wide fails on 38 pre-existing files.
-5. **Remaining browser checks** — light theme; 375 / 800 / 1280 px with no horizontal scroll;
-   hours-preset switching updates the total; clamp at 24; a cleared field resolving to 0; and the
-   focus ring on an hours pill, which comes from the `<label>` via `has-[:focus-visible]:` because
-   the `sr-only` radio is 1px-clipped and `globals.css:145-148`'s `!important` outline renders
-   invisible on it.
-6. **`tasks/fleet-pricing-calculator/progress.txt`** — does not exist yet; the folder holds only
-   `prd.md`.
-7. **Push and open the PR against `feat/59-cloud-pricing-page`**, title matching the repo's
-   convention (`feat(#61): …`, as #59/#51 use — *not* the `/git` skill's `FROM … TO …` form, which
-   this repo does not follow).
-8. **Leave `pnpm dev` running** in the `app-oh-website` tmux session — it is half the definition of
-   done.
+| gate | state |
+|---|---|
+| **US-001** — gen-3 availability in `US-EAST-VA-1` | ✅ **CLEARED 2026-08-06.** All five flavors present; every vCPU and disk figure matches the approved sheet. Evidence + UUIDs in the cloud repo's `progress.txt`. |
+| **Stripe live mode** ([#117](https://github.com/mifunedev/openharness-cloud/issues/117)) | open — repricing must land in test mode first |
+| Stripe Tax ([#116](https://github.com/mifunedev/openharness-cloud/issues/116)), terms ([#115](https://github.com/mifunedev/openharness-cloud/issues/115)) | open |
+
+**Two findings from clearing US-001 that the platform side needs:**
+
+1. **`ram=0` for every flavor** — a documented OVH quirk in the US regions. RAM must come from the
+   flavor name. Anything reading the API's `ram` field into the catalog silently records 0.
+2. **"NVMe" is unverified.** The approved sheet calls the top three rungs NVMe, but the API puts
+   `b3-16`/`b3-32` on `ovh.ssd.eg` — the same family as the outgoing `b2-30` — and `r3-64` on
+   `ovh.ssd.ram`; genuinely NVMe flavors carry `ovh.raid-nvme.*`. **The website ships "SSD" on this
+   basis.** Provisioning one node under US-007 and reading the disk device settles it.
+
+## Sequencing — website first, platform second
+
+Deliberate, and the operator's call: the website publishes the ladder now; the Console catalog,
+migration, and Stripe SKUs follow in phase 2. The module header in `src/config/cloud-pricing.ts` says
+so explicitly, so a future reader does not "fix" the site back to three specs on finding upstream
+still carries them.
+
+**Merge order for this PR is load-bearing.** #60 first — `development` has no
+`src/config/cloud-pricing.ts`, so #62 cannot compile alone. Never merge #60 with `--delete-branch`
+while #62 is stacked on it; that closes #62 and it cannot be reopened. Retarget #62 to `development`,
+merge, delete branches last.
 
 ---
 
-## Traps that cost time this session
+## Artifacts
 
-- **The stack is mandatory.** `origin/development` has an old `/pricing` page but **no**
-  `src/config/cloud-pricing.ts`. Basing on `development` will not compile.
-- **Merge order.** PR #60 must merge first, and must **not** be merged with `--delete-branch` while
-  #61 is stacked on it — that closes the child PR and it cannot be reopened. Retarget #61 to
-  `development` first, delete branches last.
-- **`next build` fights the dev server.** `pnpm dev` (pid 2893234) runs from this same checkout and
-  shares `.next`. Stop it, build, then restart — do not run both.
-- **`innerText` applies CSS `text-transform`.** Searching rendered text for `Your fleet` returns
-  nothing; the uppercase eyebrow renders as `YOUR FLEET`. Cost one false "panel missing" reading.
-- **Playwright's snapshot prints `aria-disabled` as `[disabled]`.** The tree cannot distinguish the
-  two, and the distinction is an acceptance criterion — assert on the DOM attributes instead.
-- **`$?` after a pipe is the pipe's last command**, not the tool's. `npx tsc --noEmit | head` reports
-  `head`'s status. Redirect to a file and check the code directly.
-- **agent-browser 0.8.5**: global options go *before* the subcommand; the full-page flag is `--full`
-  not `--full-page`; viewport is `agent-browser set viewport <w> <h>`; and clicking by text silently
-  reports success while missing — use `@ref`s from `snapshot -i`.
+**Cloud** — [PR #125](https://github.com/mifunedev/openharness-cloud/pull/125) ← [#123](https://github.com/mifunedev/openharness-cloud/issues/123) price-as-input ·
+[PR #124](https://github.com/mifunedev/openharness-cloud/pull/124) ← [#122](https://github.com/mifunedev/openharness-cloud/issues/122) $0-invoicing ·
+`.oh/tasks/node-catalog-repricing/{prd.md,progress.txt}` ·
+`packages/shared/src/{node-specs.ts,provider-catalog.yaml}` · `apps/web/components/spec-picker.tsx` ·
+`scripts/{ovh-explore.mjs,stripe-sync.mjs}` · R4 origin [#114](https://github.com/mifunedev/openharness-cloud/issues/114) → [PR #119](https://github.com/mifunedev/openharness-cloud/pull/119)
 
-## Open questions carried from the spec (§9), still unresolved
+**Website** — [PR #62](https://github.com/mifunedev/website/pull/62) ← [#61](https://github.com/mifunedev/website/issues/61) this calculator ·
+[PR #60](https://github.com/mifunedev/website/pull/60) ← [#59](https://github.com/mifunedev/website/issues/59) publishes the rates (merge first) ·
+`tasks/fleet-pricing-calculator/{prd.md,progress.txt}` · `tasks/cloud-pricing-page/prd.md` (§4 non-goal, §8 R4) ·
+`src/config/cloud-pricing.ts` · `src/components/pricing/FleetCalculator.tsx` · `src/app/pricing/page.tsx` ·
+`src/data/faqs.ts` · `scripts/generate-llm-txt.mjs`
 
-- The monthly anchor: `$368.36/mo` is the *maximum* a Large can cost, presented as the headline
-  monthly figure. Fallback if review rejects it is to ship the calculator **hourly-only** — it still
-  replaces the cards and sums a fleet, with zero new pricing claims.
-- The hours preset labels are new claims ("Weekdays, 12 h" assumes a 20-day month). Fallback is
-  shipping `730` as the only preset — no component change needed.
-- The 24-node cap is an implicit published number with no explanatory copy.
+**Operator spec for the gate** — `.claude/specs/ovh-gen3-flavor-verification/spec.md` (harness, gitignored)
