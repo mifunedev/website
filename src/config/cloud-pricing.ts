@@ -2,28 +2,51 @@
  * Published Open Harness Cloud node prices — the single source of every price
  * string on this site. A price change is a one-file edit here.
  *
- * Provenance — these values were transcribed from:
+ * Provenance — the five-rung ladder, transcribed from:
  *
- *   repo:   mifunedev/openharness-cloud
- *   commit: b56c2dfe673aa3ac3f95b8018568130666f6ae7c   ("task: delete the unreachable theme reader, keep the tested rule (#111)", 2026-08-02)
- *   specs:  packages/shared/src/node-specs.ts:18-23
- *   prices: packages/shared/src/provider-catalog.yaml
- *           → `plans.<spec>.hourlyCustomerPriceUsd`
+ *   repo:  mifunedev/openharness-cloud
+ *   spec:  .oh/tasks/node-catalog-repricing/prd.md
+ *          → "The approved sheet — 730-hour month", the `price/h` column
  *
- * `openharness-cloud` is a separate repository and is not reachable from a
- * `website` checkout, so these values are transcribed rather than imported.
- * Field names mirror the upstream `node-specs.ts` so a side-by-side diff is
- * legible.
+ * READ THIS BEFORE CHANGING A NUMBER. These rates are approved but are NOT yet
+ * live upstream. `packages/shared/src/provider-catalog.yaml` still carries
+ * `small`/`medium`/`large` at the old prices, and `NODE_SPECS` is still the
+ * three t-shirt sizes. The website leads the platform here **on purpose**: the
+ * marketing page ships the ladder in phase 1, the Console catalog, migration,
+ * and Stripe SKUs follow in phase 2 (cloud US-002→US-006). Do not "fix" this
+ * file back to the three old specs because upstream disagrees — upstream is
+ * behind, and catching up is scheduled work.
+ *
+ * The hardware IS verified. `pnpm ovh:explore US-EAST-VA-1` was run read-only
+ * against the live OVHcloud API on 2026-08-06 and every flavor exists, with
+ * vCPU and disk matching the approved sheet exactly:
+ *
+ *   n4   d2-4    5051d54d-6341-4860-bf63-c4bddbb7c6f0   2 vcpu / 50 GB
+ *   n8   d2-8    9802d615-a353-4668-b581-7b2bdedbf54c   4 vcpu / 50 GB
+ *   n16  b3-16   1efeacd6-7639-44b3-b0ce-243c827c5ff2   4 vcpu / 100 GB
+ *   n32  b3-32   7df840d0-cbd1-4fd0-9642-4c0f9ba65a9e   8 vcpu / 200 GB
+ *   n64  r3-64   cd1d3a46-4167-451c-b97b-44f36d3c7994   8 vcpu / 200 GB
+ *
+ * RAM is NOT in that list deliberately. OVH's flavor API reports `ram=0` for
+ * every flavor in the US regions — a documented quirk
+ * (`scripts/ovh-explore.mjs:101-103` upstream). The real figure is the trailing
+ * number in the flavor name, which is why `n32` is 32 GB. Never take RAM from
+ * the API response.
+ *
+ * Disk reads SSD, not NVMe, and that is a considered choice. The approved sheet
+ * calls the top three rungs NVMe, but the API's own taxonomy puts `b3-16` and
+ * `b3-32` on `ovh.ssd.eg` — the same family as the outgoing `b2-30` — and
+ * `r3-64` on `ovh.ssd.ram`; the genuinely NVMe flavors in this region carry
+ * `ovh.raid-nvme.*`. Read-only evidence cannot settle it, so this file claims
+ * only what was observed. If provisioning one confirms NVMe, widen it then.
  *
  * TRANSCRIBE, NEVER RECOMPUTE. Provider cost is server-only upstream and must
- * never appear in this repo, so an hourly rate must be copied from the field
- * named above and nothing else. That field is now a literal — upstream
- * openharness-cloud#123 made the customer price a stated catalog input and
- * turned gross margin into a value derived from it, replacing the older
- * `hourlyMarginPct` from which price used to be computed. The published rates
- * are unchanged by that work; only the field to read them from has a new name.
- * If a future reader finds `hourlyMarginPct` upstream, they are on a commit
- * older than #123 and should not multiply anything.
+ * never appear in this repo, so an hourly rate is copied from the approved
+ * sheet's `price/h` column and nothing else. Upstream openharness-cloud#123
+ * made the customer price a stated catalog input and turned gross margin into a
+ * value derived from it, replacing the older `hourlyMarginPct` from which price
+ * used to be computed. If a future reader finds `hourlyMarginPct` upstream,
+ * they are on a commit older than #123 and should not multiply anything.
  *
  * There is no monthly price field, and none is pending. Decision R4 withdrew
  * the monthly SKU and that still stands: nothing here is a monthly plan, and
@@ -33,12 +56,19 @@
  * That display is not a hole in TRANSCRIBE, NEVER RECOMPUTE. Multiplying a
  * transcribed rate by a quantity and an hour count the visitor chose is
  * arithmetic on a published price; the rate itself is still copied verbatim
- * from the field named above. What the rule forbids is *deriving* a rate —
+ * from the source named above. What the rule forbids is *deriving* a rate —
  * from provider cost, from a margin, from anything upstream keeps server-side.
  * That remains forbidden, and no cost or margin figure may enter this repo.
  */
 
-export type NodeSpec = "small" | "medium" | "large";
+/**
+ * Spec keys are RAM in GB, not t-shirt sizes. Upstream US-003: t-shirt names
+ * "break the moment a rung is added in the middle", and reusing `large` for a
+ * different machine was rejected outright because `node_hour_large` is a live
+ * billing identifier. The number never collides, so the next insertion is
+ * additive.
+ */
+export type NodeSpec = "n4" | "n8" | "n16" | "n32" | "n64";
 
 export type CloudNodePlan = {
   spec: NodeSpec;
@@ -50,36 +80,59 @@ export type CloudNodePlan = {
 };
 
 /**
- * The spec a node gets when the customer does not choose one — upstream
- * `node-specs.ts:23`, `export const DEFAULT_NODE_SPEC: NodeSpec = "small"`.
- * Mirrored here so the site can badge the default without reaching upstream.
+ * The spec a node gets when the customer does not choose one. Upstream's
+ * migration maps the old `small` to `n4`, so the default follows it.
  */
-export const DEFAULT_NODE_SPEC: NodeSpec = "small";
+export const DEFAULT_NODE_SPEC: NodeSpec = "n4";
 
+/**
+ * Ascending by price, which is also ascending by RAM. Order is the render
+ * order — `FleetCalculator` maps this array straight to rows.
+ *
+ * `label` is RAM in human-readable form and never the raw spec key: upstream
+ * US-003 requires "Console labels remain human-readable (e.g. '4 GB', '32 GB'),
+ * never raw enum values", and the two surfaces should read the same.
+ */
 export const cloudNodePlans: CloudNodePlan[] = [
   {
-    spec: "small",
-    label: "Small",
+    spec: "n4",
+    label: "4 GB",
     vcpu: 2,
     ramGb: 4,
     diskGb: 50,
-    hourlyUsd: 0.0384,
+    hourlyUsd: 0.045,
   },
   {
-    spec: "medium",
-    label: "Medium",
+    spec: "n8",
+    label: "8 GB",
     vcpu: 4,
     ramGb: 8,
     diskGb: 50,
-    hourlyUsd: 0.0692,
+    hourlyUsd: 0.1,
   },
   {
-    spec: "large",
-    label: "Large",
+    spec: "n16",
+    label: "16 GB",
+    vcpu: 4,
+    ramGb: 16,
+    diskGb: 100,
+    hourlyUsd: 0.21,
+  },
+  {
+    spec: "n32",
+    label: "32 GB",
     vcpu: 8,
-    ramGb: 30,
+    ramGb: 32,
     diskGb: 200,
-    hourlyUsd: 0.5046,
+    hourlyUsd: 0.45,
+  },
+  {
+    spec: "n64",
+    label: "64 GB",
+    vcpu: 8,
+    ramGb: 64,
+    diskGb: 200,
+    hourlyUsd: 0.6,
   },
 ];
 
@@ -143,8 +196,10 @@ export type FleetQuantities = Record<NodeSpec, number>;
  * A fleet with every published spec at zero.
  *
  * Derived from `cloudNodePlans` rather than written as a literal, because this
- * is the single rule that makes growing the catalog from three specs to five a
- * data-only change: no component, and nothing here, enumerates spec keys.
+ * is the single rule that keeps a catalog change data-only: no component, and
+ * nothing here, enumerates spec keys. That is not a hypothetical any more —
+ * going from the three t-shirt specs to these five rungs touched this file and
+ * nothing under `src/components/`.
  */
 export function emptyFleet(): FleetQuantities {
   return Object.fromEntries(
