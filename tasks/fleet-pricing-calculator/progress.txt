@@ -1,0 +1,147 @@
+# progress
+
+## 2026-08-06 — US-001 through US-004 implemented (issue #61)
+
+Branch: feat/61-fleet-pricing-calculator, cut off feat/59-cloud-pricing-page.
+
+STACKED, NOT OFF development. origin/development carries an older /pricing page but has no
+src/config/cloud-pricing.ts — the pricing work exists only on #59's branch. A branch cut from
+development would not compile. PR #62 therefore targets feat/59-cloud-pricing-page and must merge
+after PR #60.
+
+### US-001 — fleet arithmetic in src/config/cloud-pricing.ts — DONE (1dc1d77)
+New exports: HOURS_PER_MONTH (730), monthlyHourPresets, FleetQuantities, emptyFleet,
+fleetNodeCount, fleetHourlyUsd, fleetTotalUsd, formatUsdTotal, entryPlan. formatHourlyUsd is
+untouched and still 4dp.
+
+Three decisions that are load-bearing rather than stylistic:
+
+- emptyFleet() derives from cloudNodePlans instead of the literal {small:0,medium:0,large:0}.
+  This is the single rule that makes the upstream three-to-five change a data-only edit.
+- Sums accumulate in integer ten-thousandths and divide once. A published rate carries four
+  decimals, so it is an exact integer count of ten-thousandths. In plain float, 0.0384*5 is
+  0.19199999999999998, and that error would then be multiplied by 730.
+- formatUsdTotal is a SECOND formatter, not a widened formatHourlyUsd. An hourly RATE is a
+  published price and rounding $0.0384 to $0.04 restates it by 4.2%. A period TOTAL is a
+  dollars-and-cents figure compared against an invoice. Hand-rolled rather than Intl.NumberFormat
+  so server and client emit byte-identical strings — Intl output depends on the runtime's ICU
+  build, and a mismatch is a hydration error on a price.
+
+FR-7 satisfied: the R4 header note now states both halves — no monthly SKU exists or is pending,
+AND multiplying a transcribed rate by a visitor-chosen quantity is not a hole in TRANSCRIBE,
+NEVER RECOMPUTE, while deriving a rate from provider cost still is.
+
+PricingSection.tsx had a duplicate copy of the cheapest-plan reduce; it now imports entryPlan.
+Rendered output unchanged.
+
+### US-002 / US-003 — FleetCalculator + page swap — DONE (69958fb)
+src/components/pricing/FleetCalculator.tsx, "use client", contains no price arithmetic — every
+figure comes from a US-001 helper, so the page, generate-llm-txt.mjs, and the oracle all compute
+from the same code.
+
+The grid at page.tsx:197-250 is deleted, including the plan.spec === "large" column-span special
+case. Orphaned imports (cloudNodePlans, formatHourlyUsd, isDefault) removed. page.tsx remains a
+server component; the section, eyebrow, h2, aria-labelledby, intro, and support link all still
+render server-side.
+
+The three per-card "Create a <size> node" CTAs became one fleet-level "Open the Console" — all
+three pointed at the same OFFERING_URLS.cloud, so no destination was lost.
+
+Accessibility points that are acceptance criteria, not polish:
+- steppers use aria-disabled, never the disabled attribute: a real disabled drops the button from
+  the tab order, so pressing minus down to zero would send focus nowhere
+- hours pills are native radios (roving arrow-key focus for free) with the input sr-only, and the
+  focus ring comes from the LABEL via has-[:focus-visible]. The input is 1x1 clipped, so the
+  !important outline in globals.css:145-148 would render invisible on it
+- the empty state does not render $0.0000/hr — it reads as "free" three sections below a hero
+  saying "No free tier, no trial"
+- the live region is debounced ~350ms; visible numbers update instantly and are not aria-hidden
+
+### US-004 — FAQ and llm.txt — DONE (e946a9f)
+generate-llm-txt.mjs:80 had asserted "There is no monthly price, no free tier, and no trial" — the
+first clause of which this work made false. Both surfaces now carry monthly figures computed from
+cloudNodePlans through the US-001 helpers, so neither can drift from the published rates.
+
+FR-6 wording is load-bearing in both places, for different reasons. In the FAQ answer because the
+string feeds faqPageSchema and structured data strips whatever sits beside it, so a disclaimer in
+an adjacent sentence would not survive into a rich result. In llm.txt because the file exists to be
+quoted by language models, so the qualifier is repeated on EACH bullet rather than placed in a
+heading above the list — a model quoting one bullet must not be able to drop it.
+
+FAQ count stays at five (pricing-faq-0..4 confirmed in the rendered page).
+
+### Defect found by the browser pass and fixed — stepper batching (8fdf319)
+The stepper called setQuantity(spec, quantity + 1) with quantity read from the render closure, so
+every increment landing in the same React batch computed from the same stale value and all but one
+was lost. Three clicks in one tick produced 1.
+
+Ordinary clicking was never affected — separate user clicks are separate ticks with a render
+between them, which is why the first browser pass, driving one click per invocation, correctly read
+3 and 2. It surfaced only when three clicks were dispatched inside a single eval.
+
+Left alone this is a trap rather than a bug: any future caller stepping twice without an
+intervening render silently loses one and nothing here would fail. adjustQuantity now moves by a
+delta read INSIDE the updater. The typed-input path keeps the absolute form, which is correct
+there — the value the visitor typed IS the quantity.
+
+Re-verified against the input that had failed: three clicks in one batch give 3, two give 2.
+
+### Verification
+
+Gates (spec §7), all on this branch:
+
+    npx tsc --noEmit                          → EXIT 0
+    npm run lint                              → EXIT 0
+    npx prettier --check <6 touched files>    → EXIT 0, "All matched files use Prettier code style!"
+    npm run build                             → EXIT 0, /pricing still prerendered static (2.67 kB)
+    git diff --exit-code public/llm.txt       → EXIT 0 after the build
+
+That last one is the load-bearing check rather than a formality: prebuild regenerates llm.txt by
+parsing cloud-pricing.ts, so a byte-identical result proves the price source still parses and still
+yields the same numbers.
+
+Arithmetic oracle, every value matching the spec's pinned references:
+
+    formatUsdTotal   $0.00  $28.03  $1,234.50
+    3 small + 2 large  fleetHourlyUsd 1.1244, at 730h → $820.81
+    730h per spec    Small $28.03 | Medium $50.52 | Large $368.36
+    presets          730 / 240 / 160, all Number.isInteger
+
+Verified by rejection, not by exit 0 — a check run only on input it accepts proves nothing:
+- grouping carries correctly after rounding: $1,000.00, $999,999.50, $1,234,567.89
+- half-cent rounds up: 50.516 → $50.52, not $50.51
+- drift genuinely avoided: naive float 0.19199999999999998 vs integer path exactly 0.192
+- an FR-6 assertion that matched zero lines was caught passing vacuously (awk lacks default
+  interval quantifiers) and rewritten to assert it matched something before judging it
+
+Assertions against built .next/server/app/pricing.html — all three rates present as static text,
+empty state server-rendered, no $0.0000, no /mo, "whole" and "not included" retained, and every
+2dp monthly figure in a sentence containing "monthly plan".
+
+In-browser on the running dev server, both themes at 375 / 800 / 1280 px: no horizontal overflow
+anywhere, all three rates visible at every width. Steppers clamp (typing 99 gives 24, clearing the
+field gives 0, decrementing past zero gives 0). Hours presets recompute correctly — one Large at
+730/240/160 h gives $368.36 / $121.10 / $80.74. The focus ring appears on the LABEL (box-shadow
+none → visible) when the 1x1 sr-only radio is focus-visible.
+
+FR-5 tested by actually doing it, not by inspection: two extra specs (xlarge, xxlarge) were added
+to cloudNodePlans temporarily. tsc stayed clean, the page rendered five tier rows with five
+steppers, and one of each summed to $3.6398/hr and $2,657.05 at 730h — which also exercised
+thousands grouping on a real total. `git diff --name-only` listed ONLY src/config/cloud-pricing.ts;
+zero files under src/components/ needed changing. The experiment was reverted and the file
+confirmed byte-identical to HEAD.
+
+### Open questions carried forward from spec §9 — not resolved here
+- The monthly anchor. $368.36 is the MAXIMUM a Large can cost, presented as the headline monthly
+  figure. Mitigations shipped: the hours presets make 730 one visible scenario rather than "the"
+  price, and llm.txt's closing line says a weekday-only node costs proportionally less. If review
+  rejects the monthly display, the fallback is to ship hourly-only — it still replaces the cards
+  and sums a fleet, with zero new pricing claims.
+- The preset labels are new claims ("Weekdays, 12 h" assumes a 20-day month). Fallback is shipping
+  730 as the only preset; no component change needed.
+- MAX_NODES_PER_SPEC = 24 is an implicit published number with no explanatory copy.
+
+### Not changed, deliberately
+The hero's "Running more than three nodes? Talk to us" duplicates the node cap that
+cloud-pricing-page/prd.md wants in the FAQ only. It is PR #60's shipped copy and outside this
+PRD's scope. Raised with the operator; left alone.
