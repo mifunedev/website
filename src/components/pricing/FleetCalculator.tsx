@@ -92,8 +92,22 @@ export default function FleetCalculator() {
     return () => clearTimeout(timer);
   }, [nextAnnouncement]);
 
+  /** Typed into the field: the value IS the quantity. */
   function setQuantity(spec: NodeSpec, value: number) {
     setFleet((current) => ({ ...current, [spec]: clampQuantity(value) }));
+  }
+
+  /**
+   * Stepper buttons move relative to whatever the fleet currently is, read
+   * inside the updater rather than closed over from this render. Computing
+   * `quantity + 1` from the rendered value loses every increment but the last
+   * when more than one lands in a single React batch.
+   */
+  function adjustQuantity(spec: NodeSpec, delta: number) {
+    setFleet((current) => ({
+      ...current,
+      [spec]: clampQuantity((current[spec] ?? 0) + delta),
+    }));
   }
 
   return (
@@ -140,7 +154,7 @@ export default function FleetCalculator() {
                       type="button"
                       aria-disabled={atMin}
                       aria-label={`Remove one ${plan.label} node`}
-                      onClick={() => setQuantity(plan.spec, quantity - 1)}
+                      onClick={() => adjustQuantity(plan.spec, -1)}
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border font-montserrat text-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus ${
                         atMin
                           ? "text-muted-foreground/40"
@@ -166,7 +180,7 @@ export default function FleetCalculator() {
                       type="button"
                       aria-disabled={atMax}
                       aria-label={`Add one ${plan.label} node`}
-                      onClick={() => setQuantity(plan.spec, quantity + 1)}
+                      onClick={() => adjustQuantity(plan.spec, 1)}
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border font-montserrat text-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus ${
                         atMax
                           ? "text-muted-foreground/40"
