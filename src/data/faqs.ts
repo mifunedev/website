@@ -1,4 +1,11 @@
-import { cloudNodePlans, formatHourlyUsd } from "@/config/cloud-pricing";
+import {
+  cloudNodePlans,
+  emptyFleet,
+  fleetTotalUsd,
+  formatHourlyUsd,
+  formatUsdTotal,
+  HOURS_PER_MONTH,
+} from "@/config/cloud-pricing";
 
 export interface Faq {
   question: string;
@@ -54,6 +61,22 @@ const hourlyRateSentence = cloudNodePlans
   .join("; ");
 
 /**
+ * Monthly figures for one node of each size, computed from the published
+ * hourly rates rather than written down. The "no monthly plan" clause must
+ * stay in the same sentence as these numbers: this answer is fed to
+ * `faqPageSchema`, and structured data strips whatever sits next to it, so a
+ * disclaimer in an adjacent sentence would not survive into a rich result.
+ */
+const monthlyEstimateList = cloudNodePlans
+  .map(
+    (plan) =>
+      `${plan.label} about ${formatUsdTotal(
+        fleetTotalUsd({ ...emptyFleet(), [plan.spec]: 1 }, HOURS_PER_MONTH),
+      )}`,
+  )
+  .join(", ");
+
+/**
  * Pricing-page FAQ content, kept separate from the homepage `faqs` export so
  * neither list leaks into the other page or its FAQPage JSON-LD.
  */
@@ -65,7 +88,7 @@ export const pricingFaqs: Faq[] = [
   },
   {
     question: "What does a node cost?",
-    answer: `Each size is priced per whole running hour: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own.`,
+    answer: `Each size is priced per whole running hour: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own. Left running for a full ${HOURS_PER_MONTH}-hour month that works out to roughly ${monthlyEstimateList}, which is an estimate derived from the hourly rate and not a monthly plan, because there is no monthly plan.`,
   },
   {
     question: "Is AI usage included?",

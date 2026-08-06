@@ -27,7 +27,11 @@ import path from "path";
 import { fileURLToPath } from "url";
 import {
   cloudNodePlans,
+  emptyFleet,
+  fleetTotalUsd,
   formatHourlyUsd,
+  formatUsdTotal,
+  HOURS_PER_MONTH,
 } from "../src/config/cloud-pricing.ts";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,6 +42,21 @@ const HOURLY_RATES = cloudNodePlans
   .map(
     (plan) =>
       `- ${plan.label} (${plan.vcpu} vCPU / ${plan.ramGb} GB RAM / ${plan.diskGb} GB SSD): ${formatHourlyUsd(plan.hourlyUsd)}`,
+  )
+  .join("\n");
+
+/**
+ * Monthly figures, computed from the hourly rates above rather than written
+ * down. Each line carries "not a monthly plan" on the line itself, not in a
+ * heading above the list: this file exists to be quoted by language models,
+ * and a model quoting one bullet must not be able to drop the qualifier.
+ */
+const MONTHLY_ESTIMATES = cloudNodePlans
+  .map(
+    (plan) =>
+      `- ${plan.label}: about ${formatUsdTotal(
+        fleetTotalUsd({ ...emptyFleet(), [plan.spec]: 1 }, HOURS_PER_MONTH),
+      )} for ${HOURS_PER_MONTH} running hours — an estimate from the hourly rate, not a monthly plan`,
   )
   .join("\n");
 
@@ -77,7 +96,13 @@ Hourly rates, per whole hour a node is running:
 
 ${HOURLY_RATES}
 
-There is no monthly price, no free tier, and no trial. Signing in is free; a card is required before the first node.
+There is no monthly plan, no free tier, and no trial. Signing in is free; a card is required before the first node.
+
+A node left running for a whole month is billed as ${HOURS_PER_MONTH} whole hours at the rate above, which works out to:
+
+${MONTHLY_ESTIMATES}
+
+Those are arithmetic on the hourly rate for a node that never stops; a node that runs only on weekdays costs proportionally less, and there is no monthly plan to buy at any usage.
 
 ### 2. Open Harness Open Source — self-hosted path
 
