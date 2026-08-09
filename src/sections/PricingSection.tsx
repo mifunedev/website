@@ -1,6 +1,17 @@
+import Link from "next/link";
 import { ArrowRight, Check, ExternalLink, Headphones } from "lucide-react";
 import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
-import { cloudOptions, supportOffering } from "@/config/offerings";
+import { cloudNodePlans, formatHourlyUsd } from "@/config/cloud-pricing";
+import {
+  cloudOptions,
+  OFFERING_URLS,
+  supportOffering,
+} from "@/config/offerings";
+
+/** The cheapest published node, so this line cannot drift from the cards. */
+const entryPlan = cloudNodePlans.reduce((cheapest, plan) =>
+  plan.hourlyUsd < cheapest.hourlyUsd ? plan : cheapest,
+);
 
 export default function PricingSection() {
   return (
@@ -17,9 +28,18 @@ export default function PricingSection() {
             Managed Cloud first. Self-host when you want control.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Choose Mifune-managed Open Harness Cloud or operate the MIT-licensed
-            project yourself. Cloud customers can add Mifune engineering support
-            when adoption needs hands-on help.
+            Choose Mifune-managed Open Harness Cloud or operate the Apache-2.0
+            licensed project yourself. Cloud customers can add Mifune
+            engineering support when adoption needs hands-on help.
+          </p>
+          <p className="mx-auto mt-5 font-montserrat text-base text-muted-foreground">
+            Nodes start at {formatHourlyUsd(entryPlan.hourlyUsd)} an hour.{" "}
+            <Link
+              href={OFFERING_URLS.pricing}
+              className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+            >
+              See Cloud pricing <span aria-hidden="true">→</span>
+            </Link>
           </p>
         </div>
 

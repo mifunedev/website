@@ -38,7 +38,7 @@ export function organizationSchema(): Record<string, unknown> {
       url: LOGO_URL,
     },
     description:
-      "Mifune maintains the MIT-licensed Open Harness coding-agent workspace, operates Open Harness Cloud, and offers forward-deployed engineering support for Cloud customers.",
+      "Mifune maintains the Apache-2.0 licensed Open Harness coding-agent workspace, operates Open Harness Cloud, and offers forward-deployed engineering support for Cloud customers.",
     email: ORG_EMAIL,
     founder: {
       "@type": "Person",
@@ -63,7 +63,7 @@ export function websiteSchema(): Record<string, unknown> {
     name: ORG_NAME,
     url: SITE_URL,
     description:
-      "Mifune workspaces for coding agents: managed Open Harness Cloud, MIT-licensed Open Harness, and engineering support for Cloud customers.",
+      "Mifune workspaces for coding agents: managed Open Harness Cloud, Apache-2.0 licensed Open Harness, and engineering support for Cloud customers.",
     publisher: { "@id": ORG_ID },
   };
 }
@@ -95,7 +95,7 @@ export function openHarnessSoftwareSchema(): Record<string, unknown> {
     "@id": OPEN_SOURCE_ID,
     name: "Open Harness",
     description:
-      "MIT-licensed source for an isolated, persistent Docker workspace that keeps one coding-agent project and its toolchain off the host.",
+      "Apache-2.0 licensed source for an isolated, persistent Docker workspace that keeps one coding-agent project and its toolchain off the host.",
     url: OFFERING_URLS.openSource,
     codeRepository: OFFERING_URLS.openSource,
     license: `${OFFERING_URLS.openSource}/blob/main/LICENSE`,

@@ -1,52 +1,84 @@
 import type { Metadata } from "next";
-import { Check, ExternalLink, Mail } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/config/app";
 import {
-  cloudOptions,
-  OFFERING_URLS,
-  supportOffering,
-} from "@/config/offerings";
+  cloudNodePlans,
+  formatHourlyUsd,
+  isDefault,
+} from "@/config/cloud-pricing";
+import { OFFERING_URLS } from "@/config/offerings";
+import { pricingFaqs } from "@/data/faqs";
 import {
   breadcrumbSchema,
   cloudServiceSchema,
+  faqPageSchema,
   openHarnessSoftwareSchema,
 } from "@/lib/schema";
+import CTASection from "@/sections/CTASection";
+import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 
+const title = "Open Harness Cloud pricing";
+
 const description =
-  "Compare Open Harness workspace options by who operates the environment: Mifune through Open Harness Cloud or your team through the MIT-licensed open-source project.";
+  "Open Harness Cloud nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
 
 export const metadata: Metadata = {
-  title: "Deploy Open Harness",
+  title,
   description,
   alternates: {
     canonical: "/pricing",
   },
   openGraph: {
-    title: "Deploy Open Harness",
+    title,
     description,
     url: `${SITE_URL}/pricing`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Deploy Open Harness",
+    title,
     description,
   },
 };
+
+const billingFacts = [
+  {
+    title: "A dedicated VM",
+    detail:
+      "One node is a dedicated virtual machine, not shared infrastructure. Its vCPU, memory, and disk are yours for as long as the node exists.",
+  },
+  {
+    title: "Whole running hours",
+    detail:
+      "Only whole running UTC hours meter. Any UTC hour in which your node was running counts as one full hour, at the rate for its size.",
+  },
+  {
+    title: "Queued and failed time is free",
+    detail:
+      "Time spent queued, building, or on a build that failed is not billed. The meter starts when the node is running.",
+  },
+  {
+    title: "Destroy to stop paying",
+    detail:
+      "A running node keeps metering until you destroy it. Destroying the node in the Console is how you stop paying for it.",
+  },
+];
 
 export default function PricingPage() {
   return (
     <>
       <JsonLd data={cloudServiceSchema()} />
       <JsonLd data={openHarnessSoftwareSchema()} />
+      <JsonLd data={faqPageSchema(pricingFaqs)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Mifune", url: SITE_URL },
-          { name: "Deploy Open Harness", url: `${SITE_URL}/pricing` },
+          { name: "Pricing", url: `${SITE_URL}/pricing` },
         ])}
       />
       <header>
@@ -64,200 +96,249 @@ export default function PricingPage() {
           <div className="relative mx-auto max-w-4xl text-center">
             <OpenHarnessBrandBar
               density="hero"
-              status="Workspace options by Mifune"
+              status="Cloud pricing by Mifune"
               className="mx-auto mb-7 w-fit justify-center text-foreground"
             />
             <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              Choose who operates your Open Harness workspace.
+              Pay by the hour your node runs.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-              Choose Mifune-managed Open Harness Cloud when you want Mifune to
-              operate the environment, or self-host the MIT-licensed project
-              when your team wants that responsibility.
+              A node is a dedicated cloud VM running your Open Harness
+              workspace, and you pay for the hours it runs. AI usage is not
+              included: you sign in to Claude or Pi inside the workspace with
+              your own account, and pay that provider directly.
             </p>
-            <p className="mt-4 font-montserrat text-sm text-muted-foreground">
-              Need implementation details?{" "}
+
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
               <a
-                href={OFFERING_URLS.docs}
+                href={OFFERING_URLS.cloud}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                Read the Open Harness docs
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                Open the Console
+                <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
+              <a
+                href="#deploy"
+                className="decoration-oh-accent/40 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-md px-1 font-montserrat text-sm font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              >
+                <span>
+                  Running more than three nodes? Talk to us{" "}
+                  <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </div>
+
+            <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+              Signing in is free · A card is required before your first node ·
+              No free tier, no trial
             </p>
           </div>
         </section>
 
         <section
-          className="px-4 py-16"
-          aria-labelledby="operating-options-heading"
+          className="border-y border-border bg-card/40 px-4 py-16 sm:py-20"
+          aria-labelledby="billing-mechanics-heading"
         >
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center">
+            <div className="max-w-3xl">
+              <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-oh-accent">
+                Billing mechanic
+              </p>
               <h2
-                id="operating-options-heading"
-                className="font-montserrat text-3xl font-semibold text-foreground md:text-4xl"
+                id="billing-mechanics-heading"
+                className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl"
               >
-                Two operating paths
+                How billing works
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl font-montserrat text-muted-foreground">
-                Compare who runs the environment and what each path includes.
-                Mifune does not publish prices on this page.
+            </div>
+
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {billingFacts.map((fact) => (
+                <li
+                  key={fact.title}
+                  className="min-w-0 rounded-2xl border border-border bg-card p-6"
+                >
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
+                    {fact.title}
+                  </p>
+                  <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
+                    {fact.detail}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          className="px-4 py-16 sm:py-20"
+          aria-labelledby="node-pricing-heading"
+        >
+          <div className="mx-auto max-w-6xl">
+            <div className="max-w-3xl">
+              <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-oh-accent">
+                Hourly rates
+              </p>
+              <h2
+                id="node-pricing-heading"
+                className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl"
+              >
+                What a node costs
+              </h2>
+              <p className="mt-5 font-montserrat text-lg leading-relaxed text-muted-foreground">
+                Choose a size when you create the node. Run more than one and
+                each node meters on its own.
               </p>
             </div>
 
-            <div className="space-y-6">
-              {cloudOptions.map((option) => {
-                const isCloud = option.id === "cloud";
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {cloudNodePlans.map((plan) => (
+                <article
+                  key={plan.spec}
+                  className={`flex min-w-0 flex-col rounded-2xl border border-border bg-card p-6 sm:p-8 ${
+                    plan.spec === "large" ? "sm:col-span-2 lg:col-span-1" : ""
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="font-montserrat text-2xl font-semibold text-foreground">
+                      {plan.label}
+                    </h3>
+                    {isDefault(plan.spec) ? (
+                      <span className="border-oh-accent/40 rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
+                        Default
+                      </span>
+                    ) : null}
+                  </div>
 
-                return (
-                  <article
-                    key={option.id}
-                    className={`relative overflow-hidden rounded-2xl border ${
-                      isCloud
-                        ? "border-green-500/40 bg-green-500/10 p-6 shadow-xl sm:p-9"
-                        : "border-border bg-card p-6 sm:p-8"
-                    }`}
+                  <p className="mt-6 flex flex-wrap items-baseline gap-1 font-montserrat text-foreground">
+                    <span className="text-4xl font-bold tabular-nums sm:text-5xl">
+                      {formatHourlyUsd(plan.hourlyUsd)}
+                    </span>
+                    <span className="font-mono text-base font-semibold text-muted-foreground">
+                      /hr
+                    </span>
+                  </p>
+                  <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
+                    per whole hour the node is running
+                  </p>
+
+                  <ul className="mt-6 space-y-2 border-t border-border pt-6 font-montserrat text-sm leading-relaxed text-muted-foreground">
+                    <li>{plan.vcpu} vCPU</li>
+                    <li>{plan.ramGb} GB RAM</li>
+                    <li>{plan.diskGb} GB SSD</li>
+                    <li>A dedicated VM, not shared infrastructure</li>
+                  </ul>
+
+                  <a
+                    href={OFFERING_URLS.cloud}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-8 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-5 py-3 text-center font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
-                    <OpenHarnessBrandBar
-                      density="card"
-                      context={
-                        isCloud
-                          ? "CLOUD · MANAGED BY MIFUNE"
-                          : "OPEN SOURCE · MAINTAINED BY MIFUNE"
-                      }
-                      className={`mb-7 border-b pb-5 text-foreground ${
-                        isCloud ? "border-green-500/30" : "border-border"
-                      }`}
+                    Create a {plan.label} node
+                    <ExternalLink
+                      className="h-4 w-4 shrink-0"
+                      aria-hidden="true"
                     />
-
-                    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.8fr)]">
-                      <div className="min-w-0">
-                        <div className="mb-3 flex flex-wrap items-center gap-3">
-                          <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-oh-accent">
-                            {option.eyebrow}
-                          </p>
-                          {isCloud ? (
-                            <span className="rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-oh-accent">
-                              Recommended managed path
-                            </span>
-                          ) : null}
-                        </div>
-                        <h3
-                          className={`font-montserrat font-semibold text-foreground ${
-                            isCloud
-                              ? "text-3xl sm:text-4xl"
-                              : "text-2xl sm:text-3xl"
-                          }`}
-                        >
-                          {option.name}
-                        </h3>
-                        <p className="mt-4 font-montserrat leading-relaxed text-muted-foreground">
-                          {option.description}
-                        </p>
-                        <div className="mt-6 grid gap-5 border-t border-border pt-5 sm:grid-cols-2">
-                          <div>
-                            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                              Who operates it
-                            </p>
-                            <p className="mt-2 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                              {option.operator}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                              Best fit
-                            </p>
-                            <p className="mt-2 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                              {option.bestFor}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="min-w-0 rounded-xl border border-border bg-background/60 p-5">
-                        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                          What you get
-                        </p>
-                        <ul className="mt-4 space-y-3">
-                          {option.bullets.map((bullet) => (
-                            <li
-                              key={bullet}
-                              className="flex items-start gap-2 font-montserrat text-sm text-muted-foreground"
-                            >
-                              <Check
-                                className="mt-0.5 h-4 w-4 shrink-0 text-oh-accent"
-                                aria-hidden="true"
-                              />
-                              {bullet}
-                            </li>
-                          ))}
-                        </ul>
-                        <a
-                          href={option.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-center font-montserrat text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                            isCloud
-                              ? "bg-oh-solid text-black hover:bg-green-400"
-                              : "border border-border bg-background text-foreground hover:border-green-500/50 hover:text-oh-accent"
-                          }`}
-                        >
-                          {option.cta}
-                          <ExternalLink
-                            className="h-4 w-4 shrink-0"
-                            aria-hidden="true"
-                          />
-                          <span className="sr-only">(opens in a new tab)</span>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                </article>
+              ))}
             </div>
+
+            <p className="mt-8 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground">
+              Cloud customers can add hands-on help with adoption from our team:{" "}
+              <Link
+                href={OFFERING_URLS.support}
+                className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              >
+                Mifune engineering support <span aria-hidden="true">→</span>
+              </Link>
+            </p>
           </div>
         </section>
 
         <section
-          className="px-4 py-20"
-          aria-labelledby="support-option-heading"
+          className="relative overflow-hidden border-y border-oh-rule bg-oh-paper px-4 py-20 text-oh-ink sm:py-24"
+          aria-labelledby="self-host-heading"
         >
-          <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-card p-6 sm:p-10">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20"
+          />
+          <div className="relative mx-auto max-w-6xl">
             <OpenHarnessBrandBar
-              density="compact"
-              context="FOR CLOUD · MIFUNE ENGINEERING"
-              className="mb-6 border-b border-border pb-4 text-foreground"
+              density="card"
+              context="OPEN SOURCE · MAINTAINED BY MIFUNE"
+              className="mb-10 border-b border-oh-rule pb-5 text-oh-ink"
             />
-            <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-              <div>
-                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-oh-accent">
-                  Optional for Cloud customers
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.8fr)] lg:gap-12">
+              <div className="min-w-0">
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-oh-accent">
+                  Self-hosted
                 </p>
                 <h2
-                  id="support-option-heading"
-                  className="font-montserrat text-3xl font-semibold text-foreground"
+                  id="self-host-heading"
+                  className="mt-4 text-balance font-montserrat text-3xl font-semibold text-oh-ink sm:text-4xl"
                 >
-                  Add Mifune engineering support
+                  Or run it yourself.
                 </h2>
-                <p className="mt-4 max-w-3xl font-montserrat leading-relaxed text-muted-foreground">
-                  {supportOffering.description} This is a scoped service for
-                  Cloud adoption, not another workspace option.
+                <p className="mt-5 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
+                  Open Harness is Apache-2.0 licensed and genuinely free. Clone
+                  it, run the workspace on your own laptop or VM, and pay Mifune
+                  nothing. Cloud is for teams that would rather not operate the
+                  machine.
                 </p>
+                <a
+                  href={OFFERING_URLS.openSource}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:border-oh-accent/50 mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl border border-oh-rule bg-oh-raised px-5 py-3 text-center font-montserrat text-sm font-semibold text-oh-ink transition-colors hover:text-oh-accent-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-oh-paper"
+                >
+                  Explore Open Harness on GitHub
+                  <ExternalLink
+                    className="h-4 w-4 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
               </div>
-              <a
-                href={OFFERING_URLS.supportContact}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 text-center font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
-              >
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                Discuss your Cloud deployment
-              </a>
+
+              <div className="min-w-0 rounded-2xl border border-oh-rule bg-oh-raised p-6 sm:p-8">
+                <div>
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent-raised">
+                    Who operates it
+                  </p>
+                  <p className="mt-2 font-montserrat text-sm leading-relaxed text-oh-muted">
+                    Your team operates its local or remote environment.
+                  </p>
+                </div>
+                <div className="mt-6 border-t border-oh-rule pt-6">
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent-raised">
+                    Best fit
+                  </p>
+                  <p className="mt-2 font-montserrat text-sm leading-relaxed text-oh-muted">
+                    Teams that want self-host control and are prepared to run
+                    the workspace.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
+
+        <FAQSection
+          faqs={pricingFaqs}
+          eyebrow="Common questions"
+          heading="Pricing questions, answered."
+          subheading="What you pay for, what you don’t, and what happens before your first node."
+          idPrefix="pricing-faq"
+        />
+
+        <CTASection referrer="pricing-page-deployment-form" />
       </main>
       <FooterSection />
     </>

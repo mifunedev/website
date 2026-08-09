@@ -362,8 +362,9 @@ export default function ServicesPage() {
                   Open Harness Open Source
                 </h3>
                 <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                  The MIT-licensed project for teams that want to inspect,
-                  adapt, and operate Open Harness locally or on a remote VM.
+                  The Apache-2.0 licensed project for teams that want to
+                  inspect, adapt, and operate Open Harness locally or on a
+                  remote VM.
                 </p>
               </article>
             </div>

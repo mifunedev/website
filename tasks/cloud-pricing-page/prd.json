@@ -1,0 +1,155 @@
+{
+    "schemaVersion": 1,
+    "project": "Mifune Website",
+    "branchName": "feat/59-cloud-pricing-page",
+    "description": "Cloud Pricing Page - correct the licence claim and publish OpenHarness Cloud hourly prices ($0.0384 / $0.0692 / $0.5046) with a plain explanation of the billing mechanic. No monthly SKU is published per decision R4; as of 2026-08-04 R4 is narrowed, not repealed - a 730-hour monthly ESTIMATE derived from the hourly rate is displayed per tasks/fleet-pricing-calculator/prd.md, which also supersedes the cost-calculator non-goal and replaces the three price cards. Blocked on mifunedev/openharness-cloud#114 and operator gates #115, #116, #117 - except US-001, which is independent. Full spec: tasks/cloud-pricing-page/prd.md",
+    "userStories": [
+        {
+            "id": "US-001",
+            "title": "Replace every MIT licence claim with Apache-2.0",
+            "description": "As a visitor, I want the site to state the correct licence so I can trust what I am adopting.",
+            "acceptanceCriteria": [
+                "All 15 occurrences corrected across 9 files: src/lib/schema.ts:41,66,98 - src/app/opengraph-image.tsx:67 - src/sections/HeroSection.tsx:90 - src/config/offerings.ts:51 - src/sections/PricingSection.tsx:20 - src/app/pricing/page.tsx:20,75 - src/app/services/page.tsx:365 - src/data/faqs.ts:14 - scripts/generate-llm-txt.mjs:29,42",
+                "public/llm.txt regenerated via npm run build and committed; lines 20 and 33 no longer say MIT",
+                "grep -rn 'MIT' src/ public/llm.txt scripts/ returns nothing licence-related",
+                "Copy reads naturally as 'Apache-2.0 licensed', not a substitution that breaks a sentence",
+                "Shipped as its own commit, separate from any pricing change",
+                "npm run lint passes",
+                "Typecheck passes",
+                "Verify in browser using agent-browser skill - homepage hero and /services show the corrected licence"
+            ],
+            "priority": 1,
+            "passes": true,
+            "notes": "Verified by orchestrator against the real diff, not the delegate report. 15 MIT occurrences -> 15 Apache-2.0 insertions across 9 source files + regenerated public/llm.txt; grep for MIT in src/ scripts/ public/llm.txt returns nothing. lint exit 0, tsc --noEmit exit 0, prettier clean on all touched files. public/sw.js reverted (PWA build-ID churn). Commit d712cfa."
+        },
+        {
+            "id": "US-002",
+            "title": "Add cloud-pricing.ts as the single source of published prices",
+            "description": "As a maintainer, I want every published price to come from one module, so a price change is a one-file edit and nothing can silently drift.",
+            "acceptanceCriteria": [
+                "New src/config/cloud-pricing.ts exports CloudNodePlan[] with fields spec, label, vcpu, ramGb, diskGb, hourlyUsd",
+                "Values exactly: small 2/4/50/0.0384, medium 4/8/50/0.0692, large 8/30/200/0.5046",
+                "Field names mirror the upstream node-specs.ts so a side-by-side diff is legible",
+                "Also export DEFAULT_NODE_SPEC = 'small' (or an isDefault boolean per plan). US-004 badges Small 'Default' and must verify that INSIDE this repo - the upstream constant is not importable from a website checkout",
+                "Header comment records provenance verbatim; do NOT go looking for the upstream repo, it is a separate repository not reachable from here. repo: mifunedev/openharness-cloud, commit b56c2dfe673aa3ac3f95b8018568130666f6ae7c, specs packages/shared/src/node-specs.ts:18-23, prices packages/shared/src/provider-catalog.yaml. Transcribe the published customer-facing rates only. Upstream derives them from a provider cost and a margin; NEITHER belongs in this repository, in source or in a task file",
+                "No monthly price field exists - monthly is withdrawn per R4",
+                "The dead src/config/pricing.ts shim is left untouched",
+                "OfferingPath in src/config/offerings.ts is not extended",
+                "Typecheck passes"
+            ],
+            "priority": 2,
+            "passes": true,
+            "notes": "Verified by orchestrator. Values match upstream node-specs.ts:18-20 and provider-catalog.yaml exactly. Provenance block complete with the b56c2df SHA. No monthly field. Exports DEFAULT_NODE_SPEC + isDefault() so US-004 verifies the badge in-repo, plus formatHourlyUsd() so no page hardcodes a format. Commit a6f5421."
+        },
+        {
+            "id": "US-003",
+            "title": "Rewrite the /pricing hero and add the billing-facts strip",
+            "description": "As an evaluator, I want the page to open by telling me what I pay for and what I don't, and to explain the billing mechanic before showing me numbers.",
+            "acceptanceCriteria": [
+                "Touch the hero, the new billing-facts section, page metadata, and ONE sentence inside the operating-paths section. That section (page.tsx:94-223, aria-labelledby='operating-options-heading') is otherwise left standing - its h2 at :104 and every card below survive until US-004 replaces them, so the page builds and renders between the two stories",
+                "src/app/pricing/page.tsx:108 ('Mifune does not publish prices on this page.') is deleted. It is the second half of the intro paragraph at :106-109, which lives INSIDE the operating-paths section - delete that sentence only, do not touch the heading or the cards",
+                "Line 20 description and line 23 title are rewritten for a page that publishes prices",
+                "Hero headline is 'Pay by the hour your node runs.' with a paragraph stating AI usage is NOT included and the customer signs in to Claude or Pi with their own account",
+                "Hero trust line reads: Signing in is free - A card is required before your first node - No free tier, no trial",
+                "Hero primary CTA 'Open the Console' links to OFFERING_URLS.cloud; tertiary link 'Running more than three nodes? Talk to us' targets the anchor #deploy (its target arrives in US-006, so the anchor may dangle until then)",
+                "A new 'How billing works' section states exactly four facts: one node is a dedicated VM not shared infrastructure; only whole running UTC hours meter; queued, building and failed time is free; destroying a node is how you stop paying",
+                "Heading order h1 to h2 is preserved and the new section has aria-labelledby",
+                "The existing page shell and the three JsonLd blocks are preserved",
+                "npm run lint passes",
+                "Typecheck passes",
+                "Verify in browser using agent-browser skill - light and dark themes at 1280px and 375px"
+            ],
+            "priority": 3,
+            "passes": true,
+            "notes": "Verified against RENDERED output, not just source: .next/server/app/pricing.html states 'AI usage is not included - you sign in to Claude or Pi with your own account', carries the whole-running-UTC-hours language, and h1->h2 order holds. Intermediate build between US-003 and US-004 confirmed by the delegate. lint 0, tsc 0, prettier clean. Commit a6f5421."
+        },
+        {
+            "id": "US-004",
+            "title": "Replace the operating-paths section with hourly price cards and self-host",
+            "description": "As an evaluator, I want to see what each node size costs, without signing up.",
+            "acceptanceCriteria": [
+                "The 'two operating paths' section is replaced by a price-card grid importing from cloud-pricing.ts",
+                "Three cards; the hourly rate is the primary number (text-4xl sm:text-5xl, tabular-nums) captioned 'per whole hour the node is running'",
+                "Each card lists N vCPU, N GB RAM, N GB SSD, and 'A dedicated VM, not shared infrastructure', then a min-h-11 CTA 'Create a Small/Medium/Large node' to OFFERING_URLS.cloud",
+                "Small is badged 'Default' - verifiable against the DEFAULT_NODE_SPEC / isDefault that US-002 adds to cloud-pricing.ts, not against the upstream repo - never 'Most popular' (no data supports it)",
+                "The badge uses an eyebrow span plus border-oh-accent/40, not the bg-green-500/10 treatment at pricing/page.tsx:121",
+                "A self-host section follows the cards: Apache-2.0 and free, retaining the who-operates-it and best-fit fields, linking to OFFERING_URLS.openSource",
+                "No monthly price appears anywhere on the page",
+                "Each card h3 is the spec name, not the price",
+                "Grid reflows grid-cols-1 to sm:grid-cols-2 (Large sm:col-span-2) to lg:grid-cols-3, skipping md",
+                "text-oh-accent-raised is used on any bg-oh-raised surface",
+                "npm run lint passes",
+                "Typecheck passes",
+                "Verify in browser using agent-browser skill - light and dark themes at 1280px and 375px, no horizontal scroll"
+            ],
+            "priority": 4,
+            "passes": true,
+            "notes": "Verified against rendered output: exactly $0.0384/$0.0692/$0.5046 present, ZERO monthly price or /mo string anywhere in the HTML. Grid reflow confirmed in-browser at 375/700/800/1280 - 800px still 2 cols, so md is genuinely skipped. No horizontal scroll at any width; smallest link 44px. Orchestrator fix: breadcrumb JSON-LD still named the page 'Deploy Open Harness' - corrected to 'Pricing'. Commit a6f5421."
+        },
+        {
+            "id": "US-005",
+            "title": "Parameterise FAQSection and add pricing FAQs",
+            "description": "As an evaluator, I want my remaining pricing questions answered on the page.",
+            "acceptanceCriteria": [
+                "src/data/faqs.ts gains a second export pricingFaqs; the existing faqs export is unchanged",
+                "FAQSection accepts faqs, heading, eyebrow, subheading and idPrefix props instead of importing the module constant",
+                "subheading is REQUIRED, not optional to skip. FAQSection.tsx:61-63 hardcodes homepage-specific copy ('What the workspace does, who operates it, and how Mifune can help.') that would otherwise render verbatim under the pricing FAQ heading",
+                "The homepage render of FAQSection is byte-identical",
+                "Five entries: how billing works, what a node costs, is AI usage included, do I need a card to sign up, how many nodes can I run",
+                "The node-limit answer says 'three by default' and appears only in the FAQ, never on a price card",
+                "JsonLd with faqPageSchema(pricingFaqs) renders on /pricing only",
+                "Every price string in an answer traces to cloud-pricing.ts",
+                "npm run lint passes",
+                "Typecheck passes",
+                "Verify in browser using agent-browser skill - keyboard-expand each entry and confirm aria-expanded and aria-controls are correct"
+            ],
+            "priority": 5,
+            "passes": true,
+            "notes": "Verified by orchestrator against built HTML: homepage ids still homepage-faq-0..5, homepage subheading still present, /pricing ids pricing-faq-0..4, ZERO cross-route collision. Delegate proved the byte-identical homepage claim properly - built at HEAD first, extracted the balanced <section id=\"faq\"> fragment and cmp'd it (8194 bytes, identical). Node limit says 'three by default' and appears 0 times inside the price cards. Commit 3e4aaef."
+        },
+        {
+            "id": "US-006",
+            "title": "Add the deployment conversation as the page's final section",
+            "description": "As a buyer too big for self-serve, I want to start a conversation without leaving the page.",
+            "acceptanceCriteria": [
+                "CTASection gains exactly one optional prop referrer?: string, defaulting to 'open-harness-deployment-form', threaded into the existing payload.Referrer at CTASection.tsx:54",
+                "The homepage render of CTASection is byte-identical - no prop passed, same default",
+                "/pricing renders CTASection with referrer='pricing-page-deployment-form' as its final section, after the FAQ",
+                "The support panel at pricing/page.tsx:225-260 is removed; its job survives as one inline link 'Mifune engineering support' to /services",
+                "Strip the imports US-004 and this story orphan: cloudOptions, Check, Mail, supportOffering. Nothing catches these - eslint-config-next ships no no-unused-vars rule and tsconfig.json sets neither noUnusedLocals nor noUnusedParameters, so they pass lint and build while sitting dead in the diff",
+                "The hero's #deploy anchor from US-003 now resolves to this section",
+                "The words 'design partner' do not appear on the page",
+                "The three-node line is phrased as a question, not a published limit",
+                "No new client component is introduced - CTASection is already 'use client'",
+                "npm run lint passes",
+                "Typecheck passes",
+                "Verify in browser using agent-browser skill - submit the form and confirm the Referrer value reaching /api/contact"
+            ],
+            "priority": 6,
+            "passes": true,
+            "notes": "Verified by orchestrator. CTASection diff is exactly one optional prop with the default preserved and threaded into payload.Referrer - nothing else changed. Default present in the client chunk; /pricing flight payload carries pricing-page-deployment-form and the homepage carries it 0 times. 'design partner' absent from src/, scripts/, llm.txt. Delegate captured the real Referrer reaching /api/contact via a fetch wrapper (agent-browser's own network filter returned nothing on 0.8.5); the 500 from a missing Airtable key actually proves the handler ran on the posted body. Commit 3e4aaef."
+        },
+        {
+            "id": "US-007",
+            "title": "Relabel nav and footer, propagate prices to homepage and llm.txt",
+            "description": "As a visitor, I want the nav to say Pricing when the page shows prices, and to see the entry price on the homepage.",
+            "acceptanceCriteria": [
+                "src/components/nav/TopNavBar.tsx:30 label changes from 'Deploy' to 'Pricing' (one menuItems array serves both desktop and mobile)",
+                "src/sections/FooterSection.tsx Product-column link is relabelled to match",
+                "The route stays /pricing; src/app/sitemap.ts is unchanged and not accidentally edited",
+                "src/sections/PricingSection.tsx gains one line, 'Nodes start at $0.0384 an hour.', plus a link to /pricing, importing from cloud-pricing.ts",
+                "The homepage does not mirror the full price card grid",
+                "scripts/generate-llm-txt.mjs includes the three hourly rates sourced from cloud-pricing.ts, not re-hardcoded",
+                "Verify the import resolves under plain node and record what it depends on. prebuild runs 'node scripts/generate-llm-txt.mjs' with no tsx/ts-node, so importing a .ts module relies on Node unflagged type-stripping. It works on Node v22.23.1 here, but the repo pins no version (no .nvmrc, no engines, no CI/Dockerfile node config), so another environment could silently break llm.txt generation. Either add an engines.node floor to package.json or route shared values through a .mjs/.json sibling importable by both TS app code and plain Node. State which you chose and why",
+                "public/llm.txt is regenerated and committed",
+                "The nav active state still highlights on /pricing",
+                "npm run lint passes",
+                "Typecheck passes",
+                "Verify in browser using agent-browser skill"
+            ],
+            "priority": 7,
+            "passes": true,
+            "notes": "Verified by orchestrator. sitemap.ts absent from the diff. llm.txt carries the three rates sourced from cloud-pricing.ts. engines.node '>=22.18.0' present - the delegate chose this over a .mjs/.json sibling to keep cloud-pricing.ts the literal single source, and recorded honestly that npm only WARNS on mismatch, with prebuild failing loudly as the real protection. lint 0, tsc 0, build 0. Commit 3e4aaef. CORRECTED after the deploy preview failed: that 'failing loudly' fired on Netlify, not locally. Netlify does NOT read engines.node - it selects from .nvmrc / .node-version / NODE_VERSION and otherwise uses the image default the site is pinned to (Node 18.20.8), where npm warned EBADENGINE and prebuild then died with ERR_UNKNOWN_FILE_EXTENSION. A declared requirement is not an enforced one. Fixed by pinning .nvmrc to 22 - see progress.txt, 'Deploy fix'. Accepted judgement call: the hero's 'Read the Open Harness docs' link stays dropped - docs remain in nav, footer and the self-host section, and a third hero link competes with the paid path."
+        }
+    ]
+}

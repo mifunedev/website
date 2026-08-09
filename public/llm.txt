@@ -17,7 +17,7 @@ Grounded outcomes:
 
 ## Vendor
 
-Mifune maintains the MIT-licensed open-source Open Harness project, operates Open Harness Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
+Mifune maintains the Apache-2.0 licensed open-source Open Harness project, operates Open Harness Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
 
 ## Offering hierarchy
 
@@ -26,11 +26,21 @@ Mifune maintains the MIT-licensed open-source Open Harness project, operates Ope
 Open Harness Cloud gives coding agents an isolated, persistent workspace while Mifune operates the managed environment.
 
 - Cloud Console: https://console.mifune.dev
-- Open Harness Options: https://mifune.dev/pricing
+- Pricing: https://mifune.dev/pricing
+
+Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free; destroying a node is how you stop paying for it. AI usage is not included: you sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account and pay that provider directly.
+
+Hourly rates, per whole hour a node is running:
+
+- Small (2 vCPU / 4 GB RAM / 50 GB SSD): $0.0384
+- Medium (4 vCPU / 8 GB RAM / 50 GB SSD): $0.0692
+- Large (8 vCPU / 30 GB RAM / 200 GB SSD): $0.5046
+
+There is no monthly price, no free tier, and no trial. Signing in is free; a card is required before the first node.
 
 ### 2. Open Harness Open Source — self-hosted path
 
-The MIT-licensed project is for teams that want to inspect, adapt, and operate Open Harness themselves, locally or on a remote VM.
+The Apache-2.0 licensed project is for teams that want to inspect, adapt, and operate Open Harness themselves, locally or on a remote VM.
 
 - GitHub: https://github.com/mifunedev/openharness
 - Documentation: https://oh.mifune.dev
@@ -45,6 +55,6 @@ Mifune engineers can work alongside a Cloud customer's team to plan, implement, 
 ## Website
 
 - Homepage: https://mifune.dev
-- Open Harness Options: https://mifune.dev/pricing
+- Pricing: https://mifune.dev/pricing
 - Open Harness documentation: https://oh.mifune.dev
 - Blog: https://mifune.dev/blog

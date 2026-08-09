@@ -87,7 +87,7 @@ const HeroSection = () => {
           </a>
 
           <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-            MIT licensed · one repo / one sandbox · no host toolchains
+            Apache-2.0 licensed · one repo / one sandbox · no host toolchains
           </p>
         </div>
 

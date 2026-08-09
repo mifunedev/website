@@ -48,7 +48,7 @@ export const offeringPaths: OfferingPath[] = [
     eyebrow: "Self-hosted · Maintained by Mifune",
     name: "Open Harness Open Source",
     description:
-      "Inspect, adapt, and operate the MIT-licensed Open Harness workspace yourself, locally or on a remote VM.",
+      "Inspect, adapt, and operate the Apache-2.0 licensed Open Harness workspace yourself, locally or on a remote VM.",
     bullets: [
       "Claude Code, Codex, Pi, and other opt-in CLIs",
       "Local or remote Docker workspace",

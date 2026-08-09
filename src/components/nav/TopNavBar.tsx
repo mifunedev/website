@@ -27,7 +27,7 @@ const menuItems = [
   },
   {
     href: OFFERING_URLS.pricing,
-    label: "Deploy",
+    label: "Pricing",
     external: false,
   },
   { href: OFFERING_URLS.support, label: "Support", external: false },

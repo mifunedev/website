@@ -1,0 +1,222 @@
+# progress
+
+## US-001 — Apache-2.0 licence sweep — PASS (commit d712cfa)
+
+15 MIT claims across 9 files replaced with "Apache-2.0 licensed"; the
+delegate's own grep found exactly 15, matching the audited list with no
+extras and no stale entries. public/llm.txt regenerated via prebuild,
+never hand-edited.
+
+Validated by the orchestrator against the diff itself: 15 "+Apache-2.0"
+insertions, zero MIT remaining, 10 files changed, public/sw.js excluded.
+lint 0, tsc 0, prettier clean on every touched file.
+
+Two baseline defects surfaced and handled:
+- npm run lint failed on untouched HEAD (nested-worktree ESLint
+  resolution). Fixed in b0eeba9, committed separately.
+- npx prettier --check src/ scripts/ fails on 38 files on untouched
+  HEAD. Pre-existing drift; PRD criterion narrowed to touched files.
+
+Left alone deliberately: schema.ts:101 links `license` to
+/blob/main/LICENSE upstream — correct only if the relicensed LICENSE
+landed at that path, unverifiable from this repo. Flagged, not changed.
+
+## US-002/003/004 — pricing source, hero, price cards — PASS (commit a6f5421)
+
+/pricing now publishes $0.0384 / $0.0692 / $0.5046 per whole running
+hour, states AI usage is not included above the prices, and explains the
+billing mechanic before showing numbers. No monthly price anywhere.
+
+Orchestrator validation went to the RENDERED HTML, not the source:
+- .next/server/app/pricing.html contains the three hourly prices, the
+  AI-not-included sentence, and the whole-running-UTC-hours language.
+- Zero matches for a monthly price or "/mo" in the rendered output.
+- lint 0, tsc 0, prettier clean on both files, real build exit 0.
+
+Delegate's browser pass was unusually good and is trusted on the points
+only a browser can show: grid still 2 columns at 800px (md genuinely
+skipped), no horizontal scroll at 375/700/800/1280, smallest link 44px,
+accent-on-raised contrast measured rather than assumed.
+
+Orchestrator fix: the breadcrumb JSON-LD still named this page "Deploy
+Open Harness" — structured data contradicting the page, the same class
+of machine-readable defect as the MIT claims US-001 removed. The
+delegate left it on a literal reading of "preserve the three JsonLd
+blocks"; preserving a block means not deleting it, not freezing its
+contents. Corrected to "Pricing".
+
+Open judgement call left for US-007: the delegate dropped the hero's
+"Read the Open Harness docs" link (docs remains linked in nav and
+footer). Recorded rather than reverted.
+
+## US-005/006/007 — FAQ props, CTA referrer, nav and llm.txt — PASS (3e4aaef)
+
+Orchestrator validation against BUILT output:
+- Homepage FAQ ids still homepage-faq-0..5 and its subheading survives;
+  /pricing uses pricing-faq-0..4. Zero id collision across routes.
+- CTASection diff is exactly one optional prop, default preserved.
+  Default lives in the client chunk; /pricing payload carries
+  pricing-page-deployment-form, homepage carries it zero times.
+- sitemap.ts absent from the diff, as required.
+- llm.txt carries the three rates, sourced not hardcoded.
+- lint 0, tsc 0, build 0.
+
+The delegate proved the byte-identical homepage claim properly rather
+than asserting it: built at HEAD first, extracted balanced section
+fragments, and cmp'd them (FAQ 8194 bytes, CTA 7143 bytes, both
+identical). The 25 changed lines in the full homepage diff are all
+accounted for — content hashes, the nav/footer relabel, the new price
+line, and the flight payload.
+
+Two judgement calls accepted, both reasoned:
+- engines.node >=22.18.0 over a .mjs/.json sibling, keeping
+  cloud-pricing.ts the literal single source. Recorded honestly that npm
+  only warns; prebuild failing hard is the real protection.
+- Hero "Read the Open Harness docs" link stays dropped. Docs remain in
+  nav, footer, and the self-host section.
+
+ALL SEVEN STORIES PASS. Branch ready for PR against development.
+
+## PR audit — one blocker, fixed before push
+
+An adversarial audit of the finished branch caught that this spec quoted
+the upstream provider costs and the exact margin multiplier. Those are
+server-only figures, and this repo has a different audience and security
+boundary from openharness-cloud — publishing them discloses the cost
+basis and the margin on every SKU.
+
+The violation was in the documentation of the rule forbidding it, which
+is the easiest place for it to hide: US-002's own acceptance criterion
+says provider cost and margin must never appear in this repo, and the
+provenance note under it printed them.
+
+Redacted from the working tree AND from every commit on this branch
+(git filter-branch, branch unpushed at the time — impossible to do once
+published). Verified: no commit in origin/development..HEAD contains any
+provider cost, the multiplier, hourlyProviderCostUsd, or hourlyMarginPct.
+The rule now states why the figures are excluded instead of printing them.
+
+Commit references in these notes were updated to the post-rewrite SHAs.
+
+Everything else in the audit was clean: prices verified against the
+upstream blob at the cited commit (not against the header comment),
+byte-identical homepage fragments confirmed from two independent builds,
+no monthly price in any rendered page, no duplicate ids, aria targets
+all resolve, no orphaned imports.
+
+## Deploy fix — the Netlify preview build failed on Node 18
+
+Caught by the deploy preview for PR #60, after every local gate passed.
+
+  TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts"
+  for /opt/build/repo/src/config/cloud-pricing.ts
+
+prebuild (`node scripts/generate-llm-txt.mjs`) imports cloud-pricing.ts
+directly, which needs Node's unflagged type stripping (v22.18.0+).
+Netlify built on v18.20.8.
+
+US-007 declared `engines.node >=22.18.0` and 3e4aaef's message called
+that "the form Netlify-class builders read to select a version". That
+claim is false, and the log disproves it in two steps: npm printed
+EBADENGINE for this very package and then carried on, and the build
+proceeded on 18. Netlify selects the version from `.nvmrc`,
+`.node-version`, or `NODE_VERSION` only — each overriding the version
+the site is pinned to in the UI — and pins a site to the build image's
+default otherwise. engines is a declaration; npm only warns on it.
+
+The accepted trade in US-007 was that prebuild "fails loudly rather than
+shipping a stale llm.txt". It did fail loudly — on the deploy. Failing
+loudly in the one environment nobody was watching is not protection; it
+is an outage with a good error message. What was missing was not a
+louder failure, it was enforcement of the requirement.
+
+Fixed by adding `.nvmrc` = 22. Pinning rather than removing the .ts
+import is the stronger fix on evidence: every gate on this branch — lint,
+tsc, build, the rendered-HTML checks, the browser pass — was run on Node
+v22.23.1. The deploy now runs the version the work was verified on,
+instead of a Node 18 nothing was ever tested against. `engines` stays as
+the declaration of the requirement; `.nvmrc` is what enforces it, and
+the script header now says so instead of crediting engines.
+
+Verified after the fix: prebuild regenerates public/llm.txt
+byte-identical (`git diff --exit-code`), so this changes plumbing and
+not one published character. lint 0, tsc 0, build 0, prettier clean.
+Rendered /pricing still carries $0.0384 / $0.0692 / $0.5046 and zero
+monthly figures. public/sw.js build-ID churn excluded, as before.
+
+Control retained for the record: `node --no-experimental-strip-types
+scripts/generate-llm-txt.mjs` still reproduces the exact deploy error on
+Node 22, so the failure is understood rather than merely gone.
+
+## 2026-08-03 — provenance updated for the upstream field rename
+
+Not a price change. The three published rates are unchanged and remain
+$0.0384 / $0.0692 / $0.5046.
+
+Upstream openharness-cloud#123 (PR #125) inverts how the price is stored:
+`ProviderPlan.hourlyMarginPct` is removed, `hourlyCustomerPriceUsd` takes its
+place as a stated catalog input, and gross margin becomes a value derived from
+the price and asserted against a floor. The published numbers are byte-identical
+either way — the current prices were already exactly `cost x 1.5` and are now
+simply written down instead of computed.
+
+That matters for this file specifically, because this is a TRANSCRIPTION and the
+field being transcribed from changed its name. The provenance block now:
+
+- names the exact source field, `plans.<spec>.hourlyCustomerPriceUsd`, rather
+  than just the file it lives in
+- keeps and sharpens the do-not-recompute rule, which is now stronger than
+  before: the upstream value is a literal, so there is no arithmetic to perform
+  and no reason to reach for a cost figure that must never enter this repo
+- tells a future reader who finds `hourlyMarginPct` upstream that they are on a
+  commit older than #123 and should not multiply anything
+
+Verified after the edit:
+    npm run lint    → 0 warnings, 0 errors
+    npm run build   → EXIT 0, /pricing still prerendered static (307 B)
+    git diff public/llm.txt → EMPTY
+
+The empty llm.txt diff is the load-bearing check, not a formality: prebuild
+regenerates it by parsing src/config/cloud-pricing.ts, so a byte-identical
+result proves the price source still parses and still yields the same three
+numbers after the edit.
+
+## 2026-08-04 — PRD amended: R4 narrowed, calculator moved out
+
+No code changed in this commit. The operator asked why the new pricing options
+were not visible, and the answer is that they do not exist yet: upstream #125
+shipped the repricing MECHANISM and deliberately changed no price, so the
+five-rung catalog these cards would show is still plan-only. That is recorded
+upstream. What is recorded here is that this spec now disagrees with the
+direction requested — so the spec is what this commit fixes.
+
+Three amendments, all layered onto the shipped record rather than replacing it:
+
+- §1 gains an amendment block. R4 is NARROWED, not repealed: no monthly SKU
+  exists, none is pending, large monthly stays retired. What changed is
+  DISPLAY — a 730-hour monthly estimate computed from the hourly rate and
+  always labelled an estimate.
+- §4 non-goals: the single cell banning "hourly/monthly toggle, cost
+  calculator, competitor table" is split into four rows, so the calculator can
+  move out without also un-banning the other two. Its two stated objections
+  were MET, not waived, and the row says how — client state confined to one
+  child with the page still a server component, and integer whole-hour presets
+  instead of a slider, since a slider lets a visitor express a fractional hour
+  the meter cannot produce.
+- §8 decision 2 amended; new decision 3 records that the three cards are
+  REPLACED, not supplemented.
+
+US-004's criterion "No monthly price appears anywhere on the page" is marked
+[x] with an annotation, not deleted. It held at ship time, and the annotation
+names what supersedes it. A shipped criterion that later work falsifies is
+evidence, not an error to tidy away. The §7 success metric asserting the same
+thing is annotated the same way, with its replacement stated: every monthly
+figure must sit in the same sentence as "there is no monthly plan".
+
+prd.json's top-level description carried the same "No monthly price is
+published per decision R4" claim and is corrected to match. The JSON and the
+markdown disagreeing is how a spec quietly stops being read.
+
+tasks/fleet-pricing-calculator/prd.md is the spec for the replacement. It needs
+its own GitHub issue before /ralph can convert it — /ralph hard-fails without
+--issue <N>.

@@ -1,3 +1,5 @@
+import { cloudNodePlans, formatHourlyUsd } from "@/config/cloud-pricing";
+
 export interface Faq {
   question: string;
   answer: string;
@@ -11,7 +13,7 @@ export const faqs: Faq[] = [
   {
     question: "What is Open Harness?",
     answer:
-      "Open Harness is an MIT-licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one sandbox and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
+      "Open Harness is an Apache-2.0 licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one sandbox and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
   },
   {
     question: "What problem does it solve?",
@@ -37,5 +39,47 @@ export const faqs: Faq[] = [
     question: "How do I start?",
     answer:
       "Open console.mifune.dev for the managed Cloud path. Visit github.com/mifunedev/openharness and read the docs at oh.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for Cloud.",
+  },
+];
+
+/**
+ * Every rate below is read from `cloud-pricing.ts`, so a price change stays a
+ * one-file edit and an answer can never drift from the price cards.
+ */
+const hourlyRateSentence = cloudNodePlans
+  .map(
+    (plan) =>
+      `${plan.label} (${plan.vcpu} vCPU, ${plan.ramGb} GB RAM, ${plan.diskGb} GB SSD) is ${formatHourlyUsd(plan.hourlyUsd)} an hour`,
+  )
+  .join("; ");
+
+/**
+ * Pricing-page FAQ content, kept separate from the homepage `faqs` export so
+ * neither list leaks into the other page or its FAQPage JSON-LD.
+ */
+export const pricingFaqs: Faq[] = [
+  {
+    question: "How does billing work?",
+    answer:
+      "You pay for the hours your node runs. Only whole running UTC hours meter, so any UTC hour in which the node was running counts as one full hour at the rate for its size. Time spent queued, building, or on a build that failed is not billed, and destroying the node in the Console is how you stop paying for it.",
+  },
+  {
+    question: "What does a node cost?",
+    answer: `Each size is priced per whole running hour: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own.`,
+  },
+  {
+    question: "Is AI usage included?",
+    answer:
+      "No. The price covers the node and the Open Harness workspace running on it. You sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account, and you pay that provider directly for the AI usage.",
+  },
+  {
+    question: "Do I need a card to sign up?",
+    answer:
+      "Signing in is free and costs you nothing to look around. A card is required before you create your first node, because a running node meters from its first whole hour. There is no free tier and no trial.",
+  },
+  {
+    question: "How many nodes can I run?",
+    answer:
+      "Three by default. If you need more than that, tell us what you are planning to run in the deployment form on this page and we will work it out with you.",
   },
 ];

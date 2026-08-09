@@ -60,7 +60,7 @@ const FooterSection = () => {
               </li>
               <li>
                 <Link href={OFFERING_URLS.pricing} className={footerLinkClass}>
-                  Deploy
+                  Pricing
                 </Link>
               </li>
             </ul>
