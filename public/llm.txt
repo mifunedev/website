@@ -32,11 +32,23 @@ Nodes are billed by the hour they run, each on a dedicated VM rather than shared
 
 Hourly rates, per whole hour a node is running:
 
-- Small (2 vCPU / 4 GB RAM / 50 GB SSD): $0.0384
-- Medium (4 vCPU / 8 GB RAM / 50 GB SSD): $0.0692
-- Large (8 vCPU / 30 GB RAM / 200 GB SSD): $0.5046
+- 4 GB (2 vCPU / 4 GB RAM / 50 GB SSD): $0.0450
+- 8 GB (4 vCPU / 8 GB RAM / 50 GB SSD): $0.1000
+- 16 GB (4 vCPU / 16 GB RAM / 100 GB SSD): $0.2100
+- 32 GB (8 vCPU / 32 GB RAM / 200 GB SSD): $0.4500
+- 64 GB (8 vCPU / 64 GB RAM / 200 GB SSD): $0.6000
 
-There is no monthly price, no free tier, and no trial. Signing in is free; a card is required before the first node.
+There is no monthly plan, no free tier, and no trial. Signing in is free; a card is required before the first node.
+
+A node left running for a whole month is billed as 730 whole hours at the rate above, which works out to:
+
+- 4 GB: about $32.85 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 8 GB: about $73.00 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 16 GB: about $153.30 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 32 GB: about $328.50 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 64 GB: about $438.00 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+
+Those are arithmetic on the hourly rate for a node that never stops; a node that runs only on weekdays costs proportionally less, and there is no monthly plan to buy at any usage.
 
 ### 2. Open Harness Open Source — self-hosted path
 

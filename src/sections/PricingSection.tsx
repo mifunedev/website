@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Check, ExternalLink, Headphones } from "lucide-react";
 import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
-import { cloudNodePlans, formatHourlyUsd } from "@/config/cloud-pricing";
+import { entryPlan, formatHourlyUsd } from "@/config/cloud-pricing";
 import {
   cloudOptions,
   OFFERING_URLS,
   supportOffering,
 } from "@/config/offerings";
-
-/** The cheapest published node, so this line cannot drift from the cards. */
-const entryPlan = cloudNodePlans.reduce((cheapest, plan) =>
-  plan.hourlyUsd < cheapest.hourlyUsd ? plan : cheapest,
-);
 
 export default function PricingSection() {
   return (

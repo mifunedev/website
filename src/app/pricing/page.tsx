@@ -3,13 +3,9 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
+import FleetCalculator from "@/components/pricing/FleetCalculator";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/config/app";
-import {
-  cloudNodePlans,
-  formatHourlyUsd,
-  isDefault,
-} from "@/config/cloud-pricing";
 import { OFFERING_URLS } from "@/config/offerings";
 import { pricingFaqs } from "@/data/faqs";
 import {
@@ -194,60 +190,7 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {cloudNodePlans.map((plan) => (
-                <article
-                  key={plan.spec}
-                  className={`flex min-w-0 flex-col rounded-2xl border border-border bg-card p-6 sm:p-8 ${
-                    plan.spec === "large" ? "sm:col-span-2 lg:col-span-1" : ""
-                  }`}
-                >
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="font-montserrat text-2xl font-semibold text-foreground">
-                      {plan.label}
-                    </h3>
-                    {isDefault(plan.spec) ? (
-                      <span className="border-oh-accent/40 rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                        Default
-                      </span>
-                    ) : null}
-                  </div>
-
-                  <p className="mt-6 flex flex-wrap items-baseline gap-1 font-montserrat text-foreground">
-                    <span className="text-4xl font-bold tabular-nums sm:text-5xl">
-                      {formatHourlyUsd(plan.hourlyUsd)}
-                    </span>
-                    <span className="font-mono text-base font-semibold text-muted-foreground">
-                      /hr
-                    </span>
-                  </p>
-                  <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                    per whole hour the node is running
-                  </p>
-
-                  <ul className="mt-6 space-y-2 border-t border-border pt-6 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                    <li>{plan.vcpu} vCPU</li>
-                    <li>{plan.ramGb} GB RAM</li>
-                    <li>{plan.diskGb} GB SSD</li>
-                    <li>A dedicated VM, not shared infrastructure</li>
-                  </ul>
-
-                  <a
-                    href={OFFERING_URLS.cloud}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-8 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-5 py-3 text-center font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                  >
-                    Create a {plan.label} node
-                    <ExternalLink
-                      className="h-4 w-4 shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">(opens in a new tab)</span>
-                  </a>
-                </article>
-              ))}
-            </div>
+            <FleetCalculator />
 
             <p className="mt-8 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground">
               Cloud customers can add hands-on help with adoption from our team:{" "}
