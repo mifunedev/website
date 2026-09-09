@@ -45,7 +45,7 @@ export const faqs: Faq[] = [
   {
     question: "How do I start?",
     answer:
-      "Open console.mifune.dev for the managed Cloud path. Visit github.com/mifunedev/openharness and read the docs at oh.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for Cloud.",
+      "Open console.mifune.dev for the managed Cloud path. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for Cloud.",
   },
 ];
 

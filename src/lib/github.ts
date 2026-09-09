@@ -31,7 +31,7 @@ interface CuratedRepo {
 const FLAGSHIP: CuratedRepo[] = [
   {
     owner: "mifunedev",
-    name: "openharness",
+    name: "agro",
     tagline:
       "An open, isolated Docker workspace for running coding agents with your preferred harness.",
     fallbackStars: 21,

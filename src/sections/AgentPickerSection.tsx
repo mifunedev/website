@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { OFFERING_URLS } from "@/config/offerings";
 import { getFlagshipRepos } from "@/lib/github";
 
-const DOCS_BASE_URL = "https://oh.mifune.dev";
+const DOCS_BASE_URL = "https://agro.mifune.dev";
 
 type Agent = {
   name: string;
@@ -183,7 +183,7 @@ function AgentLogo({ logo }: { logo: Agent["logo"] }) {
 
 export default async function AgentPickerSection() {
   const openHarnessRepo = (await getFlagshipRepos()).find(
-    (repo) => repo.fullName === "mifunedev/openharness",
+    (repo) => repo.fullName === "mifunedev/agro",
   );
   const starCount = openHarnessRepo?.starsVerified
     ? openHarnessRepo.stars.toLocaleString("en-US")
@@ -230,7 +230,7 @@ export default async function AgentPickerSection() {
               <span className="min-w-0 break-words">{starCount}</span>
             </p>
             <p className="mt-1 break-all font-mono text-xs text-muted-foreground">
-              mifunedev/openharness
+              mifunedev/agro
             </p>
             <a
               href={OFFERING_URLS.openSource}
