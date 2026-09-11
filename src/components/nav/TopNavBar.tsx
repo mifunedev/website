@@ -1,185 +1,202 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MdClose, MdMenu } from "react-icons/md";
-import { FaGithub } from "react-icons/fa";
-import { FiUser, FiLogOut } from "react-icons/fi";
-import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ExternalLink, Menu, X } from "lucide-react";
+import { ModeToggle } from "@/components/mode-toggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { OFFERING_URLS } from "@/config/offerings";
+
+const menuItems = [
+  {
+    href: OFFERING_URLS.openSource,
+    label: "Open Source",
+    external: true,
+  },
+  {
+    href: OFFERING_URLS.docs,
+    label: "Docs",
+    external: true,
+  },
+  {
+    href: OFFERING_URLS.pricing,
+    label: "Pricing",
+    external: false,
+  },
+  { href: OFFERING_URLS.support, label: "Support", external: false },
+];
 
 const TopNavbar = () => {
-  const { data: session } = useSession();
+  const pathname = usePathname();
   const [showSolidBackground, setShowSolidBackground] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.pageYOffset;
-      setShowSolidBackground(currentScroll > 50);
-      
-      // Detect which section is currently in view
-      const sections = ["contact"];
-      sections.forEach(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-          }
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setShowSolidBackground(window.scrollY > 40);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
-
-  const closeDrawer = () => {
-    setIsDrawerOpen(false);
-  };
-
-  // Define menu items in one place for consistency
-  const menuItems = [
-    { href: "/", label: "Home" },
-    // { href: "/#about", label: "About" },
-    // { href: "/blog", label: "Blog" }
-  ];
-
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ease-in-out ${
-          showSolidBackground 
-            ? "bg-black/90 backdrop-blur-lg shadow-lg shadow-black/20 py-2" 
-            : "bg-transparent py-4"
+      <a
+        href="#main-content"
+        className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-md bg-background px-4 py-3 font-montserrat text-sm font-semibold text-foreground shadow-xl transition-transform focus:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
+        Skip to main content
+      </a>
+      <nav
+        aria-label="Primary navigation"
+        className={`fixed left-0 top-0 z-50 w-full transition-colors duration-200 ${
+          showSolidBackground
+            ? "border-b border-border bg-background/90 shadow-lg backdrop-blur-lg"
+            : "bg-background/40 backdrop-blur-sm"
         }`}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <motion.div
-              className="flex items-center"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4">
+          <div className="flex min-w-0 shrink-0 items-center">
+            <Link
+              href="/"
+              aria-current={pathname === "/" ? "page" : undefined}
+              className="flex min-h-11 shrink-0 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              aria-label="Mifune home"
             >
-              <a href="/" className="flex items-center ml-2 gap-3">
-                <span className="text-2xl">🤖</span>
-                <span className="text-xl font-bold tracking-tight text-white hover:text-gray-300 transition-colors duration-200">
-                  Prompt Engineers <span className="text-blue-400">AI</span>
-                </span>
-              </a>
-            </motion.div>
-            
-            {/* Right side - GitHub link and Auth */}
-            <div className="flex items-center gap-4">
-              {/* <a
-                href="https://github.com/promptengineers-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-                aria-label="GitHub"
-              >
-                <FaGithub className="text-xl" />
-              </a> */}
+              <Image
+                src="/images/ruska_logo_200.png"
+                alt=""
+                width={28}
+                height={28}
+                className="mr-2 rounded-full"
+              />
+              <span className="font-montserrat text-xl font-medium tracking-wide text-foreground sm:text-2xl">
+                Mifune
+              </span>
+            </Link>
+          </div>
 
-              {session ? (
-                <div className="relative">
-                  <button
-                    onClick={() => setShowUserMenu(!showUserMenu)}
-                    className="flex items-center gap-2 rounded-full bg-gray-800/70 px-3 py-2 text-white hover:bg-gray-700/70 transition-colors duration-200"
-                  >
-                    <FiUser className="text-lg" />
-                    <span className="hidden sm:inline text-sm">{session.user.name}</span>
-                  </button>
+          <div className="hidden min-w-0 items-center gap-0.5 lg:flex xl:gap-1">
+            {menuItems.map((item) => {
+              const isCurrent = !item.external && pathname === item.href;
 
-                  {showUserMenu && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                      <div className="py-1">
-                        <Link
-                          href="/profile"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={() => setShowUserMenu(false)}
-                        >
-                          My Profile
-                        </Link>
-                        <Link
-                          href="/profile/edit"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={() => setShowUserMenu(false)}
-                        >
-                          Edit Profile
-                        </Link>
-                        <button
-                          onClick={() => {
-                            setShowUserMenu(false);
-                            signOut({ callbackUrl: '/' });
-                          }}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          <span className="flex items-center gap-2">
-                            <FiLogOut />
-                            Sign Out
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Link
-                    href="/login"
-                    className="rounded-full bg-transparent border border-white/30 text-white px-4 py-2 text-sm font-medium hover:bg-white/10 transition-all duration-200"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className="rounded-full bg-white text-black px-4 py-2 text-sm font-medium hover:bg-gray-200 transition-all duration-200"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              )}
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isCurrent ? "page" : undefined}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 font-montserrat text-sm font-medium transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus xl:px-3 ${
+                    isCurrent
+                      ? "bg-green-500/10 text-foreground shadow-[inset_0_-2px_0_0_var(--oh-accent)]"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {item.label}
+                  {item.external ? (
+                    <>
+                      <ExternalLink
+                        className="h-3.5 w-3.5"
+                        aria-hidden="true"
+                      />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </>
+                  ) : null}
+                </a>
+              );
+            })}
+
+            <a
+              href={OFFERING_URLS.cloud}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1.5 inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-oh-solid px-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:ml-2 xl:px-4"
+            >
+              Open Console
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+
+            <div className="ml-1">
+              <ModeToggle />
             </div>
+          </div>
 
-            {/* Mobile menu button */}
-            {/* <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleDrawer} 
-              className="flex items-center justify-center rounded-full bg-gray-800/70 p-2 text-white hover:bg-gray-700/70 transition-colors duration-200 sm:hidden"
-              aria-label="Open menu"
-            >
-              <MdMenu className="h-6 w-6" />
-            </motion.button> */}
-            
-            {/* Desktop menu */}
-            {/* <div className="hidden sm:flex items-center space-x-1">
-              
-              <motion.a
-                href="/#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="ml-2 rounded-full bg-white text-black px-5 py-2 text-sm font-montserrat tracking-wide font-medium shadow-lg shadow-white/10 hover:bg-gray-200 transition-all duration-200"
-              >
-                Join Beta
-              </motion.a>
-            </div> */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ModeToggle />
+            <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="Toggle navigation menu"
+                  className="flex h-11 w-11 items-center justify-center rounded-md border border-input bg-background text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                >
+                  {menuOpen ? (
+                    <X className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <Menu className="h-5 w-5" aria-hidden="true" />
+                  )}
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-60 p-2">
+                {menuItems.map((item) => {
+                  const isCurrent = !item.external && pathname === item.href;
+
+                  return (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <a
+                        href={item.href}
+                        aria-current={isCurrent ? "page" : undefined}
+                        {...(item.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className={`flex min-h-11 w-full items-center justify-between px-3 font-montserrat text-sm ${
+                          isCurrent
+                            ? "bg-green-500/10 font-semibold text-foreground"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {item.label}
+                        {item.external ? (
+                          <>
+                            <ExternalLink
+                              className="h-4 w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="sr-only">
+                              (opens in a new tab)
+                            </span>
+                          </>
+                        ) : null}
+                      </a>
+                    </DropdownMenuItem>
+                  );
+                })}
+                <DropdownMenuItem asChild>
+                  <a
+                    href={OFFERING_URLS.cloud}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-oh-solid px-4 font-montserrat text-sm font-semibold text-black focus:bg-green-400 focus:text-black"
+                  >
+                    Open Console
+                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-      </motion.nav>
-      
+      </nav>
     </>
   );
 };

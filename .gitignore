@@ -41,12 +41,7 @@ public/swe-*.js
 public/fallback-*.js
 public/workbox-*.js
 
-**/.env*
-**/.worktrees/
-**/.play*
-**/*.map
+.env*
 
-# openpsec
-**/openspec/
-**/AGENTS.md
-**/CLAUDE.md
+# claude code agent artifacts (screenshots, scratch)
+.claude/

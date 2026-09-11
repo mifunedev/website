@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 // JSON data for the projects
 const projects = [
@@ -12,12 +13,12 @@ const projects = [
     link: "https://www.meetup.com/plano-prompt-engineers",
   },
   {
-    title: "Enso - Open Source",
+    title: "Ruska Labs - Open Source",
     image:
       "https://github.com/ryaneggz/static/blob/main/pe-oss-gh-page.png?raw=true",
     description:
       "Open-source AI projects to help you build better chatbots, faster. Get started with our pre-built templates, or dive into the code to customize your own.",
-    link: "https://github.com/enso-labs",
+    link: "https://github.com/mifunedev",
   },
   {
     title: "Prompt Engineers AI - Legacy",
@@ -25,7 +26,7 @@ const projects = [
       "https://github.com/ryaneggz/static/blob/main/promptenigineers-landing.jpg?raw=true",
     description:
       "Elevate your workflows with AI-driven chats that turn talk into tasks. Design, automate, and innovate in a chat – where every message moves mountains.",
-    link: "https://enso.sh",
+    link: "https://ruska.ai",
   },
 ];
 
@@ -49,11 +50,14 @@ const ProjectSection = () => {
               className="group flex flex-col overflow-hidden rounded-lg bg-gray-800 shadow-md"
             >
               <div className="flex-shrink-0">
-                <img
+                <Image
                   className="h-auto w-full"
                   src={project.image}
                   alt={`Project ${startIndex + index + 1} Image`}
-                  style={{ maxHeight: "405px" }}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ maxHeight: "405px", width: "100%", height: "auto" }}
                 />
               </div>
               <div className="flex-grow p-4">

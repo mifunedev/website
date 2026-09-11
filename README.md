@@ -1,65 +1,28 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Features
+## Environment variables
 
-- **User Authentication**: Secure signup and login using NextAuth.js with email/password credentials
-- **User Profiles**: Professional profiles with social links (LinkedIn, GitHub, Twitter, Portfolio)
-- **Resume Management**: Upload and manage resumes (PDF, DOC, DOCX) with MongoDB GridFS
-- **Markdown Support**: Professional background with markdown formatting
-- **Career Intentions**: Specify if you're seeking work, hiring, or networking
+See the [canonical environment-variable guide](./docs/environment-variables.md) before starting local development.
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+ installed
-- MongoDB database (local or MongoDB Atlas)
-
-### Environment Variables
-
-Copy `.example.env` to `.env` and fill in the following variables:
-
-```env
-# MongoDB
-MONGO_DB_URI=your_mongodb_connection_string
-
-# NextAuth.js
-NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=http://localhost:3000
-
-# Other services (optional)
-AIRTABLE_API_KEY=your_airtable_key
-BREVO_API_KEY=your_brevo_key
-NEXT_PUBLIC_GA_ID=your_google_analytics_id
-```
-
-To generate a `NEXTAUTH_SECRET`, run:
-```bash
-openssl rand -base64 32
-```
-
-### Installation
-
-```bash
-npm install
-```
-
-### Running the Development Server
+First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### User Account Features
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. **Sign Up**: Create a new account at `/signup`
-2. **Sign In**: Log in to your account at `/login`
-3. **Profile**: View your profile at `/profile`
-4. **Edit Profile**: Update your profile at `/profile/edit`
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load custom Google Fonts.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
@@ -75,3 +38,50 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Blog Roadmap
+
+#### How to Pre-Configure files for Deep Agents  
+
+```py
+from deepagents import create_deep_agent
+from deepagents.middleware.filesystem import FilesystemMiddleware  
+from deepagents.backends.utils import create_file_data  
+from deepagents.backends.state import StateBackend  
+from langchain.tools import ToolRuntime
+from langchain.chat_models import init_chat_model
+from langgraph.store.memory import InMemoryStore  
+
+# Pre-configure files  
+initial_files = {  
+	"/project/README.md": create_file_data("# My Project\n\nInitial documentation."),  
+	"/project/src/app.py": create_file_data("def main():\n    print('Hello!')")  
+}  
+
+# Create runtime with pre-populated state  
+runtime = ToolRuntime(  
+	state={"messages": [], "files": initial_files},  
+	context=None,  
+	tool_call_id="tc",  
+	store=InMemoryStore(),  
+	stream_writer=lambda _: None,  
+	config={},  
+)  
+
+# Create backend with pre-configured files  
+backend = StateBackend(runtime)
+model = init_chat_model(model="openai:gpt-4.1-mini")
+agent = create_deep_agent(backend=backend, model=model)
+input = {
+	"messages": [{"role": "user", "content": "List the project files."}],
+	"files": initial_files,
+}
+for chunk in agent.stream(  
+	input,  
+	config={"configurable": {"thread_id": "openai"}},  # Dual-mode for HITL support  
+	stream_mode=["values"],
+
+): 
+	if "messages" in chunk:
+		chunk["messages"][-1].pretty_print()
+```

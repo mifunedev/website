@@ -1,0 +1,33 @@
+# progress
+
+## Wave 0 — 2026-06-02T22:41Z
+- US-000 DONE: removed `delete body.Message` in airtable.ts (tsc clean)
+- US-001 DONE: rebranded ~14 chrome files Ruska→Mifune; grep gate clean; manifest theme #22c55e
+- US-002 DONE: created src/config/pricing.ts (3+4 tiers) + src/sections/PainSection.tsx (green idiom, no FeatureCard)
+
+## Wave 1 — 2026-06-02T22:46Z
+- US-003..009 DONE: Hero/Pricing-Offer/ProductShowcase/SocialProof/About/CTA/FAQ rewritten in green idiom (tsc clean, purge clean)
+- US-011 DONE: /pricing route (4-tier ladder + vs-hiring + trust blocks)
+- US-012 DONE: /case-studies coming-soon route
+- section ids: #pain #about #what-you-get (#audit pending US-010b)
+
+## Wave 2 — 2026-06-02T22:49Z
+- US-010a DONE: page.tsx new 10-section order (FeaturesOverview removed; Pain+About added); nav menuItems = AI Workers/Case Studies/Pricing/About + Book Audit button -> /#audit
+- US-010b DONE: EnterpriseSection -> audit form id=audit, wired apiClient.contactFormSubmit({...,Referrer:audit-form}), inline green/red banners (no alert), res.ok branch
+- NOTE (follow-up): no mobile hamburger exists; 5 nav items + toggle may overflow at 375px
+
+## Wave 3 + Final — 2026-06-02T22:54Z
+- US-013 DONE: /services 308->/pricing (redirects() inside nextConfig, PWA intact); sitemap lists /pricing + /case-studies
+- US-014 DONE: footer Developers column (Blog/GitHub/Launch OpenHarness); RegisterButton demoted (no marketing usage); /login + dead anchors removed
+- Deleted dead non-routable src/app/v1.page.tsx snapshot (stale brand)
+- VALIDATION: tsc clean; npm run build green (23 pages); runtime smoke -> /,/pricing,/case-studies,/blog,/socials all 200; /services 308; homepage has Mifune hero + #audit/#pain anchors; only intentional footer dev links + ruska_logo placeholder remain
+- FOLLOW-UPS (open items): real Mifune logo/favicon/OG asset; mobile hamburger nav (5 items overflow risk at 375px); cal.com/mifune slug; Mifune Slack; founder headshot; exact prices/AI Partner monthly; privacy-consent line + GA4 submit event
+- ALL 16 stories pass.
+
+## Hide Workflow Academy case study — 2026-06-02T23:02Z
+- Removed SocialProofSection (the Workflow Academy teaser) from homepage page.tsx (file kept, now orphaned)
+- Removed "Case Studies" from nav (TopNavBar) + footer + sitemap
+- Added temporary 307 redirect /case-studies -> / in next.config (page file kept for reversibility)
+- Verified: /case-studies 307->/, homepage has no Workflow Academy / Case Studies mentions, build green, tsc clean
+- Reversible: delete the /case-studies redirect entry + re-add SocialProofSection/nav/footer/sitemap when a real case study ships
+

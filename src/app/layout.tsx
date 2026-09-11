@@ -2,111 +2,98 @@ import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
 import InitialLoadActiveUsers from "@/components/users/InitialLoadActiveUsers";
-import SessionProvider from "@/components/auth/SessionProvider";
-import { GA_ID, NODE_ENV } from "@/config/app";
-// import { botScript } from "@/config/bot";
+import JsonLd from "@/components/seo/JsonLd";
+import { ThemeProvider } from "@/components/theme-provider";
+import { GA_ID, NODE_ENV, SITE_URL } from "@/config/app";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 
-// Primary font - Montserrat for clean, minimal UI elements
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-montserrat",
 });
 
-// Futuristic font for "Be Present" headline
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-space",
 });
 
-const APP_NAME = "Prompt Engineers AI";
-const APP_DEFAULT_TITLE = "Prompt Engineers AI - Dallas Plano AI Community";
-const APP_TITLE_TEMPLATE = "%s | Prompt Engineers AI";
+const APP_NAME = "Mifune";
+const APP_DEFAULT_TITLE =
+  "Run coding agents in a sandbox, not on your machine.";
+const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
-  "Join 1,500+ developers and tech enthusiasts in Plano, TX exploring ChatGPT, LLMs, and the future of AI. Monthly meetups focused on prompt engineering, machine learning, and AI development.";
+  "Open Harness connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose Mifune-managed Open Harness Cloud.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: APP_DEFAULT_TITLE,
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
+  keywords: [
+    "coding agent workspace",
+    "persistent Docker workspace",
+    "Open Harness",
+    "Open Harness Cloud",
+    "managed coding agent workspace",
+    "self-hosted Open Harness",
+    "coding agent engineering support",
+  ],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: APP_DEFAULT_TITLE,
-    // startUpImage: [],
+    title: APP_NAME,
   },
   formatDetection: {
     telephone: false,
   },
-  openGraph: {
-    type: "website",
-    siteName: APP_NAME,
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
-    locale: "en_US",
-    url: "https://promptengineers-ai.github.io/website/",
-    images: [
-      {
-        url: "/images/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Prompt Engineers AI Community - Dallas Plano AI Meetup",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
-    },
-    description: APP_DESCRIPTION,
-    images: ["/images/og-image.png"],
-  },
-  keywords: [
-    "AI",
-    "ChatGPT",
-    "LLM",
-    "Machine Learning",
-    "Prompt Engineering",
-    "Dallas",
-    "Plano",
-    "Texas",
-    "Meetup",
-    "Community",
-    "Software Development",
-    "Technology",
-    "OpenAI",
-    "Langchain"
-  ],
-  authors: [{ name: "Prompt Engineers AI Community" }],
-  creator: "Prompt Engineers AI Community",
-  publisher: "Prompt Engineers AI Community",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    url: SITE_URL,
+    locale: "en_US",
+    title: APP_DEFAULT_TITLE,
+    description: APP_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: APP_DEFAULT_TITLE,
+    description: APP_DESCRIPTION,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000",
+  // Deliberately NOT keyed on `prefers-color-scheme`. The rendered theme is
+  // resolved from the client's local hour (plus any explicit choice), which
+  // the OS preference cannot predict — an OS-light visitor at 20:00 would
+  // otherwise get eggshell mobile chrome above a dark page. A single value
+  // matching the SSR/no-JS default (dark) can never contradict conditionally.
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -114,29 +101,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en" className={`${montserrat.variable} ${spaceGrotesk.variable}`}>
-      <Head>
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
-        />
-        <meta name="theme-color" content="#000" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
-      </Head>
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${spaceGrotesk.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-montserrat">
-        <SessionProvider>{children}</SessionProvider>
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+        {NODE_ENV === "production" && GA_ID ? (
+          <>
+            <GoogleAnalytics gaId={GA_ID} />
+            <InitialLoadActiveUsers />
+          </>
+        ) : null}
       </body>
-      {NODE_ENV === "production" && GA_ID && (
-        <>
-          <GoogleAnalytics gaId={GA_ID} />
-          <InitialLoadActiveUsers />
-        </>
-      )}
     </html>
   );
 }

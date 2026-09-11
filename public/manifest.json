@@ -1,32 +1,22 @@
 {
-    "name": "Prompt Engineers AI - Dallas Plano AI Community",
-    "short_name": "Prompt Engineers AI",
-    "description": "Join 1,500+ developers and tech enthusiasts in Plano, TX exploring ChatGPT, LLMs, and the future of AI",
-    "theme_color": "#000000",
-    "background_color": "#000000",
-    "display": "standalone",
-    "orientation": "portrait-primary",
-    "scope": "/",
-    "start_url": "/",
-    "categories": ["productivity", "education", "social"],
-    "icons": [
-        {
-            "src": "/icons-192.png",
-            "type": "image/png",
-            "sizes": "192x192",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/icons-256.png",
-            "type": "image/png",
-            "sizes": "256x256",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/icons-512.png",
-            "type": "image/png",
-            "sizes": "512x512",
-            "purpose": "any maskable"
-        }
-    ]
+  "name": "Mifune",
+  "short_name": "Mifune",
+  "theme_color": "#22c55e",
+  "background_color": "#f6f3ec",
+  "display": "browser",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ]
 }

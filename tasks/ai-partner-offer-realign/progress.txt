@@ -1,0 +1,17 @@
+# progress
+
+## W0 — 2026-06-02T23:31Z
+- US-001 DONE: pricing.ts recast — AI Partner base (highlight), DFY upsell, Managed top; free intake tier (price Free, no period/roiHint); ladderStage optional + positionLabel added; mechanics bullets (AOA spelled out, same-day SLA scoped to clients); tsc clean.
+
+## W1 — 2026-06-02T23:35Z
+- US-002 DONE: /pricing ladder intake->partner->DFY->managed; ROI-Framing guarded; standalone "What's in every AI Partner month" block; 3rd trust block (grid-cols-3); jump-straight purged; CTA button "Book a free AI Workflow Audit"; positionLabel by Step label.
+- US-003 DONE: homepage Offer header "Start with an AI Partner..."; BASE/UPSELL/TOP chips; highlight on AI Partner. tsc clean.
+
+## W2 + Final — 2026-06-02T23:39Z
+- US-004 Hero partner framing + "Book a Free AI Workflow Audit" CTA + removed 30-days chip
+- US-005 audit form = free intake (copy only; wiring intact: Referrer/apiClient/id=audit)
+- US-006 FAQ aligned (free intake, done-with-you vs done-for-you, typical month; 9 FAQs)
+- US-007 added deliverable "A quantified log of everything we build together"
+- US-008 CTA dropped 30-day deployment promise
+- VALIDATION: tsc clean; npm build green (23 pages); runtime smoke: home shows AI Partner base + START HERE + "Start with an AI Partner" + partner hero + free-audit CTA; /pricing shows "What's in every AI Partner month" + Measurable Deliverables + Free INTAKE + done-with-you; /case-studies still 307 (Workflow Academy stays hidden). ALL 8 stories pass.
+
