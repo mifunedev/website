@@ -21,9 +21,9 @@ const SocialPage = () => {
     },
     {
       name: "X",
-      handle: "@mifune_dev",
+      handle: "@mifunedev",
       icon: <FaXTwitter className="text-xl" />,
-      url: "https://x.com/mifune_dev",
+      url: "https://x.com/mifunedev",
     },
     {
       name: "Github",
