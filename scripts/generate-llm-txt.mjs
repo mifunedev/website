@@ -60,15 +60,15 @@ const MONTHLY_ESTIMATES = cloudNodePlans
   )
   .join("\n");
 
-const LLM_TXT_CONTENT = `# Mifune — Open Harness workspaces for coding agents
+const LLM_TXT_CONTENT = `# Mifune — AGRO workspaces for coding agents
 
 > Run coding agents in a sandbox, not on your machine.
 
 ## Category and value
 
-Open Harness is coding-agent workspace infrastructure: one repository connects to an isolated, persistent Docker workspace for its coding agents. It keeps project toolchains off the host and runs locally or on a remote VM.
+AGRO is coding-agent workspace infrastructure: one repository connects to an isolated, persistent Docker workspace for its coding agents. It keeps project toolchains off the host and runs locally or on a remote VM.
 
-Bring your preferred coding agent. Open Harness supports Claude Code, Codex, Pi, and other opt-in agent CLIs. On a VM, agents can work unattended or on schedules and can be reachable over Slack. Isolated git worktrees support parallel branches and delegation.
+Bring your preferred coding agent. AGRO supports Claude Code, Codex, Pi, and other opt-in agent CLIs. On a VM, agents can work unattended or on schedules and can be reachable over Slack. Isolated git worktrees support parallel branches and delegation.
 
 Grounded outcomes:
 
@@ -79,13 +79,13 @@ Grounded outcomes:
 
 ## Vendor
 
-Mifune maintains the Apache-2.0 licensed open-source Open Harness project, operates Open Harness Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
+Mifune maintains the Apache-2.0 licensed open-source AGRO project, operates AGRO Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
 
 ## Offering hierarchy
 
-### 1. Open Harness Cloud — recommended managed path
+### 1. AGRO Cloud — recommended managed path
 
-Open Harness Cloud gives coding agents an isolated, persistent workspace while Mifune operates the managed environment.
+AGRO Cloud gives coding agents an isolated, persistent workspace while Mifune operates the managed environment.
 
 - Cloud Console: https://console.mifune.dev
 - Pricing: https://mifune.dev/pricing
@@ -104,16 +104,16 @@ ${MONTHLY_ESTIMATES}
 
 Those are arithmetic on the hourly rate for a node that never stops; a node that runs only on weekdays costs proportionally less, and there is no monthly plan to buy at any usage.
 
-### 2. Open Harness Open Source — self-hosted path
+### 2. AGRO Open Source — self-hosted path
 
-The Apache-2.0 licensed project is for teams that want to inspect, adapt, and operate Open Harness themselves, locally or on a remote VM.
+The Apache-2.0 licensed project is for teams that want to inspect, adapt, and operate AGRO themselves, locally or on a remote VM.
 
-- GitHub: https://github.com/mifunedev/openharness
-- Documentation: https://oh.mifune.dev
+- GitHub: https://github.com/mifunedev/agro
+- Documentation: https://agro.mifune.dev
 
 ### 3. Forward-Deployed Engineering Support — optional for Cloud customers
 
-Mifune engineers can work alongside a Cloud customer's team to plan, implement, integrate, troubleshoot, and hand off an Open Harness Cloud deployment. An established deployment is not required before discussing a scope.
+Mifune engineers can work alongside a Cloud customer's team to plan, implement, integrate, troubleshoot, and hand off an AGRO Cloud deployment. An established deployment is not required before discussing a scope.
 
 - Support: https://mifune.dev/services
 - Contact: hello@mifune.dev
@@ -122,7 +122,7 @@ Mifune engineers can work alongside a Cloud customer's team to plan, implement, 
 
 - Homepage: https://mifune.dev
 - Pricing: https://mifune.dev/pricing
-- Open Harness documentation: https://oh.mifune.dev
+- AGRO documentation: https://agro.mifune.dev
 - Blog: https://mifune.dev/blog
 `;
 

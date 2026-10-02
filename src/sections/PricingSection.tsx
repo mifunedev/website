@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check, ExternalLink, Headphones } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import { entryPlan, formatHourlyUsd } from "@/config/cloud-pricing";
 import {
   cloudOptions,
@@ -17,13 +17,13 @@ export default function PricingSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-oh-accent">
-            Open Harness options
+            AGRO options
           </p>
           <h2 className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl md:text-5xl">
             Managed Cloud first. Self-host when you want control.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Choose Mifune-managed Open Harness Cloud or operate the Apache-2.0
+            Choose Mifune-managed AGRO Cloud or operate the Apache-2.0
             licensed project yourself. Cloud customers can add Mifune
             engineering support when adoption needs hands-on help.
           </p>
@@ -55,7 +55,7 @@ export default function PricingSection() {
                   <div className="pointer-events-none absolute right-0 top-0 h-52 w-52 rounded-full bg-green-500/10 blur-3xl" />
                 ) : null}
                 <div className="relative">
-                  <OpenHarnessBrandBar
+                  <AgroBrandBar
                     density="card"
                     context={
                       isCloud
@@ -142,7 +142,7 @@ export default function PricingSection() {
         </div>
 
         <aside className="mt-5 rounded-2xl border border-border bg-card px-6 py-5 sm:px-8">
-          <OpenHarnessBrandBar
+          <AgroBrandBar
             density="compact"
             context="FOR CLOUD · MIFUNE ENGINEERING"
             className="mb-5 border-b border-border pb-4 text-foreground"

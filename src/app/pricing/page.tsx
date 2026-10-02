@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
 import FleetCalculator from "@/components/pricing/FleetCalculator";
 import JsonLd from "@/components/seo/JsonLd";
@@ -12,16 +12,16 @@ import {
   breadcrumbSchema,
   cloudServiceSchema,
   faqPageSchema,
-  openHarnessSoftwareSchema,
+  agroSoftwareSchema,
 } from "@/lib/schema";
 import CTASection from "@/sections/CTASection";
 import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 
-const title = "Open Harness Cloud pricing";
+const title = "AGRO Cloud pricing";
 
 const description =
-  "Open Harness Cloud nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
+  "AGRO Cloud nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
 
 export const metadata: Metadata = {
   title,
@@ -69,7 +69,7 @@ export default function PricingPage() {
   return (
     <>
       <JsonLd data={cloudServiceSchema()} />
-      <JsonLd data={openHarnessSoftwareSchema()} />
+      <JsonLd data={agroSoftwareSchema()} />
       <JsonLd data={faqPageSchema(pricingFaqs)} />
       <JsonLd
         data={breadcrumbSchema([
@@ -90,7 +90,7 @@ export default function PricingPage() {
           <div className="absolute left-1/2 top-1/4 h-[25rem] w-[min(44rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/15 blur-[120px]" />
 
           <div className="relative mx-auto max-w-4xl text-center">
-            <OpenHarnessBrandBar
+            <AgroBrandBar
               density="hero"
               status="Cloud pricing by Mifune"
               className="mx-auto mb-7 w-fit justify-center text-foreground"
@@ -99,7 +99,7 @@ export default function PricingPage() {
               Pay by the hour your node runs.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-              A node is a dedicated cloud VM running your Open Harness
+              A node is a dedicated cloud VM running your AGRO
               workspace, and you pay for the hours it runs. AI usage is not
               included: you sign in to Claude or Pi inside the workspace with
               your own account, and pay that provider directly.
@@ -213,7 +213,7 @@ export default function PricingPage() {
             className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20"
           />
           <div className="relative mx-auto max-w-6xl">
-            <OpenHarnessBrandBar
+            <AgroBrandBar
               density="card"
               context="OPEN SOURCE · MAINTAINED BY MIFUNE"
               className="mb-10 border-b border-oh-rule pb-5 text-oh-ink"
@@ -230,7 +230,7 @@ export default function PricingPage() {
                   Or run it yourself.
                 </h2>
                 <p className="mt-5 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
-                  Open Harness is Apache-2.0 licensed and genuinely free. Clone
+                  AGRO is Apache-2.0 licensed and genuinely free. Clone
                   it, run the workspace on your own laptop or VM, and pay Mifune
                   nothing. Cloud is for teams that would rather not operate the
                   machine.
@@ -241,7 +241,7 @@ export default function PricingPage() {
                   rel="noopener noreferrer"
                   className="hover:border-oh-accent/50 mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl border border-oh-rule bg-oh-raised px-5 py-3 text-center font-montserrat text-sm font-semibold text-oh-ink transition-colors hover:text-oh-accent-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-oh-paper"
                 >
-                  Explore Open Harness on GitHub
+                  Explore AGRO on GitHub
                   <ExternalLink
                     className="h-4 w-4 shrink-0"
                     aria-hidden="true"

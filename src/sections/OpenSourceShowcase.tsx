@@ -33,7 +33,7 @@ export default function OpenSourceShowcase({
             Open infrastructure, built in public.
           </h2>
           <p className="mx-auto mt-4 max-w-3xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Explore Open Harness and related Mifune agent projects on GitHub.
+            Explore AGRO and related Mifune agent projects on GitHub.
             Read the code, inspect how the pieces work, and evaluate the
             projects for your workflow.
           </p>

@@ -25,7 +25,7 @@ const APP_DEFAULT_TITLE =
   "Run coding agents in a sandbox, not on your machine.";
 const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
-  "Open Harness connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose Mifune-managed Open Harness Cloud.";
+  "AGRO (Agent Governance Runtime Orchestrator) connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose Mifune-managed AGRO Cloud.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -41,10 +41,10 @@ export const metadata: Metadata = {
   keywords: [
     "coding agent workspace",
     "persistent Docker workspace",
-    "Open Harness",
-    "Open Harness Cloud",
+    "AGRO",
+    "AGRO Cloud",
     "managed coding agent workspace",
-    "self-hosted Open Harness",
+    "self-hosted AGRO",
     "coding agent engineering support",
   ],
   manifest: "/manifest.json",

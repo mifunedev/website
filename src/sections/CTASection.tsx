@@ -10,7 +10,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const deploymentBenefits = [
   "A persistent, isolated workspace for your coding agents",
-  "A Mifune-managed Open Harness Cloud option",
+  "A Mifune-managed AGRO Cloud option",
   "Optional hands-on deployment support for Cloud customers",
 ];
 
@@ -26,7 +26,7 @@ type CTASectionProps = {
 };
 
 export default function CTASection({
-  referrer = "open-harness-deployment-form",
+  referrer = "agro-deployment-form",
 }: CTASectionProps) {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
@@ -94,11 +94,11 @@ export default function CTASection({
             id="deployment-heading"
             className="mt-4 text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl"
           >
-            Discuss your Open Harness deployment.
+            Discuss your AGRO deployment.
           </h2>
           <p className="mt-6 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
             Tell us how your team plans to run coding agents. We’ll use the
-            details to discuss Open Harness Cloud and, for Cloud customers,
+            details to discuss AGRO Cloud and, for Cloud customers,
             optional hands-on deployment support.
           </p>
 

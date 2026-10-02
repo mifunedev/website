@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { OFFERING_URLS } from "@/config/offerings";
 import { getFlagshipRepos } from "@/lib/github";
 
-const DOCS_BASE_URL = "https://oh.mifune.dev";
+const DOCS_BASE_URL = "https://agro.mifune.dev";
 
 type Agent = {
   name: string;
@@ -182,11 +182,11 @@ function AgentLogo({ logo }: { logo: Agent["logo"] }) {
 }
 
 export default async function AgentPickerSection() {
-  const openHarnessRepo = (await getFlagshipRepos()).find(
-    (repo) => repo.fullName === "mifunedev/openharness",
+  const agroRepo = (await getFlagshipRepos()).find(
+    (repo) => repo.fullName === "mifunedev/agro",
   );
-  const starCount = openHarnessRepo?.starsVerified
-    ? openHarnessRepo.stars.toLocaleString("en-US")
+  const starCount = agroRepo?.starsVerified
+    ? agroRepo.stars.toLocaleString("en-US")
     : "Count unavailable";
 
   return (
@@ -209,7 +209,7 @@ export default async function AgentPickerSection() {
               id="open-source-signal-heading"
               className="mt-3 text-balance font-montserrat text-2xl font-bold leading-tight text-foreground sm:text-3xl"
             >
-              Help more agent builders find Open Harness.
+              Help more agent builders find AGRO.
             </h2>
             <p className="mt-3 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground sm:text-base">
               If the sandbox model saves you from one broken local agent setup,
@@ -230,7 +230,7 @@ export default async function AgentPickerSection() {
               <span className="min-w-0 break-words">{starCount}</span>
             </p>
             <p className="mt-1 break-all font-mono text-xs text-muted-foreground">
-              mifunedev/openharness
+              mifunedev/agro
             </p>
             <a
               href={OFFERING_URLS.openSource}

@@ -9,7 +9,7 @@ import {
   Settings,
   Waypoints,
 } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/config/app";
@@ -22,7 +22,7 @@ const supportAreas = [
     icon: Waypoints,
     title: "Deployment planning",
     description:
-      "Translate your workflow, constraints, environment, and access needs into a practical Open Harness Cloud deployment plan.",
+      "Translate your workflow, constraints, environment, and access needs into a practical AGRO Cloud deployment plan.",
     bullets: [
       "Workflow and constraint review",
       "Environment and access planning",
@@ -33,9 +33,9 @@ const supportAreas = [
     icon: Code2,
     title: "Implementation and integration",
     description:
-      "Bring Mifune engineers alongside your team for hands-on implementation work connected to Open Harness Cloud.",
+      "Bring Mifune engineers alongside your team for hands-on implementation work connected to AGRO Cloud.",
     bullets: [
-      "Open Harness implementation",
+      "AGRO implementation",
       "System and workflow integration",
       "Deployment configuration",
     ],
@@ -58,7 +58,7 @@ const engagementSteps = [
     step: "01",
     title: "Share your workflow and constraints",
     description:
-      "Tell Mifune how your team works, where Open Harness Cloud should fit, and what environment, access, or integration constraints matter.",
+      "Tell Mifune how your team works, where AGRO Cloud should fit, and what environment, access, or integration constraints matter.",
   },
   {
     step: "02",
@@ -82,7 +82,7 @@ export default function ServicesPage() {
         data={breadcrumbSchema([
           { name: "Mifune", url: SITE_URL },
           {
-            name: "Open Harness Cloud Engineering Support",
+            name: "AGRO Cloud Engineering Support",
             url: `${SITE_URL}/services`,
           },
         ])}
@@ -102,15 +102,15 @@ export default function ServicesPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="text-center lg:text-left">
               <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-oh-accent">
-                Mifune Engineering | Open Harness Cloud
+                Mifune Engineering | AGRO Cloud
               </p>
-              <OpenHarnessBrandBar
+              <AgroBrandBar
                 density="compact"
                 context="FOR CLOUD · MIFUNE ENGINEERING"
                 className="mx-auto mb-6 w-fit text-foreground lg:mx-0"
               />
               <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                Adopt Open Harness Cloud with Mifune engineers{" "}
+                Adopt AGRO Cloud with Mifune engineers{" "}
                 <span className="font-space text-oh-accent">
                   alongside your team.
                 </span>
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  Explore Open Harness Cloud
+                  Explore AGRO Cloud
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
@@ -150,7 +150,7 @@ export default function ServicesPage() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
                 >
-                  Read the Open Harness docs
+                  Read the AGRO docs
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
@@ -178,7 +178,7 @@ export default function ServicesPage() {
                       aria-hidden="true"
                     />
                     <span className="ml-1 truncate font-mono text-[11px] text-muted-foreground sm:text-sm">
-                      ~/open-harness — support-workflow
+                      ~/agro — support-workflow
                     </span>
                   </div>
                   <span className="shrink-0 rounded-full border border-green-500/30 bg-green-500/10 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-oh-accent">
@@ -240,7 +240,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <figcaption id="support-workflow-caption" className="sr-only">
-                Open Harness Cloud engineering support begins with your workflow
+                AGRO Cloud engineering support begins with your workflow
                 and constraints, moves through an agreed scope, and continues
                 through planning, implementation, troubleshooting, and handoff.
               </figcaption>
@@ -262,7 +262,7 @@ export default function ServicesPage() {
               </h2>
               <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
                 Bring Mifune in when your team needs help turning constraints
-                into a plan, integrating Open Harness Cloud, troubleshooting the
+                into a plan, integrating AGRO Cloud, troubleshooting the
                 deployment, or preparing a handoff.
               </p>
             </div>
@@ -328,7 +328,7 @@ export default function ServicesPage() {
 
             <div className="grid gap-4 lg:grid-cols-2 lg:items-stretch">
               <article className="rounded-2xl border border-green-500/40 bg-green-500/10 p-6">
-                <OpenHarnessBrandBar
+                <AgroBrandBar
                   density="card"
                   context="CLOUD · MANAGED BY MIFUNE"
                   className="mb-6 border-b border-green-500/30 pb-4 text-foreground"
@@ -338,7 +338,7 @@ export default function ServicesPage() {
                   Primary managed path
                 </p>
                 <h3 className="mt-2 font-montserrat text-2xl font-semibold text-foreground">
-                  Open Harness Cloud
+                  AGRO Cloud
                 </h3>
                 <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
                   An isolated, persistent coding-agent workspace with Mifune
@@ -346,7 +346,7 @@ export default function ServicesPage() {
                 </p>
               </article>
               <article className="rounded-2xl border border-border bg-card p-6">
-                <OpenHarnessBrandBar
+                <AgroBrandBar
                   density="card"
                   context="OPEN SOURCE · MAINTAINED BY MIFUNE"
                   className="mb-6 border-b border-border pb-4 text-foreground"
@@ -359,18 +359,18 @@ export default function ServicesPage() {
                   Self-hosted path
                 </p>
                 <h3 className="mt-2 font-montserrat text-2xl font-semibold text-foreground">
-                  Open Harness Open Source
+                  AGRO Open Source
                 </h3>
                 <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
                   The Apache-2.0 licensed project for teams that want to
-                  inspect, adapt, and operate Open Harness locally or on a
+                  inspect, adapt, and operate AGRO locally or on a
                   remote VM.
                 </p>
               </article>
             </div>
 
             <aside className="mt-4 rounded-2xl border border-border bg-background p-5 sm:p-6">
-              <OpenHarnessBrandBar
+              <AgroBrandBar
                 density="compact"
                 context="FOR CLOUD · MIFUNE ENGINEERING"
                 className="mb-4 text-foreground"
@@ -398,7 +398,7 @@ export default function ServicesPage() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
-                Explore Open Harness Cloud
+                Explore AGRO Cloud
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
@@ -408,7 +408,7 @@ export default function ServicesPage() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
-                Explore Open Harness on GitHub
+                Explore AGRO on GitHub
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
@@ -457,7 +457,7 @@ export default function ServicesPage() {
               Mifune engineering
             </p>
             <h2 className="mx-auto mt-5 max-w-3xl text-balance font-montserrat text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-              Discuss your Open Harness Cloud deployment.
+              Discuss your AGRO Cloud deployment.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
               Share the workflow, constraints, or deployment work where your

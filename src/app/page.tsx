@@ -4,14 +4,14 @@ import { faqs } from "@/data/faqs";
 import {
   cloudServiceSchema,
   faqPageSchema,
-  openHarnessSoftwareSchema,
+  agroSoftwareSchema,
 } from "@/lib/schema";
 import AgentPickerSection from "@/sections/AgentPickerSection";
 import CTASection from "@/sections/CTASection";
 import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 import HeroSection from "@/sections/HeroSection";
-import OpenHarnessValueSection from "@/sections/OpenHarnessValueSection";
+import AgroValueSection from "@/sections/AgroValueSection";
 import OpenSourceSection from "@/sections/OpenSourceSection";
 import PricingSection from "@/sections/PricingSection";
 
@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={cloudServiceSchema()} />
-      <JsonLd data={openHarnessSoftwareSchema()} />
+      <JsonLd data={agroSoftwareSchema()} />
       <JsonLd data={faqPageSchema(faqs)} />
       <header>
         <TopNavBar />
@@ -28,12 +28,12 @@ export default function Home() {
         <HeroSection />
         <OpenSourceSection />
         <AgentPickerSection />
-        <OpenHarnessValueSection />
+        <AgroValueSection />
         <PricingSection />
         <FAQSection
           faqs={faqs}
           eyebrow="Common questions"
-          heading="Open Harness, clearly explained."
+          heading="AGRO, clearly explained."
           subheading="What the workspace does, who operates it, and how Mifune can help."
           idPrefix="homepage-faq"
         />
