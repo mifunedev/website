@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with AGRO: Choose Your Coding-Agent Workspace"
 date: "2026-07-02"
-excerpt: "AGRO is an isolated, persistent Docker workspace for coding agents. Choose managed Cloud or the Apache-2.0 licensed self-hosted path, then follow this concise on-ramp."
+excerpt: "AGRO is an isolated, persistent Docker workspace for coding agents. Choose the managed Mifune Cloud Console or the Apache-2.0 licensed self-hosted path, then follow this concise on-ramp."
 categories: ["AGRO", "Getting Started", "AI Infrastructure", "Developer Guide"]
 author:
   name: "Ryan Eggleston"
@@ -24,9 +24,9 @@ This post is a concise on-ramp. It does **not** reproduce the full setup manual 
 
 ## Choose your path
 
-- **AGRO Cloud:** Mifune operates the managed environment while your coding agents work in an isolated, persistent workspace. Start in the [Mifune Cloud Console](https://console.mifune.dev).
+- **Mifune Cloud Console:** Mifune operates the managed environment while your coding agents work in an isolated, persistent workspace. Start in the [Console](https://console.mifune.dev).
 - **AGRO Open Source:** Inspect, adapt, and operate the Apache-2.0 licensed project yourself, locally or on a remote VM. The self-hosted walkthrough below follows this path.
-- **Engineering support for Cloud:** Cloud customers can ask Mifune engineers to help plan, implement, integrate, troubleshoot, and hand off a deployment. [Explore support](/services).
+- **Engineering support for Console customers:** Console customers can ask Mifune engineers to help plan, implement, integrate, troubleshoot, and hand off a deployment. [Explore support](/services).
 
 ## What you get
 
@@ -138,4 +138,4 @@ From here you have an authenticated, isolated agent sandbox. For private-reposit
 
 Continue with the [AGRO docs](https://agro.mifune.dev) for private-repository remotes, optional agent CLIs, Slack setup, schedules, and worktrees.
 
-Prefer Mifune to operate the environment? Open the [Mifune Cloud Console](https://console.mifune.dev). If your Cloud adoption needs hands-on planning, implementation, integration, troubleshooting, or handoff help, [discuss engineering support](/services).
+Prefer Mifune to operate the environment? Open the [Mifune Cloud Console](https://console.mifune.dev). If your Console adoption needs hands-on planning, implementation, integration, troubleshooting, or handoff help, [discuss engineering support](/services).

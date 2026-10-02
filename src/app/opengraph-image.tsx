@@ -64,7 +64,7 @@ export default function OGImage() {
               marginTop: "32px",
             }}
           >
-            AGRO Cloud · Apache-2.0 licensed open source · Mifune
+            Mifune Cloud Console · Apache-2.0 licensed open source · Mifune
             engineering
           </div>
         </div>

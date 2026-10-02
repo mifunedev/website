@@ -1,5 +1,5 @@
 /**
- * Published AGRO Cloud node prices — the single source of every price
+ * Published Mifune Cloud Console node prices — the single source of every price
  * string on this site. A price change is a one-file edit here.
  *
  * Provenance — the five-rung ladder, transcribed from:

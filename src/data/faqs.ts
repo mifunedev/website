@@ -30,22 +30,22 @@ export const faqs: Faq[] = [
   {
     question: "What does Mifune provide?",
     answer:
-      "Mifune maintains the open-source AGRO project, operates AGRO Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.",
+      "Mifune maintains the open-source AGRO project, operates the Mifune Cloud Console as the managed path, and offers forward-deployed engineering support to Console customers.",
   },
   {
-    question: "How do AGRO Cloud and open source differ?",
+    question: "How do the Mifune Cloud Console and open source differ?",
     answer:
-      "With AGRO Cloud, Mifune operates the managed environment. With open source, your team can inspect and adapt AGRO, then operate it locally or on a remote VM. Choose based on who should own the environment and review each destination for path-specific details.",
+      "With the Mifune Cloud Console, Mifune operates the managed environment. With open source, your team can inspect and adapt AGRO, then operate it locally or on a remote VM. Choose based on who should own the environment and review each destination for path-specific details.",
   },
   {
     question: "When should I use engineering support?",
     answer:
-      "Forward-deployed support is optional for AGRO Cloud customers who want Mifune engineers alongside their team to plan, implement, integrate, troubleshoot, or hand off a Cloud deployment.",
+      "Forward-deployed support is optional for Console customers who want Mifune engineers alongside their team to plan, implement, integrate, troubleshoot, or hand off a Console deployment.",
   },
   {
     question: "How do I start?",
     answer:
-      "Open console.mifune.dev for the managed Cloud path. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for Cloud.",
+      "Open console.mifune.dev for the managed Console path. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
   },
 ];
 

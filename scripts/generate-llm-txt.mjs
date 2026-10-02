@@ -79,13 +79,13 @@ Grounded outcomes:
 
 ## Vendor
 
-Mifune maintains the Apache-2.0 licensed open-source AGRO project, operates AGRO Cloud as the managed path, and offers forward-deployed engineering support to Cloud customers.
+Mifune maintains the Apache-2.0 licensed open-source AGRO project, operates the Mifune Cloud Console as the managed path, and offers forward-deployed engineering support to Console customers.
 
 ## Offering hierarchy
 
-### 1. AGRO Cloud — recommended managed path
+### 1. Mifune Cloud Console — recommended managed path
 
-AGRO Cloud gives coding agents an isolated, persistent workspace while Mifune operates the managed environment.
+The Mifune Cloud Console gives coding agents an isolated, persistent workspace while Mifune operates the managed environment.
 
 - Cloud Console: https://console.mifune.dev
 - Pricing: https://mifune.dev/pricing
@@ -111,9 +111,9 @@ The Apache-2.0 licensed project is for teams that want to inspect, adapt, and op
 - GitHub: https://github.com/mifunedev/agro
 - Documentation: https://agro.mifune.dev
 
-### 3. Forward-Deployed Engineering Support — optional for Cloud customers
+### 3. Forward-Deployed Engineering Support — optional for Console customers
 
-Mifune engineers can work alongside a Cloud customer's team to plan, implement, integrate, troubleshoot, and hand off an AGRO Cloud deployment. An established deployment is not required before discussing a scope.
+Mifune engineers can work alongside a Console customer's team to plan, implement, integrate, troubleshoot, and hand off a Mifune Cloud Console deployment. An established deployment is not required before discussing a scope.
 
 - Support: https://mifune.dev/services
 - Contact: hello@mifune.dev

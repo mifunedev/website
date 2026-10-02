@@ -25,7 +25,7 @@ const APP_DEFAULT_TITLE =
   "Run coding agents in a sandbox, not on your machine.";
 const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
-  "AGRO (Agent Governance Runtime Orchestrator) connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose Mifune-managed AGRO Cloud.";
+  "AGRO (Agent Governance Runtime Orchestrator) connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose the Mifune Cloud Console.";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "coding agent workspace",
     "persistent Docker workspace",
     "AGRO",
-    "AGRO Cloud",
+    "Mifune Cloud Console",
     "managed coding agent workspace",
     "self-hosted AGRO",
     "coding agent engineering support",

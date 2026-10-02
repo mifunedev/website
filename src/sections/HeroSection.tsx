@@ -23,7 +23,7 @@ const flowNodes = [
   },
   {
     label: "Operator chooses",
-    detail: "Mifune-managed Cloud or self-hosted",
+    detail: "Mifune Cloud Console or self-hosted",
     emphasis: true,
   },
 ] as const;
@@ -51,8 +51,8 @@ const HeroSection = () => {
           <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
             AGRO connects one repository to an isolated, persistent
             Docker workspace. Bring your preferred coding agent, keep its
-            toolchain off your host, then self-host it or choose Mifune-managed
-            AGRO Cloud.
+            toolchain off your host, then self-host it or choose the Mifune Cloud
+            Console.
           </p>
 
           <div className="mb-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
@@ -220,7 +220,7 @@ const HeroSection = () => {
           <figcaption id="cloud-operating-model-caption" className="sr-only">
             AGRO workspace flow: one repository connects to a
             persistent, isolated Docker sandbox, the operator launches a
-            preferred coding agent inside it, and chooses Mifune-managed Cloud
+            preferred coding agent inside it, and chooses the Mifune Cloud Console
             or self-hosting.
           </figcaption>
         </motion.figure>

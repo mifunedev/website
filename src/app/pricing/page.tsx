@@ -18,10 +18,10 @@ import CTASection from "@/sections/CTASection";
 import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 
-const title = "AGRO Cloud pricing";
+const title = "Mifune Cloud Console pricing";
 
 const description =
-  "AGRO Cloud nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
+  "Mifune Cloud Console nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
 
 export const metadata: Metadata = {
   title,
@@ -92,7 +92,7 @@ export default function PricingPage() {
           <div className="relative mx-auto max-w-4xl text-center">
             <AgroBrandBar
               density="hero"
-              status="Cloud pricing by Mifune"
+              status="Console pricing by Mifune"
               className="mx-auto mb-7 w-fit justify-center text-foreground"
             />
             <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl">
@@ -193,7 +193,7 @@ export default function PricingPage() {
             <FleetCalculator />
 
             <p className="mt-8 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground">
-              Cloud customers can add hands-on help with adoption from our team:{" "}
+              Console customers can add hands-on help with adoption from our team:{" "}
               <Link
                 href={OFFERING_URLS.support}
                 className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
@@ -232,7 +232,7 @@ export default function PricingPage() {
                 <p className="mt-5 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
                   AGRO is Apache-2.0 licensed and genuinely free. Clone
                   it, run the workspace on your own laptop or VM, and pay Mifune
-                  nothing. Cloud is for teams that would rather not operate the
+                  nothing. The Console is for teams that would rather not operate the
                   machine.
                 </p>
                 <a

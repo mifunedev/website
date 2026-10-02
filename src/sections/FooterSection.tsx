@@ -32,7 +32,7 @@ const FooterSection = () => {
             </Link>
             <p className="mt-4 font-montserrat text-sm leading-relaxed text-muted-foreground">
               Mifune operates managed workspaces for coding agents and leads
-              optional engineering support for Cloud customers.
+              optional engineering support for Console customers.
             </p>
             <AgroBrandBar
               density="compact"
@@ -53,7 +53,7 @@ const FooterSection = () => {
                   rel="noopener noreferrer"
                   className={footerLinkClass}
                 >
-                  AGRO Cloud
+                  Mifune Cloud Console
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
@@ -118,7 +118,7 @@ const FooterSection = () => {
             <ul>
               <li>
                 <Link href={OFFERING_URLS.support} className={footerLinkClass}>
-                  Cloud engineering support
+                  Console engineering support
                 </Link>
               </li>
               <li>

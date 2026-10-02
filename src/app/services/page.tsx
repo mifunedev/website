@@ -22,7 +22,7 @@ const supportAreas = [
     icon: Waypoints,
     title: "Deployment planning",
     description:
-      "Translate your workflow, constraints, environment, and access needs into a practical AGRO Cloud deployment plan.",
+      "Translate your workflow, constraints, environment, and access needs into a practical Mifune Cloud Console deployment plan.",
     bullets: [
       "Workflow and constraint review",
       "Environment and access planning",
@@ -33,7 +33,7 @@ const supportAreas = [
     icon: Code2,
     title: "Implementation and integration",
     description:
-      "Bring Mifune engineers alongside your team for hands-on implementation work connected to AGRO Cloud.",
+      "Bring Mifune engineers alongside your team for hands-on implementation work connected to the Mifune Cloud Console.",
     bullets: [
       "AGRO implementation",
       "System and workflow integration",
@@ -58,7 +58,7 @@ const engagementSteps = [
     step: "01",
     title: "Share your workflow and constraints",
     description:
-      "Tell Mifune how your team works, where AGRO Cloud should fit, and what environment, access, or integration constraints matter.",
+      "Tell Mifune how your team works, where the Console should fit, and what environment, access, or integration constraints matter.",
   },
   {
     step: "02",
@@ -70,7 +70,7 @@ const engagementSteps = [
     step: "03",
     title: "Plan, implement, and hand off",
     description:
-      "Work through the agreed Cloud deployment scope together. You do not need an established deployment before the conversation starts.",
+      "Work through the agreed Console deployment scope together. You do not need an established deployment before the conversation starts.",
   },
 ];
 
@@ -82,7 +82,7 @@ export default function ServicesPage() {
         data={breadcrumbSchema([
           { name: "Mifune", url: SITE_URL },
           {
-            name: "AGRO Cloud Engineering Support",
+            name: "Mifune Cloud Console engineering support",
             url: `${SITE_URL}/services`,
           },
         ])}
@@ -102,22 +102,22 @@ export default function ServicesPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="text-center lg:text-left">
               <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-oh-accent">
-                Mifune Engineering | AGRO Cloud
+                Mifune Engineering | Cloud Console
               </p>
               <AgroBrandBar
                 density="compact"
-                context="FOR CLOUD · MIFUNE ENGINEERING"
+                context="FOR CONSOLE · MIFUNE ENGINEERING"
                 className="mx-auto mb-6 w-fit text-foreground lg:mx-0"
               />
               <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                Adopt AGRO Cloud with Mifune engineers{" "}
+                Adopt the Mifune Cloud Console with our engineers{" "}
                 <span className="font-space text-oh-accent">
                   alongside your team.
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
                 Support is useful when your team wants help translating its
-                workflow and constraints into a Cloud deployment, integrating
+                workflow and constraints into a Console deployment, integrating
                 current systems, troubleshooting adoption, or preparing a clear
                 handoff.
               </p>
@@ -128,7 +128,7 @@ export default function ServicesPage() {
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Mail className="h-4 w-4" aria-hidden="true" />
-                  Discuss your Cloud deployment
+                  Discuss your Console deployment
                 </a>
                 <a
                   href={OFFERING_URLS.cloud}
@@ -136,14 +136,14 @@ export default function ServicesPage() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  Explore AGRO Cloud
+                  Explore the Mifune Cloud Console
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
               </div>
 
               <p className="mt-7 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                For Cloud customers · No established deployment required ·{" "}
+                For Console customers · No established deployment required ·{" "}
                 <a
                   href={OFFERING_URLS.docs}
                   target="_blank"
@@ -199,7 +199,7 @@ export default function ServicesPage() {
                     },
                     {
                       icon: Cloud,
-                      label: "Cloud deployment work",
+                      label: "Console deployment work",
                       detail: "Plan, implement, troubleshoot, and hand off",
                     },
                   ].map((item, index) => {
@@ -240,7 +240,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <figcaption id="support-workflow-caption" className="sr-only">
-                AGRO Cloud engineering support begins with your workflow
+                Mifune Cloud Console engineering support begins with your workflow
                 and constraints, moves through an agreed scope, and continues
                 through planning, implementation, troubleshooting, and handoff.
               </figcaption>
@@ -258,11 +258,11 @@ export default function ServicesPage() {
                 id="support-scope-heading"
                 className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl md:text-5xl"
               >
-                Use support when Cloud adoption needs hands-on engineering.
+                Use support when Console adoption needs hands-on engineering.
               </h2>
               <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
                 Bring Mifune in when your team needs help turning constraints
-                into a plan, integrating AGRO Cloud, troubleshooting the
+                into a plan, integrating the Console, troubleshooting the
                 deployment, or preparing a handoff.
               </p>
             </div>
@@ -321,7 +321,7 @@ export default function ServicesPage() {
                 id="relationship-heading"
                 className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl"
               >
-                Cloud is managed. Open source is self-hosted. Support adds
+                The Console is managed. Open source is self-hosted. Support adds
                 Mifune engineering.
               </h2>
             </div>
@@ -330,7 +330,7 @@ export default function ServicesPage() {
               <article className="rounded-2xl border border-green-500/40 bg-green-500/10 p-6">
                 <AgroBrandBar
                   density="card"
-                  context="CLOUD · MANAGED BY MIFUNE"
+                  context="CONSOLE · MANAGED BY MIFUNE"
                   className="mb-6 border-b border-green-500/30 pb-4 text-foreground"
                 />
                 <Cloud className="h-6 w-6 text-oh-accent" aria-hidden="true" />
@@ -338,7 +338,7 @@ export default function ServicesPage() {
                   Primary managed path
                 </p>
                 <h3 className="mt-2 font-montserrat text-2xl font-semibold text-foreground">
-                  AGRO Cloud
+                  Mifune Cloud Console
                 </h3>
                 <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
                   An isolated, persistent coding-agent workspace with Mifune
@@ -372,13 +372,13 @@ export default function ServicesPage() {
             <aside className="mt-4 rounded-2xl border border-border bg-background p-5 sm:p-6">
               <AgroBrandBar
                 density="compact"
-                context="FOR CLOUD · MIFUNE ENGINEERING"
+                context="FOR CONSOLE · MIFUNE ENGINEERING"
                 className="mb-4 text-foreground"
               />
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                    Optional for Cloud customers
+                    Optional for Console customers
                   </p>
                   <h3 className="mt-2 font-montserrat text-lg font-semibold text-foreground">
                     Mifune-led engineering support
@@ -398,7 +398,7 @@ export default function ServicesPage() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
-                Explore AGRO Cloud
+                Explore the Mifune Cloud Console
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
@@ -457,7 +457,7 @@ export default function ServicesPage() {
               Mifune engineering
             </p>
             <h2 className="mx-auto mt-5 max-w-3xl text-balance font-montserrat text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-              Discuss your AGRO Cloud deployment.
+              Discuss your Mifune Cloud Console deployment.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
               Share the workflow, constraints, or deployment work where your
@@ -469,7 +469,7 @@ export default function ServicesPage() {
               className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
-              Discuss your Cloud deployment
+              Discuss your Console deployment
             </a>
           </div>
         </section>

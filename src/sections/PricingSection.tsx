@@ -20,11 +20,11 @@ export default function PricingSection() {
             AGRO options
           </p>
           <h2 className="text-balance font-montserrat text-3xl font-semibold text-foreground sm:text-4xl md:text-5xl">
-            Managed Cloud first. Self-host when you want control.
+            Managed Console first. Self-host when you want control.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Choose Mifune-managed AGRO Cloud or operate the Apache-2.0
-            licensed project yourself. Cloud customers can add Mifune
+            Choose the Mifune Cloud Console or operate the Apache-2.0
+            licensed project yourself. Console customers can add Mifune
             engineering support when adoption needs hands-on help.
           </p>
           <p className="mx-auto mt-5 font-montserrat text-base text-muted-foreground">
@@ -33,7 +33,7 @@ export default function PricingSection() {
               href={OFFERING_URLS.pricing}
               className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
             >
-              See Cloud pricing <span aria-hidden="true">→</span>
+              See Console pricing <span aria-hidden="true">→</span>
             </Link>
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function PricingSection() {
                     density="card"
                     context={
                       isCloud
-                        ? "CLOUD · MANAGED BY MIFUNE"
+                        ? "CONSOLE · MANAGED BY MIFUNE"
                         : "OPEN SOURCE · MAINTAINED BY MIFUNE"
                     }
                     className={`mb-7 border-b pb-5 ${
@@ -144,19 +144,19 @@ export default function PricingSection() {
         <aside className="mt-5 rounded-2xl border border-border bg-card px-6 py-5 sm:px-8">
           <AgroBrandBar
             density="compact"
-            context="FOR CLOUD · MIFUNE ENGINEERING"
+            context="FOR CONSOLE · MIFUNE ENGINEERING"
             className="mb-5 border-b border-border pb-4 text-foreground"
           />
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-3xl">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent">
-                Optional for Cloud customers
+                Optional for Console customers
               </p>
               <h3 className="mt-2 font-montserrat text-xl font-semibold text-foreground">
                 {supportOffering.name}
               </h3>
               <p className="mt-2 font-montserrat text-sm leading-relaxed text-muted-foreground">
-                Mifune engineers work alongside your team on an agreed Cloud
+                Mifune engineers work alongside your team on an agreed Console
                 deployment scope. Support is an add-on, not a third operating
                 path.
               </p>

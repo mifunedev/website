@@ -6,7 +6,7 @@ export const OFFERING_URLS = {
   support: "/services",
   supportEmail: "hello@mifune.dev",
   supportContact:
-    "mailto:hello@mifune.dev?subject=Discuss%20an%20Open%20Harness%20Cloud%20deployment",
+    "mailto:hello@mifune.dev?subject=Discuss%20a%20Mifune%20Cloud%20Console%20deployment",
 } as const;
 
 export type OfferingPath = {
@@ -27,7 +27,7 @@ export const offeringPaths: OfferingPath[] = [
   {
     id: "cloud",
     eyebrow: "Recommended · Managed by Mifune",
-    name: "AGRO Cloud",
+    name: "Mifune Cloud Console",
     description:
       "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
@@ -64,22 +64,22 @@ export const offeringPaths: OfferingPath[] = [
   },
   {
     id: "support",
-    eyebrow: "Optional · For Cloud customers",
+    eyebrow: "Optional · For Console customers",
     name: "Forward-Deployed Engineering Support",
     description:
-      "Bring Mifune engineers alongside your team to plan, implement, integrate, troubleshoot, and hand off your AGRO Cloud deployment.",
+      "Bring Mifune engineers alongside your team to plan, implement, integrate, troubleshoot, and hand off your Mifune Cloud Console deployment.",
     bullets: [
       "Workflow and deployment planning",
       "Hands-on implementation and integration",
       "Troubleshooting and team handoff",
     ],
-    cta: "Explore Cloud Engineering Support",
+    cta: "Explore Console engineering support",
     href: OFFERING_URLS.support,
     external: false,
     primary: false,
     operator: "Mifune engineers work alongside your team on an agreed scope.",
     bestFor:
-      "Cloud customers that want hands-on help with adoption or deployment work.",
+      "Console customers that want hands-on help with adoption or deployment work.",
   },
 ];
 

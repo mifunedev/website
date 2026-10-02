@@ -38,7 +38,7 @@ export default function ServicesOGImage() {
             marginBottom: "24px",
           }}
         >
-          Mifune Engineering | AGRO Cloud
+          Mifune Engineering | Cloud Console
         </div>
         <div
           style={{
@@ -50,7 +50,7 @@ export default function ServicesOGImage() {
             color: "#f4f4f5",
           }}
         >
-          Adopt AGRO Cloud with Mifune engineers alongside your team.
+          Adopt the Mifune Cloud Console with our engineers alongside your team.
         </div>
         <div
           style={{
