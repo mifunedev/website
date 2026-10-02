@@ -52,6 +52,11 @@ const nextConfig = {
       // Workflow Academy case study hidden until a real case study ships.
       // Temporary (307) so it can be re-enabled by removing this entry.
       { source: "/case-studies", destination: "/", permanent: false },
+      {
+        source: "/blog/openharness-getting-started",
+        destination: "/blog/agro-getting-started",
+        permanent: true,
+      },
     ];
   },
 };

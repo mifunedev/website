@@ -8,7 +8,7 @@ const ORG_EMAIL = OFFERING_URLS.supportEmail;
 const LOGO_URL = `${SITE_URL}/pe-logo.png`;
 const ORG_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
-const CLOUD_SERVICE_ID = `${SITE_URL}/#openharness-cloud`;
+const CLOUD_SERVICE_ID = `${SITE_URL}/#mifune-cloud-console`;
 const OPEN_SOURCE_ID = `${OFFERING_URLS.openSource}#software`;
 const SUPPORT_SERVICE_ID = `${SITE_URL}/services/#service`;
 
@@ -38,7 +38,7 @@ export function organizationSchema(): Record<string, unknown> {
       url: LOGO_URL,
     },
     description:
-      "Mifune maintains the Apache-2.0 licensed Open Harness coding-agent workspace, operates Open Harness Cloud, and offers forward-deployed engineering support for Cloud customers.",
+      "Mifune maintains the Apache-2.0 licensed AGRO coding-agent workspace, operates the Mifune Cloud Console, and offers forward-deployed engineering support for Console customers.",
     email: ORG_EMAIL,
     founder: {
       "@type": "Person",
@@ -63,7 +63,7 @@ export function websiteSchema(): Record<string, unknown> {
     name: ORG_NAME,
     url: SITE_URL,
     description:
-      "Mifune workspaces for coding agents: managed Open Harness Cloud, Apache-2.0 licensed Open Harness, and engineering support for Cloud customers.",
+      "Mifune workspaces for coding agents: the managed Mifune Cloud Console, Apache-2.0 licensed AGRO, and engineering support for Console customers.",
     publisher: { "@id": ORG_ID },
   };
 }
@@ -73,29 +73,29 @@ export function cloudServiceSchema(): Record<string, unknown> {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": CLOUD_SERVICE_ID,
-    name: "Open Harness Cloud",
+    name: "Mifune Cloud Console",
     serviceType: "Managed coding-agent workspace",
     category: "Coding agent workspace",
     description:
-      "A managed path to an isolated, persistent Open Harness workspace for coding agents, with Mifune operating the environment.",
+      "A managed path to an isolated, persistent AGRO workspace for coding agents, with Mifune operating the environment.",
     url: OFFERING_URLS.cloud,
     provider: { "@id": ORG_ID },
     subjectOf: {
       "@type": "WebSite",
-      name: "Open Harness Documentation",
+      name: "AGRO Documentation",
       url: OFFERING_URLS.docs,
     },
   };
 }
 
-export function openHarnessSoftwareSchema(): Record<string, unknown> {
+export function agroSoftwareSchema(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     "@id": OPEN_SOURCE_ID,
-    name: "Open Harness",
+    name: "AGRO",
     description:
-      "Apache-2.0 licensed source for an isolated, persistent Docker workspace that keeps one coding-agent project and its toolchain off the host.",
+      "AGRO (Agent Governance Runtime Orchestrator): Apache-2.0 licensed source for an isolated, persistent Docker workspace that keeps one coding-agent project and its toolchain off the host.",
     url: OFFERING_URLS.openSource,
     codeRepository: OFFERING_URLS.openSource,
     license: `${OFFERING_URLS.openSource}/blob/main/LICENSE`,
@@ -110,16 +110,16 @@ export function supportServiceSchema(): Record<string, unknown> {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": SUPPORT_SERVICE_ID,
-    name: "Open Harness Cloud Engineering Support",
+    name: "Mifune Cloud Console engineering support",
     serviceType: "Forward-deployed engineering support",
     category: "Engineering support for managed coding-agent workspaces",
     description:
-      "Mifune engineering help for Open Harness Cloud customers to plan, implement, integrate, troubleshoot, and hand off a deployment.",
+      "Mifune engineering help for Mifune Cloud Console customers to plan, implement, integrate, troubleshoot, and hand off a deployment.",
     url: `${SITE_URL}/services`,
     provider: { "@id": ORG_ID },
     audience: {
       "@type": "Audience",
-      audienceType: "Open Harness Cloud customers",
+      audienceType: "Mifune Cloud Console customers",
     },
   };
 }

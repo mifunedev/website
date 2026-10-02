@@ -1,16 +1,16 @@
 import Image from "next/image";
 
-export type OpenHarnessBrandBarDensity = "compact" | "card" | "hero";
+export type AgroBrandBarDensity = "compact" | "card" | "hero";
 
-interface OpenHarnessBrandBarProps {
-  density?: OpenHarnessBrandBarDensity;
+interface AgroBrandBarProps {
+  density?: AgroBrandBarDensity;
   context?: string;
   status?: string;
   className?: string;
 }
 
 const densityStyles: Record<
-  OpenHarnessBrandBarDensity,
+  AgroBrandBarDensity,
   {
     wrapper: string;
     mark: number;
@@ -42,12 +42,12 @@ const densityStyles: Record<
   },
 };
 
-export default function OpenHarnessBrandBar({
+export default function AgroBrandBar({
   density = "card",
   context,
   status,
   className = "",
-}: OpenHarnessBrandBarProps) {
+}: AgroBrandBarProps) {
   const styles = densityStyles[density];
 
   return (
@@ -56,14 +56,14 @@ export default function OpenHarnessBrandBar({
     >
       <span className="relative shrink-0" aria-hidden="true">
         <Image
-          src="/brand/open-harness/logo.svg"
+          src="/brand/agro/logo.svg"
           alt=""
           width={styles.mark}
           height={styles.mark}
           className="block dark:hidden"
         />
         <Image
-          src="/brand/open-harness/logo-dark.svg"
+          src="/brand/agro/logo-dark.svg"
           alt=""
           width={styles.mark}
           height={styles.mark}
@@ -74,7 +74,7 @@ export default function OpenHarnessBrandBar({
         <span
           className={`font-montserrat font-bold tracking-tight text-current ${styles.name}`}
         >
-          Open Harness
+          AGRO
         </span>
         {status ? (
           <span

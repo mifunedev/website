@@ -1,12 +1,12 @@
 export const OFFERING_URLS = {
   cloud: "https://console.mifune.dev",
-  openSource: "https://github.com/mifunedev/openharness",
-  docs: "https://oh.mifune.dev",
+  openSource: "https://github.com/mifunedev/agro",
+  docs: "https://agro.mifune.dev",
   pricing: "/pricing",
   support: "/services",
   supportEmail: "hello@mifune.dev",
   supportContact:
-    "mailto:hello@mifune.dev?subject=Discuss%20an%20Open%20Harness%20Cloud%20deployment",
+    "mailto:hello@mifune.dev?subject=Discuss%20a%20Mifune%20Cloud%20Console%20deployment",
 } as const;
 
 export type OfferingPath = {
@@ -27,9 +27,9 @@ export const offeringPaths: OfferingPath[] = [
   {
     id: "cloud",
     eyebrow: "Recommended · Managed by Mifune",
-    name: "Open Harness Cloud",
+    name: "Mifune Cloud Console",
     description:
-      "Give coding agents an isolated, persistent Open Harness workspace while Mifune operates the managed environment.",
+      "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
       "Persistent workspace for coding agents",
       "Environment operated by Mifune",
@@ -46,15 +46,15 @@ export const offeringPaths: OfferingPath[] = [
   {
     id: "open-source",
     eyebrow: "Self-hosted · Maintained by Mifune",
-    name: "Open Harness Open Source",
+    name: "AGRO Open Source",
     description:
-      "Inspect, adapt, and operate the Apache-2.0 licensed Open Harness workspace yourself, locally or on a remote VM.",
+      "Inspect, adapt, and operate the Apache-2.0 licensed AGRO workspace yourself, locally or on a remote VM.",
     bullets: [
       "Claude Code, Codex, Pi, and other opt-in CLIs",
       "Local or remote Docker workspace",
       "Isolated git worktrees for parallel branches",
     ],
-    cta: "Explore Open Harness on GitHub",
+    cta: "Explore AGRO on GitHub",
     href: OFFERING_URLS.openSource,
     external: true,
     primary: false,
@@ -64,22 +64,22 @@ export const offeringPaths: OfferingPath[] = [
   },
   {
     id: "support",
-    eyebrow: "Optional · For Cloud customers",
+    eyebrow: "Optional · For Console customers",
     name: "Forward-Deployed Engineering Support",
     description:
-      "Bring Mifune engineers alongside your team to plan, implement, integrate, troubleshoot, and hand off your Open Harness Cloud deployment.",
+      "Bring Mifune engineers alongside your team to plan, implement, integrate, troubleshoot, and hand off your Mifune Cloud Console deployment.",
     bullets: [
       "Workflow and deployment planning",
       "Hands-on implementation and integration",
       "Troubleshooting and team handoff",
     ],
-    cta: "Explore Cloud Engineering Support",
+    cta: "Explore Console engineering support",
     href: OFFERING_URLS.support,
     external: false,
     primary: false,
     operator: "Mifune engineers work alongside your team on an agreed scope.",
     bestFor:
-      "Cloud customers that want hands-on help with adoption or deployment work.",
+      "Console customers that want hands-on help with adoption or deployment work.",
   },
 ];
 

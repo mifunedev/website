@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Mail } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import { socialIcons } from "@/config/app";
 import { OFFERING_URLS } from "@/config/offerings";
 
@@ -32,9 +32,9 @@ const FooterSection = () => {
             </Link>
             <p className="mt-4 font-montserrat text-sm leading-relaxed text-muted-foreground">
               Mifune operates managed workspaces for coding agents and leads
-              optional engineering support for Cloud customers.
+              optional engineering support for Console customers.
             </p>
-            <OpenHarnessBrandBar
+            <AgroBrandBar
               density="compact"
               status=" · Maintained by Mifune"
               className="mt-6 w-fit border-t border-border pt-5 text-foreground"
@@ -53,7 +53,7 @@ const FooterSection = () => {
                   rel="noopener noreferrer"
                   className={footerLinkClass}
                 >
-                  Open Harness Cloud
+                  Mifune Cloud Console
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
@@ -68,7 +68,7 @@ const FooterSection = () => {
 
           <div>
             <h2 className="mb-2 font-montserrat text-sm font-semibold text-foreground">
-              Open Harness
+              AGRO
             </h2>
             <ul>
               <li>
@@ -97,7 +97,7 @@ const FooterSection = () => {
               </li>
               <li>
                 <Link
-                  href="/blog/openharness-getting-started"
+                  href="/blog/agro-getting-started"
                   className={footerLinkClass}
                 >
                   Getting started
@@ -118,7 +118,7 @@ const FooterSection = () => {
             <ul>
               <li>
                 <Link href={OFFERING_URLS.support} className={footerLinkClass}>
-                  Cloud engineering support
+                  Console engineering support
                 </Link>
               </li>
               <li>

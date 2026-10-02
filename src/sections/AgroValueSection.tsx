@@ -1,5 +1,5 @@
 import { Box, GitBranch, Laptop } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import AgroBrandBar from "@/components/brand/AgroBrandBar";
 
 const outcomes = [
   {
@@ -22,15 +22,15 @@ const outcomes = [
   },
 ];
 
-export default function OpenHarnessValueSection() {
+export default function AgroValueSection() {
   return (
     <section
       className="relative overflow-hidden border-y border-oh-rule bg-oh-paper px-4 py-20 text-oh-ink sm:py-24"
-      aria-labelledby="openharness-value-heading"
+      aria-labelledby="agro-value-heading"
     >
       <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20" />
       <div className="relative mx-auto max-w-6xl">
-        <OpenHarnessBrandBar
+        <AgroBrandBar
           density="card"
           context="OPEN SOURCE · MAINTAINED BY MIFUNE"
           className="mb-12 border-b border-oh-rule pb-5 text-oh-ink"
@@ -41,13 +41,13 @@ export default function OpenHarnessValueSection() {
             PORTABLE AGENT HARNESS
           </p>
           <h2
-            id="openharness-value-heading"
+            id="agro-value-heading"
             className="text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl"
           >
             One repo. One sandbox.
           </h2>
           <p className="mt-5 font-montserrat text-lg leading-relaxed text-oh-muted">
-            Open Harness is the portable layer between your repository and your
+            AGRO is the portable layer between your repository and your
             coding agent. The repository defines one isolated, persistent Docker
             workspace, so the agent gets a consistent environment and your
             machine stays clean.

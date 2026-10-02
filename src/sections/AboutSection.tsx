@@ -92,7 +92,7 @@ const AboutSection = () => {
           </div>
         </motion.div>
 
-        {/* Open Harness credibility callout */}
+        {/* AGRO credibility callout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -101,20 +101,20 @@ const AboutSection = () => {
           className="mt-8 rounded-2xl border border-green-500/30 bg-green-500/5 p-8"
         >
           <h3 className="mb-3 font-montserrat text-xl font-semibold text-foreground">
-            Powered by <span className="text-green-500">Open Harness</span>
+            Powered by <span className="text-green-500">AGRO</span>
           </h3>
           <p className="font-montserrat text-muted-foreground">
-            Open Harness is an isolated operating environment for reliable AI
+            AGRO is an isolated operating environment for reliable AI
             workers. Every agent Mifune deploys runs inside a hardened,
             auditable sandbox — so your workflows stay predictable, your data
             stays private, and you own every configuration from day one.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
-              href="/blog/openharness-getting-started"
+              href="/blog/agro-getting-started"
               className="inline-flex w-fit items-center gap-2 rounded-full border border-green-500/40 bg-green-500/10 px-5 py-2 font-montserrat text-sm font-medium text-green-500 transition-colors hover:bg-green-500/20"
             >
-              Get started with Open Harness →
+              Get started with AGRO →
             </Link>
             <span className="font-montserrat text-sm text-muted-foreground">
               Want it built for you?{" "}

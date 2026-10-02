@@ -44,7 +44,7 @@ export default function OGImage() {
               marginBottom: "24px",
             }}
           >
-            Open Harness · Maintained by Mifune
+            AGRO · Maintained by Mifune
           </div>
           <div
             style={{
@@ -64,7 +64,7 @@ export default function OGImage() {
               marginTop: "32px",
             }}
           >
-            Open Harness Cloud · Apache-2.0 licensed open source · Mifune
+            Mifune Cloud Console · Apache-2.0 licensed open source · Mifune
             engineering
           </div>
         </div>

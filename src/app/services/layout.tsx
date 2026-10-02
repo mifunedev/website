@@ -2,30 +2,30 @@ import type { Metadata } from "next";
 import { SITE_URL } from "@/config/app";
 
 const description =
-  "Mifune engineering support for Open Harness Cloud customers who want help planning, implementing, integrating, troubleshooting, or handing off a deployment.";
+  "Mifune engineering support for Mifune Cloud Console customers who want help planning, implementing, integrating, troubleshooting, or handing off a deployment.";
 
 export const metadata: Metadata = {
-  title: "Open Harness Cloud Engineering Support",
+  title: "Mifune Cloud Console engineering support",
   description,
   alternates: {
     canonical: "/services",
   },
   keywords: [
-    "Open Harness Cloud support",
+    "Mifune Cloud Console support",
     "forward-deployed engineering",
-    "Open Harness implementation",
-    "Open Harness integration",
-    "Open Harness deployment support",
+    "AGRO implementation",
+    "AGRO integration",
+    "AGRO deployment support",
   ],
   openGraph: {
-    title: "Open Harness Cloud Engineering Support | Mifune",
+    title: "Mifune Cloud Console engineering support | Mifune",
     description,
     url: `${SITE_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open Harness Cloud Engineering Support | Mifune",
+    title: "Mifune Cloud Console engineering support | Mifune",
     description,
   },
 };

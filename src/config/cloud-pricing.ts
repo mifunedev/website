@@ -1,10 +1,10 @@
 /**
- * Published Open Harness Cloud node prices — the single source of every price
+ * Published Mifune Cloud Console node prices — the single source of every price
  * string on this site. A price change is a one-file edit here.
  *
  * Provenance — the five-rung ladder, transcribed from:
  *
- *   repo:  mifunedev/openharness-cloud
+ *   repo:  mifunedev/agro-console
  *   spec:  .oh/tasks/node-catalog-repricing/prd.md
  *          → "The approved sheet — 730-hour month", the `price/h` column
  *
@@ -42,7 +42,7 @@
  *
  * TRANSCRIBE, NEVER RECOMPUTE. Provider cost is server-only upstream and must
  * never appear in this repo, so an hourly rate is copied from the approved
- * sheet's `price/h` column and nothing else. Upstream openharness-cloud#123
+ * sheet's `price/h` column and nothing else. Upstream agro-console#123
  * made the customer price a stated catalog input and turned gross margin into a
  * value derived from it, replacing the older `hourlyMarginPct` from which price
  * used to be computed. If a future reader finds `hourlyMarginPct` upstream,

@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, Headphones } from "lucide-react";
-import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
+import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import { OFFERING_URLS } from "@/config/offerings";
 
 const flowNodes = [
@@ -23,7 +23,7 @@ const flowNodes = [
   },
   {
     label: "Operator chooses",
-    detail: "Mifune-managed Cloud or self-hosted",
+    detail: "Mifune Cloud Console or self-hosted",
     emphasis: true,
   },
 ] as const;
@@ -38,7 +38,7 @@ const HeroSection = () => {
 
       <div className="relative mx-auto my-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="text-center lg:text-left">
-          <OpenHarnessBrandBar
+          <AgroBrandBar
             density="hero"
             status="Maintained by Mifune"
             className="mx-auto mb-7 w-fit justify-center text-foreground lg:mx-0 lg:justify-start"
@@ -49,10 +49,10 @@ const HeroSection = () => {
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
-            Open Harness connects one repository to an isolated, persistent
+            AGRO connects one repository to an isolated, persistent
             Docker workspace. Bring your preferred coding agent, keep its
-            toolchain off your host, then self-host it or choose Mifune-managed
-            Open Harness Cloud.
+            toolchain off your host, then self-host it or choose the Mifune Cloud
+            Console.
           </p>
 
           <div className="mb-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
@@ -72,7 +72,7 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 text-center font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Explore Open Harness on GitHub
+              Explore AGRO on GitHub
               <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
               <span className="sr-only">(opens in a new tab)</span>
             </a>
@@ -112,7 +112,7 @@ const HeroSection = () => {
                 <span className="h-3 w-3 shrink-0 rounded-full bg-yellow-500/80" />
                 <span className="h-3 w-3 shrink-0 rounded-full bg-green-500/80" />
                 <span className="ml-2 min-w-0 truncate font-mono text-[11px] text-muted-foreground sm:text-xs">
-                  open-harness-flow.mifune
+                  agro-flow.mifune
                 </span>
               </div>
 
@@ -218,9 +218,9 @@ const HeroSection = () => {
           </div>
 
           <figcaption id="cloud-operating-model-caption" className="sr-only">
-            Open Harness workspace flow: one repository connects to a
+            AGRO workspace flow: one repository connects to a
             persistent, isolated Docker sandbox, the operator launches a
-            preferred coding agent inside it, and chooses Mifune-managed Cloud
+            preferred coding agent inside it, and chooses the Mifune Cloud Console
             or self-hosting.
           </figcaption>
         </motion.figure>
