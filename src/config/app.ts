@@ -16,9 +16,9 @@ export const socialIcons = [
   },
   {
     Icon: FaXTwitter,
-    tooltip: "@mifune_dev",
+    tooltip: "@mifunedev",
     key: "x",
-    link: "https://x.com/mifune_dev",
+    link: "https://x.com/mifunedev",
   },
   {
     Icon: FaGithub,
