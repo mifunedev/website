@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "project": "website",
+  "branchName": "task/281-link-legal-drafts",
+  "description": "Website links to legal drafts",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Add website footer links",
+      "description": "As a beta visitor, I want footer links to console-hosted legal drafts so that I can review proposed policies before sign-in.",
+      "acceptanceCriteria": [
+        "Add four links labeled as drafts in `src/sections/FooterSection.tsx`.",
+        "Use the existing `OFFERING_URLS.cloud` origin for `/legal/terms`, `/legal/privacy`, `/legal/refunds`, and `/legal/acceptable-use`.",
+        "Keep footer links keyboard-accessible and visible at desktop and mobile widths.",
+        "Add red regression tests before the footer change. Focused tests, `npm run lint`, and `npm run build` exit 0.",
+        "Preserve all existing footer content and the Google Analytics integration. Do not reuse the closed PR #70.",
+        "Add an Unreleased changelog entry and a short draft-status operation note.",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/sections/FooterSection.tsx",
+        "src/config/offerings.ts",
+        "scripts/legal-footer.test.mjs",
+        "docs/legal-drafts.md",
+        "CHANGELOG.md"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Record website footer review",
+      "description": "As the operator, I want evidence for website draft links so that I can verify navigation without declaring policies effective.",
+      "acceptanceCriteria": [
+        "Use agent-browser to inspect desktop and mobile footers and follow all four links.",
+        "For local review only, route the canonical console origin to the local console review server in the browser.",
+        "Record annotated screenshots, destinations, and keyboard results in this task's evidence directory.",
+        "Stop only the owned review servers and browser sessions after review.",
+        "Verify in browser using agent-browser skill"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-001"
+      ],
+      "files": [
+        "link-legal-drafts/evidence/"
+      ]
+    }
+  ]
+}
