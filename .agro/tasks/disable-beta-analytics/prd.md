@@ -20,6 +20,7 @@ The operator approved the council recommendation to disable optional analytics f
 - [ ] Document the beta analytics decision and the production verification gate in `docs/beta-analytics.md`.
 - [ ] The documentation links console issue #281 and states that necessary data processing continues.
 - [ ] Keep public legal pages and footer links outside this change until approved content exists.
+- [ ] Add a linked `[Unreleased]` changelog entry for optional beta analytics removal.
 
 ## Summary
 
@@ -84,4 +85,8 @@ Issue #281 retains production verification, data inventory, consent, legal revie
 
 ## Lessons
 
-Filled by the advisor before undraft.
+Claim: Analytics regression tests must not freeze unrelated marketing copy or layout formatting.
+
+Evidence: The accepted repair replaces an opaque metadata checksum and full-layout string comparison with semantic assertions.
+
+Outcome: fixed in this PR.

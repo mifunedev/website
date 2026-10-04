@@ -16,17 +16,20 @@
         "`npm run lint` and `npm run build` exit 0, or report existing blockers with exact output.",
         "Document the beta analytics decision and the production verification gate in `docs/beta-analytics.md`.",
         "The documentation links console issue #281 and states that necessary data processing continues.",
-        "Keep public legal pages and footer links outside this change until approved content exists."
+        "Keep public legal pages and footer links outside this change until approved content exists.",
+        "Add a linked `[Unreleased]` changelog entry for optional beta analytics removal."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "1. Remove Google Analytics and the associated initial active-user tracking mount from `src/app/layout.tsx`. \u2014 reasoned: inspected accepted root-layout diff; optional Google Analytics and initial active-user tracking mounts removed.\n2. Remove their unused imports without changing metadata, fonts, theme, page children, or unrelated processing. \u2014 reasoned: diff preserves metadata/fonts/theme/children; only tracking imports and block changed.\n3. Add a focused Node regression test before changing the layout. \u2014 executed by worker: red focused test exited 1 before layout edit (4 failed,1 passed).\n4. `node --test scripts/beta-analytics.test.mjs` exits 0. \u2014 executed: integrated node --test scripts/beta-analytics.test.mjs exited 0 (5 passed,0 failed).\n5. `npm run lint` and `npm run build` exit 0, or report existing blockers with exact output. \u2014 executed: integrated npm ci, npm run lint and npm run build exited 0; output in evidence/verification.txt.\n6. Document the beta analytics decision and the production verification gate in `docs/beta-analytics.md`. \u2014 reasoned: inspected docs/beta-analytics.md; decision and production verification gate stated.\n7. The documentation links console issue #281 and states that necessary data processing continues. \u2014 reasoned: docs link issue281 and distinguish necessary processing and legal gates.\n8. Keep public legal pages and footer links outside this change until approved content exists. \u2014 reasoned: inspected changed-file list; no policy routes or footer links added.\n9. Add a linked `[Unreleased]` changelog entry for optional beta analytics removal. \u2014 executed: STE checker exited 0; reviewed issue-linked Unreleased changelog entry.",
       "dependsOn": [],
       "files": [
         "src/app/layout.tsx",
         "scripts/beta-analytics.test.mjs",
-        "docs/beta-analytics.md"
-      ]
+        "docs/beta-analytics.md",
+        "CHANGELOG.md"
+      ],
+      "commit": "20ef6d7c00840f566e05577e8dc96601a0523914"
     }
   ]
 }

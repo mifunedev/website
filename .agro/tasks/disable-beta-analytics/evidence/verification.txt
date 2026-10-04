@@ -1,0 +1,155 @@
+Integrated source verification
+20ef6d7c00840f566e05577e8dc96601a0523914
+v22.23.3
+npm warn deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+npm warn deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+npm warn deprecated workbox-google-analytics@7.0.0: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
+
+added 1047 packages, and audited 1048 packages in 14s
+
+263 packages are looking for funding
+  run `npm fund` for details
+
+51 vulnerabilities (1 low, 16 moderate, 31 high, 3 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+TAP version 13
+# Subtest: root layout never imports or mounts Google Analytics
+ok 1 - root layout never imports or mounts Google Analytics
+  ---
+  duration_ms: 0.508671
+  type: 'test'
+  ...
+# Subtest: root layout never imports or mounts initial active-user tracking
+ok 2 - root layout never imports or mounts initial active-user tracking
+  ---
+  duration_ms: 0.084199
+  type: 'test'
+  ...
+# Subtest: analytics stays disabled regardless of runtime mode or GA identifier
+ok 3 - analytics stays disabled regardless of runtime mode or GA identifier
+  ---
+  duration_ms: 0.138179
+  type: 'test'
+  ...
+# Subtest: root layout retains font imports, metadata, viewport, and site URL
+ok 4 - root layout retains font imports, metadata, viewport, and site URL
+  ---
+  duration_ms: 0.791297
+  type: 'test'
+  ...
+# Subtest: root layout retains structured data, theme provider, and children
+ok 5 - root layout retains structured data, theme provider, and children
+  ---
+  duration_ms: 0.200603
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 36.878234
+
+> client@0.1.0 lint
+> next lint
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+✔ No ESLint warnings or errors
+
+> client@0.1.0 prebuild
+> node scripts/generate-llm-txt.mjs
+
+Generated llm.txt at /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/public/llm.txt
+(node:3829983) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/src/config/cloud-pricing.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> client@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/public/sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ○ (pwa) This app will fallback to these precached routes when fetching from the cache and the network fails:
+ ○ (pwa)   Documents (pages): /offline
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/24) ...
+Looking for posts in: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/posts
+Found files: anthropic-reasoning-langchain-init-chat-model.md, api-walkthrough-creating-agents.md, connect-mcp-tools-to-orchestra-agents.md, openharness-getting-started.md, remote-dev-cloudflare-tunnel-claude-hooks.md, rendering-interactive-charts.md, swe-toolkit-2026.md
+   Generating static pages (6/24) 
+Looking for posts in: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/posts
+Found files: anthropic-reasoning-langchain-init-chat-model.md, api-walkthrough-creating-agents.md, connect-mcp-tools-to-orchestra-agents.md, openharness-getting-started.md, remote-dev-cloudflare-tunnel-claude-hooks.md, rendering-interactive-charts.md, swe-toolkit-2026.md
+Rendering BlogIndex with 7 posts
+Looking for posts in: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-disable-beta-analytics/posts
+Found files: anthropic-reasoning-langchain-init-chat-model.md, api-walkthrough-creating-agents.md, connect-mcp-tools-to-orchestra-agents.md, openharness-getting-started.md, remote-dev-cloudflare-tunnel-claude-hooks.md, rendering-interactive-charts.md, swe-toolkit-2026.md
+Rendering BlogIndex with 7 posts
+   Generating static pages (12/24) 
+   Generating static pages (18/24) 
+ ✓ Generating static pages (24/24)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                Size     First Load JS
+┌ ○ /                                                      40.9 kB         187 kB
+├ ○ /_not-found                                            880 B          91.1 kB
+├ ƒ /api/contact                                           0 B                0 B
+├ ƒ /api/subscribe                                         0 B                0 B
+├ ○ /blog                                                  208 B           142 kB
+├ ● /blog/[slug]                                           306 kB          447 kB
+├   ├ /blog/anthropic-reasoning-langchain-init-chat-model
+├   ├ /blog/api-walkthrough-creating-agents
+├   ├ /blog/connect-mcp-tools-to-orchestra-agents
+├   └ [+4 more paths]
+├ ○ /case-studies                                          208 B           142 kB
+├ ○ /offline                                               153 B          90.4 kB
+├ ○ /opengraph-image                                       0 B                0 B
+├ ○ /pricing                                               2.73 kB         147 kB
+├ ○ /robots.txt                                            0 B                0 B
+├ ○ /services                                              208 B           142 kB
+├ ○ /services/opengraph-image                              0 B                0 B
+├ ○ /sitemap.xml                                           0 B                0 B
+└ ○ /socials                                               3.37 kB         102 kB
++ First Load JS shared by all                              90.2 kB
+  ├ chunks/5190-b46161770304692e.js                        33.8 kB
+  ├ chunks/fd9d1056-b848dae799369838.js                    53.6 kB
+  └ other shared chunks (total)                            2.79 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+
+ste-check: no findings in 3 file(s). Two defects escape every detector: a condition that trails the action it guards (question 4), and a sentence that opens with a pronoun naming no antecedent (question 7). Run the 10-question check in /home/sandbox/harness/.agro/skills/ste/SKILL.md.
+All commands exited 0
