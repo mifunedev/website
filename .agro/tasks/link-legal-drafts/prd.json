@@ -18,7 +18,7 @@
         "Verify in browser using agent-browser skill"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "",
       "dependsOn": [],
       "files": [
@@ -27,7 +27,10 @@
         "scripts/legal-footer.test.mjs",
         "docs/legal-drafts.md",
         "CHANGELOG.md"
-      ]
+      ],
+      "status": "accepted",
+      "acceptedCommit": "2d66ffbaee097699f3646c7f4c19283bbc358666",
+      "verificationNotes": "Independent npm ci, six focused tests, lint/build/STE and whitespace checks passed. Desktop/mobile and keyboard review passed. Four canonical destinations recorded before browser-only local origin substitution; all four companion draft pages verified. Existing analytics preserved. Production reachability and consent not tested."
     },
     {
       "id": "US-002",
@@ -41,14 +44,17 @@
         "Verify in browser using agent-browser skill"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "",
       "dependsOn": [
         "US-001"
       ],
       "files": [
-        "link-legal-drafts/evidence/"
-      ]
+        ".agro/tasks/link-legal-drafts/evidence/"
+      ],
+      "status": "accepted",
+      "acceptedCommit": "2d66ffbaee097699f3646c7f4c19283bbc358666",
+      "verificationNotes": "Independent npm ci, six focused tests, lint/build/STE and whitespace checks passed. Desktop/mobile and keyboard review passed. Four canonical destinations recorded before browser-only local origin substitution; all four companion draft pages verified. Existing analytics preserved. Production reachability and consent not tested."
     }
   ]
 }

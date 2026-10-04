@@ -95,4 +95,8 @@ Issue #281 retains analytics/consent verification and policy approval. These gat
 
 ## Lessons
 
-Filled by the advisor before undraft.
+Claim: Local footer navigation does not establish production policy availability.
+
+Evidence: The browser recorded canonical destinations before local-only substitution and verified all four corresponding draft pages.
+
+Outcome: fixed in this PR.
