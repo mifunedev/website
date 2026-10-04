@@ -9,6 +9,13 @@ export const OFFERING_URLS = {
     "mailto:hello@mifune.dev?subject=Discuss%20an%20Open%20Harness%20Cloud%20deployment",
 } as const;
 
+export const legalDraftLinks = [
+  { slug: "terms", label: "Terms (DRAFT)" },
+  { slug: "privacy", label: "Privacy (DRAFT)" },
+  { slug: "refunds", label: "Refunds (DRAFT)" },
+  { slug: "acceptable-use", label: "Acceptable use (DRAFT)" },
+] as const;
+
 export type OfferingPath = {
   id: "cloud" | "open-source" | "support";
   eyebrow: string;

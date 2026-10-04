@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ExternalLink, Mail } from "lucide-react";
 import OpenHarnessBrandBar from "@/components/brand/OpenHarnessBrandBar";
 import { socialIcons } from "@/config/app";
-import { OFFERING_URLS } from "@/config/offerings";
+import { legalDraftLinks, OFFERING_URLS } from "@/config/offerings";
 
 const footerLinkClass =
   "inline-flex min-h-11 items-center gap-1 rounded-md font-montserrat text-sm text-muted-foreground transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus";
@@ -138,6 +138,24 @@ const FooterSection = () => {
             </ul>
           </div>
         </div>
+
+        <nav aria-label="Legal drafts" className="pt-8">
+          <h2 className="mb-2 font-montserrat text-sm font-semibold text-foreground">
+            Legal drafts
+          </h2>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {legalDraftLinks.map(({ slug, label }) => (
+              <li key={slug}>
+                <a
+                  href={`${OFFERING_URLS.cloud}/legal/${slug}`}
+                  className={footerLinkClass}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <div className="flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-montserrat text-sm text-muted-foreground">
