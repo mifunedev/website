@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "project": "website",
+  "branchName": "task/281-disable-beta-analytics",
+  "description": "Remove optional beta analytics; issue281 retains deployment and legal gates.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Remove optional analytics from the root layout",
+      "description": "As a beta visitor, I want optional analytics disabled so that the beta does not load optional visitor tracking before legal review.",
+      "acceptanceCriteria": [
+        "Remove Google Analytics and the associated initial active-user tracking mount from `src/app/layout.tsx`.",
+        "Remove their unused imports without changing metadata, fonts, theme, page children, or unrelated processing.",
+        "Add a focused Node regression test before changing the layout.",
+        "`node --test scripts/beta-analytics.test.mjs` exits 0.",
+        "`npm run lint` and `npm run build` exit 0, or report existing blockers with exact output.",
+        "Document the beta analytics decision and the production verification gate in `docs/beta-analytics.md`.",
+        "The documentation links console issue #281 and states that necessary data processing continues.",
+        "Keep public legal pages and footer links outside this change until approved content exists."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/app/layout.tsx",
+        "scripts/beta-analytics.test.mjs",
+        "docs/beta-analytics.md"
+      ]
+    }
+  ]
+}
