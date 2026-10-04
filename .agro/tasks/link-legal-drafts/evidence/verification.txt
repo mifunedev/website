@@ -1,0 +1,164 @@
+2d66ffbaee097699f3646c7f4c19283bbc358666
+v22.23.3
+npm warn deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+npm warn deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+npm warn deprecated workbox-google-analytics@7.0.0: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
+
+added 1047 packages, and audited 1048 packages in 14s
+
+263 packages are looking for funding
+  run `npm fund` for details
+
+51 vulnerabilities (1 low, 16 moderate, 31 high, 3 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+TAP version 13
+# (node:3943906) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/src/config/offerings.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the footer offers exactly the four known console policy destinations
+ok 1 - the footer offers exactly the four known console policy destinations
+  ---
+  duration_ms: 0.920188
+  type: 'test'
+  ...
+# Subtest: each policy has a visible DRAFT label
+ok 2 - each policy has a visible DRAFT label
+  ---
+  duration_ms: 0.391951
+  type: 'test'
+  ...
+# Subtest: the footer builds policy links from the canonical cloud origin
+ok 3 - the footer builds policy links from the canonical cloud origin
+  ---
+  duration_ms: 0.208111
+  type: 'test'
+  ...
+# Subtest: legal navigation uses a list of native same-tab links
+ok 4 - legal navigation uses a list of native same-tab links
+  ---
+  duration_ms: 0.197391
+  type: 'test'
+  ...
+# Subtest: legal links reuse the footer keyboard focus and touch target styles
+ok 5 - legal links reuse the footer keyboard focus and touch target styles
+  ---
+  duration_ms: 0.188054
+  type: 'test'
+  ...
+# Subtest: the legal list wraps at narrow viewport widths
+ok 6 - the legal list wraps at narrow viewport widths
+  ---
+  duration_ms: 0.150651
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 66.723633
+
+> client@0.1.0 lint
+> next lint
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+✔ No ESLint warnings or errors
+
+> client@0.1.0 prebuild
+> node scripts/generate-llm-txt.mjs
+
+Generated llm.txt at /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/public/llm.txt
+(node:3944187) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/src/config/cloud-pricing.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> client@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/public/sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ○ (pwa) This app will fallback to these precached routes when fetching from the cache and the network fails:
+ ○ (pwa)   Documents (pages): /offline
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/24) ...
+   Generating static pages (6/24) 
+Looking for posts in: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/posts
+Found files: anthropic-reasoning-langchain-init-chat-model.md, api-walkthrough-creating-agents.md, connect-mcp-tools-to-orchestra-agents.md, openharness-getting-started.md, remote-dev-cloudflare-tunnel-claude-hooks.md, rendering-interactive-charts.md, swe-toolkit-2026.md
+Looking for posts in: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/posts
+Found files: anthropic-reasoning-langchain-init-chat-model.md, api-walkthrough-creating-agents.md, connect-mcp-tools-to-orchestra-agents.md, openharness-getting-started.md, remote-dev-cloudflare-tunnel-claude-hooks.md, rendering-interactive-charts.md, swe-toolkit-2026.md
+Rendering BlogIndex with 7 posts
+Looking for posts in: /home/sandbox/harness/projects/mifunedev/website/.worktrees/task/281-link-legal-drafts/posts
+Found files: anthropic-reasoning-langchain-init-chat-model.md, api-walkthrough-creating-agents.md, connect-mcp-tools-to-orchestra-agents.md, openharness-getting-started.md, remote-dev-cloudflare-tunnel-claude-hooks.md, rendering-interactive-charts.md, swe-toolkit-2026.md
+Rendering BlogIndex with 7 posts
+   Generating static pages (12/24) 
+   Generating static pages (18/24) 
+ ✓ Generating static pages (24/24)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                Size     First Load JS
+┌ ○ /                                                      40.9 kB         187 kB
+├ ○ /_not-found                                            880 B          91.1 kB
+├ ƒ /api/contact                                           0 B                0 B
+├ ƒ /api/subscribe                                         0 B                0 B
+├ ○ /blog                                                  208 B           142 kB
+├ ● /blog/[slug]                                           306 kB          447 kB
+├   ├ /blog/anthropic-reasoning-langchain-init-chat-model
+├   ├ /blog/api-walkthrough-creating-agents
+├   ├ /blog/connect-mcp-tools-to-orchestra-agents
+├   └ [+4 more paths]
+├ ○ /case-studies                                          208 B           142 kB
+├ ○ /offline                                               153 B          90.4 kB
+├ ○ /opengraph-image                                       0 B                0 B
+├ ○ /pricing                                               2.73 kB         147 kB
+├ ○ /robots.txt                                            0 B                0 B
+├ ○ /services                                              208 B           142 kB
+├ ○ /services/opengraph-image                              0 B                0 B
+├ ○ /sitemap.xml                                           0 B                0 B
+└ ○ /socials                                               3.37 kB         102 kB
++ First Load JS shared by all                              90.2 kB
+  ├ chunks/5190-b46161770304692e.js                        33.8 kB
+  ├ chunks/fd9d1056-b848dae799369838.js                    53.6 kB
+  └ other shared chunks (total)                            2.79 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+
+ste-check: no findings in 3 file(s). Two defects escape every detector: a condition that trails the action it guards (question 4), and a sentence that opens with a pronoun naming no antecedent (question 7). Run the 10-question check in /home/sandbox/harness/.agro/skills/ste/SKILL.md.
+All commands exited 0

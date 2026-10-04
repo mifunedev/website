@@ -1,0 +1,10 @@
+Mobile local browser review; website source URLs use canonical console origin.
+Website anchors substituted in the browser only to avoid production requests.
+console footer -> terms: http://127.0.0.1:3055/legal/terms; draft warning and unfinished effective date verified
+console footer -> privacy: http://127.0.0.1:3055/legal/privacy; draft warning and unfinished effective date verified
+console footer -> refunds: http://127.0.0.1:3055/legal/refunds; draft warning and unfinished effective date verified
+console footer -> acceptable-use: http://127.0.0.1:3055/legal/acceptable-use; draft warning and unfinished effective date verified
+website footer -> terms: http://127.0.0.1:3055/legal/terms; draft warning and unfinished effective date verified
+website footer -> privacy: http://127.0.0.1:3055/legal/privacy; draft warning and unfinished effective date verified
+website footer -> refunds: http://127.0.0.1:3055/legal/refunds; draft warning and unfinished effective date verified
+website footer -> acceptable-use: http://127.0.0.1:3055/legal/acceptable-use; draft warning and unfinished effective date verified
