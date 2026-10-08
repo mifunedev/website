@@ -82,13 +82,14 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Blog uses the GitHub release install.sh in both the piped and review forms, verified against harness docs/installation.md. AgentPickerSection states that agro harness install <id> adds an agent (docs/installation.md: the image contains no agent CLI). Both pages render the new text in the browser. lint 0; scratch build 0. Out of scope, for phase 2: the picker still lists a DeepAgents card whose docsPath has no page in the harness docs/harnesses/.",
       "dependsOn": [],
       "files": [
         "posts/agro-getting-started.md",
         "src/sections/AgentPickerSection.tsx"
-      ]
+      ],
+      "commit": "6663289479f560965a2e64b989c75c6e806ab477"
     },
     {
       "id": "US-005",
