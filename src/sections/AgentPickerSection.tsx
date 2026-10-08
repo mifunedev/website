@@ -117,26 +117,15 @@ function AgentLogo({ logo }: { logo: Agent["logo"] }) {
   if (logo === "opencode") {
     return (
       <svg
-        viewBox="0 0 28 28"
+        viewBox="0 6 24 30"
         width="28"
         height="28"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
-        className="h-7 w-7"
+        className="h-7 w-7 text-foreground"
       >
-        <rect
-          x="3"
-          y="3"
-          width="22"
-          height="22"
-          rx="5"
-          fill="currentColor"
-          opacity="0.14"
-        />
-        <path
-          fill="currentColor"
-          d="M8 14c0-3.6 2.5-6.2 6-6.2s6 2.6 6 6.2-2.5 6.2-6 6.2-6-2.6-6-6.2Zm3.1 0c0 2 1.1 3.4 2.9 3.4s2.9-1.4 2.9-3.4-1.1-3.4-2.9-3.4-2.9 1.4-2.9 3.4Z"
-        />
+        <path fill="currentColor" opacity="0.3" d="M18 30H6V18H18V30Z" />
+        <path fill="currentColor" d="M18 12H6V30H18V12ZM24 36H0V6H24V36Z" />
       </svg>
     );
   }
@@ -144,19 +133,19 @@ function AgentLogo({ logo }: { logo: Agent["logo"] }) {
   if (logo === "pi") {
     return (
       <svg
-        viewBox="0 0 800 800"
+        viewBox="140 140 520 520"
         width="28"
         height="28"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         className="h-7 w-7"
       >
+        <path fill="#F09082" d="M165.29 165.29H517.36V400H400V282.65H165.29Z" />
         <path
-          fill="currentColor"
-          fillRule="evenodd"
-          d="M165.29 165.29 H517.36 V400 H400 V517.36 H282.65 V634.72 H165.29 Z M282.65 282.65 V400 H400 V282.65 Z"
+          fill="#4D9ABF"
+          d="M165.29 282.65H282.65V400H400V517.36H282.65V634.72H165.29Z"
         />
-        <path fill="currentColor" d="M517.36 400 H634.72 V634.72 H517.36 Z" />
+        <path fill="#F1BE58" d="M517.36 400H634.72V634.72H517.36Z" />
       </svg>
     );
   }
