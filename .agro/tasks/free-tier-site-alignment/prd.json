@@ -54,7 +54,6 @@
       "title": "State the free, browser-first Console on the home page",
       "description": "As a visitor, I want the home page to show the free Console so that I try it first.",
       "acceptanceCriteria": [
-        "Under the home hero CTA, the line \"Free for personal accounts · No card · No SSH key\" shows.",
         "The Console offering card bullets include \"Free: 24 running hours a month on one n4 node\" and \"Browser terminal and editor, no SSH key\".",
         "The \"How do I start?\" FAQ answer names the free Console path.",
         "Verify in browser using agent-browser skill.",
@@ -65,8 +64,8 @@
       "notes": "",
       "dependsOn": [],
       "files": [
-        "src/app/page.tsx",
-        "src/config/offerings.ts"
+        "src/config/offerings.ts",
+        "src/data/faqs.ts"
       ]
     },
     {
@@ -112,16 +111,45 @@
     },
     {
       "id": "US-006",
+      "title": "Align the hero headline with the AGRO description",
+      "description": "As a first-time visitor, I want the hero to say what AGRO is and how to start free so that I pick a path.",
+      "acceptanceCriteria": [
+        "The hero `<h1>` reads exactly \"A portable home for autonomous coding agents.\", and the page has one `<h1>`.",
+        "The `<h1>` equals the `mifunedev/agro` GitHub description without its prefix \"AGRO — Agent Governance Runtime Orchestrator. \".",
+        "The hero subtitle reads exactly \"Give Claude Code, Codex, Pi, or any harness an isolated, persistent sandbox that keeps working after you disconnect. Self-host it, or start free in your browser.\"",
+        "The primary CTA reads \"Start your free workspace\" and links to `OFFERING_URLS.cloud`.",
+        "The secondary CTA reads \"Self-host AGRO on GitHub\" and links to `OFFERING_URLS.openSource`.",
+        "Both CTAs keep the screen-reader text \"(opens in a new tab)\".",
+        "The line \"Free for personal accounts · No card · No SSH key\" sits directly below the CTA row.",
+        "The hero footer line reads \"Apache-2.0 · Agent Governance Runtime Orchestrator · works with any coding harness\".",
+        "The hero contains no \"not on your machine\", no \"Open Mifune Cloud Console\", and no scarcity number.",
+        "At 414x896, the `<h1>` wraps to 3 lines or fewer, and the `<h1>`, the subtitle, and the primary CTA show without a scroll.",
+        "At 1440x900, the `<h1>`, the subtitle, and both CTAs show without a scroll.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-003"
+      ],
+      "files": [
+        "src/sections/HeroSection.tsx"
+      ]
+    },
+    {
+      "id": "US-007",
       "title": "Manual review evidence",
       "description": "As the operator, I want a recorded browser review of the changed pages so that I can accept the change from evidence.",
       "acceptanceCriteria": [
-        "Depends on US-001 through US-005.",
-        "`.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` holds annotated screenshots of `/pricing`, the FAQ section, the home hero, and the Console card, at 1280x720 and 414x896.",
+        "Depends on US-001 through US-006.",
+        "`.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` holds annotated screenshots of `/pricing`, the FAQ section, the home hero, and the Console card, and of the hero before and after the headline change, at 1280x720 and 414x896.",
         "Each screenshot of a changed page has a matching screenshot in `evidence/before/`, so a reviewer compares the two.",
         "The run checks that `scrollWidth <= innerWidth` on `/` and `/pricing` at 414x896.",
         "The run uses a local `npm run build` and `npm run start`, and stops each process that the run starts."
       ],
-      "priority": 6,
+      "priority": 7,
       "passes": false,
       "notes": "",
       "dependsOn": [
@@ -129,7 +157,8 @@
         "US-002",
         "US-003",
         "US-004",
-        "US-005"
+        "US-005",
+        "US-006"
       ],
       "files": [
         ".agro/tasks/free-tier-site-alignment/evidence/"

@@ -42,7 +42,6 @@ Issue: [#72](https://github.com/mifunedev/website/issues/72). Base branch: `mast
 
 **Acceptance Criteria:**
 
-- [ ] Under the home hero CTA, the line "Free for personal accounts · No card · No SSH key" shows.
 - [ ] The Console offering card bullets include "Free: 24 running hours a month on one n4 node" and "Browser terminal and editor, no SSH key".
 - [ ] The "How do I start?" FAQ answer names the free Console path.
 - [ ] Verify in browser using agent-browser skill.
@@ -70,14 +69,34 @@ Issue: [#72](https://github.com/mifunedev/website/issues/72). Base branch: `mast
 - [ ] The generator states that Pause stops billing and that a node opens in the browser with no SSH key.
 - [ ] After `npm run build`, `public/llm.txt` matches the generator output.
 
-### US-006: Manual review evidence
+### US-006: Align the hero headline with the AGRO description
+
+**Description:** As a first-time visitor, I want the hero to say what AGRO is and how to start free so that I pick a path.
+
+**Acceptance Criteria:**
+
+- [ ] The hero `<h1>` reads exactly "A portable home for autonomous coding agents.", and the page has one `<h1>`.
+- [ ] The `<h1>` equals the `mifunedev/agro` GitHub description without its prefix "AGRO — Agent Governance Runtime Orchestrator. ".
+- [ ] The hero subtitle reads exactly "Give Claude Code, Codex, Pi, or any harness an isolated, persistent sandbox that keeps working after you disconnect. Self-host it, or start free in your browser."
+- [ ] The primary CTA reads "Start your free workspace" and links to `OFFERING_URLS.cloud`.
+- [ ] The secondary CTA reads "Self-host AGRO on GitHub" and links to `OFFERING_URLS.openSource`.
+- [ ] Both CTAs keep the screen-reader text "(opens in a new tab)".
+- [ ] The line "Free for personal accounts · No card · No SSH key" sits directly below the CTA row.
+- [ ] The hero footer line reads "Apache-2.0 · Agent Governance Runtime Orchestrator · works with any coding harness".
+- [ ] The hero contains no "not on your machine", no "Open Mifune Cloud Console", and no scarcity number.
+- [ ] At 414x896, the `<h1>` wraps to 3 lines or fewer, and the `<h1>`, the subtitle, and the primary CTA show without a scroll.
+- [ ] At 1440x900, the `<h1>`, the subtitle, and both CTAs show without a scroll.
+- [ ] Verify in browser using agent-browser skill.
+- [ ] `npm run lint` and `npm run build` exit 0.
+
+### US-007: Manual review evidence
 
 **Description:** As the operator, I want a recorded browser review of the changed pages so that I can accept the change from evidence.
 
 **Acceptance Criteria:**
 
-- [ ] Depends on US-001 through US-005.
-- [ ] `.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` holds annotated screenshots of `/pricing`, the FAQ section, the home hero, and the Console card, at 1280x720 and 414x896.
+- [ ] Depends on US-001 through US-006.
+- [ ] `.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` holds annotated screenshots of `/pricing`, the FAQ section, the home hero, and the Console card, and of the hero before and after the headline change, at 1280x720 and 414x896.
 - [ ] Each screenshot of a changed page has a matching screenshot in `evidence/before/`, so a reviewer compares the two.
 - [ ] The run checks that `scrollWidth <= innerWidth` on `/` and `/pricing` at 414x896.
 - [ ] The run uses a local `npm run build` and `npm run start`, and stops each process that the run starts.
@@ -98,7 +117,7 @@ The prices in `src/config/cloud-pricing.ts` match the Console catalog for each o
 | `src/components/pricing/FleetCalculator.tsx` | n4 row | "Free tier eligible" label |
 | `src/data/faqs.ts` | billing, card, start FAQs | FAQ text and JSON-LD source |
 | `src/config/offerings.ts` | `offeringPaths` (Console card) | Free and browser bullets |
-| `src/app/page.tsx` | hero | Line under the hero CTA |
+| `src/sections/HeroSection.tsx` | `<h1>`, subtitle, CTAs, footer line | Hero headline and free start |
 | `src/sections/AgentPickerSection.tsx` | harness copy, line 258 | Install-on-demand wording |
 | `posts/agro-getting-started.md` | install steps, lines 64-75 | `install.sh` command |
 | `scripts/generate-llm-txt.mjs` | text lines 93 and 99 | `llm.txt` source |
@@ -109,7 +128,7 @@ The prices in `src/config/cloud-pricing.ts` match the Console catalog for each o
 | Surface | Change Type | Description |
 |---|---|---|
 | `/pricing` | Modified | Free card, CTA strip, billing fact, FAQ |
-| `/` | Modified | Hero line, Console card, start FAQ, agent wording |
+| `/` | Modified | Hero headline, subtitle, CTAs, Console card, start FAQ, agent wording |
 | `/blog/agro-getting-started` | Modified | Install command |
 | `/llm.txt` | Modified | Offer text |
 
@@ -123,6 +142,7 @@ N/A. The site is static content and stores no data.
 - **Static copy:** the site states the free tier in static text. The site reads no Console state at run time.
 - **Qualified offer:** each free-tier claim names personal accounts and limited spots, and each card claim names paid nodes.
 - **Base branch:** `master`, because the live site serves `master`.
+- **One tagline:** the hero `<h1>` repeats the `mifunedev/agro` GitHub description. The subtitle adds the harnesses, the unattended work, and the free browser start. A designer scored this headline 21 of 25, and the current headline 16 of 25.
 
 ## Test Plan (TDD)
 
@@ -130,7 +150,7 @@ N/A. The site is static content and stores no data.
 |---|---|---|
 | N/A: the repository has no test script | `npm run lint`, `npm run build` | Each story |
 | `git grep` checks | `No free tier`, `no trial`, `card is required before`, `how you stop paying`, `until you destroy`, `get-agro.sh`, `preinstalled` | US-001 to US-005 |
-| `.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` | before and after screenshots | US-006 |
+| `.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` | before and after screenshots | US-007 |
 
 ## Design Principles
 
@@ -142,6 +162,7 @@ N/A. The site is static content and stores no data.
 ## Out of Scope
 
 - Phase 2, in a separate plan: the free-first layout redesign, the "n4 · 4 GB" calculator labels, the mobile button order, the Console card restyle, Console product screenshots as site visuals, and the docs-link move from `agro.mifune.dev`.
+- Phase 3, scoped after this task: a demo video of the platform in the hero. The new headline stays true with and without the video.
 - The rename of `mifunedev/agro-web` (mifunedev/agro-web#69).
 - UTM tags on the Console links.
 - A price change, and any Console change.
