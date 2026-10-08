@@ -156,8 +156,8 @@
         "The run uses a local `npm run build` and `npm run start`, and stops each process that the run starts."
       ],
       "priority": 7,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "evidence/manual-review.md pairs 12 annotated after screenshots (6 views at 1280x720 and 414x896) with the before set. scrollWidth equals innerWidth on / and /pricing at both widths. The run used npm run build and next start on port 3100 in a scratch copy, and stopped next-server after the run.",
       "dependsOn": [
         "US-001",
         "US-002",
@@ -168,7 +168,8 @@
       ],
       "files": [
         ".agro/tasks/free-tier-site-alignment/evidence/"
-      ]
+      ],
+      "commit": "3f923a278a1ed3814b5ec869568562a910ee10b9"
     }
   ]
 }
