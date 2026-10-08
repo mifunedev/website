@@ -19,13 +19,14 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Free card, CTA strip, and Pause billing fact show on /pricing. The n4 row carries 'Free tier eligible' through isFreeTierEligible() in src/config/cloud-pricing.ts, so FleetCalculator keeps its no-spec-comparison rule. lint 0; build 0 in a scratch copy, because next build in the main checkout breaks the running dev server.",
       "dependsOn": [],
       "files": [
         "src/app/pricing/page.tsx",
         "src/components/pricing/FleetCalculator.tsx"
-      ]
+      ],
+      "commit": "789949b63884341541ded672c1c4873c03f73d8c"
     },
     {
       "id": "US-002",
