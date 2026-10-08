@@ -90,13 +90,13 @@ The Mifune Cloud Console gives coding agents an isolated, persistent workspace w
 - Cloud Console: https://console.mifune.dev
 - Pricing: https://mifune.dev/pricing
 
-Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free; destroying a node is how you stop paying for it. AI usage is not included: you sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account and pay that provider directly.
+Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free. Pausing a node stops billing and keeps its workspace; destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account and pay that provider directly.
 
 Hourly rates, per whole hour a node is running:
 
 ${HOURLY_RATES}
 
-There is no monthly plan, no free tier, and no trial. Signing in is free; a card is required before the first node.
+A personal free tier gives one n4 node 24 running hours per UTC month with no card; the node auto-pauses at the limit and its workspace is kept 60 days after each pause. Free spots are limited, and a paid node needs a card. There is no monthly plan.
 
 A node left running for a whole month is billed as ${HOURS_PER_MONTH} whole hours at the rate above, which works out to:
 
