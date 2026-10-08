@@ -123,6 +123,18 @@ Issue: [#72](https://github.com/mifunedev/website/issues/72). Base branch: `mast
 - [ ] Verify in browser using agent-browser skill.
 - [ ] `npm run lint` and `npm run build` exit 0.
 
+### US-010: List each harness in the AGRO catalog
+
+**Description:** As a visitor, I want the agent picker to list each harness that `agro harness install` supports so that I find my agent.
+
+**Acceptance Criteria:**
+
+- [ ] The agent picker lists each `installable` and `on-demand` entry in the AGRO harness catalog (`.agro/cli/src/lib/harnesses/catalog.ts`).
+- [ ] The agent picker lists no harness that the catalog omits, except the OpenClaw "Coming soon" card.
+- [ ] Each harness card with a published docs page links to that page.
+- [ ] Verify in browser using agent-browser skill.
+- [ ] `npm run lint` and `npm run build` exit 0.
+
 ## Summary
 
 agro-console 1.7.0 and 1.8.0 added a personal free tier and made the SSH key optional, and production runs that release. The free tier gives one n4 node 24 running hours per UTC month, with no card, for personal accounts only. The Console caps enrollment at 250 (`agro-console/config.yaml`, `enrollmentCap`). The Console bills only running time: `billing.ts` meters only `node_hour_<spec>`, so a paused node costs nothing. A personal-account owner holds the `admin` role, and the Pause route requires `operator` or higher (`nodes.controller.ts:254`).
