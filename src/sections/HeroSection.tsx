@@ -45,24 +45,23 @@ const HeroSection = () => {
           />
 
           <h1 className="mb-6 text-balance font-montserrat text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Run coding agents in a sandbox, not on your machine.
+            A portable home for autonomous coding agents.
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
-            AGRO connects one repository to an isolated, persistent
-            Docker workspace. Bring your preferred coding agent, keep its
-            toolchain off your host, then self-host it or choose the Mifune Cloud
-            Console.
+            Give Claude Code, Codex, Pi, or any harness an isolated, persistent
+            sandbox that keeps working after you disconnect. Self-host it, or
+            start free in your browser.
           </p>
 
-          <div className="mb-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
+          <div className="mb-3 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
             <a
               href={OFFERING_URLS.cloud}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Open Mifune Cloud Console
+              Start your free workspace
               <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
               <span className="sr-only">(opens in a new tab)</span>
             </a>
@@ -72,11 +71,15 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 text-center font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Explore AGRO on GitHub
+              Self-host AGRO on GitHub
               <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
               <span className="sr-only">(opens in a new tab)</span>
             </a>
           </div>
+
+          <p className="mb-5 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            Free for personal accounts · No card · No SSH key
+          </p>
 
           <a
             href={OFFERING_URLS.support}
@@ -87,7 +90,8 @@ const HeroSection = () => {
           </a>
 
           <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-            Apache-2.0 licensed · one repo / one sandbox · no host toolchains
+            Apache-2.0 · Agent Governance Runtime Orchestrator · works with any
+            coding harness
           </p>
         </div>
 
