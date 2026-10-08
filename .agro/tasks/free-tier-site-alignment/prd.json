@@ -208,16 +208,17 @@
       "acceptanceCriteria": [
         "On `/`, the section order is the hero, `AgentPickerSection`, `AgroValueSection`, `PricingSection`, the FAQ, `CTASection`, then `OpenSourceSection`.",
         "Verify in browser using agent-browser skill.",
-        "`npm run lint` and `npm run build` exit 0."
+        "`npm run lint` and `npm run build` exit 0.",
+        "The card \"Help more agent builders find AGRO.\" sits directly above \"Open infrastructure, built in public.\"."
       ],
       "priority": 9,
       "passes": true,
-      "notes": "Home order in the browser: hero, agent picker, AGRO value, offerings, FAQ, contact form (CTASection), open-source showcase. The showcase renders when it scrolls into view. lint 0; scratch build 0.",
+      "notes": "Home order in the browser: hero, agent picker, AGRO value, offerings, FAQ, contact form (CTASection), open-source showcase. The showcase renders when it scrolls into view. lint 0; scratch build 0. Operator follow-up: the GitHub star card moved out of AgentPickerSection into OpenSourceSignalSection, rendered by OpenSourceSection directly above the showcase.",
       "dependsOn": [],
       "files": [
         "src/app/page.tsx"
       ],
-      "commit": "d8cda2d96817fcb4e2dc5d9c92f9cb6ec6f325a5"
+      "commit": "59ae4f69bc33054b33a07667ef3c508ab9ba956f"
     }
   ]
 }
