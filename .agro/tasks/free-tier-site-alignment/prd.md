@@ -181,4 +181,9 @@ N/A. The site is static content and stores no data.
 
 ## Lessons
 
-Filled by the advisor before undraft.
+- In Next.js 14.2.4, `next build` and `next dev` share the `.next` directory. A build in the main checkout breaks a running dev server. The advisor ran each `npm run build` in a scratch copy of the tracked files.
+- `npx next start` runs `next-server` as a child process. A stop of the `npx` process leaves the server on its port. Stop the process that listens on the port.
+- `FleetCalculator.tsx` forbids a comparison against one spec. The free-tier label reads `isFreeTierEligible()` from `src/config/cloud-pricing.ts`, so the calculator stays a map over `cloudNodePlans`.
+- The `mifunedev/agro` GitHub description starts with an emoji before "AGRO — Agent Governance Runtime Orchestrator. ". The hero `<h1>` uses only the text after that prefix.
+- The sticky navigation bar hides an element that a scroll puts at the top of the viewport. Scroll each callout target 110 pixels below the top before an annotated screenshot.
+- Phase 2 follow-up: the agent picker still shows a DeepAgents card. The AGRO docs have no page at `docs/harnesses/deepagents`.
