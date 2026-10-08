@@ -62,7 +62,7 @@ const MONTHLY_ESTIMATES = cloudNodePlans
 
 const LLM_TXT_CONTENT = `# Mifune — AGRO workspaces for coding agents
 
-> Run coding agents in a sandbox, not on your machine.
+> A portable home for autonomous coding agents.
 
 ## Category and value
 
@@ -72,7 +72,7 @@ Bring your preferred coding agent. AGRO supports Claude Code, Codex, Pi, and oth
 
 Grounded outcomes:
 
-- Isolate each project in its own sandbox.
+- Isolate each project in its own workspace.
 - Keep project toolchains off the host or laptop.
 - Run the workspace locally or on a remote VM.
 - Separate parallel branches with isolated git worktrees.

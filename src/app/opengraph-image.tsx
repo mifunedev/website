@@ -55,7 +55,7 @@ export default function OGImage() {
               maxWidth: "1000px",
             }}
           >
-            Run coding agents in a sandbox, not on your machine.
+            A portable home for autonomous coding agents.
           </div>
           <div
             style={{

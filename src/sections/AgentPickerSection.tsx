@@ -212,7 +212,7 @@ export default async function AgentPickerSection() {
               Help more agent builders find AGRO.
             </h2>
             <p className="mt-3 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground sm:text-base">
-              If the sandbox model saves you from one broken local agent setup,
+              If the workspace model saves you from one broken local agent setup,
               star the repo so the next Claude Code, Codex, OpenCode, or Hermes
               user can find it faster.
             </p>
@@ -255,12 +255,12 @@ export default async function AgentPickerSection() {
             Pick your agent.
           </h2>
           <p className="mx-auto mt-4 font-montserrat text-base leading-relaxed text-muted-foreground sm:text-lg">
-            The sandbox starts with no agent. Run{" "}
+            The workspace starts with no agent. Run{" "}
             <code className="font-mono text-sm text-foreground">
               agro harness install &lt;id&gt;
             </code>{" "}
             to add Claude Code, Codex, Pi, or another harness, then switch
-            between them inside the sandbox.
+            between them inside the workspace.
           </p>
         </div>
 

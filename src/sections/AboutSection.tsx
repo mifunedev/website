@@ -106,7 +106,7 @@ const AboutSection = () => {
           <p className="font-montserrat text-muted-foreground">
             AGRO is an isolated operating environment for reliable AI
             workers. Every agent Mifune deploys runs inside a hardened,
-            auditable sandbox — so your workflows stay predictable, your data
+            auditable workspace — so your workflows stay predictable, your data
             stays private, and you own every configuration from day one.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">

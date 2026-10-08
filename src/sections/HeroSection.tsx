@@ -12,13 +12,13 @@ const flowNodes = [
     emphasis: true,
   },
   {
-    label: "Sandbox isolated",
+    label: "Workspace isolated",
     detail: "Persistent Docker environment; tools stay off host",
     emphasis: false,
   },
   {
     label: "Agent launched",
-    detail: "Your preferred coding CLI runs inside the sandbox",
+    detail: "Your preferred coding CLI runs inside the workspace",
     emphasis: false,
   },
   {
@@ -50,7 +50,7 @@ const HeroSection = () => {
 
           <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
             Give Claude Code, Codex, Pi, or any harness an isolated, persistent
-            sandbox that keeps working after you disconnect. Self-host it, or
+            workspace that keeps working after you disconnect. Self-host it, or
             start free in your browser.
           </p>
 
@@ -195,7 +195,7 @@ const HeroSection = () => {
               className="absolute bottom-0 left-0 rounded-xl border border-border bg-card px-4 py-2 shadow-lg sm:-left-1 lg:-bottom-4 lg:-left-4"
             >
               <p className="font-montserrat text-xs font-medium text-muted-foreground">
-                Sandbox
+                Workspace
               </p>
               <p className="font-montserrat text-lg font-bold text-oh-accent">
                 Isolated
@@ -223,7 +223,7 @@ const HeroSection = () => {
 
           <figcaption id="cloud-operating-model-caption" className="sr-only">
             AGRO workspace flow: one repository connects to a
-            persistent, isolated Docker sandbox, the operator launches a
+            persistent, isolated Docker workspace, the operator launches a
             preferred coding agent inside it, and chooses the Mifune Cloud Console
             or self-hosting.
           </figcaption>

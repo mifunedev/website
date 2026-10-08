@@ -6,7 +6,7 @@ const outcomes = [
     icon: Box,
     title: "Isolation by default",
     description:
-      "Keep one project and its toolchain in one Docker sandbox instead of installing project dependencies on your host.",
+      "Keep one project and its toolchain in one Docker workspace instead of installing project dependencies on your host.",
   },
   {
     icon: Laptop,
@@ -44,7 +44,7 @@ export default function AgroValueSection() {
             id="agro-value-heading"
             className="text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl"
           >
-            One repo. One sandbox.
+            One repo. One workspace.
           </h2>
           <p className="mt-5 font-montserrat text-lg leading-relaxed text-oh-muted">
             AGRO is the portable layer between your repository and your
