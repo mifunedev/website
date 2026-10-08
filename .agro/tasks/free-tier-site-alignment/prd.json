@@ -102,8 +102,8 @@
         "After `npm run build`, `public/llm.txt` matches the generator output."
       ],
       "priority": 5,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Generator states the free tier sentence verbatim, Pause stops billing, and browser access with no SSH key; it holds no denial strings. The committed public/llm.txt equals the scratch build's prebuild output (cmp), and the dev server serves it at /llm.txt. lint 0; scratch build 0.",
       "dependsOn": [
         "US-001",
         "US-002"
@@ -111,7 +111,8 @@
       "files": [
         "scripts/generate-llm-txt.mjs",
         "public/llm.txt"
-      ]
+      ],
+      "commit": "a6006180feafec1feb188fe120d0f0c5e375886e"
     },
     {
       "id": "US-006",
