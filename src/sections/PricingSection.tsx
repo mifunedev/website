@@ -23,7 +23,7 @@ export default function PricingSection() {
             Managed Console first. Self-host when you want control.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
-            Choose the Mifune Cloud Console or operate the Apache-2.0
+            Choose the Mifune Console or operate the Apache-2.0
             licensed project yourself. Console customers can add Mifune
             engineering support when adoption needs hands-on help.
           </p>

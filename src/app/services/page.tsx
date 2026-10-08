@@ -22,7 +22,7 @@ const supportAreas = [
     icon: Waypoints,
     title: "Deployment planning",
     description:
-      "Translate your workflow, constraints, environment, and access needs into a practical Mifune Cloud Console deployment plan.",
+      "Translate your workflow, constraints, environment, and access needs into a practical Mifune Console deployment plan.",
     bullets: [
       "Workflow and constraint review",
       "Environment and access planning",
@@ -33,7 +33,7 @@ const supportAreas = [
     icon: Code2,
     title: "Implementation and integration",
     description:
-      "Bring Mifune engineers alongside your team for hands-on implementation work connected to the Mifune Cloud Console.",
+      "Bring Mifune engineers alongside your team for hands-on implementation work connected to the Mifune Console.",
     bullets: [
       "AGRO implementation",
       "System and workflow integration",
@@ -82,7 +82,7 @@ export default function ServicesPage() {
         data={breadcrumbSchema([
           { name: "Mifune", url: SITE_URL },
           {
-            name: "Mifune Cloud Console engineering support",
+            name: "Mifune Console engineering support",
             url: `${SITE_URL}/services`,
           },
         ])}
@@ -102,7 +102,7 @@ export default function ServicesPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="text-center lg:text-left">
               <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-oh-accent">
-                Mifune Engineering | Cloud Console
+                Mifune Engineering | Mifune Console
               </p>
               <AgroBrandBar
                 density="compact"
@@ -110,7 +110,7 @@ export default function ServicesPage() {
                 className="mx-auto mb-6 w-fit text-foreground lg:mx-0"
               />
               <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                Adopt the Mifune Cloud Console with our engineers{" "}
+                Adopt the Mifune Console with our engineers{" "}
                 <span className="font-space text-oh-accent">
                   alongside your team.
                 </span>
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  Explore the Mifune Cloud Console
+                  Explore the Mifune Console
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
@@ -240,7 +240,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <figcaption id="support-workflow-caption" className="sr-only">
-                Mifune Cloud Console engineering support begins with your workflow
+                Mifune Console engineering support begins with your workflow
                 and constraints, moves through an agreed scope, and continues
                 through planning, implementation, troubleshooting, and handoff.
               </figcaption>
@@ -338,7 +338,7 @@ export default function ServicesPage() {
                   Primary managed path
                 </p>
                 <h3 className="mt-2 font-montserrat text-2xl font-semibold text-foreground">
-                  Mifune Cloud Console
+                  Mifune Console
                 </h3>
                 <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
                   An isolated, persistent coding-agent workspace with Mifune
@@ -398,7 +398,7 @@ export default function ServicesPage() {
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
-                Explore the Mifune Cloud Console
+                Explore the Mifune Console
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
@@ -457,7 +457,7 @@ export default function ServicesPage() {
               Mifune engineering
             </p>
             <h2 className="mx-auto mt-5 max-w-3xl text-balance font-montserrat text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-              Discuss your Mifune Cloud Console deployment.
+              Discuss your Mifune Console deployment.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
               Share the workflow, constraints, or deployment work where your

@@ -10,7 +10,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const deploymentBenefits = [
   "A persistent, isolated workspace for your coding agents",
-  "The Mifune Cloud Console as a managed option",
+  "The Mifune Console as a managed option",
   "Optional hands-on deployment support for Console customers",
 ];
 
@@ -98,7 +98,7 @@ export default function CTASection({
           </h2>
           <p className="mt-6 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
             Tell us how your team plans to run coding agents. We’ll use the
-            details to discuss the Mifune Cloud Console and, for Console customers,
+            details to discuss the Mifune Console and, for Console customers,
             optional hands-on deployment support.
           </p>
 

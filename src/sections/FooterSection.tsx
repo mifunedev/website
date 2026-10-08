@@ -53,7 +53,7 @@ const FooterSection = () => {
                   rel="noopener noreferrer"
                   className={footerLinkClass}
                 >
-                  Mifune Cloud Console
+                  Mifune Console
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
