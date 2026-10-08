@@ -61,18 +61,18 @@ npm install -g @mifune/agro
 
 Or run it without a global install by using `npx @mifune/agro` in place of `agro` in later commands.
 
-If you do not have Node yet, the bootstrap script installs `agro` to `~/.local/bin` and offers to install Node for you:
+If you do not have Node yet, the release install script installs `agro` to `~/.local/bin` and offers to install Node for you:
 
 ```bash
-curl -fsSL https://agro.mifune.dev/get-agro.sh | bash
+curl -fsSL https://github.com/mifunedev/agro/releases/latest/download/install.sh | bash
 ```
 
 To review the script before you run it:
 
 ```bash
-curl -fsSL -o get-agro.sh https://agro.mifune.dev/get-agro.sh
-# Review get-agro.sh in your editor or pager before running it.
-bash get-agro.sh
+curl -fsSL -o install.sh https://github.com/mifunedev/agro/releases/latest/download/install.sh
+# Review install.sh in your editor or pager before running it.
+bash install.sh
 ```
 
 Later, `agro update` upgrades the installed CLI.

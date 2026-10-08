@@ -255,9 +255,12 @@ export default async function AgentPickerSection() {
             Pick your agent.
           </h2>
           <p className="mx-auto mt-4 font-montserrat text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Claude Code, Codex, and Pi ship preinstalled. OpenCode, DeepAgents,
-            Hermes, and Grok Build are opt-in image installs. Switch between
-            them inside the sandbox — or add your own by editing the Dockerfile.
+            The sandbox starts with no agent. Run{" "}
+            <code className="font-mono text-sm text-foreground">
+              agro harness install &lt;id&gt;
+            </code>{" "}
+            to add Claude Code, Codex, Pi, or another harness, then switch
+            between them inside the sandbox.
           </p>
         </div>
 
