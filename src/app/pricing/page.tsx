@@ -59,9 +59,9 @@ const billingFacts = [
       "Time spent queued, building, or on a build that failed is not billed. The meter starts when the node is running.",
   },
   {
-    title: "Destroy to stop paying",
+    title: "Pause or destroy to stop paying",
     detail:
-      "A running node keeps metering until you destroy it. Destroying the node in the Console is how you stop paying for it.",
+      "Only running time is billed. Pause a node to stop billing and keep its workspace. Destroy it to delete it for good.",
   },
 ];
 
@@ -128,9 +128,44 @@ export default function PricingPage() {
             </div>
 
             <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-              Signing in is free · A card is required before your first node ·
-              No free tier, no trial
+              Free for personal accounts: 24 running hours a month on one n4
+              node, no card · Limited free spots · Paid nodes need a card
             </p>
+          </div>
+        </section>
+
+        <section className="px-4 pb-16" aria-labelledby="free-tier-heading">
+          <div className="border-oh-accent/40 mx-auto flex max-w-4xl flex-col gap-6 rounded-2xl border bg-card p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="min-w-0">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
+                Free tier
+              </p>
+              <h2
+                id="free-tier-heading"
+                className="mt-2 font-montserrat text-2xl font-semibold text-foreground"
+              >
+                Start your free workspace
+              </h2>
+              <p className="mt-3 max-w-xl font-montserrat text-sm leading-relaxed text-muted-foreground">
+                Personal accounts get one n4 node with 24 running hours each
+                UTC month. No credit card. No SSH key.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col items-start gap-2 sm:items-center">
+              <a
+                href={OFFERING_URLS.cloud}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Create free node
+                <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <p className="font-mono text-xs text-muted-foreground">
+                Limited free spots.
+              </p>
+            </div>
           </div>
         </section>
 

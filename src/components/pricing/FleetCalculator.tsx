@@ -33,6 +33,7 @@ import {
   formatHourlyUsd,
   formatUsdTotal,
   isDefault,
+  isFreeTierEligible,
   monthlyHourPresets,
   type FleetQuantities,
   type NodeSpec,
@@ -130,6 +131,11 @@ export default function FleetCalculator() {
                     {isDefault(plan.spec) ? (
                       <span className="border-oh-accent/40 rounded-full border px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-oh-accent">
                         Default
+                      </span>
+                    ) : null}
+                    {isFreeTierEligible(plan.spec) ? (
+                      <span className="rounded-full bg-oh-solid px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-black">
+                        Free tier eligible
                       </span>
                     ) : null}
                   </div>
