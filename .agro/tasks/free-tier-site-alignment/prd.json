@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "project": "website",
+  "branchName": "feat/72-free-tier-site-alignment",
+  "description": "Align mifune.dev with the free tier and the browser-first Console. agro-console 1.7.0 and 1.8.0 added a personal free tier and made the SSH key optional, and production runs that release. The free tier gives one n4 node 24 running hours per UTC month, with no card, for personal accounts only. The Console caps enrollment at 250 (`agro-console/config.yaml`, `enrollmentCap`). The Console bills only running time: `billing.ts` meters only `node_hour_<spec>`, so a paused node costs nothing. A personal-account owner holds the `admin` role, and the Pause route requires `operator` or higher (`nodes.controller.ts:254`). The live site serves `master` (`883c9ed`), which is 17 commits ahead of `development`. On `master`, mifune.dev says \"No free tier, no trial\" (`src/app/pricing/page.tsx:131-132`, `src/data/faqs.ts:101`, `scripts/generate-llm-txt.mjs:99`) and \"Destroy to stop paying\" (`src/app/pricing/page.tsx:62`). The blog post installs from `agro.mifune.dev/get-agro.sh`. `AgentPickerSection.tsx:258-260` says three agents ship preinstalled. The prices in `src/config/cloud-pricing.ts` match the Console catalog for each of the five specs, so the plan changes no price.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "State the free tier and remove the false denial on the pricing page",
+      "description": "As a visitor, I want the pricing page to state the free tier with its limits so that I start without a card.",
+      "acceptanceCriteria": [
+        "`/pricing` contains no \"No free tier\", no \"no trial\", and no \"A card is required before your first node\".",
+        "Below the hero, `/pricing` shows a card with the heading \"Start your free workspace\" and the text \"Personal accounts get one n4 node with 24 running hours each UTC month. No credit card. No SSH key.\"",
+        "The free card has one button \"Create free node\" that links to `https://console.mifune.dev`, and the note \"Limited free spots.\"",
+        "The CTA strip reads \"Free for personal accounts: 24 running hours a month on one n4 node, no card · Limited free spots · Paid nodes need a card\".",
+        "The billing fact \"Destroy to stop paying\" becomes \"Pause or destroy to stop paying\", with the detail \"Only running time is billed. Pause a node to stop billing and keep its workspace. Destroy it to delete it for good.\"",
+        "The n4 row of the rate calculator carries the label \"Free tier eligible\".",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/app/pricing/page.tsx",
+        "src/components/pricing/FleetCalculator.tsx"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Correct the FAQ and its JSON-LD",
+      "description": "As a visitor, I want the FAQ to match the Console so that I know what is free and how to stop paying.",
+      "acceptanceCriteria": [
+        "The billing FAQ answer names Pause and contains no \"destroying the node in the Console is how you stop paying\".",
+        "The card FAQ question reads \"Do I need a card to start?\".",
+        "The card FAQ answer reads \"No, not for the free tier. A personal account gets one n4 node with 24 running hours each UTC month and no card. At the limit, the node pauses, and its workspace is kept for 60 days. A paid node needs a card. Free spots are limited.\"",
+        "A new FAQ \"What happens when my free hours run out?\" answers \"The node pauses automatically, and nothing is billed. Add a card to continue now, or wait for the next UTC month. The workspace is kept for 60 days after each pause.\"",
+        "A new FAQ \"Do I need an SSH key?\" answers \"No. You open every node in your browser, with a terminal and an editor. Add an SSH key only if you also want direct SSH access.\"",
+        "The `FAQPage` JSON-LD on `/pricing` contains each new question and each new answer.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/data/faqs.ts"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "State the free, browser-first Console on the home page",
+      "description": "As a visitor, I want the home page to show the free Console so that I try it first.",
+      "acceptanceCriteria": [
+        "Under the home hero CTA, the line \"Free for personal accounts · No card · No SSH key\" shows.",
+        "The Console offering card bullets include \"Free: 24 running hours a month on one n4 node\" and \"Browser terminal and editor, no SSH key\".",
+        "The \"How do I start?\" FAQ answer names the free Console path.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/app/page.tsx",
+        "src/config/offerings.ts"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "Correct the install command and the agent wording",
+      "description": "As a self-hosting developer, I want the current install command and agent wording so that my first steps succeed.",
+      "acceptanceCriteria": [
+        "`posts/agro-getting-started.md` contains `curl -fsSL https://github.com/mifunedev/agro/releases/latest/download/install.sh | bash` and contains no `get-agro.sh`.",
+        "`src/sections/AgentPickerSection.tsx` states that `agro harness install <id>` adds an agent, and contains no \"preinstalled\" and no \"Dockerfile\".",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "posts/agro-getting-started.md",
+        "src/sections/AgentPickerSection.tsx"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "Mirror the changes in llm.txt",
+      "description": "As an AI assistant that reads the site, I want `llm.txt` to state the current offer so that my answers match the Console.",
+      "acceptanceCriteria": [
+        "`scripts/generate-llm-txt.mjs` contains no \"no free tier\", no \"no trial\", no \"card is required before\", no \"how you stop paying\", and no \"until you destroy\".",
+        "The generator states \"A personal free tier gives one n4 node 24 running hours per UTC month with no card; the node auto-pauses at the limit and its workspace is kept 60 days after each pause. Free spots are limited, and a paid node needs a card.\"",
+        "The generator states that Pause stops billing and that a node opens in the browser with no SSH key.",
+        "After `npm run build`, `public/llm.txt` matches the generator output."
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-001",
+        "US-002"
+      ],
+      "files": [
+        "scripts/generate-llm-txt.mjs",
+        "public/llm.txt"
+      ]
+    },
+    {
+      "id": "US-006",
+      "title": "Manual review evidence",
+      "description": "As the operator, I want a recorded browser review of the changed pages so that I can accept the change from evidence.",
+      "acceptanceCriteria": [
+        "Depends on US-001 through US-005.",
+        "`.agro/tasks/free-tier-site-alignment/evidence/manual-review.md` holds annotated screenshots of `/pricing`, the FAQ section, the home hero, and the Console card, at 1280x720 and 414x896.",
+        "Each screenshot of a changed page has a matching screenshot in `evidence/before/`, so a reviewer compares the two.",
+        "The run checks that `scrollWidth <= innerWidth` on `/` and `/pricing` at 414x896.",
+        "The run uses a local `npm run build` and `npm run start`, and stops each process that the run starts."
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-001",
+        "US-002",
+        "US-003",
+        "US-004",
+        "US-005"
+      ],
+      "files": [
+        ".agro/tasks/free-tier-site-alignment/evidence/"
+      ]
+    }
+  ]
+}
