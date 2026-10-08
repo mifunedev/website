@@ -62,13 +62,14 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "The Console card bullets now include the free-tier and browser bullets; they replace 'Environment operated by Mifune' (the card's operator line keeps that fact) and 'Start in the Mifune Cloud Console'. The 'How do I start?' answer and its FAQPage JSON-LD name the free path. lint 0; scratch build 0.",
       "dependsOn": [],
       "files": [
         "src/config/offerings.ts",
         "src/data/faqs.ts"
-      ]
+      ],
+      "commit": "459dbddc89fea14495c0ada7f420d3282a4e2525"
     },
     {
       "id": "US-004",
