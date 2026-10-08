@@ -32,8 +32,8 @@ export const offeringPaths: OfferingPath[] = [
       "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
       "Persistent workspace for coding agents",
-      "Environment operated by Mifune",
-      "Start in the Mifune Cloud Console",
+      "Free: 24 running hours a month on one n4 node",
+      "Browser terminal and editor, no SSH key",
     ],
     cta: "Open Mifune Cloud Console",
     href: OFFERING_URLS.cloud,

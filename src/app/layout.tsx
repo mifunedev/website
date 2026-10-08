@@ -21,8 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const APP_NAME = "Mifune";
-const APP_DEFAULT_TITLE =
-  "Run coding agents in a sandbox, not on your machine.";
+const APP_DEFAULT_TITLE = "A portable home for autonomous coding agents.";
 const APP_TITLE_TEMPLATE = "%s | Mifune";
 const APP_DESCRIPTION =
   "AGRO (Agent Governance Runtime Orchestrator) connects one repository to an isolated, persistent Docker workspace for your preferred coding agent. Self-host it or choose the Mifune Cloud Console.";

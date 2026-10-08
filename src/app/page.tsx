@@ -26,7 +26,6 @@ export default function Home() {
       </header>
       <main id="main-content" tabIndex={-1} className="scroll-mt-20">
         <HeroSection />
-        <OpenSourceSection />
         <AgentPickerSection />
         <AgroValueSection />
         <PricingSection />
@@ -38,6 +37,7 @@ export default function Home() {
           idPrefix="homepage-faq"
         />
         <CTASection />
+        <OpenSourceSection />
       </main>
       <FooterSection />
     </>

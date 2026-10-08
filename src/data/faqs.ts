@@ -20,7 +20,7 @@ export const faqs: Faq[] = [
   {
     question: "What is AGRO?",
     answer:
-      "AGRO, formerly Open Harness, is an Apache-2.0 licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one sandbox and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
+      "AGRO, formerly Open Harness, is an Apache-2.0 licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one workspace and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
   },
   {
     question: "What problem does it solve?",
@@ -45,7 +45,7 @@ export const faqs: Faq[] = [
   {
     question: "How do I start?",
     answer:
-      "Open console.mifune.dev for the managed Console path. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
+      "Open console.mifune.dev and start free with a personal account: one n4 node with 24 running hours each UTC month, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
   },
 ];
 
@@ -84,7 +84,7 @@ export const pricingFaqs: Faq[] = [
   {
     question: "How does billing work?",
     answer:
-      "You pay for the hours your node runs. Only whole running UTC hours meter, so any UTC hour in which the node was running counts as one full hour at the rate for its size. Time spent queued, building, or on a build that failed is not billed, and destroying the node in the Console is how you stop paying for it.",
+      "You pay for the hours your node runs. Only whole running UTC hours meter, so any UTC hour in which the node was running counts as one full hour at the rate for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop billing and keep its workspace, or destroy it to delete it for good.",
   },
   {
     question: "What does a node cost?",
@@ -96,9 +96,19 @@ export const pricingFaqs: Faq[] = [
       "No. The price covers the node and the AGRO workspace running on it. You sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account, and you pay that provider directly for the AI usage.",
   },
   {
-    question: "Do I need a card to sign up?",
+    question: "Do I need a card to start?",
     answer:
-      "Signing in is free and costs you nothing to look around. A card is required before you create your first node, because a running node meters from its first whole hour. There is no free tier and no trial.",
+      "No, not for the free tier. A personal account gets one n4 node with 24 running hours each UTC month and no card. At the limit, the node pauses, and its workspace is kept for 60 days. A paid node needs a card. Free spots are limited.",
+  },
+  {
+    question: "What happens when my free hours run out?",
+    answer:
+      "The node pauses automatically, and nothing is billed. Add a card to continue now, or wait for the next UTC month. The workspace is kept for 60 days after each pause.",
+  },
+  {
+    question: "Do I need an SSH key?",
+    answer:
+      "No. You open every node in your browser, with a terminal and an editor. Add an SSH key only if you also want direct SSH access.",
   },
   {
     question: "How many nodes can I run?",

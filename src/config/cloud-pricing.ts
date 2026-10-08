@@ -136,6 +136,17 @@ export const cloudNodePlans: CloudNodePlan[] = [
   },
 ];
 
+/**
+ * The one spec the Console personal free tier runs: one node, 24 running
+ * hours per UTC month, no card.
+ */
+export const FREE_TIER_NODE_SPEC: NodeSpec = "n4";
+
+/** True for the spec the personal free tier covers. */
+export function isFreeTierEligible(spec: NodeSpec): boolean {
+  return spec === FREE_TIER_NODE_SPEC;
+}
+
 /** True for the spec a new node gets by default. */
 export function isDefault(spec: NodeSpec): boolean {
   return spec === DEFAULT_NODE_SPEC;
