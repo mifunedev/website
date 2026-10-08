@@ -121,7 +121,7 @@
       "acceptanceCriteria": [
         "The hero `<h1>` reads exactly \"A portable home for autonomous coding agents.\", and the page has one `<h1>`.",
         "The `<h1>` equals the `mifunedev/agro` GitHub description without its prefix \"AGRO — Agent Governance Runtime Orchestrator. \".",
-        "The hero subtitle reads exactly \"Give Claude Code, Codex, Pi, or any harness an isolated, persistent sandbox that keeps working after you disconnect. Self-host it, or start free in your browser.\"",
+        "The hero subtitle reads exactly \"Give Claude Code, Codex, Pi, or any harness an isolated, persistent workspace that keeps working after you disconnect. Self-host it, or start free in your browser.\"",
         "The primary CTA reads \"Start your free workspace\" and links to `OFFERING_URLS.cloud`.",
         "The secondary CTA reads \"Self-host AGRO on GitHub\" and links to `OFFERING_URLS.openSource`.",
         "Both CTAs keep the screen-reader text \"(opens in a new tab)\".",
@@ -170,6 +170,52 @@
         ".agro/tasks/free-tier-site-alignment/evidence/"
       ],
       "commit": "3f923a278a1ed3814b5ec869568562a910ee10b9"
+    },
+    {
+      "id": "US-008",
+      "title": "Use \"workspace\" for the agent environment",
+      "description": "As a visitor, I want the site to call the agent environment \"workspace\" so that the site matches the Console.",
+      "acceptanceCriteria": [
+        "`git grep -n -i sandbox -- src scripts public/llm.txt` returns only comments, identifiers, or code that is not visible copy.",
+        "The site title, the Open Graph image, and the `llm.txt` tagline read \"A portable home for autonomous coding agents.\"",
+        "Blog posts keep \"sandbox\" where the text names an `agro sandbox` command or the self-hosted CLI.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-006"
+      ],
+      "files": [
+        "src/sections/HeroSection.tsx",
+        "src/sections/AgentPickerSection.tsx",
+        "src/sections/AgroValueSection.tsx",
+        "src/sections/AboutSection.tsx",
+        "src/data/faqs.ts",
+        "src/app/layout.tsx",
+        "src/app/opengraph-image.tsx",
+        "scripts/generate-llm-txt.mjs",
+        "public/llm.txt"
+      ]
+    },
+    {
+      "id": "US-009",
+      "title": "Move harness support up and open source below the contact section",
+      "description": "As a visitor, I want agent support after the hero and the open-source showcase at the end, so that the free start comes first.",
+      "acceptanceCriteria": [
+        "On `/`, the section order is the hero, `AgentPickerSection`, `AgroValueSection`, `PricingSection`, the FAQ, `CTASection`, then `OpenSourceSection`.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/app/page.tsx"
+      ]
     }
   ]
 }

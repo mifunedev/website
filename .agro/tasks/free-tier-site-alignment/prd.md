@@ -77,7 +77,7 @@ Issue: [#72](https://github.com/mifunedev/website/issues/72). Base branch: `mast
 
 - [ ] The hero `<h1>` reads exactly "A portable home for autonomous coding agents.", and the page has one `<h1>`.
 - [ ] The `<h1>` equals the `mifunedev/agro` GitHub description without its prefix "AGRO — Agent Governance Runtime Orchestrator. ".
-- [ ] The hero subtitle reads exactly "Give Claude Code, Codex, Pi, or any harness an isolated, persistent sandbox that keeps working after you disconnect. Self-host it, or start free in your browser."
+- [ ] The hero subtitle reads exactly "Give Claude Code, Codex, Pi, or any harness an isolated, persistent workspace that keeps working after you disconnect. Self-host it, or start free in your browser."
 - [ ] The primary CTA reads "Start your free workspace" and links to `OFFERING_URLS.cloud`.
 - [ ] The secondary CTA reads "Self-host AGRO on GitHub" and links to `OFFERING_URLS.openSource`.
 - [ ] Both CTAs keep the screen-reader text "(opens in a new tab)".
@@ -100,6 +100,28 @@ Issue: [#72](https://github.com/mifunedev/website/issues/72). Base branch: `mast
 - [ ] Each screenshot of a changed page has a matching screenshot in `evidence/before/`, so a reviewer compares the two.
 - [ ] The run checks that `scrollWidth <= innerWidth` on `/` and `/pricing` at 414x896.
 - [ ] The run uses a local `npm run build` and `npm run start`, and stops each process that the run starts.
+
+### US-008: Use "workspace" for the agent environment
+
+**Description:** As a visitor, I want the site to call the agent environment "workspace" so that the site matches the Console.
+
+**Acceptance Criteria:**
+
+- [ ] `git grep -n -i sandbox -- src scripts public/llm.txt` returns only comments, identifiers, or code that is not visible copy.
+- [ ] The site title, the Open Graph image, and the `llm.txt` tagline read "A portable home for autonomous coding agents."
+- [ ] Blog posts keep "sandbox" where the text names an `agro sandbox` command or the self-hosted CLI.
+- [ ] Verify in browser using agent-browser skill.
+- [ ] `npm run lint` and `npm run build` exit 0.
+
+### US-009: Move harness support up and open source below the contact section
+
+**Description:** As a visitor, I want agent support after the hero and the open-source showcase at the end, so that the free start comes first.
+
+**Acceptance Criteria:**
+
+- [ ] On `/`, the section order is the hero, `AgentPickerSection`, `AgroValueSection`, `PricingSection`, the FAQ, `CTASection`, then `OpenSourceSection`.
+- [ ] Verify in browser using agent-browser skill.
+- [ ] `npm run lint` and `npm run build` exit 0.
 
 ## Summary
 
