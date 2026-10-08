@@ -233,13 +233,13 @@
       ],
       "priority": 10,
       "passes": true,
-      "notes": "Added Muse Code (Meta), Antigravity CLI (Google), and fx (Vercel Labs) with each vendor's official favicon. Removed DeepAgents and its logo: the catalog has no DeepAgents entry, and the published docs overview omits it. agro.mifune.dev has no fx page yet (HTTP 404), so the fx card links to docs/harnesses/fx.md on mifunedev/agro main through a new docsUrl field. Every card image loads in the browser. lint 0; scratch build 0.",
+      "notes": "Added Muse Code (Meta), Antigravity CLI (Google), and fx (Vercel Labs) with each vendor's official favicon. Removed DeepAgents and its logo: the catalog has no DeepAgents entry, and the published docs overview omits it. agro.mifune.dev has no fx page yet (HTTP 404), so the fx card links to docs/harnesses/fx.md on mifunedev/agro main through a new docsUrl field. Every card image loads in the browser. lint 0; scratch build 0. Operator follow-up: the Pi card uses the three-color Pi 1.0 mark from pi.dev (shipped with Pi Durable), and the OpenCode card uses the square O mark from the opencode.ai wordmark.",
       "dependsOn": [],
       "files": [
         "src/sections/AgentPickerSection.tsx",
         "public/brand/agents/"
       ],
-      "commit": "dac244b008fa832715e1e343cfa3b58d0329a2ea"
+      "commit": "3e7a6c781a30acb7deb7b0bd0e3cb66da107fc3a"
     }
   ]
 }
