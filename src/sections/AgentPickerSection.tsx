@@ -6,14 +6,17 @@ type Agent = {
   name: string;
   description: string;
   docsPath?: string;
+  docsUrl?: string;
   logo:
     | "claude-code"
     | "codex"
     | "opencode"
     | "pi"
-    | "deepagents"
     | "hermes"
     | "grok-build"
+    | "muse-code"
+    | "antigravity-cli"
+    | "fx"
     | "t3-code"
     | "openclaw";
 };
@@ -44,12 +47,6 @@ const agents: Agent[] = [
     logo: "pi",
   },
   {
-    name: "DeepAgents",
-    description: "LangChain's multi-provider terminal agent.",
-    docsPath: "/docs/harnesses/deepagents",
-    logo: "deepagents",
-  },
-  {
     name: "Hermes",
     description: "Nous Research's self-improving agent CLI.",
     docsPath: "/docs/harnesses/hermes",
@@ -60,6 +57,24 @@ const agents: Agent[] = [
     description: "xAI's terminal coding agent and CLI.",
     docsPath: "/docs/harnesses/grok-build",
     logo: "grok-build",
+  },
+  {
+    name: "Muse Code",
+    description: "Meta's terminal coding agent.",
+    docsPath: "/docs/harnesses/muse-code",
+    logo: "muse-code",
+  },
+  {
+    name: "Antigravity CLI",
+    description: "Google's terminal coding agent.",
+    docsPath: "/docs/harnesses/antigravity-cli",
+    logo: "antigravity-cli",
+  },
+  {
+    name: "fx",
+    description: "Vercel Labs' native coding agent (experimental).",
+    docsUrl: "https://github.com/mifunedev/agro/blob/main/docs/harnesses/fx.md",
+    logo: "fx",
   },
   {
     name: "T3 Code",
@@ -77,10 +92,12 @@ const agents: Agent[] = [
 const imageLogos = {
   "claude-code": "/brand/agents/claude-code.png",
   codex: "/brand/agents/codex.png",
-  deepagents: "/brand/agents/deepagents.png",
   hermes: "/brand/agents/hermes.ico",
   "grok-build": "/brand/agents/grok-build.ico",
   "t3-code": "/brand/agents/t3-code.png",
+  "muse-code": "/brand/agents/muse-code.ico",
+  "antigravity-cli": "/brand/agents/antigravity-cli.png",
+  fx: "/brand/agents/fx.png",
 } as const;
 
 function AgentLogo({ logo }: { logo: Agent["logo"] }) {
@@ -213,9 +230,9 @@ export default function AgentPickerSection() {
         >
           {agents.map((agent) => (
             <li key={agent.name} className="min-w-0">
-              {agent.docsPath ? (
+              {agent.docsPath || agent.docsUrl ? (
                 <a
-                  href={`${DOCS_BASE_URL}${agent.docsPath}`}
+                  href={agent.docsUrl ?? `${DOCS_BASE_URL}${agent.docsPath}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex h-full min-h-28 min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
