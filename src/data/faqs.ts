@@ -45,7 +45,7 @@ export const faqs: Faq[] = [
   {
     question: "How do I start?",
     answer:
-      "Open console.mifune.dev for the managed Console path. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
+      "Open console.mifune.dev and start free with a personal account: one n4 node with 24 running hours each UTC month, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
   },
 ];
 
