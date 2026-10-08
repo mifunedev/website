@@ -134,14 +134,15 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 6,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "H1, subtitle, CTAs, free line, and footer match the plan strings. One h1; the h1 equals the mifunedev/agro description after its prefix '🏗️ AGRO — Agent Governance Runtime Orchestrator. ' (the live description also starts with an emoji). Both CTAs keep '(opens in a new tab)'. At 1440x900 and 414x896 the h1 wraps to 3 lines, and the h1, subtitle, and both CTAs show without a scroll; scrollWidth <= innerWidth. The support link moved below the free line. lint 0; scratch build 0.",
       "dependsOn": [
         "US-003"
       ],
       "files": [
         "src/sections/HeroSection.tsx"
-      ]
+      ],
+      "commit": "5b2cdc9496cbdf725b403cba809e409ff21c03a7"
     },
     {
       "id": "US-007",
