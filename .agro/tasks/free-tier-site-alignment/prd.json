@@ -43,12 +43,13 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Billing answer names Pause. Card FAQ renamed and rewritten; two new FAQs added. FAQPage JSON-LD on /pricing holds 7 entries with each new question and answer, and no old denial text. The new FAQ expands in the browser and shows its answer. lint 0; scratch build 0.",
       "dependsOn": [],
       "files": [
         "src/data/faqs.ts"
-      ]
+      ],
+      "commit": "7986ddcdfe225f97d14fd5caa60f7c28fabf1030"
     },
     {
       "id": "US-003",
