@@ -30,12 +30,12 @@ export const faqs: Faq[] = [
   {
     question: "What does Mifune provide?",
     answer:
-      "Mifune maintains the open-source AGRO project, operates the Mifune Cloud Console as the managed path, and offers forward-deployed engineering support to Console customers.",
+      "Mifune maintains the open-source AGRO project, operates the Mifune Console as the managed path, and offers forward-deployed engineering support to Console customers.",
   },
   {
-    question: "How do the Mifune Cloud Console and open source differ?",
+    question: "How do the Mifune Console and open source differ?",
     answer:
-      "With the Mifune Cloud Console, Mifune operates the managed environment. With open source, your team can inspect and adapt AGRO, then operate it locally or on a remote VM. Choose based on who should own the environment and review each destination for path-specific details.",
+      "With the Mifune Console, Mifune operates the managed environment. With open source, your team can inspect and adapt AGRO, then operate it locally or on a remote VM. Choose based on who should own the environment and review each destination for path-specific details.",
   },
   {
     question: "When should I use engineering support?",

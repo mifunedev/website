@@ -27,7 +27,7 @@ export const offeringPaths: OfferingPath[] = [
   {
     id: "cloud",
     eyebrow: "Recommended · Managed by Mifune",
-    name: "Mifune Cloud Console",
+    name: "Mifune Console",
     description:
       "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
@@ -35,7 +35,7 @@ export const offeringPaths: OfferingPath[] = [
       "Free: 24 running hours a month on one n4 node",
       "Browser terminal and editor, no SSH key",
     ],
-    cta: "Open Mifune Cloud Console",
+    cta: "Open Mifune Console",
     href: OFFERING_URLS.cloud,
     external: true,
     primary: true,
@@ -67,7 +67,7 @@ export const offeringPaths: OfferingPath[] = [
     eyebrow: "Optional · For Console customers",
     name: "Forward-Deployed Engineering Support",
     description:
-      "Bring Mifune engineers alongside your team to plan, implement, integrate, troubleshoot, and hand off your Mifune Cloud Console deployment.",
+      "Bring Mifune engineers alongside your team to plan, implement, integrate, troubleshoot, and hand off your Mifune Console deployment.",
     bullets: [
       "Workflow and deployment planning",
       "Hands-on implementation and integration",

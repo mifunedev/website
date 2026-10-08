@@ -18,10 +18,10 @@ import CTASection from "@/sections/CTASection";
 import FAQSection from "@/sections/FAQSection";
 import FooterSection from "@/sections/FooterSection";
 
-const title = "Mifune Cloud Console pricing";
+const title = "Mifune Console pricing";
 
 const description =
-  "Mifune Cloud Console nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
+  "Mifune Console nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
 
 export const metadata: Metadata = {
   title,

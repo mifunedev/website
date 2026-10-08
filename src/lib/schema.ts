@@ -38,7 +38,7 @@ export function organizationSchema(): Record<string, unknown> {
       url: LOGO_URL,
     },
     description:
-      "Mifune maintains the Apache-2.0 licensed AGRO coding-agent workspace, operates the Mifune Cloud Console, and offers forward-deployed engineering support for Console customers.",
+      "Mifune maintains the Apache-2.0 licensed AGRO coding-agent workspace, operates the Mifune Console, and offers forward-deployed engineering support for Console customers.",
     email: ORG_EMAIL,
     founder: {
       "@type": "Person",
@@ -63,7 +63,7 @@ export function websiteSchema(): Record<string, unknown> {
     name: ORG_NAME,
     url: SITE_URL,
     description:
-      "Mifune workspaces for coding agents: the managed Mifune Cloud Console, Apache-2.0 licensed AGRO, and engineering support for Console customers.",
+      "Mifune workspaces for coding agents: the managed Mifune Console, Apache-2.0 licensed AGRO, and engineering support for Console customers.",
     publisher: { "@id": ORG_ID },
   };
 }
@@ -73,7 +73,7 @@ export function cloudServiceSchema(): Record<string, unknown> {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": CLOUD_SERVICE_ID,
-    name: "Mifune Cloud Console",
+    name: "Mifune Console",
     serviceType: "Managed coding-agent workspace",
     category: "Coding agent workspace",
     description:
@@ -110,16 +110,16 @@ export function supportServiceSchema(): Record<string, unknown> {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": SUPPORT_SERVICE_ID,
-    name: "Mifune Cloud Console engineering support",
+    name: "Mifune Console engineering support",
     serviceType: "Forward-deployed engineering support",
     category: "Engineering support for managed coding-agent workspaces",
     description:
-      "Mifune engineering help for Mifune Cloud Console customers to plan, implement, integrate, troubleshoot, and hand off a deployment.",
+      "Mifune engineering help for Mifune Console customers to plan, implement, integrate, troubleshoot, and hand off a deployment.",
     url: `${SITE_URL}/services`,
     provider: { "@id": ORG_ID },
     audience: {
       "@type": "Audience",
-      audienceType: "Mifune Cloud Console customers",
+      audienceType: "Mifune Console customers",
     },
   };
 }
