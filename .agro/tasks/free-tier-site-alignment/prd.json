@@ -211,12 +211,13 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 9,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Home order in the browser: hero, agent picker, AGRO value, offerings, FAQ, contact form (CTASection), open-source showcase. The showcase renders when it scrolls into view. lint 0; scratch build 0.",
       "dependsOn": [],
       "files": [
         "src/app/page.tsx"
-      ]
+      ],
+      "commit": "d8cda2d96817fcb4e2dc5d9c92f9cb6ec6f325a5"
     }
   ]
 }
