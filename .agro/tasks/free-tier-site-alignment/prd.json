@@ -183,8 +183,8 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 8,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Visible copy in src/, the generator, and public/llm.txt uses 'workspace'; git grep -i sandbox on those paths returns no match. The site title, the OG image, and the llm.txt tagline now use the new headline (US-006 missed them). Blog posts keep 'sandbox', because they document the agro sandbox CLI verbs. No 'sandbox' text renders on /. lint 0; scratch build 0; public/llm.txt equals the prebuild output.",
       "dependsOn": [
         "US-006"
       ],
@@ -198,7 +198,8 @@
         "src/app/opengraph-image.tsx",
         "scripts/generate-llm-txt.mjs",
         "public/llm.txt"
-      ]
+      ],
+      "commit": "07b84f0aa666e66082d30117f3e252162d7beaa3"
     },
     {
       "id": "US-009",
