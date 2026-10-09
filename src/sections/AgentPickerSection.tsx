@@ -53,6 +53,12 @@ const agents: Agent[] = [
     logo: "hermes",
   },
   {
+    name: "OpenClaw",
+    description: "Gateway-first personal agent runtime.",
+    docsPath: "/docs/harnesses/openclaw",
+    logo: "openclaw",
+  },
+  {
     name: "Grok Build",
     description: "xAI's terminal coding agent and CLI.",
     docsPath: "/docs/harnesses/grok-build",
@@ -82,11 +88,6 @@ const agents: Agent[] = [
     docsPath: "/docs/harnesses/t3code",
     logo: "t3-code",
   },
-  {
-    name: "OpenClaw",
-    description: "Coming soon.",
-    logo: "openclaw",
-  },
 ];
 
 const imageLogos = {
@@ -98,6 +99,7 @@ const imageLogos = {
   "muse-code": "/brand/agents/muse-code.ico",
   "antigravity-cli": "/brand/agents/antigravity-cli.png",
   fx: "/brand/agents/fx.png",
+  openclaw: "/brand/agents/openclaw.png",
 } as const;
 
 function AgentLogo({ logo }: { logo: Agent["logo"] }) {
