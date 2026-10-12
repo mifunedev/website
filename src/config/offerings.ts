@@ -45,7 +45,7 @@ export const offeringPaths: OfferingPath[] = [
   },
   {
     id: "open-source",
-    eyebrow: "Self-hosted · Maintained by Mifune",
+    eyebrow: "Self-hosted",
     name: "AGRO Open Source",
     description:
       "Inspect, adapt, and operate the Apache-2.0 licensed AGRO workspace yourself, locally or on a remote VM.",

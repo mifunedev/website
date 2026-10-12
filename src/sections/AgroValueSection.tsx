@@ -32,7 +32,7 @@ export default function AgroValueSection() {
       <div className="relative mx-auto max-w-6xl">
         <AgroBrandBar
           density="card"
-          context="OPEN SOURCE · MAINTAINED BY MIFUNE"
+          context="OPEN SOURCE"
           className="mb-12 border-b border-oh-rule pb-5 text-oh-ink"
         />
 

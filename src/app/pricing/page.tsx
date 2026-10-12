@@ -250,7 +250,7 @@ export default function PricingPage() {
           <div className="relative mx-auto max-w-6xl">
             <AgroBrandBar
               density="card"
-              context="OPEN SOURCE · MAINTAINED BY MIFUNE"
+              context="OPEN SOURCE"
               className="mb-10 border-b border-oh-rule pb-5 text-oh-ink"
             />
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.8fr)] lg:gap-12">

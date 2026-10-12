@@ -348,7 +348,7 @@ export default function ServicesPage() {
               <article className="rounded-2xl border border-border bg-card p-6">
                 <AgroBrandBar
                   density="card"
-                  context="OPEN SOURCE · MAINTAINED BY MIFUNE"
+                  context="OPEN SOURCE"
                   className="mb-6 border-b border-border pb-4 text-foreground"
                 />
                 <GitBranch

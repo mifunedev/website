@@ -34,13 +34,12 @@ const HeroSection = () => {
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-4 pb-16 pt-28 sm:pt-32">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_90%_60%_at_50%_0%,#000_65%,transparent_100%)]" />
-      <div className="absolute left-1/2 top-1/4 h-[28rem] w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/10 blur-[120px]" />
+      <div className="absolute left-1/2 top-1/4 h-[28rem] w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(34,197,94,0.16),rgba(16,185,129,0.07)_55%,transparent)]" />
 
       <div className="relative mx-auto my-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="text-center lg:text-left">
           <AgroBrandBar
             density="hero"
-            status="Maintained by Mifune"
             className="mx-auto mb-7 w-fit justify-center text-foreground lg:mx-0 lg:justify-start"
           />
 
