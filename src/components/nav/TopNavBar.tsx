@@ -49,7 +49,7 @@ const TopNavbar = () => {
     <>
       <a
         href="#main-content"
-        className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-md bg-background px-4 py-3 font-montserrat text-sm font-semibold text-foreground shadow-xl transition-transform focus:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="sr-only rounded-md bg-background px-4 py-3 font-montserrat text-sm font-semibold text-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[100] focus:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         Skip to main content
       </a>
@@ -57,8 +57,8 @@ const TopNavbar = () => {
         aria-label="Primary navigation"
         className={`fixed left-0 top-0 z-50 w-full transition-colors duration-200 ${
           showSolidBackground
-            ? "border-b border-border bg-background/90 shadow-lg backdrop-blur-lg"
-            : "bg-background/40 backdrop-blur-sm"
+            ? "border-b border-border bg-background/95 shadow-lg"
+            : "bg-background/90"
         }`}
       >
         <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4">
