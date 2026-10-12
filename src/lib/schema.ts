@@ -3,7 +3,7 @@ import { OFFERING_URLS } from "@/config/offerings";
 import type { Post } from "@/types/post";
 
 const ORG_NAME = "Mifune";
-const ORG_LEGAL_NAME = "Mifune Dev";
+const ORG_LEGAL_NAME = "Mifune";
 const ORG_EMAIL = OFFERING_URLS.supportEmail;
 const LOGO_URL = `${SITE_URL}/pe-logo.png`;
 const ORG_ID = `${SITE_URL}/#organization`;
