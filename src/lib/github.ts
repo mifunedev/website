@@ -39,6 +39,14 @@ const FLAGSHIP: CuratedRepo[] = [
   },
   {
     owner: "mifunedev",
+    name: "skills",
+    tagline:
+      "A portable, cross-agent skill library for Claude Code and compatible AI agents.",
+    fallbackStars: 0,
+    fallbackLanguage: "Shell",
+  },
+  {
+    owner: "mifunedev",
     name: "orchestra",
     tagline: "Steerable harnesses for DeepAgents and multi-agent automation.",
     fallbackStars: 13,
