@@ -60,7 +60,7 @@ export default function PricingSection() {
                     context={
                       isCloud
                         ? "CONSOLE · MANAGED BY MIFUNE"
-                        : "OPEN SOURCE · MAINTAINED BY MIFUNE"
+                        : "OPEN SOURCE"
                     }
                     className={`mb-7 border-b pb-5 ${
                       isCloud

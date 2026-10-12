@@ -27,7 +27,6 @@ const FooterSection = () => {
             </p>
             <AgroBrandBar
               density="compact"
-              status=" · Maintained by Mifune"
               className="mt-6 w-fit border-t border-border pt-5 text-foreground"
             />
           </div>
