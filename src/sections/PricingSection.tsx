@@ -52,7 +52,7 @@ export default function PricingSection() {
                 }`}
               >
                 {isCloud ? (
-                  <div className="pointer-events-none absolute right-0 top-0 h-52 w-52 rounded-full bg-green-500/10 blur-3xl" />
+                  <div className="pointer-events-none absolute -right-10 -top-10 h-72 w-72 bg-[radial-gradient(closest-side,rgba(34,197,94,0.10),transparent)]" />
                 ) : null}
                 <div className="relative">
                   <AgroBrandBar
