@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Mail } from "lucide-react";
 import AgroBrandBar from "@/components/brand/AgroBrandBar";
+import MifuneLockup from "@/components/brand/MifuneLockup";
 import { socialIcons } from "@/config/app";
 import { OFFERING_URLS } from "@/config/offerings";
 
@@ -19,16 +19,7 @@ const FooterSection = () => {
               className="inline-flex min-h-11 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               aria-label="Mifune home"
             >
-              <Image
-                src="/images/ruska_logo_200.png"
-                alt=""
-                width={36}
-                height={36}
-                className="rounded-full"
-              />
-              <span className="ml-3 font-montserrat text-xl font-medium text-foreground">
-                Mifune
-              </span>
+              <MifuneLockup size={36} />
             </Link>
             <p className="mt-4 font-montserrat text-sm leading-relaxed text-muted-foreground">
               Mifune operates managed workspaces for coding agents and leads

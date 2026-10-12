@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ExternalLink, Menu, X } from "lucide-react";
+import MifuneLockup from "@/components/brand/MifuneLockup";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
   DropdownMenu,
@@ -69,16 +69,7 @@ const TopNavbar = () => {
               className="flex min-h-11 shrink-0 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               aria-label="Mifune home"
             >
-              <Image
-                src="/images/ruska_logo_200.png"
-                alt=""
-                width={28}
-                height={28}
-                className="mr-2 rounded-full"
-              />
-              <span className="font-montserrat text-xl font-medium tracking-wide text-foreground sm:text-2xl">
-                Mifune
-              </span>
+              <MifuneLockup size={28} />
             </Link>
           </div>
 

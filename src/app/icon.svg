@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <path fill="#0a0a0a" d="M0 0H64V64H0Z"/>
+  <path transform="matrix(0.6667 0 0 0.6667 10.6667 10.6667)" fill="#f6f3ec" d="M32 18 L16 2 L8 6 L30 28 L32 28 L34 28 L56 6 L48 2 L32 18 Z M12 16 L24 28 L24 37 L8 29 Q8 19.5 12 16 Z M52 16 Q56 19.5 56 29 L40 37 L40 28 L52 16 Z M32 47 L4 33 L0 43 Q4 55 12 59 L18 48 L32 55 L46 48 L52 59 Q60 55 64 43 L60 33 L32 47 Z"/>
+  <path transform="matrix(0.6667 0 0 0.6667 10.6667 10.6667)" fill="#22c55e" d="M28 32 L36 32 L36 40 L28 40 Z"/>
+</svg>

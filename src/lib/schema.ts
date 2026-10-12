@@ -5,7 +5,7 @@ import type { Post } from "@/types/post";
 const ORG_NAME = "Mifune";
 const ORG_LEGAL_NAME = "Mifune";
 const ORG_EMAIL = OFFERING_URLS.supportEmail;
-const LOGO_URL = `${SITE_URL}/pe-logo.png`;
+const LOGO_URL = `${SITE_URL}/brand/mifune/avatar-500.png`;
 const ORG_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const CLOUD_SERVICE_ID = `${SITE_URL}/#mifune-cloud-console`;
