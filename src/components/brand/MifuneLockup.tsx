@@ -35,7 +35,7 @@ export default function MifuneLockup({
     >
       <path fill="currentColor" d={SYMBOL_SMALL_MARK_PATH} />
       <path
-        className="fill-[#15803d] dark:fill-[#22c55e]"
+        className="fill-[#15803d] dark:fill-[#4ade80]"
         d={SYMBOL_SMALL_SQUARE_PATH}
       />
       <path

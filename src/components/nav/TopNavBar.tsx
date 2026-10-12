@@ -69,7 +69,7 @@ const TopNavbar = () => {
               className="flex min-h-11 shrink-0 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               aria-label="Mifune home"
             >
-              <MifuneLockup size={28} />
+              <MifuneLockup size={34} />
             </Link>
           </div>
 
