@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, Headphones } from "lucide-react";
-import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import { OFFERING_URLS } from "@/config/offerings";
 
 const flowNodes = [
@@ -33,16 +32,11 @@ const HeroSection = () => {
 
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-4 pb-16 pt-28 sm:pt-32">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_90%_60%_at_50%_0%,#000_65%,transparent_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_0%,transparent_65%,hsl(var(--background))_100%),linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] [background-size:100%_100%,24px_24px,24px_24px]" />
       <div className="absolute left-1/2 top-1/4 h-[28rem] w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(34,197,94,0.16),rgba(16,185,129,0.07)_55%,transparent)]" />
 
       <div className="relative mx-auto my-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="text-center lg:text-left">
-          <AgroBrandBar
-            density="hero"
-            className="mx-auto mb-7 w-fit justify-center text-foreground lg:mx-0 lg:justify-start"
-          />
-
           <h1 className="mb-6 text-balance font-montserrat text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             A portable home for autonomous coding agents.
           </h1>
@@ -104,12 +98,12 @@ const HeroSection = () => {
           aria-labelledby="cloud-operating-model-caption"
         >
           <div
-            className="pointer-events-none absolute -inset-4 rounded-3xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 blur-3xl sm:-inset-8"
+            className="pointer-events-none absolute -inset-4 bg-[radial-gradient(closest-side,rgba(34,197,94,0.2),rgba(16,185,129,0.1)_60%,transparent)] sm:-inset-8"
             aria-hidden="true"
           />
 
           <div aria-hidden="true" className="relative z-10 min-w-0">
-            <div className="relative mx-1 overflow-hidden rounded-2xl border border-border bg-card/80 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.72)] backdrop-blur-sm sm:mx-4 lg:mx-0">
+            <div className="relative mx-1 overflow-hidden rounded-2xl border border-border bg-card/95 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.72)] sm:mx-4 lg:mx-0">
               <div className="flex min-h-11 min-w-0 items-center gap-2 border-b border-border px-4 py-3">
                 <span className="h-3 w-3 shrink-0 rounded-full bg-red-500/80" />
                 <span className="h-3 w-3 shrink-0 rounded-full bg-yellow-500/80" />
