@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ExternalLink, Mail } from "lucide-react";
-import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import MifuneLockup from "@/components/brand/MifuneLockup";
 import { socialIcons } from "@/config/app";
 import { OFFERING_URLS } from "@/config/offerings";
@@ -25,10 +24,6 @@ const FooterSection = () => {
               Mifune operates managed workspaces for coding agents and leads
               optional engineering support for Console customers.
             </p>
-            <AgroBrandBar
-              density="compact"
-              className="mt-6 w-fit border-t border-border pt-5 text-foreground"
-            />
           </div>
 
           <div>
