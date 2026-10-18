@@ -16,8 +16,6 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 }
 
-/** One click-to-play card. The heavy YouTube player only loads on click — the
- *  resting state is a single thumbnail image, so the section stays fast. */
 function VideoCard({ video, index }: { video: YouTubeVideo; index: number }) {
   const [playing, setPlaying] = useState(false);
 
@@ -139,7 +137,6 @@ export default function WatchShowcase({ videos }: { videos: YouTubeVideo[] }) {
             <ChannelCta label="See every build on YouTube" />
           </>
         ) : (
-          /* Teaser state — shown until the channel is live / has uploads. */
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

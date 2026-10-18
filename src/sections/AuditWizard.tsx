@@ -31,7 +31,7 @@ export default function AuditWizard() {
   const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [website, setWebsite] = useState(""); // honeypot
+  const [website, setWebsite] = useState("");
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
 
   const step = wizardSteps[index];
@@ -41,7 +41,6 @@ export default function AuditWizard() {
   const progress = ((index + 1) / wizardSteps.length) * 100;
   const submitting = status === "loading";
 
-  // Auto-focus text inputs as each step enters.
   useEffect(() => {
     if (step.type !== "select") {
       const t = setTimeout(() => inputRef.current?.focus(), 60);
@@ -69,7 +68,6 @@ export default function AuditWizard() {
 
   const pickOption = (val: string) => {
     setAnswer(step.id, val);
-    // Brief highlight, then advance — feels responsive without being jarring.
     setDirection(1);
     setTimeout(() => {
       if (index === wizardSteps.length - 1) submit({ ...answers, [step.id]: val });
@@ -87,7 +85,6 @@ export default function AuditWizard() {
   async function submit(finalAnswers?: Record<string, string>) {
     const data = finalAnswers ?? answers;
 
-    // Honeypot — bots fill the hidden field. Fake success, never hit the API.
     if (website.trim()) {
       setStatus("success");
       return;
@@ -115,12 +112,10 @@ export default function AuditWizard() {
       id="audit"
       className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-background to-green-500/5 px-4 py-24"
     >
-      {/* Ambient glow + grid */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808014_1px,transparent_1px),linear-gradient(to_bottom,#80808014_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,#000_60%,transparent_100%)]" />
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[420px] w-[620px] -translate-x-1/2 rounded-full bg-green-500/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-2xl">
-        {/* Eyebrow */}
         <div className="mb-8 text-center">
           <p className="mb-3 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground">
             Free AI Workflow Audit
@@ -145,7 +140,6 @@ export default function AuditWizard() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                {/* Progress */}
                 <div className="mb-8">
                   <div className="mb-2 flex items-center justify-between font-montserrat text-xs text-muted-foreground">
                     <span>
@@ -162,7 +156,6 @@ export default function AuditWizard() {
                   </div>
                 </div>
 
-                {/* Step */}
                 <div className="min-h-[320px]">
                   <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
@@ -257,7 +250,6 @@ export default function AuditWizard() {
                   </AnimatePresence>
                 </div>
 
-                {/* Honeypot */}
                 <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0 }}>
                   <label htmlFor="wizard-website">Website</label>
                   <input
@@ -280,7 +272,6 @@ export default function AuditWizard() {
                   </p>
                 )}
 
-                {/* Controls — select steps auto-advance, so hide Continue there */}
                 <div className="mt-8 flex items-center justify-between gap-4">
                   <button
                     type="button"

@@ -56,16 +56,7 @@ type FAQSectionProps = {
   faqs: Faq[];
   eyebrow: string;
   heading: string;
-  /**
-   * Required, not optional: every caller states its own third line. A default
-   * here would render the homepage's copy verbatim under another page's
-   * heading.
-   */
   subheading: string;
-  /**
-   * Namespaces the trigger and panel ids, so `aria-controls` cannot collide if
-   * two instances ever render on one route.
-   */
   idPrefix: string;
 };
 

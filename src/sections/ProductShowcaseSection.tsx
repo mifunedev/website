@@ -39,7 +39,6 @@ export default function ProductShowcaseSection() {
   return (
     <section id="what-you-get" className="relative scroll-mt-20 px-4 py-24">
       <div className="mx-auto max-w-5xl">
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +54,6 @@ export default function ProductShowcaseSection() {
           </h2>
         </motion.div>
 
-        {/* Deliverables checklist */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {deliverables.map((item, index) => (
             <motion.div

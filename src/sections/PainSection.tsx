@@ -39,11 +39,9 @@ const painCards = [
 export default function PainSection() {
   return (
     <section id="pain" className="relative px-4 py-24">
-      {/* Ambient glow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/5 blur-[120px]" />
 
       <div className="relative mx-auto max-w-5xl">
-        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +62,6 @@ export default function PainSection() {
           </h2>
         </motion.div>
 
-        {/* Pain Cards */}
         <div className="grid gap-6 md:grid-cols-2">
           {painCards.map((card, index) => (
             <motion.div
@@ -75,7 +72,6 @@ export default function PainSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6"
             >
-              {/* Card header */}
               <div className="mb-4 flex items-start gap-4">
                 <span className="text-3xl">{card.icon}</span>
                 <div>
@@ -89,7 +85,6 @@ export default function PainSection() {
                 </div>
               </div>
 
-              {/* Card detail */}
               <p className="font-montserrat text-sm leading-relaxed text-muted-foreground">
                 {card.detail}
               </p>
@@ -97,7 +92,6 @@ export default function PainSection() {
           ))}
         </div>
 
-        {/* Bottom nudge */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

@@ -9,7 +9,7 @@ import {
   FaCloud,
   FaPencilRuler,
   FaChess,
-} from "react-icons/fa"; // Import icons from React Icons
+} from "react-icons/fa";
 
 const services = [
   {
