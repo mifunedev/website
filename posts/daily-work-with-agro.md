@@ -71,7 +71,7 @@ A new worktree has no `node_modules`. When the worktree has a `package.json`, in
 
 [Herdr](https://github.com/mifunedev/agro/blob/main/docs/integrations/herdr.md) is the interactive workspace of AGRO. It runs as a server inside the sandbox, so your panes survive a terminal disconnect. Detach with `Ctrl-b q`. Run `herdr` again to reattach.
 
-A Herdr session holds workspaces, tabs, and panes. Use one pane for each agent, test run, or development server. With the default keys, `Ctrl-b v` splits a pane side by side, and `Ctrl-b -` splits top and bottom.
+A Herdr session holds workspaces, tabs, and panes. Use one pane for each agent, test run, or development server. With the default keys, `Ctrl-b v` splits a pane side by side, and `Ctrl-b -` splits top and bottom. Run `herdr --default-config` to see every default binding. From a script, use `herdr pane split --current --direction right` or `--direction down`.
 
 The clip below is a real Herdr session in this sandbox. The left pane lists the worktrees of the task that produced this post: one integration branch and four story branches. The right pane opens in the `feat/88-us-004` worktree and reads the plan. A third pane checks the CLI version and lists the AGRO skills.
 
