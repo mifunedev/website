@@ -105,14 +105,15 @@
         "Verify in browser using agent-browser skill."
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Worker executed: lint exit 0; flock npm run build exit 0; agent-browser: video attrs set and playing, images alt text, media HTTP 200; cover 1200x630 ffprobe; largest file 163 KB. Advisor executed: merged on task branch; viewed herdr-three-panes.png (real session, agro 0.24.0); verified Herdr split keys via herdr --default-config lines 63,101-102 and worktree claims against .agro/skills/worktrees/SKILL.md. Reasoned: skill descriptions quoted from SKILL.md frontmatter; section order from review. Repair 071c1f0: sourced split keybindings.",
       "dependsOn": [],
       "files": [
         "posts/daily-work-with-agro.md",
         "public/blog/daily-work-with-agro/",
         ".agro/tasks/agro-console-blog-refresh/media/daily-work-with-agro/"
-      ]
+      ],
+      "commit": "071c1f0"
     },
     {
       "id": "US-005",
