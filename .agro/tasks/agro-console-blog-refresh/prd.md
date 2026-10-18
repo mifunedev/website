@@ -172,6 +172,6 @@ Posts stay as Markdown files in `posts/`. Media goes into `public/blog/<slug>/`,
 ## Lessons
 
 - Claim: post dates rendered one day early. Evidence: `formatDate` formatted UTC-midnight dates in the local time zone, so `2026-10-18` showed as "October 17, 2026". Outcome: fixed in this PR with `timeZone: "UTC"` in `src/utils/format.ts`.
-- Claim: `src/config/cloud-pricing.ts` describes the free tier as one node, and Mifune Console now allows three free `n4` nodes. Evidence: `projects/mifunedev/agro-console/README.md` and the live create form show "0 of 3 free nodes in use". Outcome: proposed issue, for operator approval. The file is outside this PR.
+- Claim: comments in `src/config/cloud-pricing.ts` described the free tier as one node and the Console catalog as behind. Evidence: the agro-console README, `provider-catalog.yaml`, and `NODE_SPECS` show three free `n4` nodes and the same n4 to n64 prices. Reader-facing copy already said three. Outcome: fixed in this PR, comments only.
 - Claim: the Console post video shows the create form only. Evidence: the create-to-terminal recording was corrupt after the terminal opened in a new tab, and the plan allowed one capture node. Outcome: dropped. Stills cover the running node, the Connect menu, and the terminal.
 - Claim: the sandbox `agro` on PATH is v0.16.0, older than the v0.24.0 that the posts describe. Evidence: `agro --version` on PATH and the harness `.agro/cli/dist/agro.js`. Outcome: dropped. The captures used the v0.24.0 CLI, and the sandbox image upgrade is an operator task.
