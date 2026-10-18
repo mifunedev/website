@@ -131,4 +131,32 @@ None.
 
 ## Lessons
 
-Filled by the advisor before undraft.
+1. The first token hash counted JSDoc text as code.
+   - Evidence: `ts.Node.getChildren()` returns attached JSDoc nodes. Each JSDoc removal changed the hash of an unchanged file. All three workers reported the false difference.
+   - Outcome: fixed in this PR. Commit `0c5a79e` skips JSDoc nodes in `tokens()`.
+2. Some removed comments recorded facts that no other tracked source records. The operator decides where each fact belongs. The list below gives the location on `master` at `b0caa5d`.
+   - Outcome for each fact: dropped from the code in this PR, kept here for the operator.
+   - `src/config/cloud-pricing.ts:1-59`: the price ladder comes from `mifunedev/agro-console` `.oh/tasks/node-catalog-repricing/prd.md`, the `price/h` column. The same rates are in agro-console `packages/shared/src/provider-catalog.yaml`, so a price change must change both repositories.
+   - `src/config/cloud-pricing.ts:16-24`: `pnpm ovh:explore US-EAST-VA-1` ran read-only against the OVHcloud API on 2026-08-06. The flavor table is in the code block below.
+   - `src/config/cloud-pricing.ts:26-37`: the OVH API reports `ram=0` for US flavors, so RAM comes from the flavor name. The site says SSD, not NVMe, because `b3-*` is `ovh.ssd.eg` and `r3-64` is `ovh.ssd.ram`.
+   - `src/config/cloud-pricing.ts:165-193`: the month is 730 hours because hourly vendors quote 730. The hour presets are whole numbers because nodes meter whole UTC hours.
+   - `src/config/cloud-pricing.ts:226-268`: totals sum in ten-thousandths of a dollar to prevent float drift. `formatUsdTotal` does not use `Intl.NumberFormat`, so server output and client output are identical.
+   - `src/lib/time-of-day-theme.ts` and `src/components/theme-provider.tsx`: the automatic theme is never written to storage, because `storage` events re-theme other tabs. The legacy keys `theme` and `theme-auto` are read and never removed. The bootstrap script must render after the next-themes script.
+   - `src/app/layout.tsx:88-92`: `viewport.themeColor` is a fixed `#000000`, because the theme follows the local hour and the OS preference cannot predict it.
+   - `src/app/globals.css:49-52,100-102`: `--oh-accent-raised` is `#166534` in light mode because `--oh-accent` is 4.02:1 on `--oh-raised`. In dark mode the accent is 11.36:1, so the two tokens are equal.
+   - `scripts/generate-llm-txt.mjs:2-24`: the script needs Node type stripping (v22.18.0 or later). `.nvmrc` sets the deploy Node version, because a deploy once ran on Node 18.20.8 and failed.
+   - `next.config.mjs:52-53`: the `/case-studies` redirect is a temporary 307 until a real case study ships.
+   - `src/data/faqs.ts:63-69` and `scripts/generate-llm-txt.mjs:48-53`: each monthly figure carries "not a monthly plan" in the same sentence, because FAQPage data and LLM quotes drop the next sentence.
+   - `src/lib/youtube.ts:18-22`: set `YOUTUBE_CHANNEL_ID` when the @ryaneggz channel is live.
+   - `src/sections/VideoSection.tsx:25-42`: commented-out video entries used the YouTube IDs `E2AX09cHSTk` and `I44ZQaTsgAc`.
+3. The comment removal exposed unused code: the `BrevoApi` import in `src/app/api/contact/route.ts`, and `scroll`, `FaArrowLeft`, and `FaArrowRight` in `src/sections/VideoSection.tsx`.
+   - Evidence: the worker reports for US-001 and US-003. `npm run lint` does not flag the unused code.
+   - Outcome: dropped. The plan forbids each code change.
+
+```text
+n4   d2-4    5051d54d-6341-4860-bf63-c4bddbb7c6f0   2 vcpu / 50 GB
+n8   d2-8    9802d615-a353-4668-b581-7b2bdedbf54c   4 vcpu / 50 GB
+n16  b3-16   1efeacd6-7639-44b3-b0ce-243c827c5ff2   4 vcpu / 100 GB
+n32  b3-32   7df840d0-cbd1-4fd0-9642-4c0f9ba65a9e   8 vcpu / 200 GB
+n64  r3-64   cd1d3a46-4167-451c-b97b-44f36d3c7994   8 vcpu / 200 GB
+```

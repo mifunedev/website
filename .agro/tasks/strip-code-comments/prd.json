@@ -67,12 +67,13 @@
         "`npm run lint` exits 0 in the worker worktree."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed on the integrated task branch: inventory full shows only src/sections/AgentPickerSection.tsx:248 eslint-disable-next-line in owned paths, directly above the <article> it suppresses (exit 0); JSDoc-aware token hashes equal master for all 94 files (diff exit 0); added-line scan finds no empty {} and no new blank lines; git diff --name-only limited to src/sections/, public/llm.txt absent; npm run lint exit 0, which proves the directive still suppresses its rule.",
       "dependsOn": [],
       "files": [
         "src/sections/"
-      ]
+      ],
+      "commit": "5a0255e"
     }
   ]
 }
