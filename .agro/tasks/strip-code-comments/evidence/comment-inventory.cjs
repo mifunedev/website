@@ -57,6 +57,7 @@ function tokens(f) {
   const toks = [];
   (function walk(n) {
     if (n.kind === ts.SyntaxKind.JsxExpression && !n.expression) return;
+    if (n.kind >= ts.SyntaxKind.FirstJSDocNode && n.kind <= ts.SyntaxKind.LastJSDocNode) return;
     const kids = n.getChildren(sf);
     if (!kids.length) {
       const t = n.getText(sf);
