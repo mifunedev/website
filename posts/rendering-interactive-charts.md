@@ -4,6 +4,7 @@ date: "2025-12-06"
 excerpt: "A deep dive into using content_and_artifact to stream rich visualizations from Python agents to React UIs."
 categories: ["Python", "LangGraph", "React", "Vite"]
 coverImage: "https://github.com/mifunedev/static/blob/master/blog/charts.png?raw=true"
+archived: true
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"

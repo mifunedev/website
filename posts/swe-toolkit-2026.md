@@ -4,6 +4,7 @@ date: "2026-01-21"
 excerpt: "The 4 tools I use to turn vague ideas into merged PRs: a multi-agent planning council (/team), a ticket-to-PR automator (/ticket), an autonomous execution loop (Ralph), and a ruthlessly curated AGENTS.md that keeps the agent in the 'Smart Zone' of the context window."
 categories: ["Agentic Coding", "Developer Productivity", "Workflow", "AI Engineering"]
 coverImage: "https://github.com/mifunedev/static/blob/master/blog/swe-toolkit.png?raw=true"
+archived: true
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"

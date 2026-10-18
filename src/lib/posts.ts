@@ -50,8 +50,10 @@ export function getSortedPosts(): Post[] {
         socialImage: socialImage as string | undefined,
         categories: data.categories as string[] | undefined,
         author: data.author as { name: string; picture: string } | undefined,
+        archived: data.archived === true,
       };
-    });
+    })
+    .filter((post) => !post.archived);
 
   // Sort by date descending
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -86,6 +88,7 @@ export function getPostBySlug(slug: string): Post | null {
       socialImage: socialImage as string | undefined,
       categories: data.categories as string[] | undefined,
       author: data.author as { name: string; picture: string } | undefined,
+      archived: data.archived === true,
     };
   } catch (e) {
     console.error(e);

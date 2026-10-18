@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "feat/88-agro-console-blog-refresh",
+  "description": "Archive stale posts and publish three AGRO and Mifune Console guides with real screenshots and video.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Archive the existing posts",
+      "description": "As a site reader, I want stale posts hidden from the blog index so that I read only current guides. Each old URL still resolves and shows a visible warning.",
+      "acceptanceCriteria": [
+        "`src/types/post.ts` declares `archived?: boolean`, and `src/lib/posts.ts` reads `data.archived` into each `Post`.",
+        "`getSortedPosts` returns no post that has `archived: true`. `getAllPostSlugs` and `getPostBySlug` still return archived posts.",
+        "These 6 files set `archived: true` in the frontmatter: `posts/anthropic-reasoning-langchain-init-chat-model.md`, `posts/api-walkthrough-creating-agents.md`, `posts/connect-mcp-tools-to-orchestra-agents.md`, `posts/remote-dev-cloudflare-tunnel-claude-hooks.md`, `posts/rendering-interactive-charts.md`, `posts/swe-toolkit-2026.md`.",
+        "`src/app/blog/[slug]/page.tsx` shows the banner text \"This post is archived and can be out of date.\" above the content of each archived post. The banner links to `/blog`.",
+        "`generateMetadata` in `src/app/blog/[slug]/page.tsx` returns `robots: { index: false }` for an archived post.",
+        "After `npm run build`, `/blog` lists no archived post, `/sitemap.xml` holds no archived URL, and `/blog/swe-toolkit-2026` returns HTTP 200 with the banner.",
+        "`npm run lint` and `npm run build` exit 0.",
+        "Verify in browser using agent-browser skill."
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Executed on integrated task branch: npm run lint exit 0; npm run build exit 0; built sitemap has 0 swe-toolkit URLs; 6 built archived pages contain the banner. Worker executed: grep archived flag in 6 files; noindex meta present; agent-browser screenshot of banner. Reasoned: type field and filter location from diff review. Repair d712303 merged: formatDate uses timeZone UTC; worker executed build shows July 2, 2026.",
+      "dependsOn": [],
+      "files": [
+        "src/types/post.ts",
+        "src/lib/posts.ts",
+        "src/app/blog/[slug]/page.tsx",
+        "posts/anthropic-reasoning-langchain-init-chat-model.md",
+        "posts/api-walkthrough-creating-agents.md",
+        "posts/connect-mcp-tools-to-orchestra-agents.md",
+        "posts/remote-dev-cloudflare-tunnel-claude-hooks.md",
+        "posts/rendering-interactive-charts.md",
+        "posts/swe-toolkit-2026.md"
+      ],
+      "commit": "ad1d258"
+    },
+    {
+      "id": "US-002",
+      "title": "Rewrite the getting-started post as \"Self-host AGRO\"",
+      "description": "As a developer, I want a current, illustrated self-host guide at `/blog/agro-getting-started`. With the guide, I can install AGRO, open a sandbox, start Herdr, install a harness, and delete the sandbox.",
+      "acceptanceCriteria": [
+        "`posts/agro-getting-started.md` replaces the old body. The post covers, in this order: host prerequisites, install, `agro sandbox install docker`, `agro shell <name>`, `agro tool install herdr` and `herdr`, `agro harness install <id>`, optional `gh auth login && gh auth setup-git`, `agro ps <name>`, `agro stop`, and `agro destroy <name>`.",
+        "The post places a data-loss warning before the `agro destroy` command.",
+        "Each command in the post matches `docs/quickstart.md` and `docs/lifecycle-commands.md` in the agro repository at version 0.24.0. The post states \"As of AGRO v0.24.0\" at the top.",
+        "The post links to `docs/quickstart.md`, `docs/installation.md`, `docs/connecting.md`, `docs/integrations/herdr.md`, and `docs/harnesses/overview.md` instead of copying their detail.",
+        "The post uses the name \"Mifune Console\" and links to `/blog/run-agro-on-mifune-console` for the managed path.",
+        "The post embeds at least 3 real screenshots from the agro `docs/img/` set and at least 1 muted looping MP4 terminal clip. All media files are under `public/blog/agro-getting-started/`.",
+        "Each `<video>` element has `autoplay`, `muted`, `loop`, `playsinline`, and `preload=\"none\"`. Each image has alt text.",
+        "The frontmatter sets `date` to the publish date, `coverImage: \"/blog/agro-getting-started/cover.png\"`, and no `archived` key. The cover is 1200x630 pixels.",
+        "Each media file is 4 MB or less.",
+        "`npm run lint` and `npm run build` exit 0.",
+        "Verify in browser using agent-browser skill."
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Worker executed: lint exit 0; flock npm run build exit 0; agent-browser: all media HTTP 200, video attrs autoplay/muted/loop/playsinline/preload=none, playing; cover 1200x630 via ffprobe; largest file 208 KB. Advisor executed: merged on task branch; viewed poster frame (agro 0.24.0, no stale warning); verified destroy warning precedes command and matches docs/lifecycle-commands.md:388-405. Reasoned: command order and doc links from diff review. Repair round: re-recorded clip without old-image warning and removed scratchpad path from tape.",
+      "dependsOn": [],
+      "files": [
+        "posts/agro-getting-started.md",
+        "public/blog/agro-getting-started/",
+        ".agro/tasks/agro-console-blog-refresh/media/agro-getting-started/"
+      ],
+      "commit": "0cd6dc7"
+    },
+    {
+      "id": "US-003",
+      "title": "Publish \"Run AGRO on Mifune Console\"",
+      "description": "As a developer, I want a hands-on Mifune Console guide. With the guide, I can sign in, create a free `n4` node, connect, install a harness, and manage nodes from the `agro` CLI.",
+      "acceptanceCriteria": [
+        "`posts/run-agro-on-mifune-console.md` exists. The post covers, in this order: GitHub sign-in at `https://console.mifune.dev`, free-tier terms, node creation with the `n4` spec, the Connect menu (code-server and the Ghostty browser terminal), `agro harness install <id> --host`, the CLI path (`agro auth login`, `agro node create --spec n4 --free-tier`, `agro node list`, `agro node delete <id>`), and node deletion.",
+        "The post states that no sandbox container runs on a node created in the Console UI, as `projects/mifunedev/agro-console/README.md` states. The post states the profile that `agro node create` uses, as `docs/lifecycle-commands.md:351` states.",
+        "Prices and free-tier limits in the post match `projects/mifunedev/agro-console/README.md`. The post links to `/pricing` for current prices.",
+        "The post states \"As of Mifune Console v1.17.0 and AGRO v0.24.0\" at the top.",
+        "The post embeds at least 3 screenshots and 1 muted looping MP4 clip from the live Console: the create form, the running node page, and the Connect menu or terminal. All media files are under `public/blog/run-agro-on-mifune-console/`. No screenshot shows an email address, a token, an IP address, or an SSH key.",
+        "The worker creates at most 1 free `n4` node for capture and deletes the node after capture. `agro node list` or the Console node list shows no capture node at the end.",
+        "If no signed-in Console session is available, the worker stops and reports `BLOCKED: operator sign-in required`.",
+        "Each `<video>` element has `autoplay`, `muted`, `loop`, `playsinline`, and `preload=\"none\"`. Each image has alt text. Each media file is 4 MB or less.",
+        "The frontmatter sets `coverImage: \"/blog/run-agro-on-mifune-console/cover.png\"`. The cover is 1200x630 pixels.",
+        "`npm run lint` and `npm run build` exit 0.",
+        "Verify in browser using agent-browser skill."
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Advisor executed on integrated branch: lint exit 0; build exit 0; /blog lists exactly 3 new posts; sitemap holds only the 3 new post URLs. Advisor viewed create-form, node-running, connect-menu, terminal-harness-install, nodes-after-delete: IP and owner redacted, no email/token/SSH key visible. Worker executed: one free n4 node 098449f7-bc91-4705-8f2d-dce2c4d377a6 created and destroyed (nodes-after-delete.png shows Total 0, blog-capture Destroyed); video attrs set and playing; 10 media URLs HTTP 200. Reasoned: section order, sandbox-container and sandbox-profile statements, prices vs agro-console README. Divergence: the MP4 shows the create form only; running node, Connect menu and terminal are stills, because the full-flow recording was corrupt and the one-node limit prevented a retake.",
+      "dependsOn": [],
+      "files": [
+        "posts/run-agro-on-mifune-console.md",
+        "public/blog/run-agro-on-mifune-console/",
+        ".agro/tasks/agro-console-blog-refresh/media/run-agro-on-mifune-console/"
+      ],
+      "commit": "7b3fda0"
+    },
+    {
+      "id": "US-004",
+      "title": "Publish \"Daily work with AGRO\"",
+      "description": "As an AGRO user, I want a guide to the daily agent workflow. With the guide, I can clone a project, isolate work in worktrees, and run `/prd`, `/delegate`, and `/council`.",
+      "acceptanceCriteria": [
+        "`posts/daily-work-with-agro.md` exists. The post covers, in this order: project clones under `projects/<owner>/<repo>/`, worktrees under `.worktrees/`, Herdr panes for parallel agents, `/council` for scope decisions, `/prd` for a plan, `/delegate` for bounded workers, and CI checks before review.",
+        "Each skill description in the post matches the canonical `SKILL.md` under `.agro/skills/` in the agro repository at version 0.24.0.",
+        "The post states \"As of AGRO v0.24.0\" at the top and links to `/blog/agro-getting-started` and `/blog/run-agro-on-mifune-console`.",
+        "The post embeds at least 2 screenshots and 1 muted looping MP4 clip of a real Herdr session with two or more panes. All media files are under `public/blog/daily-work-with-agro/`.",
+        "Each `<video>` element has `autoplay`, `muted`, `loop`, `playsinline`, and `preload=\"none\"`. Each image has alt text. Each media file is 4 MB or less.",
+        "The frontmatter sets `coverImage: \"/blog/daily-work-with-agro/cover.png\"`. The cover is 1200x630 pixels.",
+        "`npm run lint` and `npm run build` exit 0.",
+        "Verify in browser using agent-browser skill."
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Worker executed: lint exit 0; flock npm run build exit 0; agent-browser: video attrs set and playing, images alt text, media HTTP 200; cover 1200x630 ffprobe; largest file 163 KB. Advisor executed: merged on task branch; viewed herdr-three-panes.png (real session, agro 0.24.0); verified Herdr split keys via herdr --default-config lines 63,101-102 and worktree claims against .agro/skills/worktrees/SKILL.md. Reasoned: skill descriptions quoted from SKILL.md frontmatter; section order from review. Repair 071c1f0: sourced split keybindings.",
+      "dependsOn": [],
+      "files": [
+        "posts/daily-work-with-agro.md",
+        "public/blog/daily-work-with-agro/",
+        ".agro/tasks/agro-console-blog-refresh/media/daily-work-with-agro/"
+      ],
+      "commit": "071c1f0"
+    },
+    {
+      "id": "US-005",
+      "title": "Record the manual review journey",
+      "description": "As the operator, I want an annotated browser journey of the finished blog so that I can review the change without a local build.",
+      "acceptanceCriteria": [
+        "The journey runs against the Vercel preview URL of the PR, or against `npm run start` after `npm run build`.",
+        "`.agro/tasks/agro-console-blog-refresh/evidence/` holds annotated screenshots of: `/blog` with exactly 3 cards, one archived post with the banner, each of the 3 new posts with media in view, and `/sitemap.xml`.",
+        "`.agro/tasks/agro-console-blog-refresh/evidence/manual-review.md` lists each screenshot, the URL, and the observed result.",
+        "Each of the 3 new posts plays its video in the browser, and no image returns HTTP 404.",
+        "Verify in browser using agent-browser skill."
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Worker executed: npm run build exit 0; npm run start served /blog 200; annotate-screenshot.sh exit 0 for 6 screenshots; browser asserts video paused=false readyState=4 and 0 broken images on 3 posts; curl 22/22 media URLs 200; 6 archived URLs 200 with banner and absent from sitemap. Advisor executed: viewed blog-index-3-cards.png (3 cards, covers loaded, dates October 18, 2026); read manual-review.md.",
+      "dependsOn": [
+        "US-001",
+        "US-002",
+        "US-003",
+        "US-004"
+      ],
+      "files": [
+        ".agro/tasks/agro-console-blog-refresh/evidence/"
+      ],
+      "commit": "8b0c0a2"
+    }
+  ]
+}

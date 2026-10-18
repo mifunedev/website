@@ -8,6 +8,7 @@ export function formatDate(timestamp: number) {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   };
   return new Date(timestamp).toLocaleDateString("en-US", options);
 }

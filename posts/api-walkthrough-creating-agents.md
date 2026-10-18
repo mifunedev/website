@@ -4,6 +4,7 @@ date: "2025-12-14"
 excerpt: "A hands-on, step-by-step guide to building, verifying, and scheduling a durable AI agent using Orchestra’s API—including tools, assistants, threads, and autonomous scheduling. Curl examples included!"
 categories: ["How-To", "API Walkthrough", "Agent Automation"]
 coverImage: "https://github.com/mifunedev/static/blob/master/blog/scheduler.png?raw=true"
+archived: true
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"

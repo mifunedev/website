@@ -8,14 +8,11 @@
  *   spec:  .oh/tasks/node-catalog-repricing/prd.md
  *          → "The approved sheet — 730-hour month", the `price/h` column
  *
- * READ THIS BEFORE CHANGING A NUMBER. These rates are approved but are NOT yet
- * live upstream. `packages/shared/src/provider-catalog.yaml` still carries
- * `small`/`medium`/`large` at the old prices, and `NODE_SPECS` is still the
- * three t-shirt sizes. The website leads the platform here **on purpose**: the
- * marketing page ships the ladder in phase 1, the Console catalog, migration,
- * and Stripe SKUs follow in phase 2 (cloud US-002→US-006). Do not "fix" this
- * file back to the three old specs because upstream disagrees — upstream is
- * behind, and catching up is scheduled work.
+ * READ THIS BEFORE CHANGING A NUMBER. The Console catalog matches these rates.
+ * In mifunedev/agro-console, `packages/shared/src/provider-catalog.yaml`
+ * carries the same n4–n64 `hourlyCustomerPriceUsd` values, and `NODE_SPECS` in
+ * `packages/shared/src/models/node.ts` is `["n4", "n8", "n16", "n32", "n64"]`.
+ * A price change must change both repositories together.
  *
  * The hardware IS verified. `pnpm ovh:explore US-EAST-VA-1` was run read-only
  * against the live OVHcloud API on 2026-08-06 and every flavor exists, with
@@ -137,8 +134,8 @@ export const cloudNodePlans: CloudNodePlan[] = [
 ];
 
 /**
- * The one spec the Console personal free tier runs: one node, 24 running
- * hours per UTC month, no card.
+ * The one spec the Console personal free tier runs: up to three n4 nodes that
+ * share 24 running hours each UTC month, and no card.
  */
 export const FREE_TIER_NODE_SPEC: NodeSpec = "n4";
 

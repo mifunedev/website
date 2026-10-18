@@ -1,141 +1,163 @@
 ---
-title: "Getting Started with AGRO: Choose Your Coding-Agent Workspace"
-date: "2026-07-02"
-excerpt: "AGRO is an isolated, persistent Docker workspace for coding agents. Choose the managed Mifune Console or the Apache-2.0 licensed self-hosted path, then follow this concise on-ramp."
+title: "Self-host AGRO: Your Coding-Agent Workspace in Docker"
+date: "2026-10-18"
+excerpt: "Install the agro CLI, create a Docker sandbox, open Herdr, install a coding harness, and tear the sandbox down again. A self-host guide for AGRO v0.24.0."
 categories: ["AGRO", "Getting Started", "AI Infrastructure", "Developer Guide"]
+coverImage: "/blog/agro-getting-started/cover.png"
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
   linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
-AGRO is an isolated, persistent Docker workspace for coding agents, maintained by Mifune. It keeps one project and its toolchain in one sandbox instead of putting project dependencies on your host. Run it locally or on a remote VM, and choose Claude Code, Codex, Pi, or another opt-in agent CLI.
+> **As of AGRO v0.24.0.** AGRO ships often. If a command here disagrees with the [quickstart](https://github.com/mifunedev/agro/blob/main/docs/quickstart.md), the quickstart wins.
 
-> **Updated 2026-10-02.** This post was first published on 2026-07-02. The setup steps below are the current ones; this list records what changed since then.
->
-> - **The project has a new name.** AGRO was formerly named Open Harness. The repository is now [github.com/mifunedev/agro](https://github.com/mifunedev/agro), and the docs are at [agro.mifune.dev](https://agro.mifune.dev).
-> - **The `agro` CLI replaces the `make` targets.** The original walkthrough used `make harness-config`, `harness.yaml`, `make sandbox`, and `make shell`. Those no longer exist. The `agro` CLI is now the only front door to the sandbox lifecycle.
-> - **The license is Apache-2.0.** The original post said MIT. The project has been licensed under Apache-2.0 since 2026-07-24.
+AGRO gives AI coding agents a workspace you control. It packages a Docker sandbox and shared agent procedures. You choose the coding harness: Claude Code, Codex, Pi, or another. Your host stays clean, because the project toolchain and every agent CLI live inside the sandbox.
 
-This post is a concise on-ramp. It does **not** reproduce the full setup manual — for depth, follow the canonical docs:
+This guide is the self-host path: you run Docker on your own laptop or VM. If you want Mifune to run the machine for you, use **Mifune Console** instead. See [Run AGRO on Mifune Console](/blog/run-agro-on-mifune-console).
 
-- **Docs:** [agro.mifune.dev](https://agro.mifune.dev)
-- **Quickstart reference:** [github.com/mifunedev/agro](https://github.com/mifunedev/agro#-quickstart)
-
-## Choose your path
-
-- **Mifune Console:** Mifune operates the managed environment while your coding agents work in an isolated, persistent workspace. Start in the [Console](https://console.mifune.dev).
-- **AGRO Open Source:** Inspect, adapt, and operate the Apache-2.0 licensed project yourself, locally or on a remote VM. The self-hosted walkthrough below follows this path.
-- **Engineering support for Console customers:** Console customers can ask Mifune engineers to help plan, implement, integrate, troubleshoot, and hand off a deployment. [Explore support](/services).
-
-## What you get
-
-- One project per isolated, persistent Docker workspace
-- Project toolchains kept off your host
-- Claude Code, Codex, Pi, and other opt-in agent CLIs
-- The same workspace model on a local machine or remote VM
-- Unattended or scheduled agent work and Slack reachability when configured on a VM
-- Isolated git worktrees for parallel branches and delegation
+The guide walks the full lifecycle once, from a bare host to an agent in a sandbox, and back to nothing. It links to the [AGRO docs](https://agro.mifune.dev) for detail instead of copying it.
 
 ## Where you type each command
 
-Every step below is labelled **on the host** or **inside the sandbox**. `agro sandbox install` is host-only: inside a sandbox it refuses with a host-only error, because it changes the sandbox's own Docker configuration. `agro shell` runs on the host and drops you inside.
+Each step says **on the host** or **inside the sandbox**. The host is the machine that runs Docker. The sandbox is the container that AGRO creates. `agro sandbox install` works only on the host. `agro shell` runs on the host and puts you inside the sandbox.
 
-## Self-hosted prerequisites
+## 1. Check the host prerequisites — on the host
 
-**On the host** (Linux, macOS, or WSL2):
+The host needs three things:
 
 - [Docker](https://docs.docker.com/get-docker/) with the Compose plugin
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) 20 or newer
 
-Node runs the `agro` CLI. Everything else — pnpm, Python, the agent CLIs — lives inside the sandbox.
+The host needs nothing else. pnpm, Python, and every agent CLI run inside the sandbox. See [Installation → Prerequisites](https://github.com/mifunedev/agro/blob/main/docs/installation.md#prerequisites).
 
-## 1. Install `agro` — on the host
+## 2. Install the `agro` CLI — on the host
 
-If you already have Node 20 or newer:
+With Node 20 or newer, install the npm package:
 
 ```bash
 npm install -g @mifune/agro
 ```
 
-Or run it without a global install by using `npx @mifune/agro` in place of `agro` in later commands.
-
-If you do not have Node yet, the release install script installs `agro` to `~/.local/bin` and offers to install Node for you:
+Without Node, use the release script. It installs `agro` to `~/.local/bin/agro` and offers to install Node:
 
 ```bash
 curl -fsSL https://github.com/mifunedev/agro/releases/latest/download/install.sh | bash
 ```
 
-To review the script before you run it:
+To read the script before it runs, download it first, then run `bash install.sh`. [Installation](https://github.com/mifunedev/agro/blob/main/docs/installation.md) covers the review-first install, the PATH rules, and upgrades. Run `agro --version` to confirm the install.
 
-```bash
-curl -fsSL -o install.sh https://github.com/mifunedev/agro/releases/latest/download/install.sh
-# Review install.sh in your editor or pager before running it.
-bash install.sh
-```
+## 3. Create the sandbox — on the host
 
-Later, `agro update` upgrades the installed CLI.
-
-## 2. Create and enter the sandbox — on the host
-
-`agro sandbox install docker` runs from **any** directory on the host — no checkout required. The wizard asks for the sandbox name, timezone, git identity, SSH, and Docker socket access.
+Run this from any directory. You do not need a checkout of AGRO:
 
 ```bash
 agro sandbox install docker
+```
+
+The wizard asks for the sandbox name, the timezone, your git identity, SSH, the host Docker socket, and the host path for `/home/sandbox`. Press Enter to keep each default, or pass `--yes` to keep all of them. The default name is `agro-sbx-<n>`.
+
+![The terminal runs agro sandbox install docker, accepts each default in the wizard, starts the agro-sbx-1 container, and prints the next command: agro shell agro-sbx-1.](/blog/agro-getting-started/quickstart-sandbox-install.png)
+
+*The wizard with every default. Screenshots in this post come from the AGRO docs and were captured with an earlier release (0.18.1). The commands are the same in v0.24.0.*
+
+Without `--checkout <dir>`, the sandbox runs the published image and needs no project checkout. To bind your own checkout instead, see [Installation → Create the sandbox](https://github.com/mifunedev/agro/blob/main/docs/installation.md#create-the-sandbox).
+
+## 4. Enter the sandbox — on the host
+
+```bash
 agro shell <name>
 ```
 
-To bind a project checkout into the sandbox instead of the seeded workspace, pass `--checkout <dir>` to `agro sandbox install docker`.
+You get `zsh` inside the container, as the `sandbox` user, in `/home/sandbox/harness`. You can omit `<name>` when you have only one sandbox. `agro sandbox list` shows every sandbox you created.
 
-You can also attach with **VS Code Dev Containers** → _Attach to Running Container_, locally or over Remote-SSH.
+![The agro shell banner for agro-sbx-1 lists the onboarding status of gh and each harness, tells you to run herdr next, and ends at a zsh prompt inside the sandbox.](/blog/agro-getting-started/quickstart-shell.png)
 
-## 3. Open Herdr and authenticate GitHub — inside the sandbox
+The banner lists what is installed and what is authenticated, and names the next step. To attach VS Code, or to connect from another machine, see [Connecting to the sandbox](https://github.com/mifunedev/agro/blob/main/docs/connecting.md).
 
-Herdr is the persistent terminal workspace for your agents, tests, and development servers. Install it and open it:
+## 5. Start Herdr — inside the sandbox
+
+A fresh sandbox has no `herdr`. Install it, then start it:
 
 ```bash
 agro tool install herdr
 herdr
 ```
 
-From the first Herdr pane, authenticate GitHub once:
+Herdr is the persistent terminal workspace for agents, tests, and development servers. Do every later step inside the sandbox in a Herdr pane. Detach with `Ctrl-b q` and run `herdr` again to reattach. The container keeps running after you detach, so a dropped SSH connection does not stop an agent.
+
+![Herdr shows the harness workspace in the spaces list and two panes side by side: one runs agro --version, the other runs claude --version.](/blog/agro-getting-started/herdr-two-panes.png)
+
+See [Herdr](https://github.com/mifunedev/agro/blob/main/docs/integrations/herdr.md) for panes, worktrees, and the optional provider integrations.
+
+## 6. Install a coding harness — inside the sandbox
+
+The image contains no agent CLI. Install the one you want, then sign in:
+
+```bash
+agro harness install claude-code
+claude auth login
+claude auth status
+```
+
+Run `agro harness list` to see every harness id. Each install goes into `~/.local` in the persistent home volume, so it survives a container restart.
+
+<video autoplay muted loop playsinline preload="none" poster="/blog/agro-getting-started/agro-cli-poster.png" width="1200" height="440">
+  <source src="/blog/agro-getting-started/agro-cli.mp4" type="video/mp4" />
+</video>
+
+*A real recording with the v0.24.0 CLI: `agro --version` prints `0.24.0`, and `agro harness list` shows each harness and whether it is installed.*
+
+![A Herdr pane runs agro harness install claude-code and reports that claude-code is installed, with a link to its authentication guide.](/blog/agro-getting-started/quickstart-harness-install.png)
+
+On a remote or headless sandbox, use device login: start the agent, run `/login`, and choose device mode. Open the printed URL on any device. Each [harness guide](https://github.com/mifunedev/agro/blob/main/docs/harnesses/overview.md) gives its own login command.
+
+The sandbox now works. The next step is optional.
+
+## 7. Authenticate GitHub (optional) — inside the sandbox
+
+Local work needs no GitHub account. A push, a new repository, or a pull request does. A provider login does not give repository access. From a Herdr pane:
 
 ```bash
 gh auth login && gh auth setup-git
+gh auth status
 ```
 
-## 4. Install and authenticate a coding agent — inside the sandbox
+Confirm that `gh auth status` names the account you intend to use.
 
-Install only the harness you intend to use. `agro harness list` shows every available id.
-
-```bash
-agro harness install claude-code   # Claude Code
-agro harness install codex         # Codex
-agro harness install pi            # Pi
-```
-
-The simplest cross-provider sign-in path: launch the agent, run `/login`, and pick **device mode** — you get a code and a URL that work even on a headless or remote host. Where a provider exposes a one-liner, these are equivalents:
-
-```bash
-claude auth login            # Claude Code
-codex login --device-auth    # Codex
-```
-
-Secrets never go in a tracked file. Use `agro secret set <KEY>` to write them to the sandbox's gitignored `.env`.
-
-## 5. Verify the container — on the host
+## 8. Check the container — on the host
 
 ```bash
 agro ps <name>
 ```
 
-From here you have an authenticated, isolated agent sandbox. For private-repository remotes, Slack gateways, schedules, and worktrees, keep going in the [canonical docs](https://agro.mifune.dev).
+![The terminal runs agro ps agro-sbx-1 and shows one container, agro-sbx-1, with status Up and healthy.](/blog/agro-getting-started/lifecycle-commands-ps.png)
 
----
+`agro ps` shows the sandbox container and its health. [Lifecycle commands](https://github.com/mifunedev/agro/blob/main/docs/lifecycle-commands.md) lists every verb.
 
-### Where to go next
+## 9. Stop the sandbox — on the host
 
-Continue with the [AGRO docs](https://agro.mifune.dev) for private-repository remotes, optional agent CLIs, Slack setup, schedules, and worktrees.
+`agro stop` stops the containers and keeps the volumes. Your logins and installs stay in the home volume:
 
-Prefer Mifune to operate the environment? Open the [Mifune Console](https://console.mifune.dev). If your Console adoption needs hands-on planning, implementation, integration, troubleshooting, or handoff help, [discuss engineering support](/services).
+```bash
+agro stop <name>
+agro sandbox install docker --name <name>   # start it again
+```
+
+## 10. Destroy the sandbox — on the host
+
+> **Warning: data loss.** `agro destroy` deletes the sandbox home volume, with every agent login and every install in it. The command has no undo. Push any work you want to keep before you run it.
+
+```bash
+agro destroy <name>
+```
+
+`agro destroy` names the volumes it will delete and asks you to type the sandbox name. Any other input aborts and removes nothing. After the delete, it removes the registry entry, so the name is free again.
+
+## Where to go next
+
+- [Quickstart](https://github.com/mifunedev/agro/blob/main/docs/quickstart.md): the canonical version of these steps
+- [Connecting to the sandbox](https://github.com/mifunedev/agro/blob/main/docs/connecting.md): VS Code, SSH, and mobile access
+- [Harnesses overview](https://github.com/mifunedev/agro/blob/main/docs/harnesses/overview.md): every supported agent and how to sign in
+- [Run AGRO on Mifune Console](/blog/run-agro-on-mifune-console): the managed path, with no Docker host to run

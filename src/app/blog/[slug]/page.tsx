@@ -1,6 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { Metadata } from "next";
 import "./code-highlight.css";
 import TopNavbar from "@/components/nav/TopNavBar";
@@ -62,6 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/blog/${post.slug}`,
     },
     keywords: post.categories,
+    robots: post.archived ? { index: false } : undefined,
     authors: post.author ? [{ name: post.author.name }] : undefined,
     openGraph: {
       title: post.title,
@@ -150,6 +152,21 @@ export default function BlogPost({ params }: Props) {
               <time>{formatDate(new Date(post.date).getTime())}</time>
             </div>
           </header>
+
+          {post.archived && (
+            <div
+              role="note"
+              className="mb-8 rounded-lg border border-border bg-muted px-4 py-3 font-montserrat text-sm text-muted-foreground"
+            >
+              This post is archived and can be out of date.{" "}
+              <Link
+                href="/blog"
+                className="font-medium text-foreground underline underline-offset-4 hover:text-green-500"
+              >
+                Read current posts
+              </Link>
+            </div>
+          )}
 
           {post.coverImage && (
             <ImageWithPreview
