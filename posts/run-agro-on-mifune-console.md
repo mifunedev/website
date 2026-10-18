@@ -12,7 +12,7 @@ author:
 
 > **As of Mifune Console v1.17.0 and AGRO v0.24.0.** Both products release often. Check the linked docs when a step does not match what you see.
 
-Mifune Console is the control plane for dedicated AGRO nodes. You pick a node spec, and the Console creates a dedicated cloud VM for you. The node then builds its own workspace: it installs the `agro` CLI, creates an AGRO workspace, and installs code-server and the GitHub CLI.
+Mifune Console is the control plane for dedicated AGRO nodes. You pick a node spec, and the Console creates a dedicated cloud VM for you. The node then builds its own workspace: it installs the `agro` CLI, creates an AGRO workspace, and adds the browser apps and tools that you select.
 
 This guide takes you from sign-in to a running node, then shows the same work from the `agro` CLI. To run AGRO on your own machine or VM instead, read [Self-host AGRO](/blog/agro-getting-started).
 
@@ -22,7 +22,9 @@ Open [https://console.mifune.dev](https://console.mifune.dev) and select **Conti
 
 <img src="/blog/run-agro-on-mifune-console/console-sign-in.png" alt="The Mifune Console sign-in card with the Continue with GitHub button" width="560" height="330" />
 
-Mifune Console is in public beta. Expect rough edges and frequent changes.
+Mifune Console is in public beta. Expect rough edges and frequent changes. During the beta, payments are off, so you can use only the free tier.
+
+The free tier belongs to your personal context. If you also belong to an organization, use the context switcher in the sidebar to select your personal context before you create a free node. In an organization context, the create form shows "The free tier is not available for this account."
 
 ## 2. Know the free-tier terms
 
@@ -38,7 +40,7 @@ The free tier lets you try a node without a card. The terms are:
 - A paused node does not resume by itself after the monthly reset. You resume it.
 - A paused free node still counts toward the limit of three. Destroy a free node to free its place.
 
-Paid nodes are billed a la carte per node, by the hour. The meter counts whole running UTC hours. There is no monthly plan, and destroying a node stops the charge.
+When payments open, paid nodes are billed a la carte per node, by the hour. The meter counts whole running UTC hours. There is no monthly plan, and destroying a node stops the charge.
 
 | Spec | vCPU | RAM | Disk | Each running hour |
 | --- | --- | --- | --- | --- |
@@ -52,11 +54,25 @@ The node price covers the machine and the workspace. It does not include AI usag
 
 ## 3. Create an `n4` node
 
-Open the create form and select the `n4` spec. Select the free option to put the node on the free tier. The form shows how many of your three free nodes are in use. When you hold three free nodes, the form disables the free option.
+On the **Nodes** page, select **Create node**. The form has five parts:
 
-The Console queues the node, creates the VM, and runs the node's build. The node page shows the status until the node is `running`.
+- **Billing.** **Free** is selected. The option shows the free hours left this month, the reset date, and how many of your three free nodes are in use. At three free nodes, the form disables the free option.
+- **Setup.** **Agro** is the default: Ubuntu with `agro` and the web terminal. **Sandbox** is Ubuntu with your SSH keys.
+- **Browser apps.** The web terminal is always available. **Browser editor (code-server)** and **T3 Code** are off by default. Each app uses memory on the node: about 70 MiB for code-server and about 175 MiB for T3 Code.
+- **Tools.** **Docker** is on by default and uses about 40 MiB.
+- **Node 1.** The name is optional. Without a name, the Console shows the node alias. SSH keys are optional, under **Advanced: direct SSH access**. A free node always uses the `n4` size: 2 vCPU, 4 GB RAM, and 50 GB disk.
 
-A node that you create in the Console UI runs **no sandbox container**. The AGRO workspace lives directly on the VM. You install agents on the VM host in step 5.
+<img src="/blog/run-agro-on-mifune-console/create-form.png" alt="The Create your free node form with Free billing, the Agro setup, code-server and Docker selected, and the fixed n4 size" width="712" height="1310" />
+
+For this guide, select the **Agro** setup, turn on **Browser editor (code-server)**, keep **Docker**, and name the node. Then select **Create free node**.
+
+<video src="/blog/run-agro-on-mifune-console/create-free-node.mp4" poster="/blog/run-agro-on-mifune-console/create-free-node-poster.png" autoplay muted loop playsinline preload="none" width="1032" height="720" aria-label="Filling the free node form: turning on code-server, naming the node, and pointing at Create free node"></video>
+
+The node page opens at once and shows the status. The capture node for this guide went from **Bootstrapping** to **Running** in less than a minute. A cold build can take longer.
+
+<img src="/blog/run-agro-on-mifune-console/node-running.png" alt="The node page of a running free n4 node, with Restart, Pause, and Destroy buttons and the Metadata and Billing panels; the IP address and owner are redacted" width="1024" height="720" />
+
+A node with the **Agro** setup runs **no sandbox container**. The AGRO workspace lives directly on the VM, at `~/.agro/workspaces/harness`. You install agents on the VM host in step 5.
 
 Two safety rules apply to every node:
 
@@ -65,12 +81,18 @@ Two safety rules apply to every node:
 
 ## 4. Connect from the browser
 
-Open the node page, then open the **Connect** menu.
+On the node page, open the arrow next to **Connect**. The menu has four items:
 
-- The default Connect action opens **code-server**, a VS Code editor in the browser.
-- The Connect menu also opens a **Ghostty browser terminal**. The terminal runs on a persistent zmx session, so a closed tab does not end your shell.
+- **Browser editor (code-server)**, marked **Default**. The **Connect** button opens the default item. On this node, code-server was turned on in the create form.
+- **Browser terminal (Ghostty)**. The terminal runs on a persistent zmx session, so a closed tab does not end your shell.
+- **SSH**.
+- **Remote desktop (RDP)**.
 
-The node's hostname is its alias, so the prompt shows `sandbox@<alias>`. You need no local setup for either surface.
+<img src="/blog/run-agro-on-mifune-console/connect-menu.png" alt="The Connect menu open on a running node, listing Browser editor (code-server) as Default, Browser terminal (Ghostty), SSH, and Remote desktop (RDP)" width="1024" height="720" />
+
+The browser terminal opens in a new tab. The node's hostname is its alias, so the prompt shows `sandbox@<alias>`. The node ships with AGRO v0.24.0:
+
+<img src="/blog/run-agro-on-mifune-console/terminal-harness-list.png" alt="The Ghostty browser terminal on the node: agro --version prints 0.24.0, and agro harness list shows claude-code, codex, pi, and other harnesses, none installed" width="1280" height="720" />
 
 ## 5. Install a coding agent
 
@@ -80,6 +102,10 @@ In the browser terminal, list the supported harnesses, then install one on the n
 agro harness list
 agro harness install claude-code --host
 ```
+
+The install puts the CLI under `~/.local` and prints the command that starts the agent in the AGRO workspace:
+
+<img src="/blog/run-agro-on-mifune-console/terminal-harness-install.png" alt="The browser terminal after agro harness install claude-code --host: Claude Code is installed at /home/sandbox/.local, with the command to run it in the AGRO workspace" width="1280" height="720" />
 
 Replace `claude-code` with any id from `agro harness list`, such as `codex` or `pi`. You can install two or more agents on one node. They work side by side in the same workspace. Start the agent and sign in to your AI provider with your own account.
 
@@ -106,7 +132,7 @@ The CLI uses `https://console.mifune.dev` by default. In CI, set `AGRO_CONSOLE_T
 agro node create --spec n4 --free-tier --name demo
 ```
 
-`agro node create` creates a node with the profile **`sandbox`**. This is different from a node that you create in the Console UI, which runs no sandbox container.
+`agro node create` creates a node with the profile **`sandbox`**. In the Console, that is the **Sandbox** setup, and the node list marks the node with a **Sandbox** badge. It is not the **Agro** setup from step 3, which runs no sandbox container.
 
 - `--free-tier` requests the free tier.
 - `--name` sets the node name.
@@ -135,9 +161,15 @@ agro node delete <id>
 
 The command asks for a confirmation. `--yes` skips it. Destroy needs the admin role in your Console organization. Without it, the command exits 1 and prints `destroy needs the admin role in agro-console`.
 
-You can also destroy the node from its node page in the Console. To stop a node but keep its files, pause it instead of deleting it.
+In the Console, select **Destroy** on the node page. The dialog says: "The VM is deleted and billing stops. This cannot be undone." A node can keep its latest snapshot after a destroy, but on a free node, Destroy also deletes the snapshot. Select **Destroy node** to confirm.
 
-Run `agro node list` again to confirm that the node is gone.
+To stop a node but keep its files, select **Pause** instead.
+
+The destroyed node leaves the active list. Select **Show archived** to see it with the status **Destroyed**:
+
+<img src="/blog/run-agro-on-mifune-console/nodes-after-delete.png" alt="The Nodes page after the delete: Total 0 and Running 0, with the archived list showing blog-capture as Destroyed" width="1024" height="660" />
+
+From the CLI, run `agro node list` again to confirm that the node is gone.
 
 ## Further reading
 
