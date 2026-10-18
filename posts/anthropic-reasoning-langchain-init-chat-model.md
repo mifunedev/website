@@ -4,6 +4,7 @@ date: "2025-12-30"
 excerpt: "A complete guide to enabling Claude's extended thinking mode in Langchain, persisting reasoning blocks in LangGraph checkpoints, and exporting them to disk. Includes working code examples."
 categories: ["How-To", "Langchain", "Anthropic", "Extended Thinking", "LangGraph"]
 coverImage: "https://github.com/mifunedev/static/blob/master/blog/reasoning.png?raw=true"
+archived: true
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"

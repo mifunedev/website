@@ -7,6 +7,7 @@ export interface Post {
   coverImage?: string; // Added for card style compatibility
   socialImage?: string; // Derived from coverImage or first content image
   categories?: string[]; // Added for card style compatibility
+  archived?: boolean;
   author?: {
     name: string;
     picture: string;

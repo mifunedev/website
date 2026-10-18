@@ -4,6 +4,7 @@ date: "2025-12-25"
 excerpt: "A hands-on guide to using Orchestra's MCP endpoint with the MCP Inspector, Cursor, Claude Desktop, and the Orchestra API—complete with streaming examples and troubleshooting."
 categories: ["How-To", "MCP", "API Walkthrough", "Agent Automation"]
 coverImage: "https://github.com/mifunedev/static/blob/master/blog/mcp.png?raw=true"
+archived: true
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"

@@ -4,6 +4,7 @@ date: "2025-12-30"
 excerpt: "Set up persistent Cloudflare Tunnels for remote access to your dev environment, then supercharge it with Claude Code hooks for an automated agent feedback loop."
 categories: ["How-To", "Developer Productivity", "Claude Code", "Remote Development"]
 coverImage: "https://github.com/mifunedev/static/blob/master/blog/hooks_tunnels.png?raw=true"
+archived: true
 author:
   name: "Ryan Eggleston"
   picture: "https://avatars.githubusercontent.com/u/40816745?s=96&v=4"
