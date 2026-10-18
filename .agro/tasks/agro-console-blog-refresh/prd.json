@@ -20,7 +20,7 @@
       ],
       "priority": 1,
       "passes": true,
-      "notes": "Executed on integrated task branch: npm run lint exit 0; npm run build exit 0; built sitemap has 0 swe-toolkit URLs; 6 built archived pages contain the banner. Worker executed: grep archived flag in 6 files; noindex meta present; agent-browser screenshot of banner. Reasoned: type field and filter location from diff review.",
+      "notes": "Executed on integrated task branch: npm run lint exit 0; npm run build exit 0; built sitemap has 0 swe-toolkit URLs; 6 built archived pages contain the banner. Worker executed: grep archived flag in 6 files; noindex meta present; agent-browser screenshot of banner. Reasoned: type field and filter location from diff review. Repair d712303 merged: formatDate uses timeZone UTC; worker executed build shows July 2, 2026.",
       "dependsOn": [],
       "files": [
         "src/types/post.ts",
@@ -53,14 +53,15 @@
         "Verify in browser using agent-browser skill."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Worker executed: lint exit 0; flock npm run build exit 0; agent-browser: all media HTTP 200, video attrs autoplay/muted/loop/playsinline/preload=none, playing; cover 1200x630 via ffprobe; largest file 208 KB. Advisor executed: merged on task branch; viewed poster frame (agro 0.24.0, no stale warning); verified destroy warning precedes command and matches docs/lifecycle-commands.md:388-405. Reasoned: command order and doc links from diff review. Repair round: re-recorded clip without old-image warning and removed scratchpad path from tape.",
       "dependsOn": [],
       "files": [
         "posts/agro-getting-started.md",
         "public/blog/agro-getting-started/",
         ".agro/tasks/agro-console-blog-refresh/media/agro-getting-started/"
-      ]
+      ],
+      "commit": "0cd6dc7"
     },
     {
       "id": "US-003",
