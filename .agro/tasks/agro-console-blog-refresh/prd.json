@@ -19,8 +19,8 @@
         "Verify in browser using agent-browser skill."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed on integrated task branch: npm run lint exit 0; npm run build exit 0; built sitemap has 0 swe-toolkit URLs; 6 built archived pages contain the banner. Worker executed: grep archived flag in 6 files; noindex meta present; agent-browser screenshot of banner. Reasoned: type field and filter location from diff review.",
       "dependsOn": [],
       "files": [
         "src/types/post.ts",
@@ -32,7 +32,8 @@
         "posts/remote-dev-cloudflare-tunnel-claude-hooks.md",
         "posts/rendering-interactive-charts.md",
         "posts/swe-toolkit-2026.md"
-      ]
+      ],
+      "commit": "ad1d258"
     },
     {
       "id": "US-002",
