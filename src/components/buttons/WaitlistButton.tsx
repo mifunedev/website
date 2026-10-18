@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { FaClipboardList } from "react-icons/fa"; // Importing the icon
+import { FaClipboardList } from "react-icons/fa";
 
 const WaitlistButton = () => {
   const [visible, setVisible] = useState(true);

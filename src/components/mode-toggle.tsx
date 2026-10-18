@@ -19,16 +19,8 @@ const THEME_OPTIONS = [
 ] as const;
 
 export function ModeToggle() {
-  // Every selection here is an explicit choice, and `setTheme` is all it takes
-  // to record one: the automatic default never writes storage, so the mere
-  // presence of a stored value permanently ends the automatic path — including
-  // when the user picks the same value the clock had already applied.
   const { theme, resolvedTheme, setTheme: chooseTheme } = useTheme();
 
-  // The active theme is not knowable during SSR, and on the client it is
-  // resolved from the DOM — so rendering it before mount would hydrate against
-  // markup the server could not have produced. Until then the control keeps its
-  // previous, state-free name.
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
 
@@ -54,11 +46,6 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {/*
-          A radio group rather than plain items: it is what gives each option
-          `role="menuitemradio"` and an `aria-checked` state, so the menu reports
-          which theme is active instead of only offering destinations.
-        */}
         <DropdownMenuRadioGroup
           value={mounted ? theme : undefined}
           onValueChange={chooseTheme}

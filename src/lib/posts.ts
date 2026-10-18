@@ -14,7 +14,6 @@ function extractFirstImage(content: string): string | null {
 export function getSortedPosts(): Post[] {
   let postsDirectory = path.join(process.cwd(), 'posts');
   
-  // Try alternative path if default doesn't exist (e.g. running from root vs website dir)
   if (!fs.existsSync(postsDirectory)) {
     console.log(`Posts directory not found at ${postsDirectory}, trying website/posts`);
     postsDirectory = path.join(process.cwd(), 'website', 'posts');
@@ -55,7 +54,6 @@ export function getSortedPosts(): Post[] {
     })
     .filter((post) => !post.archived);
 
-  // Sort by date descending
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 

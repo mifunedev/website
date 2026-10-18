@@ -1,11 +1,3 @@
-/**
- * Flagship open-source projects shown as social proof on the homepage.
- * Star counts are fetched live from the GitHub API at build time and refreshed
- * hourly (ISR). Every fetch is wrapped so a network/rate-limit failure falls
- * back to curated internal data, while provenance prevents fallback counts from
- * being presented as current GitHub data.
- */
-
 export const GITHUB_ORG_URL = "https://github.com/mifunedev";
 
 export interface FlagshipRepo {
@@ -27,7 +19,6 @@ interface CuratedRepo {
   fallbackLanguage: string | null;
 }
 
-// Curated taglines (cleaner than the raw GitHub descriptions); stars/language go live.
 const FLAGSHIP: CuratedRepo[] = [
   {
     owner: "mifunedev",
@@ -79,7 +70,7 @@ async function fetchRepo(repo: CuratedRepo): Promise<FlagshipRepo> {
       `https://api.github.com/repos/${repo.owner}/${repo.name}`,
       {
         headers: { Accept: "application/vnd.github+json" },
-        next: { revalidate: 3600 }, // refresh star counts hourly
+        next: { revalidate: 3600 },
       },
     );
     if (!res.ok) return base;

@@ -1,26 +1,5 @@
 "use client";
 
-/**
- * The fleet pricing calculator on /pricing. Replaces the three rate cards.
- *
- * THREE RULES THAT MUST HOLD (FR-5, tasks/fleet-pricing-calculator/prd.md).
- * The upstream catalog is moving from three node specs to five, and this file
- * must not need editing when it does:
- *
- *   1. Fleet state derives from `cloudNodePlans` via `emptyFleet()` — never a
- *      literal `{ small: 0, medium: 0, large: 0 }`.
- *   2. All rendering is `.map` over `cloudNodePlans`. There is no
- *      `plan.spec === "…"` comparison anywhere in this file, and adding one
- *      breaks the guarantee.
- *   3. Tiers are single-column rows, never a fixed grid column count. A
- *      `lg:grid-cols-3` is what made the old cards unable to survive a fourth
- *      spec.
- *
- * This component performs NO price arithmetic. Every number it shows comes
- * from a helper in `@/config/cloud-pricing`, so `scripts/generate-llm-txt.mjs`
- * and the verification oracle compute from the same code the page does.
- */
-
 import { useEffect, useMemo, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import {
@@ -40,24 +19,13 @@ import {
 } from "@/config/cloud-pricing";
 import { OFFERING_URLS } from "@/config/offerings";
 
-/**
- * The most nodes the stepper will count to. A `+` button has to stop
- * somewhere; past this the honest answer is a conversation, which is what the
- * hero's "Running more than three nodes? Talk to us" link is for.
- */
 const MAX_NODES_PER_SPEC = 24;
 
-/** Whole nodes only, and never negative. Input validation, not pricing. */
 function clampQuantity(value: number): number {
   if (!Number.isFinite(value)) return 0;
   return Math.min(MAX_NODES_PER_SPEC, Math.max(0, Math.trunc(value)));
 }
 
-/**
- * The screen-reader sentence for a given fleet. Kept as a pure function so the
- * initial state below is computed the same way on the server and the client —
- * a mismatch here is a hydration error on a live region.
- */
 function describeFleet(fleet: FleetQuantities, hours: number): string {
   const count = fleetNodeCount(fleet);
   if (count === 0) {
@@ -83,27 +51,15 @@ export default function FleetCalculator() {
     [fleet, hours],
   );
 
-  /**
-   * The visible figures update instantly; only the announcement waits. Typing
-   * "12" is two state changes, and an undebounced live region reads the
-   * intermediate "1" fleet out loud before the real one.
-   */
   useEffect(() => {
     const timer = setTimeout(() => setAnnouncement(nextAnnouncement), 350);
     return () => clearTimeout(timer);
   }, [nextAnnouncement]);
 
-  /** Typed into the field: the value IS the quantity. */
   function setQuantity(spec: NodeSpec, value: number) {
     setFleet((current) => ({ ...current, [spec]: clampQuantity(value) }));
   }
 
-  /**
-   * Stepper buttons move relative to whatever the fleet currently is, read
-   * inside the updater rather than closed over from this render. Computing
-   * `quantity + 1` from the rendered value loses every increment but the last
-   * when more than one lands in a single React batch.
-   */
   function adjustQuantity(spec: NodeSpec, delta: number) {
     setFleet((current) => ({
       ...current,
