@@ -81,14 +81,15 @@
         "Verify in browser using agent-browser skill."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Advisor executed on integrated branch: lint exit 0; build exit 0; /blog lists exactly 3 new posts; sitemap holds only the 3 new post URLs. Advisor viewed create-form, node-running, connect-menu, terminal-harness-install, nodes-after-delete: IP and owner redacted, no email/token/SSH key visible. Worker executed: one free n4 node 098449f7-bc91-4705-8f2d-dce2c4d377a6 created and destroyed (nodes-after-delete.png shows Total 0, blog-capture Destroyed); video attrs set and playing; 10 media URLs HTTP 200. Reasoned: section order, sandbox-container and sandbox-profile statements, prices vs agro-console README. Divergence: the MP4 shows the create form only; running node, Connect menu and terminal are stills, because the full-flow recording was corrupt and the one-node limit prevented a retake.",
       "dependsOn": [],
       "files": [
         "posts/run-agro-on-mifune-console.md",
         "public/blog/run-agro-on-mifune-console/",
         ".agro/tasks/agro-console-blog-refresh/media/run-agro-on-mifune-console/"
-      ]
+      ],
+      "commit": "7b3fda0"
     },
     {
       "id": "US-004",
