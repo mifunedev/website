@@ -128,8 +128,8 @@
         "Verify in browser using agent-browser skill."
       ],
       "priority": 5,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Worker executed: npm run build exit 0; npm run start served /blog 200; annotate-screenshot.sh exit 0 for 6 screenshots; browser asserts video paused=false readyState=4 and 0 broken images on 3 posts; curl 22/22 media URLs 200; 6 archived URLs 200 with banner and absent from sitemap. Advisor executed: viewed blog-index-3-cards.png (3 cards, covers loaded, dates October 18, 2026); read manual-review.md.",
       "dependsOn": [
         "US-001",
         "US-002",
@@ -138,7 +138,8 @@
       ],
       "files": [
         ".agro/tasks/agro-console-blog-refresh/evidence/"
-      ]
+      ],
+      "commit": "8b0c0a2"
     }
   ]
 }
