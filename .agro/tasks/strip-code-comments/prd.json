@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "task/90-strip-code-comments",
+  "description": "Strip explanatory code comments: remove every explanatory comment from tracked code and config, keep machine-read directives, and change no behavior.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Strip comments from root config, scripts, and src/app",
+      "description": "As the operator, I want no explanatory comments in root config, `scripts/`, `src/app/`, and `src/page.tsx` so that code alone describes behavior.",
+      "acceptanceCriteria": [
+        "The inventory script reports 0 comments in `next.config.mjs`, `postcss.config.js`, `tailwind.config.ts`, `scripts/**`, `src/app/**`, and `src/page.tsx`, except the `/** @type {import('next').NextConfig} */` annotation in `next.config.mjs`.",
+        "The comment-insensitive token hash of each owned file is equal before and after the change.",
+        "Each removed JSX comment removes the whole `{/* ... */}` expression, and no empty `{}` expression remains.",
+        "The worker report lists each removed comment that holds a fact that no other tracked source records.",
+        "`npm run lint` exits 0 in the worker worktree."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": ["next.config.mjs", "postcss.config.js", "tailwind.config.ts", "scripts/", "src/app/", "src/page.tsx"]
+    },
+    {
+      "id": "US-002",
+      "title": "Strip comments from shared modules",
+      "description": "As the operator, I want no explanatory comments in the shared module directories so that the code is the only description of behavior. The directories are `src/components/`, `src/config/`, `src/data/`, `src/lib/`, `src/types/`, and `src/utils/`.",
+      "acceptanceCriteria": [
+        "The inventory script reports 0 comments in `src/components/**`, `src/config/**`, `src/data/**`, `src/lib/**`, `src/types/**`, and `src/utils/**`.",
+        "The comment-insensitive token hash of each owned file is equal before and after the change.",
+        "Each removed JSX comment removes the whole `{/* ... */}` expression, and no empty `{}` expression remains.",
+        "The worker report lists each removed comment that holds a fact that no other tracked source records, including the OVH flavor IDs in `src/config/cloud-pricing.ts`.",
+        "`npm run lint` exits 0 in the worker worktree."
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": ["src/components/", "src/config/", "src/data/", "src/lib/", "src/types/", "src/utils/"]
+    },
+    {
+      "id": "US-003",
+      "title": "Strip comments from src/sections",
+      "description": "As the operator, I want no explanatory comments in `src/sections/` so that the code is the only description of behavior.",
+      "acceptanceCriteria": [
+        "The inventory script reports exactly 1 comment in `src/sections/**`: `// eslint-disable-next-line jsx-a11y/role-supports-aria-props` in `src/sections/AgentPickerSection.tsx`.",
+        "The `eslint-disable-next-line` directive stays on the line directly above the element that it suppresses.",
+        "The comment-insensitive token hash of each owned file is equal before and after the change.",
+        "Each removed JSX comment removes the whole `{/* ... */}` expression, and no empty `{}` expression remains.",
+        "The worker report lists each removed comment that holds a fact that no other tracked source records.",
+        "`npm run lint` exits 0 in the worker worktree."
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": ["src/sections/"]
+    }
+  ]
+}
