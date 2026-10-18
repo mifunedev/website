@@ -68,7 +68,7 @@ const LLM_TXT_CONTENT = `# Mifune — AGRO workspaces for coding agents
 
 AGRO is coding-agent workspace infrastructure: one repository connects to an isolated, persistent Docker workspace for its coding agents. It keeps project toolchains off the host and runs locally or on a remote VM.
 
-Bring your preferred coding agent. AGRO supports Claude Code, Codex, Pi, and other opt-in agent CLIs. On a VM, agents can work unattended or on schedules and can be reachable over Slack. Isolated git worktrees support parallel branches and delegation.
+Bring your preferred coding agent. AGRO supports Claude Code, Codex, Pi, OpenCode, Hermes, OpenClaw, Grok Build, Muse Code, Antigravity CLI, and fx, and two or more can run side by side in one workspace. On a VM, agents can work unattended or on schedules and can be reachable over Slack. Isolated git worktrees support parallel branches and delegation.
 
 Grounded outcomes:
 
@@ -90,13 +90,13 @@ The Mifune Console gives coding agents an isolated, persistent workspace while M
 - Mifune Console: https://console.mifune.dev
 - Pricing: https://mifune.dev/pricing
 
-Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free. Pausing a node stops billing and keeps its workspace; destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account and pay that provider directly.
+Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free. Pausing a node stops billing and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
 
 Hourly rates, per whole hour a node is running:
 
 ${HOURLY_RATES}
 
-A personal free tier gives one n4 node 24 running hours per UTC month with no card; the node auto-pauses at the limit and its workspace is kept 60 days after each pause. Free spots are limited, and a paid node needs a card. There is no monthly plan.
+A personal free tier gives up to three n4 nodes that share 24 running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept 60 days after each pause. Free spots are limited, and a paid node needs a card. There is no monthly plan.
 
 A node left running for a whole month is billed as ${HOURS_PER_MONTH} whole hours at the rate above, which works out to:
 

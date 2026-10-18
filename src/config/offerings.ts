@@ -32,7 +32,7 @@ export const offeringPaths: OfferingPath[] = [
       "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
       "Persistent workspace for coding agents",
-      "Free: 24 running hours a month on one n4 node",
+      "Free: up to three n4 nodes that share 24 running hours a month",
       "Browser terminal and editor, no SSH key",
     ],
     cta: "Open Mifune Console",
