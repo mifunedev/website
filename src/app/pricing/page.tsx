@@ -21,7 +21,7 @@ import FooterSection from "@/sections/FooterSection";
 const title = "Mifune Console pricing";
 
 const description =
-  "Mifune Console nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to Claude or Pi with your own account. Or self-host the Apache-2.0 licensed project yourself.";
+  "Mifune Console nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to each agent CLI you use, such as Claude Code, Codex, or Hermes, with your own account. Or self-host the Apache-2.0 licensed project yourself.";
 
 export const metadata: Metadata = {
   title,
@@ -61,7 +61,7 @@ const billingFacts = [
   {
     title: "Pause or destroy to stop paying",
     detail:
-      "Only running time is billed. Pause a node to stop billing and keep its workspace. Destroy it to delete it for good.",
+      "Only running time is billed. Pause a node to stop billing and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. Destroy a node to delete it for good.",
   },
 ];
 
@@ -101,8 +101,10 @@ export default function PricingPage() {
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
               A node is a dedicated cloud VM running your AGRO
               workspace, and you pay for the hours it runs. AI usage is not
-              included: you sign in to Claude or Pi inside the workspace with
-              your own account, and pay that provider directly.
+              included: you sign in to each agent CLI you use, such as Claude
+              Code, Codex, or Hermes, inside the workspace with your own
+              account, and pay that provider directly. Mifune holds no model
+              credential.
             </p>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
@@ -128,8 +130,9 @@ export default function PricingPage() {
             </div>
 
             <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-              Free for personal accounts: 24 running hours a month on one n4
-              node, no card · Limited free spots · Paid nodes need a card
+              Free for personal accounts: up to three n4 nodes that share 24
+              running hours a month, no card · Limited free spots · Paid nodes
+              need a card
             </p>
           </div>
         </section>
@@ -147,8 +150,8 @@ export default function PricingPage() {
                 Start your free workspace
               </h2>
               <p className="mt-3 max-w-xl font-montserrat text-sm leading-relaxed text-muted-foreground">
-                Personal accounts get one n4 node with 24 running hours each
-                UTC month. No credit card. No SSH key.
+                Personal accounts get up to three n4 nodes that share 24
+                running hours each UTC month. No credit card. No SSH key.
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-start gap-2 sm:items-center">

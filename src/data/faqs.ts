@@ -45,7 +45,7 @@ export const faqs: Faq[] = [
   {
     question: "How do I start?",
     answer:
-      "Open console.mifune.dev and start free with a personal account: one n4 node with 24 running hours each UTC month, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
+      "Open console.mifune.dev and start free with a personal account: up to three n4 nodes that share 24 running hours each UTC month, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.",
   },
 ];
 
@@ -93,17 +93,17 @@ export const pricingFaqs: Faq[] = [
   {
     question: "Is AI usage included?",
     answer:
-      "No. The price covers the node and the AGRO workspace running on it. You sign in to Claude, Pi, or another opt-in agent CLI inside the workspace with your own account, and you pay that provider directly for the AI usage.",
+      "No. The price covers the node and the AGRO workspace running on it. You sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account, and you pay that provider directly for the AI usage. Mifune holds no model credential and does not mark up tokens.",
   },
   {
     question: "Do I need a card to start?",
     answer:
-      "No, not for the free tier. A personal account gets one n4 node with 24 running hours each UTC month and no card. At the limit, the node pauses, and its workspace is kept for 60 days. A paid node needs a card. Free spots are limited.",
+      "No, not for the free tier. A personal account gets up to three n4 nodes that share 24 running hours each UTC month, and no card. At the limit, the nodes pause, and each workspace is kept for 60 days. A paid node needs a card. Free spots are limited.",
   },
   {
     question: "What happens when my free hours run out?",
     answer:
-      "The node pauses automatically, and nothing is billed. Add a card to continue now, or wait for the next UTC month. The workspace is kept for 60 days after each pause.",
+      "Your free nodes pause automatically, and nothing is billed. Add a card to continue now, or wait for the next UTC month. The workspace is kept for 60 days after each pause.",
   },
   {
     question: "Do I need an SSH key?",
