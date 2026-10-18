@@ -107,7 +107,7 @@ Run `agro harness list` to see every harness id. Each install goes into `~/.loca
   <source src="/blog/agro-getting-started/agro-cli.mp4" type="video/mp4" />
 </video>
 
-*A real recording with the v0.24.0 CLI: `agro --version` prints `0.24.0`, and `agro harness list` shows each harness and whether it is installed. The recording ran in an older sandbox image, so the CLI also prints an upgrade warning.*
+*A real recording with the v0.24.0 CLI: `agro --version` prints `0.24.0`, and `agro harness list` shows each harness and whether it is installed.*
 
 ![A Herdr pane runs agro harness install claude-code and reports that claude-code is installed, with a link to its authentication guide.](/blog/agro-getting-started/quickstart-harness-install.png)
 

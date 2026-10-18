@@ -7,7 +7,7 @@ Set Padding 24
 Set Theme "Dracula"
 Set TypingSpeed 60ms
 Hide
-Type "export PATH=/tmp/claude-1000/-home-sandbox-harness/dece6a39-5e13-49c2-b4c5-6ef8107162b8/scratchpad/US-002/bin:$PATH PS1='$ ' && cd /home/sandbox/harness && clear"
+Type `agro() { node /home/sandbox/harness/.agro/cli/dist/agro.js "$@" 2>/dev/null; }; PS1='$ '; cd /home/sandbox/harness; clear`
 Enter
 Show
 Type "agro --version"
@@ -17,4 +17,5 @@ Sleep 1.5s
 Type "agro harness list"
 Sleep 400ms
 Enter
-Sleep 5s
+Wait+Screen@20s /t3code/
+Sleep 4s
