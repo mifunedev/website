@@ -16,10 +16,18 @@
         "`npm run lint` exits 0 in the worker worktree."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed on the integrated task branch: inventory full shows only next.config.mjs:18 @type annotation in owned paths (exit 0); JSDoc-aware token hashes equal master for all 94 files (diff exit 0); added-line scan finds no empty {} and no new blank lines; git diff --name-only limited to owned paths, public/llm.txt absent; npm run lint exit 0. Worker reported the original token check false-failed on JSDoc removal; the advisor verified with the JSDoc-skip fix.",
       "dependsOn": [],
-      "files": ["next.config.mjs", "postcss.config.js", "tailwind.config.ts", "scripts/", "src/app/", "src/page.tsx"]
+      "files": [
+        "next.config.mjs",
+        "postcss.config.js",
+        "tailwind.config.ts",
+        "scripts/",
+        "src/app/",
+        "src/page.tsx"
+      ],
+      "commit": "043b781"
     },
     {
       "id": "US-002",
@@ -33,10 +41,18 @@
         "`npm run lint` exits 0 in the worker worktree."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed on the integrated task branch: inventory full shows 0 comments in owned paths (exit 0); JSDoc-aware token hashes equal master for all 94 files (diff exit 0); added-line scan finds no empty {} and no new blank lines; git diff --name-only limited to owned paths, public/llm.txt absent; npm run lint exit 0. Worker report lists the cloud-pricing OVH flavor table and other comment-only facts; they are recorded in Lessons.",
       "dependsOn": [],
-      "files": ["src/components/", "src/config/", "src/data/", "src/lib/", "src/types/", "src/utils/"]
+      "files": [
+        "src/components/",
+        "src/config/",
+        "src/data/",
+        "src/lib/",
+        "src/types/",
+        "src/utils/"
+      ],
+      "commit": "26da75c"
     },
     {
       "id": "US-003",
@@ -54,7 +70,9 @@
       "passes": false,
       "notes": "",
       "dependsOn": [],
-      "files": ["src/sections/"]
+      "files": [
+        "src/sections/"
+      ]
     }
   ]
 }
