@@ -15,7 +15,6 @@ export default class BrevoApi {
     }
 
     public async subscribe(body: any) {
-      // Forward the request to Airtable
       const response = await fetch(this.url, {
         method: "POST",
         headers: this.headers,

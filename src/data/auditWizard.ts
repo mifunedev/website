@@ -4,7 +4,7 @@ export interface WizardOption {
   value: string;
   label: string;
   hint?: string;
-  score?: number; // contribution to the internal lead-fit score
+  score?: number;
 }
 
 export interface WizardStep {
@@ -17,12 +17,6 @@ export interface WizardStep {
   options?: WizardOption[];
 }
 
-/**
- * The audit intake wizard — one question per screen. Select steps auto-advance;
- * text/email/textarea steps advance on Enter or the Continue button. Answers are
- * composed into the Contact `Message` field on submit (see composeMessage) so the
- * existing Airtable schema needs no new columns.
- */
 export const wizardSteps: WizardStep[] = [
   {
     id: "focus",
@@ -107,7 +101,6 @@ export function leadScore(answers: Record<string, string>): number {
   return Math.min(100, score);
 }
 
-/** Fold every wizard answer + the lead-fit score into a single Message string. */
 export function composeMessage(answers: Record<string, string>): string {
   return [
     `Primary time-sink: ${answers.focus || "—"}`,

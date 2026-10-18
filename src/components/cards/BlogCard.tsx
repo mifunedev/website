@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Post } from "@/types/post";
 import { formatDate } from "@/utils/format";
 
-// Helper for Author Info, extracted from original page.tsx
 const AuthorInfo = ({
   name,
   published,
@@ -36,7 +35,6 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-  // Use coverImage from frontmatter or fallback
   const imageSrc = post.coverImage || "/images/placeholder-blog.jpg";
 
   return (

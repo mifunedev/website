@@ -9,7 +9,6 @@ const AboutSection = () => {
   return (
     <section id="about" className="relative px-4 py-24">
       <div className="mx-auto max-w-4xl">
-        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +27,6 @@ const AboutSection = () => {
           </h2>
         </motion.div>
 
-        {/* Founder card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +35,6 @@ const AboutSection = () => {
           className="rounded-3xl border border-border bg-card p-8 md:p-12"
         >
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-            {/* Founder image */}
             <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full border border-green-500/30 bg-green-500/10">
               <Image
                 src="/images/ryan_egg.png"
@@ -48,7 +45,6 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* Founder bio */}
             <div>
               <p className="mb-6 font-montserrat text-lg leading-relaxed text-muted-foreground">
                 I&apos;m <span className="text-foreground">Ryan Eggleston</span>
@@ -67,7 +63,6 @@ const AboutSection = () => {
                 fit.
               </p>
 
-              {/* Social links */}
               <div className="flex gap-4">
                 <a
                   href="https://www.linkedin.com/in/ryan-eggleston"
@@ -92,7 +87,6 @@ const AboutSection = () => {
           </div>
         </motion.div>
 
-        {/* AGRO credibility callout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

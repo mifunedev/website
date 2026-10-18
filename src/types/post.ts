@@ -1,12 +1,12 @@
 export interface Post {
   slug: string;
   title: string;
-  date: string; // ISO string
+  date: string;
   excerpt?: string;
   content: string;
-  coverImage?: string; // Added for card style compatibility
-  socialImage?: string; // Derived from coverImage or first content image
-  categories?: string[]; // Added for card style compatibility
+  coverImage?: string;
+  socialImage?: string;
+  categories?: string[];
   archived?: boolean;
   author?: {
     name: string;

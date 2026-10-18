@@ -18,12 +18,10 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
       const language = match ? match[1] : "";
       const codeString = String(children).replace(/\n$/, "");
 
-      // Handle mermaid diagrams
       if (language === "mermaid") {
         return <MermaidDiagram chart={codeString} />;
       }
 
-      // For inline code (no language specified and no newlines)
       if (!match && !codeString.includes("\n")) {
         return (
           <code className={className} {...props}>
@@ -32,7 +30,6 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
         );
       }
 
-      // For regular code blocks, let rehype-highlight handle syntax highlighting
       return (
         <code className={className} {...props}>
           {children}

@@ -12,10 +12,6 @@ export interface Faq {
   answer: string;
 }
 
-/**
- * Homepage FAQ content. This is shared by the visible disclosure list and the
- * FAQPage JSON-LD so buyer-facing copy and structured data stay aligned.
- */
 export const faqs: Faq[] = [
   {
     question: "What is AGRO?",
@@ -49,10 +45,6 @@ export const faqs: Faq[] = [
   },
 ];
 
-/**
- * Every rate below is read from `cloud-pricing.ts`, so a price change stays a
- * one-file edit and an answer can never drift from the price cards.
- */
 const hourlyRateSentence = cloudNodePlans
   .map(
     (plan) =>
@@ -60,13 +52,6 @@ const hourlyRateSentence = cloudNodePlans
   )
   .join("; ");
 
-/**
- * Monthly figures for one node of each size, computed from the published
- * hourly rates rather than written down. The "no monthly plan" clause must
- * stay in the same sentence as these numbers: this answer is fed to
- * `faqPageSchema`, and structured data strips whatever sits next to it, so a
- * disclaimer in an adjacent sentence would not survive into a rich result.
- */
 const monthlyEstimateList = cloudNodePlans
   .map(
     (plan) =>
@@ -76,10 +61,6 @@ const monthlyEstimateList = cloudNodePlans
   )
   .join(", ");
 
-/**
- * Pricing-page FAQ content, kept separate from the homepage `faqs` export so
- * neither list leaks into the other page or its FAQPage JSON-LD.
- */
 export const pricingFaqs: Faq[] = [
   {
     question: "How does billing work?",

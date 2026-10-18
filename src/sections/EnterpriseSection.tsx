@@ -18,7 +18,7 @@ export default function EnterpriseSection() {
   const [Email, setEmail] = useState("");
   const [Phone, setPhone] = useState("");
   const [Message, setMessage] = useState("");
-  const [Website, setWebsite] = useState(""); // honeypot — humans never see or fill this
+  const [Website, setWebsite] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
   const loading = status === "loading";
@@ -26,8 +26,6 @@ export default function EnterpriseSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Honeypot: real users never fill the hidden Website field — bots do.
-    // Show success so they don't retry, but never hit the API.
     if (Website.trim()) {
       setStatus("success");
       return;
@@ -47,20 +45,17 @@ export default function EnterpriseSection() {
       const res = await apiClient.contactFormSubmit(payload);
       setStatus(res.ok ? "success" : "error");
     } catch {
-      // Network/timeout/CORS — never leave the form stuck on the spinner.
       setStatus("error");
     }
   };
 
   return (
     <section id="audit" className="relative py-24 px-4 bg-gradient-to-b from-background to-green-500/5">
-      {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="h-[500px] w-[500px] rounded-full bg-green-500/5 blur-3xl" />
       </div>
 
       <div className="relative max-w-5xl mx-auto">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +78,6 @@ export default function EnterpriseSection() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Benefits column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -143,7 +137,6 @@ export default function EnterpriseSection() {
             </motion.div>
           </motion.div>
 
-          {/* Form column */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -158,7 +151,6 @@ export default function EnterpriseSection() {
                 Takes 2 minutes. No credit card. No commitment.
               </p>
 
-              {/* Success banner */}
               {status === "success" && (
                 <motion.div
                   role="alert"
@@ -187,7 +179,6 @@ export default function EnterpriseSection() {
                 </motion.div>
               )}
 
-              {/* Error banner */}
               {status === "error" && (
                 <motion.div
                   role="alert"
@@ -222,7 +213,6 @@ export default function EnterpriseSection() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name */}
                 <div>
                   <label
                     htmlFor="audit-name"
@@ -242,7 +232,6 @@ export default function EnterpriseSection() {
                   />
                 </div>
 
-                {/* Email */}
                 <div>
                   <label
                     htmlFor="audit-email"
@@ -262,7 +251,6 @@ export default function EnterpriseSection() {
                   />
                 </div>
 
-                {/* Phone */}
                 <div>
                   <label
                     htmlFor="audit-phone"
@@ -282,7 +270,6 @@ export default function EnterpriseSection() {
                   />
                 </div>
 
-                {/* Message */}
                 <div>
                   <label
                     htmlFor="audit-message"
@@ -303,7 +290,6 @@ export default function EnterpriseSection() {
                   />
                 </div>
 
-                {/* Honeypot — invisible to humans; bots that fill it are dropped client-side */}
                 <div
                   aria-hidden="true"
                   style={{ position: "absolute", left: "-9999px", opacity: 0 }}

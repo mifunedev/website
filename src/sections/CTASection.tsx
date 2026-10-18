@@ -18,10 +18,6 @@ const fieldClassName =
   "min-h-11 w-full min-w-0 rounded-xl border border-[var(--oh-control-border)] bg-oh-paper px-4 py-3 font-montserrat text-base text-oh-ink placeholder:text-oh-muted focus-visible:border-oh-focus focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus disabled:cursor-not-allowed disabled:opacity-60";
 
 type CTASectionProps = {
-  /**
-   * Lead attribution for the page this form was submitted from. Defaults to
-   * the homepage value, so an existing `<CTASection />` render is unchanged.
-   */
   referrer?: string;
 };
 

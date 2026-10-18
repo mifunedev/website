@@ -6,7 +6,6 @@ export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mifune.dev";
 export const MEDIUM_RSS_URL = "https://medium.com/feed/@ryaneggz";
 
-// Social Config
 export const socialIcons = [
   {
     Icon: FaYoutube,

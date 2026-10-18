@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Image from "next/image";
 
-// JSON data for the projects
 const projects = [
   {
     title: "Plano Prompt Engineers Meetup",

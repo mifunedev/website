@@ -8,7 +8,6 @@ interface MermaidDiagramProps {
   className?: string;
 }
 
-// Initialize mermaid with default config
 mermaid.initialize({
   startOnLoad: false,
   theme: "dark",
@@ -26,7 +25,6 @@ export function MermaidDiagram({ chart, className = "" }: MermaidDiagramProps) {
       if (!containerRef.current) return;
 
       try {
-        // Generate a unique ID for the diagram
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         const { svg } = await mermaid.render(id, chart);
         setSvg(svg);

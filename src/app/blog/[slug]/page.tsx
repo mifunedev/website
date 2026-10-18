@@ -19,7 +19,6 @@ interface Props {
   };
 }
 
-// Generate static params for all posts
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({
@@ -36,13 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mifune.dev";
-  // Fallback to a default image if no specific image is found
-  // Note: Ensure /static/social-default.png exists or use a valid URL
   const defaultImage = `${siteUrl}/static/social-default.png`;
 
   let imageUrl = post.socialImage || defaultImage;
 
-  // Ensure absolute URL
   if (imageUrl && !imageUrl.startsWith("http")) {
     try {
       imageUrl = new URL(imageUrl, siteUrl).href;

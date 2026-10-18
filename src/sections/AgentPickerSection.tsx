@@ -245,7 +245,6 @@ export default function AgentPickerSection() {
                   </span>
                 </a>
               ) : (
-                // The docs reference uses a deliberately noninteractive disabled card.
                 // eslint-disable-next-line jsx-a11y/role-supports-aria-props
                 <article
                   aria-disabled="true"

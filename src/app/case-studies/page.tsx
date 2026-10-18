@@ -26,15 +26,11 @@ export default function CaseStudiesPage() {
         tabIndex={-1}
         className="scroll-mt-20 bg-background"
       >
-        {/* Hero / Coming-soon section */}
         <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-20">
-          {/* Grid background */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-          {/* Ambient glow */}
           <div className="absolute left-1/2 top-1/4 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/10 blur-[120px]" />
 
           <div className="relative mx-auto w-full max-w-4xl text-center">
-            {/* Eyebrow badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
@@ -45,7 +41,6 @@ export default function CaseStudiesPage() {
               </span>
             </div>
 
-            {/* Two-tone headline */}
             <h1 className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
               <span className="font-montserrat text-foreground">
                 Case Studies
@@ -66,7 +61,6 @@ export default function CaseStudiesPage() {
               slip through the cracks.
             </p>
 
-            {/* Metrics-to-capture card */}
             <div className="mx-auto mb-12 max-w-xl rounded-2xl border border-border bg-card p-8 text-left">
               <h2 className="mb-2 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground">
                 Metrics We&#39;re Capturing
@@ -84,7 +78,6 @@ export default function CaseStudiesPage() {
               </ul>
             </div>
 
-            {/* Soft CTA */}
             <p className="mb-6 font-montserrat text-base text-muted-foreground">
               Want results like these for your business?
             </p>

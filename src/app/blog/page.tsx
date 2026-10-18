@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Server Component
 export default function BlogIndex() {
   const posts = getSortedPosts();
   console.log(`Rendering BlogIndex with ${posts.length} posts`);
@@ -25,7 +24,6 @@ export default function BlogIndex() {
         <TopNavbar />
       </header>
       <main id="main-content" tabIndex={-1} className="scroll-mt-20">
-        {/* Added pt-32 to account for fixed navbar, z-0 to ensure it's behind navbar if needed, but navbar is z-50 */}
         <div className="min-h-screen bg-background bg-cover bg-center bg-no-repeat pb-20 pt-32">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
           <div className="container relative z-10 mx-auto px-6">

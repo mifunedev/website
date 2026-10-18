@@ -22,24 +22,6 @@ const videos = [
     title: "Play World of Warcraft with Me!",
     views: "3.8M views",
   },
-//   {
-//     id: 4,
-//     src: "https://www.youtube.com/embed/E2AX09cHSTk?si=kp_9Sb1fqyMX3PFX",
-//     title: "Kithe Reh Gaya | Ring Ceremony Reel",
-//     views: "82K views",
-//   },
-//   {
-//     id: 5,
-//     src: "https://www.youtube.com/embed/I44ZQaTsgAc?si=ONGl9IygHDtQcqlD",
-//     title: "WHEN TOEI ANIMATORS WENT CRAZY",
-//     views: "3.5M views",
-//   },
-//   {
-//     id: 6,
-//     src: "https://www.youtube.com/embed/I44ZQaTsgAc?si=ONGl9IygHDtQcqlD",
-//     title: "How Kalpana Chawla and team died!",
-//     views: "8M views",
-//   },
 ];
 
 const VideoCarousel = () => {
@@ -55,12 +37,6 @@ const VideoCarousel = () => {
     <div className="bg-black py-4">
       <div className="w-full">
         <div className="relative flex items-center">
-          {/* <button
-            onClick={() => scroll(-300)}
-            className="absolute left-0 z-10 rounded-full bg-gray-800 p-2"
-          >
-            <FaArrowLeft className="text-white" />
-          </button> */}
           <div
             ref={carouselRef}
             className="scrollbar-hide flex overflow-x-scroll gap-3"
@@ -79,12 +55,6 @@ const VideoCarousel = () => {
               </div>
             ))}
           </div>
-          {/* <button
-            onClick={() => scroll(300)}
-            className="absolute right-0 z-10 rounded-full bg-gray-800 p-2"
-          >
-            <FaArrowRight className="text-white" />
-          </button> */}
         </div>
       </div>
     </div>

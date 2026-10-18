@@ -85,11 +85,6 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  // Deliberately NOT keyed on `prefers-color-scheme`. The rendered theme is
-  // resolved from the client's local hour (plus any explicit choice), which
-  // the OS preference cannot predict — an OS-light visitor at 20:00 would
-  // otherwise get eggshell mobile chrome above a dark page. A single value
-  // matching the SSR/no-JS default (dark) can never contradict conditionally.
   themeColor: "#000000",
   width: "device-width",
   initialScale: 1,

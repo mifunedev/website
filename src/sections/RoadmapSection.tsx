@@ -2,15 +2,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Icons for features - you can use appropriate icons from your UI library
 const icons = {
-  A: "🚀", // Launch icon
-  B: "⚙️", // Settings icon
-  C: "📊", // Analytics icon
-  D: "🔒", // Security icon
+  A: "🚀",
+  B: "⚙️",
+  C: "📊",
+  D: "🔒",
 };
 
-// Status indicators for features
 type Status = 'completed' | 'in-progress' | 'planned';
 
 const roadmapData = [
@@ -49,7 +47,6 @@ const roadmapData = [
   },
 ];
 
-// Get status color
 const getStatusColor = (status: Status) => {
   switch(status) {
     case 'completed': return 'bg-green-500';
@@ -59,7 +56,6 @@ const getStatusColor = (status: Status) => {
   }
 };
 
-// Get status label
 const getStatusLabel = (status: Status) => {
   switch(status) {
     case 'completed': return 'Completed';
@@ -70,7 +66,6 @@ const getStatusLabel = (status: Status) => {
 };
 
 export default function RoadmapSection() {
-  // State to track which item is expanded
   const [expandedItem, setExpandedItem] = useState<number | null>(null);
 
   const toggleExpand = (idx: number) => {
@@ -79,7 +74,6 @@ export default function RoadmapSection() {
 
   return (
     <section id="roadmap" className="py-24 bg-gray-900 relative overflow-hidden">
-      {/* Background gradient element */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-purple-900/20 pointer-events-none"></div>
       
       <div className="container mx-auto px-4">
@@ -104,13 +98,11 @@ export default function RoadmapSection() {
                 viewport={{ once: true }}
                 className="mb-16 relative"
               >
-                {/* Timeline dot with status color */}
                 <div 
                   className={`absolute w-5 h-5 ${getStatusColor(item.status)} rounded-full -left-[44px] mt-1.5 
                     shadow-lg shadow-${item.status === 'completed' ? 'green' : item.status === 'in-progress' ? 'blue' : 'purple'}-500/50
                     flex items-center justify-center transition-transform duration-300 hover:scale-125`}
                 >
-                  {/* Show checkmark for completed items */}
                   {item.status === 'completed' && (
                     <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
@@ -118,37 +110,30 @@ export default function RoadmapSection() {
                   )}
                 </div>
                 
-                {/* Diagonal connector line */}
                 <div className="absolute h-8 w-8 border-t-2 border-blue-500/30 -left-[30px] top-2 border-dotted"></div>
                 
-                {/* Content card */}
                 <div 
                   className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500/50 
                     transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-blue-500/10"
                   onClick={() => toggleExpand(idx)}
                 >
-                  {/* Status badge */}
                   <div className={`inline-block px-2 py-1 rounded-full text-xs font-medium mb-2 ${getStatusColor(item.status)} bg-opacity-20 text-white`}>
                     {getStatusLabel(item.status)}
                   </div>
                   
-                  {/* Date */}
                   <time className="mb-1 text-sm font-normal text-gray-400 block">
                     {item.date}
                   </time>
                   
-                  {/* Title with icon */}
                   <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
                     <span className="text-2xl">{item.icon}</span>
                     {item.title}
                   </h3>
                   
-                  {/* Description */}
                   <p className="text-base font-normal text-gray-300 mb-2">
                     {item.description}
                   </p>
                   
-                  {/* Expanded details */}
                   {expandedItem === idx && (
                     <motion.div 
                       initial={{ height: 0, opacity: 0 }}
@@ -160,7 +145,6 @@ export default function RoadmapSection() {
                     </motion.div>
                   )}
                   
-                  {/* Expand/collapse indicator */}
                   <div className="text-blue-400 text-sm mt-2 flex items-center">
                     {expandedItem === idx ? 'Show less' : 'Learn more'}
                     <svg 

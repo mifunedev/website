@@ -7,7 +7,6 @@ export async function POST(request: Request) {
     const response = await brevo.subscribe(request);
 
     if (!response.ok) {
-      // Handles Airtable API errors
       const errorData = await response.json();
       console.log(errorData);
       return new Response(errorData, {
@@ -15,11 +14,9 @@ export async function POST(request: Request) {
       });
     }
 
-    // Forward the successful response from Airtable to the client
     const data = await response.json();
     return NextResponse.json(data, { status: 201 });
   } catch (error) {
-    // Handles fetch errors
     console.log(error)
     return NextResponse.json(
       { error: "Failed to subscribe" },

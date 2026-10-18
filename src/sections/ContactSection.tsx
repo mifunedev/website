@@ -14,7 +14,6 @@ const initState = {
 };
 
 export default function ContactSection() {
-  // State for the contact form
   const [buttonText, setButtonText] = useState(initState.buttonText);
   const [payload, setPayload] = useState(initState.payload);
   const [loading, setLoading] = useState(false);
@@ -24,9 +23,7 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Call the API to submit the contact form
     const res = await apiClient.contactFormSubmit(payload);
-    // Reset the form
     const data = await res.json();
     setLoading(false);
     if (res.ok) {
@@ -40,7 +37,6 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-24 bg-gray-900 relative overflow-hidden">
-      {/* Background gradient element - similar to Roadmap section */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-blue-900/20 pointer-events-none"></div>
       
       <div className="container mx-auto px-4">
