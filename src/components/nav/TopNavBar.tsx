@@ -25,6 +25,7 @@ const menuItems = [
     label: "Docs",
     external: true,
   },
+  { href: "/blog", label: "Blog", external: false },
   {
     href: OFFERING_URLS.pricing,
     label: "Pricing",
@@ -75,7 +76,10 @@ const TopNavbar = () => {
 
           <div className="hidden min-w-0 items-center gap-0.5 lg:flex xl:gap-1">
             {menuItems.map((item) => {
-              const isCurrent = !item.external && pathname === item.href;
+              const isCurrent =
+                !item.external &&
+                (pathname === item.href ||
+                  (item.href === "/blog" && pathname.startsWith("/blog/")));
 
               return (
                 <a
@@ -139,7 +143,10 @@ const TopNavbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60 p-2">
                 {menuItems.map((item) => {
-                  const isCurrent = !item.external && pathname === item.href;
+                  const isCurrent =
+                    !item.external &&
+                    (pathname === item.href ||
+                      (item.href === "/blog" && pathname.startsWith("/blog/")));
 
                   return (
                     <DropdownMenuItem key={item.href} asChild>
