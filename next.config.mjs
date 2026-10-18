@@ -6,7 +6,6 @@ const withPWA = withPWAInit({
   reloadOnOnline: true,
   swcMinify: true,
   dest: "public",
-  // PWA service workers break HMR and 404 /_next/static chunks in development.
   disable: process.env.NODE_ENV !== "production",
   fallbacks: {
     document: "/offline",
@@ -49,8 +48,6 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Workflow Academy case study hidden until a real case study ships.
-      // Temporary (307) so it can be re-enabled by removing this entry.
       { source: "/case-studies", destination: "/", permanent: false },
       {
         source: "/blog/openharness-getting-started",

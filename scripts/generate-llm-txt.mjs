@@ -1,27 +1,4 @@
 #!/usr/bin/env node
-/**
- * Generates public/llm.txt. Run by `prebuild`, so `npm run build` refreshes it.
- *
- * Prices are imported from src/config/cloud-pricing.ts — the single source of
- * every published price — rather than re-hardcoded here, so llm.txt cannot
- * drift from the site. That import is a TypeScript module loaded by plain
- * `node`, which relies on Node's built-in type stripping: unflagged from
- * v22.18.0 and v23.6.0. On an older runtime this script fails loudly with
- * ERR_UNKNOWN_FILE_EXTENSION rather than emitting a stale file.
- *
- * The build runtime is pinned by `.nvmrc` at the repo root. That file is what
- * actually selects the version — `engines.node` in package.json does NOT:
- * Netlify chooses from `.nvmrc` / `.node-version` / `NODE_VERSION`, each of
- * which overrides the version the site is pinned to in the UI, while npm only
- * *warns* (EBADENGINE) when the running Node disagrees with `engines`. Relying
- * on `engines` alone broke a deploy: the build ran on the image default (Node
- * 18.20.8), warned, and then died here. `engines` stays as the declaration of
- * what the repo needs; `.nvmrc` is the enforcement.
- *
- * Node also logs a MODULE_TYPELESS_PACKAGE_JSON warning for the .ts import
- * (this package is CommonJS-by-default and Next.js requires it to stay that
- * way). It is informational and does not affect the output.
- */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -45,12 +22,6 @@ const HOURLY_RATES = cloudNodePlans
   )
   .join("\n");
 
-/**
- * Monthly figures, computed from the hourly rates above rather than written
- * down. Each line carries "not a monthly plan" on the line itself, not in a
- * heading above the list: this file exists to be quoted by language models,
- * and a model quoting one bullet must not be able to drop the qualifier.
- */
 const MONTHLY_ESTIMATES = cloudNodePlans
   .map(
     (plan) =>

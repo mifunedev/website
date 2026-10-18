@@ -38,7 +38,6 @@
     --sidebar-border: 240 5.9% 90%;
     --sidebar-ring: 240 10% 3.9%;
 
-    /* AGRO owned-brand surfaces */
     --oh-paper: #f6f3ec;
     --oh-raised: #eae6db;
     --oh-ink: #0a0a0a;
@@ -46,10 +45,6 @@
     --oh-rule: #d8d2c2;
     --oh-control-border: #8a8375;
     --oh-accent: #15803d;
-    /* The accent, at the strength a raised surface needs. --oh-accent clears
-       4.5:1 on --oh-paper (4.53:1) but not on --oh-raised (4.02:1), and a
-       10% red alert overlay on that same surface drags it to 3.58:1. Darker
-       is the only lever that fixes both without restyling the surface. */
     --oh-accent-raised: #166534;
     --oh-focus: #166534;
     --oh-solid: #22c55e;
@@ -97,9 +92,6 @@
     --oh-rule: #262626;
     --oh-control-border: #626262;
     --oh-accent: #4ade80;
-    /* Dark mode never had the problem — the accent already measures 11.36:1 on
-       --oh-raised and 10.51:1 through the alert overlay — so this deliberately
-       tracks --oh-accent rather than darkening anything. */
     --oh-accent-raised: #4ade80;
     --oh-focus: #86efac;
     --oh-solid: #22c55e;
@@ -140,28 +132,24 @@
   }
 }
 
-/* Keep the accessible semantic focus color even when utility classes remove
-   the browser outline. The light role is deliberately darker than #22c55e. */
 :where(a, button, summary, input, textarea, select):focus-visible {
   outline: 2px solid var(--oh-focus) !important;
   outline-offset: 3px !important;
 }
-
-/* Custom/Existing Styles */
 
 .blog-content p {
   margin: 10px 0px;
 }
 
 .blog-content ul {
-  list-style-type: disc; /* or your preferred style */
+  list-style-type: disc;
   margin-left: 20px;
   padding-left: 0;
 }
 
 .blog-content ol {
-  list-style-type: disc; /* for ul */
-  list-style-type: decimal; /* for ol */
+  list-style-type: disc;
+  list-style-type: decimal;
   margin-left: 20px;
 }
 
@@ -173,8 +161,6 @@
 .blog-content h2,
 h4,
 h3 {
-  /* text-align: center; */
-  /* margin: 20px 0px 0px 0px; */
   font-weight: 700;
   font-size: 1.5rem;
 }
@@ -184,20 +170,20 @@ h3 {
 }
 
 .blog-content pre {
-  background-color: #2d2d2d; /* Dark background */
-  border: 1px solid #444; /* Darker border */
-  border-left: 4px solid #6366f1; /* Accent color, can adjust */
-  color: #ccc; /* Light gray text for readability */
-  page-break-inside: avoid; /* Avoids breaking the code block across pages */
-  font-family: "Courier New", monospace; /* Monospace font for code */
-  font-size: 15px; /* Adjust font size as needed */
-  line-height: 1.4; /* Line height for readability */
-  margin-bottom: 1.6em; /* Margin below the block */
-  max-width: 100%; /* Ensure it doesn't overflow its container */
-  overflow: auto; /* Add horizontal scrollbar if needed */
-  padding: 1em; /* Padding around the text */
-  display: block; /* Ensure it's block-level for margins to work */
-  white-space: pre; /* Preserve whitespace and do not wrap text */
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  border-left: 4px solid #6366f1;
+  color: #ccc;
+  page-break-inside: avoid;
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em;
+  display: block;
+  white-space: pre;
 }
 
 @keyframes fadeIn {
@@ -209,23 +195,22 @@ h3 {
   }
 }
 
-/* Apply the animation and initial state */
 .fade-in {
-  opacity: 0; /* Ensure elements are initially hidden */
-  animation-fill-mode: forwards; /* Keep the final state after the animation completes */
-  will-change: opacity; /* Optimize for opacity change */
+  opacity: 0;
+  animation-fill-mode: forwards;
+  will-change: opacity;
 }
 
 .fade-in-1 {
-  animation: fadeIn 0.25s ease-out 0s forwards; /* No delay for the first item */
+  animation: fadeIn 0.25s ease-out 0s forwards;
 }
 
 .fade-in-2 {
-  animation: fadeIn 0.25s ease-out 0.25s forwards; /* 0.25s delay for the second item */
+  animation: fadeIn 0.25s ease-out 0.25s forwards;
 }
 
 .fade-in-3 {
-  animation: fadeIn 0.25s ease-out 0.5s forwards; /* 0.5s delay for the third item */
+  animation: fadeIn 0.25s ease-out 0.5s forwards;
 }
 
 ::-webkit-scrollbar {
@@ -252,7 +237,6 @@ h3 {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Add this CSS to your global styles or component-specific styles */
 .iphone-mock-hover {
   transition:
     z-index 0.3s ease,
@@ -263,7 +247,6 @@ h3 {
   transform: scale(1.05);
 }
 
-/* Technology Ecosystem Marquee */
 .marquee-container {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(

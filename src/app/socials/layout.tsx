@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-// The Socials page is a client component, so its metadata lives in this
-// route-level server layout (Next.js App Router pattern).
 export const metadata: Metadata = {
   title: "Socials",
   description:
