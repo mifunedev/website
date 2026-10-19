@@ -108,8 +108,8 @@ Those are arithmetic on the hourly rate for a node that never stops; a node that
 
 The Apache-2.0 licensed project is for teams that want to inspect, adapt, and operate Open Harness themselves, locally or on a remote VM.
 
-- GitHub: https://github.com/mifunedev/openharness
-- Documentation: https://oh.mifune.dev
+- GitHub: https://github.com/mifunedev/agro
+- Documentation: https://agro.mifune.dev
 
 ### 3. Forward-Deployed Engineering Support — optional for Cloud customers
 
@@ -122,7 +122,7 @@ Mifune engineers can work alongside a Cloud customer's team to plan, implement, 
 
 - Homepage: https://mifune.dev
 - Pricing: https://mifune.dev/pricing
-- Open Harness documentation: https://oh.mifune.dev
+- Open Harness documentation: https://agro.mifune.dev
 - Blog: https://mifune.dev/blog
 `;
 

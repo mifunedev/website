@@ -1,7 +1,7 @@
 export const OFFERING_URLS = {
   cloud: "https://console.mifune.dev",
-  openSource: "https://github.com/mifunedev/openharness",
-  docs: "https://oh.mifune.dev",
+  openSource: "https://github.com/mifunedev/agro",
+  docs: "https://agro.mifune.dev",
   pricing: "/pricing",
   support: "/services",
   supportEmail: "hello@mifune.dev",
