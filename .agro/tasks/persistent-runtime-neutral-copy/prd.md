@@ -25,4 +25,4 @@ Keep the H1 "A portable home for autonomous coding agents." Lead the hero subtit
 
 - Claim: JSON-LD `runtimePlatform` still named Docker as the only platform. Evidence: `src/lib/schema.ts:102` at 809151a. Outcome: fixed in this PR (93da8e1).
 - Claim: the brand guide lists "a laptop, a remote VM, or a Codespace", and the site now names "a Mifune Console node". Evidence: `brands/mifunedev/STYLE.md:380` in the studio repository. Outcome: dropped; the studio repository is outside this PR, and both lists are true.
-- Claim: annotated screenshots could not be captured in this sandbox. Evidence: Chrome fails on a missing `libglib-2.0.so.0`, and `agent-browser install --with-deps` needs a sudo password. Outcome: dropped; the Vercel preview covers visual review.
+- Claim: annotated screenshots could not be captured in this sandbox. Evidence: Chrome fails on a missing `libglib-2.0.so.0`, and `agent-browser install --with-deps` needs a sudo password. Outcome: dropped; the PR manual review covers visual review on a local build, because Vercel skips preview builds for this repository.
