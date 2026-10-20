@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "task/92-persistent-runtime-neutral-copy",
+  "description": "Lead the hero subtitle with persistent workspaces and replace Docker-only workspace copy with runtime-neutral copy.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Persistent subtitle and runtime-neutral workspace copy",
+      "description": "As a first-time visitor, I want the hero to say the workspace is persistent and the site to describe AGRO without a Docker-only claim, so that the copy matches the Mifune Console and self-hosted AGRO.",
+      "acceptanceCriteria": [
+        "The hero `<h1>` still reads exactly \"A portable home for autonomous coding agents.\", and `APP_DEFAULT_TITLE` is unchanged.",
+        "The hero subtitle reads exactly \"Persistent workspaces for Claude Code, Codex, Pi, or any harness: isolated, and still working after you disconnect. Self-host it, or start free in your browser.\"",
+        "`git grep -n -i -E \"docker (workspace|environment)\" -- src scripts public/llm.txt` returns no match.",
+        "The FAQ answer for what AGRO is, and the `llm.txt` category paragraph, each state that workspaces run on a laptop, a remote VM, or a Mifune Console node, and that Docker is one supported runtime.",
+        "`public/llm.txt` equals the output of `node scripts/generate-llm-txt.mjs`.",
+        "`npm run lint` exits 0, and `npm run build` exits 0."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "src/",
+        "scripts/generate-llm-txt.mjs",
+        "public/llm.txt"
+      ]
+    }
+  ]
+}
