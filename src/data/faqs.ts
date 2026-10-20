@@ -16,7 +16,7 @@ export const faqs: Faq[] = [
   {
     question: "What is AGRO?",
     answer:
-      "AGRO, formerly Open Harness, is an Apache-2.0 licensed, isolated, persistent Docker workspace for coding agents. It keeps one project and its toolchain in one workspace and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
+      "AGRO, formerly Open Harness, is an Apache-2.0 licensed, isolated, persistent workspace for coding agents. It runs on a laptop, a remote VM, or a Mifune Console node; Docker is one supported runtime. It keeps one project and its toolchain in one workspace and supports Claude Code, Codex, Pi, and other opt-in agent CLIs.",
   },
   {
     question: "What problem does it solve?",
