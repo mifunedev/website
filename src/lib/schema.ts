@@ -99,7 +99,7 @@ export function agroSoftwareSchema(): Record<string, unknown> {
     url: OFFERING_URLS.openSource,
     codeRepository: OFFERING_URLS.openSource,
     license: `${OFFERING_URLS.openSource}/blob/main/LICENSE`,
-    runtimePlatform: "Docker",
+    runtimePlatform: ["Linux", "Docker"],
     isAccessibleForFree: true,
     author: { "@id": ORG_ID },
   };
