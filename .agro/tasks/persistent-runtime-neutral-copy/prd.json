@@ -17,8 +17,9 @@
         "`npm run lint` exits 0, and `npm run build` exits 0."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "93da8e1",
+      "notes": "Executed on the task branch at 93da8e1: the h1 and APP_DEFAULT_TITLE each match 'A portable home for autonomous coding agents.' once; `next start` HTML contains the exact subtitle; the docker (workspace|environment) git grep exits 1; generate-llm-txt then git diff --exit-code public/llm.txt exits 0; npm run lint exits 0; npm run build exits 0. Reasoned: the FAQ (src/data/faqs.ts:19) and the llm.txt category paragraph name a laptop, a remote VM, a Mifune Console node, and Docker as one supported runtime. Folded in: schema.ts runtimePlatform Docker -> [Linux, Docker] (93da8e1). Screenshots not captured: Chrome lacks libglib and sudo needs a password.",
       "dependsOn": [],
       "files": [
         "src/",
