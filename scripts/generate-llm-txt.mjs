@@ -37,7 +37,7 @@ const LLM_TXT_CONTENT = `# Mifune — AGRO workspaces for coding agents
 
 ## Category and value
 
-AGRO is coding-agent workspace infrastructure: one repository connects to an isolated, persistent Docker workspace for its coding agents. It keeps project toolchains off the host and runs locally or on a remote VM.
+AGRO is coding-agent workspace infrastructure: one repository connects to an isolated, persistent workspace for its coding agents. It keeps project toolchains off the host. Workspaces run on a laptop, a remote VM, or a Mifune Console node; Docker is one supported runtime.
 
 Bring your preferred coding agent. AGRO supports Claude Code, Codex, Pi, OpenCode, Hermes, OpenClaw, Grok Build, Muse Code, Antigravity CLI, and fx, and two or more can run side by side in one workspace. On a VM, agents can work unattended or on schedules and can be reachable over Slack. Isolated git worktrees support parallel branches and delegation.
 

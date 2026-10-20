@@ -12,7 +12,7 @@ const flowNodes = [
   },
   {
     label: "Workspace isolated",
-    detail: "Persistent Docker environment; tools stay off host",
+    detail: "Persistent environment; tools stay off host",
     emphasis: false,
   },
   {
@@ -42,8 +42,8 @@ const HeroSection = () => {
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
-            Give Claude Code, Codex, Pi, or any harness an isolated, persistent
-            workspace that keeps working after you disconnect. Self-host it, or
+            Persistent workspaces for Claude Code, Codex, Pi, or any harness:
+            isolated, and still working after you disconnect. Self-host it, or
             start free in your browser.
           </p>
 
@@ -216,7 +216,7 @@ const HeroSection = () => {
 
           <figcaption id="cloud-operating-model-caption" className="sr-only">
             AGRO workspace flow: one repository connects to a
-            persistent, isolated Docker workspace, the operator launches a
+            persistent, isolated workspace, the operator launches a
             preferred coding agent inside it, and chooses the Mifune Console
             or self-hosting.
           </figcaption>

@@ -95,11 +95,11 @@ export function agroSoftwareSchema(): Record<string, unknown> {
     "@id": OPEN_SOURCE_ID,
     name: "AGRO",
     description:
-      "AGRO (Agent Governance Runtime Orchestrator): Apache-2.0 licensed source for an isolated, persistent Docker workspace that keeps one coding-agent project and its toolchain off the host.",
+      "AGRO (Agent Governance Runtime Orchestrator): Apache-2.0 licensed source for an isolated, persistent workspace that keeps one coding-agent project and its toolchain off the host.",
     url: OFFERING_URLS.openSource,
     codeRepository: OFFERING_URLS.openSource,
     license: `${OFFERING_URLS.openSource}/blob/main/LICENSE`,
-    runtimePlatform: "Docker",
+    runtimePlatform: ["Linux", "Docker"],
     isAccessibleForFree: true,
     author: { "@id": ORG_ID },
   };

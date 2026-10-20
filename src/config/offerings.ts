@@ -51,7 +51,7 @@ export const offeringPaths: OfferingPath[] = [
       "Inspect, adapt, and operate the Apache-2.0 licensed AGRO workspace yourself, locally or on a remote VM.",
     bullets: [
       "Claude Code, Codex, Pi, and other opt-in CLIs",
-      "Local or remote Docker workspace",
+      "Local or remote persistent workspace",
       "Isolated git worktrees for parallel branches",
     ],
     cta: "Explore AGRO on GitHub",

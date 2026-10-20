@@ -24,7 +24,7 @@ const FLAGSHIP: CuratedRepo[] = [
     owner: "mifunedev",
     name: "agro",
     tagline:
-      "An open, isolated Docker workspace for running coding agents with your preferred harness.",
+      "An open, isolated workspace for running coding agents with your preferred harness.",
     fallbackStars: 21,
     fallbackLanguage: "TypeScript",
   },

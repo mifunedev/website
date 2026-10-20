@@ -6,7 +6,7 @@ const outcomes = [
     icon: Box,
     title: "Isolation by default",
     description:
-      "Keep one project and its toolchain in one Docker workspace instead of installing project dependencies on your host.",
+      "Keep one project and its toolchain in one isolated workspace instead of installing project dependencies on your host.",
   },
   {
     icon: Laptop,
@@ -48,7 +48,7 @@ export default function AgroValueSection() {
           </h2>
           <p className="mt-5 font-montserrat text-lg leading-relaxed text-oh-muted">
             AGRO is the portable layer between your repository and your
-            coding agent. The repository defines one isolated, persistent Docker
+            coding agent. The repository defines one isolated, persistent
             workspace, so the agent gets a consistent environment and your
             machine stays clean.
           </p>
