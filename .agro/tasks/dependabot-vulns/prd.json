@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "bug/98-dependabot-vulns",
+  "description": "Fix the Dependabot vulnerabilities: upgrade Next.js to 15.5 and React to 19, remove unused vulnerable packages, and refresh vulnerable transitive packages.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Upgrade Next.js to 15.5 and React to 19",
+      "description": "As the site owner, I want Next.js on the latest 15.5.x release so that the upgrade resolves the critical and high alerts on `next`.",
+      "acceptanceCriteria": [
+        "`package.json` pins `next` and `eslint-config-next` to the same 15.5.x version, at least `15.5.24`.",
+        "`package.json` sets `react` and `react-dom` to `^19`, and `@types/react` and `@types/react-dom` to `^19`.",
+        "`src/app/blog/[slug]/page.tsx` types `params` as `Promise<{ slug: string }>` and awaits `params` in `generateMetadata` and in `BlogPost`.",
+        "`npm ci`, `npm run lint`, and `npm run build` exit 0.",
+        "`npm ls next react react-dom` reports one version of each package and no `invalid` or `ERESOLVE` line."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "src/app/blog/[slug]/page.tsx",
+        "src/**"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Remove unused packages and refresh the vulnerable transitive packages",
+      "description": "As the site owner, I want unused vulnerable packages removed and the other vulnerable packages updated so that `npm audit` reports no high or critical finding.",
+      "acceptanceCriteria": [
+        "`package.json` no longer lists `jsdom`, `isomorphic-dompurify`, `dompurify`, `html-react-parser`, or `react-input-mask`, nor `@types/react-input-mask`. `git grep` finds no import of these packages in `src/`, `scripts/`, or `next.config.mjs`.",
+        "`mermaid` is at least `11.16.1` and `webpack` is at least `5.94.0` in `package-lock.json`.",
+        "`npm audit --audit-level=high` exits 0, or `.agro/tasks/dependabot-vulns/evidence/audit.md` records a reason for each remaining high or critical finding.",
+        "Each `overrides` entry in `package.json`, if any, names a package for which no parent release carries the fix. `audit.md` records the reason.",
+        "`npm ci`, `npm run lint`, and `npm run build` exit 0."
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-001"
+      ],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        ".agro/tasks/dependabot-vulns/evidence/audit.md"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "Record the manual review evidence",
+      "description": "As the reviewer, I want screenshots and an audit transcript so that I can confirm that the site still renders after the upgrade.",
+      "acceptanceCriteria": [
+        "`.agro/tasks/dependabot-vulns/evidence/home.png` and `.agro/tasks/dependabot-vulns/evidence/pricing.png` show `/` and `/pricing` rendered by `npm start` on the task branch.",
+        "Verify in browser using agent-browser skill.",
+        "`.agro/tasks/dependabot-vulns/evidence/manual-review.md` records the commands `npm ci`, `npm run lint`, `npm run build`, and `npm audit --audit-level=high`, with each exit status and the `npm audit` severity counts before and after.",
+        "The `npm start` process stops after the screenshots."
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        ".agro/tasks/dependabot-vulns/evidence/"
+      ]
+    }
+  ]
+}
