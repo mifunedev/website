@@ -1,0 +1,98 @@
+[
+  {
+    "index": 0,
+    "name": "Claude Code",
+    "description": "Anthropic's terminal coding agent.",
+    "href": "https://agro.mifune.dev/docs/harnesses/claude-code",
+    "img": "/brand/agents/claude-code.png",
+    "imgLoaded": true
+  },
+  {
+    "index": 1,
+    "name": "Codex",
+    "description": "OpenAI's CLI coding agent.",
+    "href": "https://agro.mifune.dev/docs/harnesses/codex",
+    "img": "/brand/agents/codex.png",
+    "imgLoaded": true
+  },
+  {
+    "index": 2,
+    "name": "OpenCode",
+    "description": "Terminal agent with OpenAI OAuth support.",
+    "href": "https://agro.mifune.dev/docs/harnesses/opencode",
+    "img": null,
+    "imgLoaded": null
+  },
+  {
+    "index": 3,
+    "name": "Pi",
+    "description": "A lightweight, customizable agent.",
+    "href": "https://agro.mifune.dev/docs/harnesses/pi",
+    "img": null,
+    "imgLoaded": null
+  },
+  {
+    "index": 4,
+    "name": "Hermes",
+    "description": "Nous Research's self-improving agent CLI.",
+    "href": "https://agro.mifune.dev/docs/harnesses/hermes",
+    "img": "/brand/agents/hermes.ico",
+    "imgLoaded": true
+  },
+  {
+    "index": 5,
+    "name": "OpenClaw",
+    "description": "Gateway-first personal agent runtime.",
+    "href": "https://agro.mifune.dev/docs/harnesses/openclaw",
+    "img": "/brand/agents/openclaw.png",
+    "imgLoaded": true
+  },
+  {
+    "index": 6,
+    "name": "Grok Build",
+    "description": "xAI's terminal coding agent and CLI.",
+    "href": "https://agro.mifune.dev/docs/harnesses/grok-build",
+    "img": "/brand/agents/grok-build.ico",
+    "imgLoaded": true
+  },
+  {
+    "index": 7,
+    "name": "Muse Code",
+    "description": "Meta's terminal coding agent.",
+    "href": "https://agro.mifune.dev/docs/harnesses/muse-code",
+    "img": "/brand/agents/muse-code.ico",
+    "imgLoaded": true
+  },
+  {
+    "index": 8,
+    "name": "Antigravity CLI",
+    "description": "Google's terminal coding agent.",
+    "href": "https://agro.mifune.dev/docs/harnesses/antigravity-cli",
+    "img": "/brand/agents/antigravity-cli.png",
+    "imgLoaded": true
+  },
+  {
+    "index": 9,
+    "name": "fx",
+    "description": "Vercel Labs' native coding agent (experimental).",
+    "href": "https://github.com/mifunedev/agro/blob/main/docs/harnesses/fx.md",
+    "img": "/brand/agents/fx.png",
+    "imgLoaded": true
+  },
+  {
+    "index": 10,
+    "name": "Prime Agent",
+    "description": "Prime Intellect's coding agent.",
+    "href": "https://github.com/mifunedev/agro/blob/main/docs/harnesses/prime-agent.md",
+    "img": "/brand/agents/prime-agent.png",
+    "imgLoaded": true
+  },
+  {
+    "index": 11,
+    "name": "T3 Code",
+    "description": "Browser UI over Claude/Codex/OpenCode (port 3773).",
+    "href": "https://agro.mifune.dev/docs/harnesses/t3code",
+    "img": "/brand/agents/t3-code.png",
+    "imgLoaded": true
+  }
+]
