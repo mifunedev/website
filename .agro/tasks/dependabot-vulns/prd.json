@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "bug/98-dependabot-vulns",
+  "description": "Fix the Dependabot vulnerabilities: upgrade Next.js to 15.5 and React to 19, remove unused vulnerable packages, and refresh vulnerable transitive packages.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Upgrade Next.js to 15.5 and React to 19",
+      "description": "As the site owner, I want Next.js on the latest 15.5.x release so that the upgrade resolves the critical and high alerts on `next`.",
+      "acceptanceCriteria": [
+        "`package.json` pins `next` and `eslint-config-next` to the same 15.5.x version, at least `15.5.24`.",
+        "`package.json` sets `react` and `react-dom` to `^19`, and `@types/react` and `@types/react-dom` to `^19`.",
+        "`src/app/blog/[slug]/page.tsx` types `params` as `Promise<{ slug: string }>` and awaits `params` in `generateMetadata` and in `BlogPost`.",
+        "`npm ci`, `npm run lint`, and `npm run build` exit 0.",
+        "`npm ls next react react-dom` reports one version of each package and no `invalid` or `ERESOLVE` line."
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Executed on integrated branch: next and eslint-config-next 15.5.28, react/react-dom 19.3.1, @types/react(-dom) ^19 (git diff, exit 0); blog/[slug] params Promise and awaited (git diff); npm ci 0, npm run lint 0, npm run build 0; npm ls next react react-dom shows one version each, no invalid/ERESOLVE. Extra bumps @next/third-parties ^15.5.28 and @headlessui/react ^2.2.10 for React 19 peers; case-studies <a> to Link for new lint rule.",
+      "dependsOn": [],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "src/app/blog/[slug]/page.tsx",
+        "src/**"
+      ],
+      "commit": "73267d0"
+    },
+    {
+      "id": "US-002",
+      "title": "Remove unused packages and refresh the vulnerable transitive packages",
+      "description": "As the site owner, I want unused vulnerable packages removed and the other vulnerable packages updated so that `npm audit` reports no high or critical finding.",
+      "acceptanceCriteria": [
+        "`package.json` no longer lists `jsdom`, `isomorphic-dompurify`, `dompurify`, `html-react-parser`, or `react-input-mask`, nor `@types/react-input-mask`. `git grep` finds no import of these packages in `src/`, `scripts/`, or `next.config.mjs`.",
+        "`mermaid` is at least `11.16.1` and `webpack` is at least `5.94.0` in `package-lock.json`.",
+        "`npm audit --audit-level=high` exits 0, or `.agro/tasks/dependabot-vulns/evidence/audit.md` records a reason for each remaining high or critical finding.",
+        "Each `overrides` entry in `package.json`, if any, names a package for which no parent release carries the fix. `audit.md` records the reason.",
+        "`npm ci`, `npm run lint`, and `npm run build` exit 0."
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Executed: 6 unused packages removed, git grep finds no import; lockfile mermaid 11.17.2, webpack 5.112.0; npm audit --audit-level=high exit 1 with 8 high, all from braces GHSA-vfj7-8cjw-p6xm with no patched release, reason recorded in evidence/audit.md; overrides next>postcss and serialize-javascript with reasons in audit.md; npm ci 0, lint 0, build 0; npm install --package-lock-only leaves the lockfile unchanged.",
+      "dependsOn": [
+        "US-001"
+      ],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        ".agro/tasks/dependabot-vulns/evidence/audit.md"
+      ],
+      "commit": "249338b"
+    },
+    {
+      "id": "US-003",
+      "title": "Record the manual review evidence",
+      "description": "As the reviewer, I want screenshots and an audit transcript so that I can confirm that the site still renders after the upgrade.",
+      "acceptanceCriteria": [
+        "`.agro/tasks/dependabot-vulns/evidence/home.png` and `.agro/tasks/dependabot-vulns/evidence/pricing.png` show `/` and `/pricing` rendered by `npm start` on the task branch.",
+        "Verify in browser using agent-browser skill.",
+        "`.agro/tasks/dependabot-vulns/evidence/manual-review.md` records the commands `npm ci`, `npm run lint`, `npm run build`, and `npm audit --audit-level=high`, with each exit status and the `npm audit` severity counts before and after.",
+        "The `npm start` process stops after the screenshots."
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Executed: home.png and pricing.png show / and /pricing fully rendered by npm start (advisor opened both PNGs); curl 200 on both; manual-review.md records npm ci 0, lint 0, build 0, audit --audit-level=high 1 (braces, reason in audit.md) with before/after counts; port 3098 free after (ss). Repair 206ad21 adds tsconfig target ES2017 so next build leaves tsconfig.json unchanged.",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        ".agro/tasks/dependabot-vulns/evidence/"
+      ],
+      "commit": "5f0bdf9"
+    }
+  ]
+}
