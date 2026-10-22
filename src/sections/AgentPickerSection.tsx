@@ -17,6 +17,7 @@ type Agent = {
     | "muse-code"
     | "antigravity-cli"
     | "fx"
+    | "prime-agent"
     | "t3-code"
     | "openclaw";
 };
@@ -83,6 +84,13 @@ const agents: Agent[] = [
     logo: "fx",
   },
   {
+    name: "Prime Agent",
+    description: "Prime Intellect's coding agent.",
+    docsUrl:
+      "https://github.com/mifunedev/agro/blob/main/docs/harnesses/prime-agent.md",
+    logo: "prime-agent",
+  },
+  {
     name: "T3 Code",
     description: "Browser UI over Claude/Codex/OpenCode (port 3773).",
     docsPath: "/docs/harnesses/t3code",
@@ -99,6 +107,7 @@ const imageLogos = {
   "muse-code": "/brand/agents/muse-code.ico",
   "antigravity-cli": "/brand/agents/antigravity-cli.png",
   fx: "/brand/agents/fx.png",
+  "prime-agent": "/brand/agents/prime-agent.png",
   openclaw: "/brand/agents/openclaw.png",
 } as const;
 
