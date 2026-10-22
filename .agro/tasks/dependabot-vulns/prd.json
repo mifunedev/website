@@ -16,15 +16,16 @@
         "`npm ls next react react-dom` reports one version of each package and no `invalid` or `ERESOLVE` line."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed on integrated branch: next and eslint-config-next 15.5.28, react/react-dom 19.3.1, @types/react(-dom) ^19 (git diff, exit 0); blog/[slug] params Promise and awaited (git diff); npm ci 0, npm run lint 0, npm run build 0; npm ls next react react-dom shows one version each, no invalid/ERESOLVE. Extra bumps @next/third-parties ^15.5.28 and @headlessui/react ^2.2.10 for React 19 peers; case-studies <a> to Link for new lint rule.",
       "dependsOn": [],
       "files": [
         "package.json",
         "package-lock.json",
         "src/app/blog/[slug]/page.tsx",
         "src/**"
-      ]
+      ],
+      "commit": "73267d0"
     },
     {
       "id": "US-002",
@@ -38,8 +39,8 @@
         "`npm ci`, `npm run lint`, and `npm run build` exit 0."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed: 6 unused packages removed, git grep finds no import; lockfile mermaid 11.17.2, webpack 5.112.0; npm audit --audit-level=high exit 1 with 8 high, all from braces GHSA-vfj7-8cjw-p6xm with no patched release, reason recorded in evidence/audit.md; overrides next>postcss and serialize-javascript with reasons in audit.md; npm ci 0, lint 0, build 0; npm install --package-lock-only leaves the lockfile unchanged.",
       "dependsOn": [
         "US-001"
       ],
@@ -47,7 +48,8 @@
         "package.json",
         "package-lock.json",
         ".agro/tasks/dependabot-vulns/evidence/audit.md"
-      ]
+      ],
+      "commit": "249338b"
     },
     {
       "id": "US-003",
