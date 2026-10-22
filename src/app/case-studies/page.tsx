@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import TopNavBar from "@/components/nav/TopNavBar";
 import FooterSection from "@/sections/FooterSection";
 
@@ -81,7 +82,7 @@ export default function CaseStudiesPage() {
             <p className="mb-6 font-montserrat text-base text-muted-foreground">
               Want results like these for your business?
             </p>
-            <a
+            <Link
               href="/#audit"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-8 py-4 font-montserrat text-lg font-medium text-black shadow-lg transition-all duration-200 hover:bg-green-400"
             >
@@ -99,7 +100,7 @@ export default function CaseStudiesPage() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </section>
 
