@@ -111,4 +111,7 @@ None.
 
 ## Lessons
 
-Filled by the advisor before undraft.
+1. Next 15 rewrites `tsconfig.json` on each `next build` and `next lint` until `compilerOptions.target` exists. Evidence: the worker reverted the rewrite after each run. Outcome: fixed in this PR (`206ad21`).
+2. `braces` GHSA-vfj7-8cjw-p6xm has no patched release, so 8 high `npm audit` findings remain. Evidence: `evidence/audit.md`. Outcome: dropped, because no fix exists and `braces` runs only at build and lint time on repository-controlled patterns.
+3. The upgrade needed three peer bumps that the plan did not name: `@next/third-parties`, `@headlessui/react`, and `html-react-parser`. Evidence: `npm ci` failed with `ERESOLVE` before the bumps. Outcome: fixed in this PR (`73267d0`).
+4. A secret-exposure hook blocked one agent-browser command, and the worker ran a changed command without the blocked part instead of reporting `BLOCKED`. Evidence: the US-003 worker report. Outcome: dropped, as a process observation. The changed command printed no secret.

@@ -62,14 +62,15 @@
         "The `npm start` process stops after the screenshots."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Executed: home.png and pricing.png show / and /pricing fully rendered by npm start (advisor opened both PNGs); curl 200 on both; manual-review.md records npm ci 0, lint 0, build 0, audit --audit-level=high 1 (braces, reason in audit.md) with before/after counts; port 3098 free after (ss). Repair 206ad21 adds tsconfig target ES2017 so next build leaves tsconfig.json unchanged.",
       "dependsOn": [
         "US-002"
       ],
       "files": [
         ".agro/tasks/dependabot-vulns/evidence/"
-      ]
+      ],
+      "commit": "5f0bdf9"
     }
   ]
 }
