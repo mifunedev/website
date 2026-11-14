@@ -11,7 +11,7 @@ Reader: the design team. The design team approves the scope before US-002 starts
 - JSX text that wraps over two lines or more in the source appears on one line in this deck. The deck changes no word of the quote.
 - `unchanged` marks text that this plan keeps.
 - `unchanged: E4-00` marks the pause fact that story E4-00 corrects in a separate PR. This plan keeps that text byte for byte.
-- `<free paused days>` marks a value with no approved number. "Questions for review" lists each placeholder.
+- An angle-bracket placeholder, such as `<design approver>`, marks a value with no approved number. "Questions for review" lists each placeholder.
 - A `${...}` expression in new text stays code. The rendered line under it shows the output with the new values.
 - The copy uses "node" for a console node. No new text names a brain or a hand. No new text names an `agro hands` command.
 
@@ -29,7 +29,7 @@ Each value comes from `mifunedev/agro-console` `.agro/tasks/per-second-prepaid-b
 | Billing unit | per second, `round(seconds * hourlyCustomerPriceUsd * 1_000_000 / 3600)` micro-USD | US-008, lines 93 and 98 |
 | Per-run minimum | `300` seconds | US-008, line 99; US-001, line 17; line 302 |
 | Hot paused disk price | `0.16` USD per GB-month, prorated per second | US-004, line 47; US-009, line 110 |
-| Free paused days for a paid node | `<free paused days>` | US-009, line 110 names `platform.pause.freeDays` and sets no value |
+| Free paused days for a paid node | `14` | `platform.pause.freeDays`; supervisor answer (b), 2026-11-14 |
 | Top-up amounts | `10`, `25`, `50`, `100` USD | US-007, line 84; line 302 |
 | Automatic top-up | optional, at a threshold and an amount that the org sets | US-010, line 122 |
 | Low-balance warning | email when the balance covers less than 24 hours of the current org spend rate | US-010, lines 123 and 124 |
@@ -38,7 +38,7 @@ Each value comes from `mifunedev/agro-console` `.agro/tasks/per-second-prepaid-b
 | Free nodes | `2`, live or paused | US-005, lines 53, 58, and 60; line 302 |
 | Free node spec | `n4` | Not in the Console prd. Source: website `src/config/cloud-pricing.ts`, `FREE_TIER_NODE_SPEC`, line 57 |
 | Shared free running time | `86400` seconds (24 hours) each month | US-005, line 59; line 302 |
-| Paused free retention | `14` days | The Console prd names `platform.pause.freeRetentionDays` at line 63 and sets no number. Source of `14`: agro-console `config.yaml` line 79 and the website `prd.md` Open Questions |
+| Paused free retention | `14` days | `platform.pause.freeRetentionDays`; supervisor answer (c), 2026-11-14 |
 | Card for a paid node | a card-verified Stripe Checkout buys the credit | Summary, line 210; US-007, line 84 |
 
 The website `prd.md` Open Questions paragraph restates the same prices, minimum, disk price, top-ups, warning, grace window, free node count, and retention. The two sources agree on each value that both state.
@@ -66,7 +66,7 @@ This file holds values, not visible copy. Each page reads the values from this f
 | `cloudNodePlans[4].hourlyUsd` (`n64`), line 53 | `0.6` | `0.64` |
 | `MINIMUM_BILLED_SECONDS`, new export | none | `300` |
 | paused disk price per GB-month, new export | none | `0.16` |
-| free paused days, new export | none | `<free paused days>` |
+| free paused days, new export | none | `14` |
 | free node count, new export | none | `2` |
 | free running hours each UTC month, new export | none | `24` |
 | paused free retention days, new export | none | `14` |
@@ -222,7 +222,7 @@ Fact 5, new. The sentence `Pause does not keep running processes, memory, or Doc
 
 ```text
 title: Pause or destroy to stop the running charge
-detail: Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for <free paused days> days, then pays $0.16 per GB-month, billed per second. Destroy a node to delete it for good.
+detail: Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for 14 days, then pays $0.16 per GB-month, billed per second. Destroy a node to delete it for good.
 ```
 
 ### 2.8 Other page text
@@ -316,7 +316,7 @@ You pay for the hours your node runs. Only whole running UTC hours meter, so any
 New. The value `300` comes from `MINIMUM_BILLED_SECONDS`:
 
 ```text
-You pay from prepaid credit for each second your node runs, at the rate for its size. Each run pays for at least 300 seconds. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node keeps its disk free for <free paused days> days, then pays $0.16 per GB-month.
+You pay from prepaid credit for each second your node runs, at the rate for its size. Each run pays for at least 300 seconds. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node keeps its disk free for 14 days, then pays $0.16 per GB-month.
 ```
 
 ### 4.3 `pricingFaqs`, "What does a node cost?"
@@ -566,7 +566,7 @@ Nodes are billed by the hour they run, each on a dedicated VM rather than shared
 New. The clause `keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data` is `unchanged: E4-00`:
 
 ```text
-Nodes are billed per second they run, from prepaid credit, each on a dedicated VM rather than shared infrastructure. Each run pays for at least 300 seconds; queued, building, and failed time is free. Credit comes in top-ups of 10, 25, 50, or 100 USD, with an optional automatic top-up. When the balance covers less than 24 hours of spend, the org admins get an email; a negative balance starts a 24-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for <free paused days> days, then pays 0.16 USD per GB-month, prorated per second. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
+Nodes are billed per second they run, from prepaid credit, each on a dedicated VM rather than shared infrastructure. Each run pays for at least 300 seconds; queued, building, and failed time is free. Credit comes in top-ups of 10, 25, 50, or 100 USD, with an optional automatic top-up. When the balance covers less than 24 hours of spend, the org admins get an email; a negative balance starts a 24-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for 14 days, then pays 0.16 USD per GB-month, prorated per second. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
 ```
 
 ### 7.2 Rates heading
@@ -646,8 +646,11 @@ No text change. `faqPageSchema` reads `pricingFaqs`, so the `FAQPage` JSON-LD ca
 ## Questions for review
 
 1. The website `prd.md` US-002 states "one live `n4` node". US-003, US-005, US-006, and the Console prd US-005 state two nodes. This deck uses two. The plan owner corrects US-002.
-2. The free paused days for a paid node have no approved value. The Console prd US-009 names `platform.pause.freeDays` and sets no number. Agro-console `config.yaml` line 77 sets `freeDays: 14` today, but the operator approval at line 302 omits this value. The deck uses `<free paused days>`. The operator supplies the value.
+   Answer (supervisor, 2026-11-14): Resolved. Two free `n4` nodes is the approved value. The "one live `n4` node" text in US-002 of `prd.md` is a stale line, and the advisor corrects `prd.md`. The deck keeps two.
+2. The free paused days for a paid node have no approved value. The Console prd US-009 names `platform.pause.freeDays` and sets no number. Agro-console `config.yaml` line 77 sets `freeDays: 14` today, but the operator approval at line 302 omits this value. The first draft used a placeholder. The operator supplies the value.
+   Answer (supervisor, 2026-11-14): Resolved. Free paused days for a paid node stay at `14` (`platform.pause.freeDays`). The Console Stage 1 plan does not change that value. A later cold-tier task (agro-console#767) can change the value. Until then, the site states `14`.
 3. The Console prd states no number for paused free retention. The value `14` comes from agro-console `config.yaml` `platform.pause.freeRetentionDays` and from the website `prd.md`. The same `config.yaml` also sets `platform.freeTier.retentionDays: 60` at line 72. The operator confirms `14` as the customer-facing retention.
+   Answer (supervisor, 2026-11-14): Resolved. `14` days is the paused free retention. The Console reads `platform.pause.freeRetentionDays` (`14`) in `apps/web/server/services/free-tier.service.ts` and in the provisioner free-tier cleanup. `freeTier.retentionDays` (`60`) is not on the retention path. The `60` in the agro-console README is one of the known stale facts. If agro-console#732 changes a free-tier limit before US-002 starts, the site follows production at build time.
 4. The Console prd does not name the free node spec. The deck uses `n4` from the website `FREE_TIER_NODE_SPEC`. The operator confirms `n4`.
 5. The Console prd Open Question 2 asks whether US-001 confirms the 300-second minimum. US-001 can raise the minimum. The site ships only after the Console deploys, so the deck uses `300`. The implementer re-checks `MINIMUM_BILLED_SECONDS` against the US-001 evidence.
 6. The hero link "Running more than three nodes? Talk to us" and the answer "How many nodes can I run?" state a default of three paid nodes. No approved value names a paid node limit. Agro-console `config.yaml` sets `platform.pause.maxPausedNodesPerOrg: 3`, which is a pause limit. The deck keeps both strings. The operator confirms the paid node limit.
