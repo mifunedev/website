@@ -24,7 +24,7 @@ Status: DRAFT
 - [ ] `hourlyUsd` of each plan in `src/config/cloud-pricing.ts` equals the approved Console price for that spec.
 - [ ] `src/config/cloud-pricing.ts` exports the per-run minimum as `MINIMUM_BILLED_SECONDS`, equal to `300`.
 - [ ] `src/config/cloud-pricing.ts` exports the hot paused storage price per GB-month and the free paused days.
-- [ ] `src/config/cloud-pricing.ts` exports the free-tier values: one live `n4` node, `24` running hours each UTC month, and `14` days of paused retention.
+- [ ] `src/config/cloud-pricing.ts` exports the free-tier values: two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.
 - [ ] `npm run lint` and `npm run build` exit 0.
 
 ### US-003: Update the pricing page and the calculator

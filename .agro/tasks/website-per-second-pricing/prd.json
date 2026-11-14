@@ -16,7 +16,7 @@
       ],
       "priority": 1,
       "passes": false,
-      "notes": "Copy deck commit 18ba5e872a26831d3a8c5dc188aa1df0d95da58a. Advisor verification: (1) executed: the deck has one section for each of the 8 Key Integration Points surfaces, with current text and new text; the worker grep -F matched each current-text quote against the source files. (2) executed: the advisor compared the deck Source values table with agro-console per-second-prepaid-billing/prd.md lines 37, 47, 58-60, 84, 99, 110, 122-124, 134 at 3c5ebd85; each price, the 300 s minimum, 0.16 USD/GB-month, the 10/25/50/100 USD top-ups, the 24 h warning and grace, two free nodes and 86400 s match. Free paused days has no approved value and is a placeholder. (3) external: OPEN, design scope approval waits on gate G3. (4) executed: ste-check.sh on git show HEAD:copy-deck.md exits 0. passes stays false until the design team approves.",
+      "notes": "Copy deck commit 18ba5e872a26831d3a8c5dc188aa1df0d95da58a. Advisor verification: (1) executed: the deck has one section for each of the 8 Key Integration Points surfaces, with current text and new text; the worker grep -F matched each current-text quote against the source files. (2) executed: the advisor compared the deck Source values table with agro-console per-second-prepaid-billing/prd.md lines 37, 47, 58-60, 84, 99, 110, 122-124, 134 at 3c5ebd85; each price, the 300 s minimum, 0.16 USD/GB-month, the 10/25/50/100 USD top-ups, the 24 h warning and grace, two free nodes and 86400 s match. Free paused days has no approved value and is a placeholder. (3) external: OPEN, design scope approval waits on gate G3. (4) executed: ste-check.sh on git show HEAD:copy-deck.md exits 0. passes stays false until the design team approves. Supervisor answers, 2026-11-14, recorded in copy-deck.md Questions for review at b78e55f6: (a) two free n4 nodes is the approved value; the advisor corrected the stale US-002 criterion in prd.md and prd.json. (b) free paused days for a paid node stay at 14 (platform.pause.freeDays) until a later cold-tier task (agro-console#767) changes it. (c) paused free retention is 14 days (platform.pause.freeRetentionDays); freeTier.retentionDays 60 is not on the retention path. If agro-console#732 changes a free-tier limit before US-002 starts, the site follows production at build time. Revised deck b78e55f: ste-check.sh exit 0 (executed); no <free paused days> placeholder remains (executed, grep -c 0).",
       "dependsOn": [],
       "files": [
         ".agro/tasks/website-per-second-pricing/copy-deck.md"
@@ -31,7 +31,7 @@
         "`hourlyUsd` of each plan in `src/config/cloud-pricing.ts` equals the approved Console price for that spec.",
         "`src/config/cloud-pricing.ts` exports the per-run minimum as `MINIMUM_BILLED_SECONDS`, equal to `300`.",
         "`src/config/cloud-pricing.ts` exports the hot paused storage price per GB-month and the free paused days.",
-        "`src/config/cloud-pricing.ts` exports the free-tier values: one live `n4` node, `24` running hours each UTC month, and `14` days of paused retention.",
+        "`src/config/cloud-pricing.ts` exports the free-tier values: two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.",
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 2,
@@ -190,5 +190,5 @@
     }
   ],
   "pr": 101,
-  "blocked": "US-001 waits on external design scope approval of copy deck commit 18ba5e872a26831d3a8c5dc188aa1df0d95da58a. Gate G3 is open: the design approver is not named. US-002 to US-008 stay stopped. Decisions for supervisor before US-002: (a) prd US-002 says the free tier is one live n4 node, but US-003/005/006 and the approved values say two n4 nodes; the deck uses two. (b) Free paused days for a paid node (platform.pause.freeDays) has no approved value; config.yaml sets 14 today. (c) Paused free retention 14 days is not in the Console prd; agro-console config.yaml also sets freeTier.retentionDays: 60. The full list is in copy-deck.md, Questions for review."
+  "blocked": "US-001 waits on external design scope approval of copy deck commit b78e55fc3e94758606b21261185ef490f9daa5c9. Gate G3 is open: the design approver is not named. US-002 to US-008 stay stopped. The supervisor resolved decisions (a), (b), and (c) on 2026-11-14; see US-001 notes."
 }
