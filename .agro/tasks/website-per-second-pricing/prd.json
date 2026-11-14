@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "feat/100-website-per-second-pricing",
+  "description": "Website per-second pricing. The site states the current Console terms in five places: `src/config/cloud-pricing.ts`, the pricing page, the FAQ, the offerings, and `public/llm.txt`. The Console guide in `posts/run-agro-on-mifune-console.md` repeats the free-tier terms.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Write the copy deck and get design scope sign-off",
+      "description": "As the design team, I want one copy deck for each changed surface. I can then approve the scope before any page changes.",
+      "acceptanceCriteria": [
+        "`.agro/tasks/website-per-second-pricing/copy-deck.md` lists each surface in the Key Integration Points table with its current text and its new text.",
+        "Each new value in the copy deck matches the approved value in `mifunedev/agro-console` `.agro/tasks/per-second-prepaid-billing/prd.md`.",
+        "`external` The design team approves the scope of the copy deck. The approval names the copy deck commit.",
+        "`bash .agro/skills/ste/scripts/ste-check.sh` exits 0 on the copy deck."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        ".agro/tasks/website-per-second-pricing/copy-deck.md"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-002",
+      "title": "Update the pricing data",
+      "description": "As a visitor, I want each displayed rate to match the Console. The calculator then shows what the Console charges.",
+      "acceptanceCriteria": [
+        "`hourlyUsd` of each plan in `src/config/cloud-pricing.ts` equals the approved Console price for that spec.",
+        "`src/config/cloud-pricing.ts` exports the per-run minimum as `MINIMUM_BILLED_SECONDS`, equal to `300`.",
+        "`src/config/cloud-pricing.ts` exports the hot paused storage price per GB-month and the free paused days.",
+        "`src/config/cloud-pricing.ts` exports the free-tier values: one live `n4` node, `24` running hours each UTC month, and `14` days of paused retention.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-001"
+      ],
+      "files": [
+        "src/config/cloud-pricing.ts"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-003",
+      "title": "Update the pricing page and the calculator",
+      "description": "As a visitor, I want the pricing page to state per-second billing from prepaid credit. I then know what I pay before I add credit.",
+      "acceptanceCriteria": [
+        "`/pricing` contains no \"Whole running hours\" and no \"Only whole running UTC hours meter\".",
+        "A billing fact states per-second billing and the per-run minimum from `MINIMUM_BILLED_SECONDS`.",
+        "A billing fact states prepaid credit, the low-balance email, the optional automatic top-up, and the grace window before a pause.",
+        "`src/config/cloud-pricing.ts` exports the free-tier values. The values are two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.",
+        "The pause billing fact states the free paused days and the paused storage price.",
+        "The free-tier card and the CTA strip state two free `n4` nodes, `24` running hours each UTC month, no card, and `14` days of retention.",
+        "The `FleetCalculator` summary text contains no \"whole\".",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "src/app/pricing/page.tsx",
+        "src/components/pricing/FleetCalculator.tsx"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-004",
+      "title": "Update the FAQ and its JSON-LD",
+      "description": "As a visitor, I want the FAQ to state the new billing model. My questions about credit and pause then have one answer.",
+      "acceptanceCriteria": [
+        "The billing answer in `src/data/faqs.ts` states per-second billing and contains no \"whole running UTC hours\".",
+        "The rates answer derives each rate from `cloudNodePlans` and states the per-second unit.",
+        "The card answer states that the free tier needs no card and that a paid node runs from prepaid credit.",
+        "The free-hours answer states `14` days of retention and contains no \"60 days\".",
+        "A new question \"How does prepaid credit work?\" states the top-up amounts, the automatic top-up, the low-balance email, and the grace window.",
+        "The `FAQPage` JSON-LD on `/pricing` contains each changed question and each changed answer.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "src/data/faqs.ts",
+        "src/lib/schema.ts",
+        "src/app/pricing/page.tsx"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-005",
+      "title": "Update the home page offering",
+      "description": "As a visitor, I want the home page Console offering to match the pricing page. The two pages then state one offer.",
+      "acceptanceCriteria": [
+        "The Console bullets in `src/config/offerings.ts` state two free `n4` nodes that share `24` running hours a month, and contain no \"up to three\".",
+        "The Console bullets state per-second billing from prepaid credit.",
+        "Verify in browser using agent-browser skill.",
+        "`npm run lint` and `npm run build` exit 0."
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "src/config/offerings.ts"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-006",
+      "title": "Update the Console blog guide",
+      "description": "As a reader of the Console guide, I want the free-tier terms and the billing section to match the Console. My first node then behaves as the guide states.",
+      "acceptanceCriteria": [
+        "`posts/run-agro-on-mifune-console.md` states two free nodes, `24` running hours each UTC month, and `14` days of retention.",
+        "The guide contains no \"three free nodes\", no \"60 days\", and no \"archives the node's files\".",
+        "The billing section states per-second billing from prepaid credit and links to `/pricing`.",
+        "The guide contains no \"payments are off\" sentence.",
+        "Verify in browser using agent-browser skill."
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "posts/run-agro-on-mifune-console.md"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-007",
+      "title": "Mirror the changes in llm.txt",
+      "description": "As an AI assistant that reads the site, I want `public/llm.txt` to state the new offer. My answers then match the Console.",
+      "acceptanceCriteria": [
+        "`scripts/generate-llm-txt.mjs` states per-second billing, prepaid credit, the per-run minimum, the pause behavior, and the free-tier values from `src/config/cloud-pricing.ts`.",
+        "`public/llm.txt` contains no \"whole running UTC hours\", no \"up to three n4 nodes\", and no \"60 days\".",
+        "`npm run build` regenerates `public/llm.txt` with no diff after the commit."
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "scripts/generate-llm-txt.mjs",
+        "public/llm.txt"
+      ],
+      "external": false
+    },
+    {
+      "id": "US-008",
+      "title": "Capture review evidence and get design quality sign-off",
+      "description": "As the design team, I want before and after screenshots of each changed surface. I can then confirm that the result meets or exceeds the expected quality.",
+      "acceptanceCriteria": [
+        "`.agro/tasks/website-per-second-pricing/evidence/before/` and `.agro/tasks/website-per-second-pricing/evidence/after/` hold desktop and mobile screenshots of `/`, `/pricing`, the pricing FAQ, the calculator, and the Console guide.",
+        "An agent-browser journey records the pricing page and the FAQ with annotated screenshots.",
+        "`.agro/tasks/website-per-second-pricing/evidence/manual-review.md` lists each acceptance criterion with its evidence.",
+        "`external` The design team signs off that the result meets or exceeds the expected quality. The sign-off names the evidence commit."
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-003",
+        "US-004",
+        "US-005",
+        "US-006",
+        "US-007"
+      ],
+      "files": [
+        ".agro/tasks/website-per-second-pricing/evidence/"
+      ],
+      "external": false
+    }
+  ]
+}
