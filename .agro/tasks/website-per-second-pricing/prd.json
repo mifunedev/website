@@ -28,7 +28,8 @@
       "title": "Update the pricing data",
       "description": "As a visitor, I want each displayed rate to match the Console. The calculator then shows what the Console charges.",
       "acceptanceCriteria": [
-        "Each plan in `src/config/cloud-pricing.ts` holds a compute price per hour and a storage price per started clock hour that equal the approved Console prices: compute `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD per hour; storage `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD per started clock hour.",
+        "Each plan in `src/config/cloud-pricing.ts` holds the approved compute price per hour: `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD.",
+        "Each plan in `src/config/cloud-pricing.ts` holds the approved storage price per started clock hour: `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD.",
         "`src/config/cloud-pricing.ts` derives the full-hour price of each plan as the compute price plus the storage price: `n4` `0.068`, `n8` `0.103`, `n16` `0.255`, `n32` `0.51`, `n64` `0.63` USD.",
         "`src/config/cloud-pricing.ts` exports the per-run compute minimum as `MINIMUM_BILLED_SECONDS`, equal to `60`.",
         "`src/config/cloud-pricing.ts` exports the hot paused storage price per GB-month and the free paused days.",
@@ -52,8 +53,9 @@
       "description": "As a visitor, I want the pricing page to state per-second billing from prepaid credit. I then know what I pay before I add credit.",
       "acceptanceCriteria": [
         "`/pricing` contains no \"Whole running hours\" and no \"Only whole running UTC hours meter\".",
-        "A billing fact states per-second compute billing with the per-run minimum from `MINIMUM_BILLED_SECONDS`, and storage billing for each started clock hour while the node runs.",
-        "The rate table on `/pricing` shows, for each spec, the compute price per hour, the storage price per started hour, and the full-hour total.",
+        "A billing fact states per-second compute billing and the per-run minimum from `MINIMUM_BILLED_SECONDS`.",
+        "A billing fact states that storage bills for each started clock hour while the node runs.",
+        "The rate table on `/pricing` shows the compute price, the storage price, and the full-hour total of each spec.",
         "The `FleetCalculator` shows the compute cost, the storage cost, and their total.",
         "A billing fact states prepaid credit, the low-balance email, the optional automatic top-up, and the grace window before a pause.",
         "`src/config/cloud-pricing.ts` exports the free-tier values. The values are two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.",
@@ -81,7 +83,8 @@
       "description": "As a visitor, I want the FAQ to state the new billing model. My questions about credit and pause then have one answer.",
       "acceptanceCriteria": [
         "The billing answer in `src/data/faqs.ts` states per-second billing and contains no \"whole running UTC hours\".",
-        "The rates answer derives each compute price, storage price, and full-hour total from `cloudNodePlans`, and states the per-second compute unit and the per-started-hour storage unit.",
+        "The rates answer derives each compute price, storage price, and full-hour total from `cloudNodePlans`.",
+        "The rates answer states the per-second compute unit and the per-started-hour storage unit.",
         "The card answer states that the free tier needs no card and that a paid node runs from prepaid credit.",
         "The free-hours answer states `14` days of retention and contains no \"60 days\".",
         "A new question \"How does prepaid credit work?\" states the top-up amounts, the automatic top-up, the low-balance email, and the grace window.",
@@ -150,7 +153,8 @@
       "title": "Mirror the changes in llm.txt",
       "description": "As an AI assistant that reads the site, I want `public/llm.txt` to state the new offer. My answers then match the Console.",
       "acceptanceCriteria": [
-        "`scripts/generate-llm-txt.mjs` states per-second compute billing, storage billing for each started clock hour, prepaid credit, the per-run minimum, the pause behavior, and the free-tier values from `src/config/cloud-pricing.ts`.",
+        "`scripts/generate-llm-txt.mjs` states per-second compute billing, storage billing for each started clock hour, and prepaid credit.",
+        "`scripts/generate-llm-txt.mjs` states the per-run minimum, the pause behavior, and the free-tier values from `src/config/cloud-pricing.ts`.",
         "`public/llm.txt` lists the compute price, the storage price, and the full-hour total of each spec.",
         "`public/llm.txt` contains no \"whole running UTC hours\", no \"up to three n4 nodes\", and no \"60 days\".",
         "`npm run build` regenerates `public/llm.txt` with no diff after the commit."
