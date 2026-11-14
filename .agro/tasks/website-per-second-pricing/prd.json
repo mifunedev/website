@@ -16,7 +16,7 @@
       ],
       "priority": 1,
       "passes": false,
-      "notes": "",
+      "notes": "Copy deck commit 18ba5e872a26831d3a8c5dc188aa1df0d95da58a. Advisor verification: (1) executed: the deck has one section for each of the 8 Key Integration Points surfaces, with current text and new text; the worker grep -F matched each current-text quote against the source files. (2) executed: the advisor compared the deck Source values table with agro-console per-second-prepaid-billing/prd.md lines 37, 47, 58-60, 84, 99, 110, 122-124, 134 at 3c5ebd85; each price, the 300 s minimum, 0.16 USD/GB-month, the 10/25/50/100 USD top-ups, the 24 h warning and grace, two free nodes and 86400 s match. Free paused days has no approved value and is a placeholder. (3) external: OPEN, design scope approval waits on gate G3. (4) executed: ste-check.sh on git show HEAD:copy-deck.md exits 0. passes stays false until the design team approves.",
       "dependsOn": [],
       "files": [
         ".agro/tasks/website-per-second-pricing/copy-deck.md"
@@ -188,5 +188,7 @@
       ],
       "external": false
     }
-  ]
+  ],
+  "pr": 101,
+  "blocked": "US-001 waits on external design scope approval of copy deck commit 18ba5e872a26831d3a8c5dc188aa1df0d95da58a. Gate G3 is open: the design approver is not named. US-002 to US-008 stay stopped. Decisions for supervisor before US-002: (a) prd US-002 says the free tier is one live n4 node, but US-003/005/006 and the approved values say two n4 nodes; the deck uses two. (b) Free paused days for a paid node (platform.pause.freeDays) has no approved value; config.yaml sets 14 today. (c) Paused free retention 14 days is not in the Console prd; agro-console config.yaml also sets freeTier.retentionDays: 60. The full list is in copy-deck.md, Questions for review."
 }
