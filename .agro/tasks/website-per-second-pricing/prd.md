@@ -11,7 +11,7 @@ Status: DRAFT
 **Acceptance Criteria:**
 
 - [ ] `.agro/tasks/website-per-second-pricing/copy-deck.md` lists each surface in the Key Integration Points table with its current text and its new text.
-- [ ] Each new value in the copy deck matches the approved value in `mifunedev/agro-console` `.agro/tasks/per-second-prepaid-billing/prd.md`.
+- [ ] Each new value in the copy deck matches the Decisions table of agro-console `.agro/tasks/mifune-launch/PROGRAM.md` (2026-11-14) and the revised plan on agro-console#768.
 - [ ] `external` The design team approves the scope of the copy deck. The approval names the copy deck commit.
 - [ ] `bash .agro/skills/ste/scripts/ste-check.sh` exits 0 on the copy deck.
 
