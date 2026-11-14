@@ -21,8 +21,9 @@ Status: DRAFT
 
 **Acceptance Criteria:**
 
-- [ ] `hourlyUsd` of each plan in `src/config/cloud-pricing.ts` equals the approved Console price for that spec.
-- [ ] `src/config/cloud-pricing.ts` exports the per-run minimum as `MINIMUM_BILLED_SECONDS`, equal to `300`.
+- [ ] Each plan in `src/config/cloud-pricing.ts` holds a compute price per hour and a storage price per started clock hour that equal the approved Console prices: compute `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD per hour; storage `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD per started clock hour.
+- [ ] `src/config/cloud-pricing.ts` derives the full-hour price of each plan as the compute price plus the storage price: `n4` `0.068`, `n8` `0.103`, `n16` `0.255`, `n32` `0.51`, `n64` `0.63` USD.
+- [ ] `src/config/cloud-pricing.ts` exports the per-run compute minimum as `MINIMUM_BILLED_SECONDS`, equal to `60`.
 - [ ] `src/config/cloud-pricing.ts` exports the hot paused storage price per GB-month and the free paused days.
 - [ ] `src/config/cloud-pricing.ts` exports the free-tier values: two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.
 - [ ] `npm run lint` and `npm run build` exit 0.
@@ -34,7 +35,9 @@ Status: DRAFT
 **Acceptance Criteria:**
 
 - [ ] `/pricing` contains no "Whole running hours" and no "Only whole running UTC hours meter".
-- [ ] A billing fact states per-second billing and the per-run minimum from `MINIMUM_BILLED_SECONDS`.
+- [ ] A billing fact states per-second compute billing with the per-run minimum from `MINIMUM_BILLED_SECONDS`, and storage billing for each started clock hour while the node runs.
+- [ ] The rate table on `/pricing` shows, for each spec, the compute price per hour, the storage price per started hour, and the full-hour total.
+- [ ] The `FleetCalculator` shows the compute cost, the storage cost, and their total.
 - [ ] A billing fact states prepaid credit, the low-balance email, the optional automatic top-up, and the grace window before a pause.
 - [ ] `src/config/cloud-pricing.ts` exports the free-tier values. The values are two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.
 - [ ] The pause billing fact states the free paused days and the paused storage price.
@@ -50,7 +53,7 @@ Status: DRAFT
 **Acceptance Criteria:**
 
 - [ ] The billing answer in `src/data/faqs.ts` states per-second billing and contains no "whole running UTC hours".
-- [ ] The rates answer derives each rate from `cloudNodePlans` and states the per-second unit.
+- [ ] The rates answer derives each compute price, storage price, and full-hour total from `cloudNodePlans`, and states the per-second compute unit and the per-started-hour storage unit.
 - [ ] The card answer states that the free tier needs no card and that a paid node runs from prepaid credit.
 - [ ] The free-hours answer states `14` days of retention and contains no "60 days".
 - [ ] A new question "How does prepaid credit work?" states the top-up amounts, the automatic top-up, the low-balance email, and the grace window.
@@ -87,7 +90,8 @@ Status: DRAFT
 
 **Acceptance Criteria:**
 
-- [ ] `scripts/generate-llm-txt.mjs` states per-second billing, prepaid credit, the per-run minimum, the pause behavior, and the free-tier values from `src/config/cloud-pricing.ts`.
+- [ ] `scripts/generate-llm-txt.mjs` states per-second compute billing, storage billing for each started clock hour, prepaid credit, the per-run minimum, the pause behavior, and the free-tier values from `src/config/cloud-pricing.ts`.
+- [ ] `public/llm.txt` lists the compute price, the storage price, and the full-hour total of each spec.
 - [ ] `public/llm.txt` contains no "whole running UTC hours", no "up to three n4 nodes", and no "60 days".
 - [ ] `npm run build` regenerates `public/llm.txt` with no diff after the commit.
 
@@ -176,7 +180,7 @@ The repository has no unit test runner. The plan adds none.
 
 1. Who on the design team approves the scope and signs off on the quality: `<design approver>`? Gate G3 in `mifunedev/agro-console` `.agro/tasks/mifune-launch/PROGRAM.md` tracks this question.
 
-The operator approved the Console values on 2026-11-14. Each spec price is `n4` `0.07`, `n8` `0.11`, `n16` `0.26`, `n32` `0.52`, and `n64` `0.64` per hour. The per-run minimum is 300 seconds. The hot paused disk price is `0.16` per GB-month. Top-ups are 10, 25, 50, and 100 USD. The low-balance warning and the grace window are 24 hours each. The free tier holds two `n4` nodes that share 24 running hours each month, with 14 days of paused retention.
+The operator approved the Console values on 2026-11-14. The operator changed the prices on 2026-11-14, and the supervisor relayed the change. The Console bills two components. Compute bills per second, with a 60-second minimum for each run: compute `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD per hour. Storage bills for each started clock hour while a node runs, for its volumes: storage `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD per started clock hour. A full running hour costs `n4` `0.068`, `n8` `0.103`, `n16` `0.255`, `n32` `0.51`, `n64` `0.63` USD. The hot paused disk price is `0.16` per GB-month. Top-ups are 10, 25, 50, and 100 USD. The low-balance warning and the grace window are 24 hours each. The free tier holds two `n4` nodes that share 24 running hours each month, with 14 days of paused retention.
 
 A separate PR corrects the three facts that differ from production. That PR ships after agro-console#732 merges, as story E4-00 in the program record.
 
