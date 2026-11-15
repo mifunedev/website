@@ -21,9 +21,9 @@ Status: DRAFT
 
 **Acceptance Criteria:**
 
-- [ ] Each plan in `src/config/cloud-pricing.ts` holds the approved compute price per hour: `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD.
-- [ ] Each plan in `src/config/cloud-pricing.ts` holds the approved storage price per started clock hour: `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD.
-- [ ] `src/config/cloud-pricing.ts` derives the full-hour price of each plan as the compute price plus the storage price: `n4` `0.068`, `n8` `0.103`, `n16` `0.255`, `n32` `0.51`, `n64` `0.63` USD.
+- [ ] Each plan in `src/config/cloud-pricing.ts` holds the approved compute price per hour: `n2` `0.023`, `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD.
+- [ ] Each plan in `src/config/cloud-pricing.ts` holds the approved storage price per started clock hour: `n2` `0.008`, `n4` `0.015`, `n8` `0.015`, `n16` `0.026`, `n32` `0.049`, `n64` `0.049` USD.
+- [ ] `src/config/cloud-pricing.ts` derives the full-hour price of each plan as the compute price plus the storage price: `n2` `0.031`, `n4` `0.060`, `n8` `0.095`, `n16` `0.236`, `n32` `0.469`, `n64` `0.589` USD.
 - [ ] `src/config/cloud-pricing.ts` exports the per-run compute minimum as `MINIMUM_BILLED_SECONDS`, equal to `60`.
 - [ ] `src/config/cloud-pricing.ts` exports the hot paused storage price per GB-month and the free paused days.
 - [ ] `src/config/cloud-pricing.ts` exports the free-tier values: two free `n4` nodes, `24` running hours each UTC month, and `14` days of paused retention.
@@ -184,7 +184,7 @@ The repository has no unit test runner. The plan adds none.
 
 1. Who on the design team approves the scope and signs off on the quality: `<design approver>`? Gate G3 in `mifunedev/agro-console` `.agro/tasks/mifune-launch/PROGRAM.md` tracks this question.
 
-The operator approved the Console values on 2026-11-14. The operator changed the prices on 2026-11-14, and the supervisor relayed the change. The Console bills two components. Compute bills per second, with a 60-second minimum for each run: compute `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD per hour. Storage bills for each started clock hour while a node runs, for its volumes: storage `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD per started clock hour. A full running hour costs `n4` `0.068`, `n8` `0.103`, `n16` `0.255`, `n32` `0.51`, `n64` `0.63` USD. The hot paused disk price is `0.16` per GB-month. Top-ups are 10, 25, 50, and 100 USD. The low-balance warning and the grace window are 24 hours each. The free tier holds two `n4` nodes that share 24 running hours each month, with 14 days of paused retention.
+The operator approved the Console values on 2026-11-14. The operator changed the prices on 2026-11-14, and the supervisor relayed the change. The Console bills two components. Compute bills per second, with a 60-second minimum for each run: compute `n2` `0.023`, `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD per hour. The E8 decision of 2026-11-15 replaced the 2026-11-14 storage prices. Storage bills for each started clock hour while a node runs, for its volumes: storage `n2` `0.008`, `n4` `0.015`, `n8` `0.015`, `n16` `0.026`, `n32` `0.049`, `n64` `0.049` USD per started clock hour. A full running hour costs `n2` `0.031`, `n4` `0.060`, `n8` `0.095`, `n16` `0.236`, `n32` `0.469`, `n64` `0.589` USD. The hot paused disk price is `0.16` per GB-month. Extra disk costs `0.16` USD per GB-month. Top-ups are 10, 25, 50, and 100 USD. The low-balance warning and the grace window are 24 hours each. The free tier holds two `n4` nodes that share 24 running hours each month, with 14 days of paused retention.
 
 A separate PR corrects the three facts that differ from production. That PR ships after agro-console#732 merges, as story E4-00 in the program record.
 

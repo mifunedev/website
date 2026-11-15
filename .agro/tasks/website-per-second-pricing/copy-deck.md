@@ -282,6 +282,24 @@ New:
 
 Rendered. `entryPlan` is the cheapest plan shown, `n2`: `No nodes selected. Nodes start at $0.0310 for a full running hour: $0.0230 compute, billed per second, plus $0.0080 storage for each started hour.`
 
+### 3.1b Empty fleet card
+
+Location: the empty-fleet card `<p>`, line 213. The heading `Add a node above to price a fleet.` stays `unchanged`.
+
+Current:
+
+```text
+Nodes start at {formatHourlyUsd(entryPlan.hourlyUsd)} an hour.
+```
+
+New:
+
+```text
+Nodes start at {formatHourlyUsd(fullHourUsd(entryPlan))} for a full running hour: {formatHourlyUsd(entryPlan.computeHourlyUsd)} compute, billed per second, plus {formatHourlyUsd(entryPlan.storageHourlyUsd)} storage for each started hour.
+```
+
+Rendered. `entryPlan` is the cheapest plan shown, `n2`: `Nodes start at $0.0310 for a full running hour: $0.0230 compute, billed per second, plus $0.0080 storage for each started hour.`
+
 ### 3.2 `describeFleet`, one node or more
 
 Location: line 35.
