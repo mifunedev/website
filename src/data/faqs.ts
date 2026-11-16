@@ -4,6 +4,7 @@ import {
   fleetTotalUsd,
   formatHourlyUsd,
   formatUsdTotal,
+  fullHourUsd,
   HOURS_PER_MONTH,
 } from "@/config/cloud-pricing";
 
@@ -48,7 +49,7 @@ export const faqs: Faq[] = [
 const hourlyRateSentence = cloudNodePlans
   .map(
     (plan) =>
-      `${plan.label} (${plan.vcpu} vCPU, ${plan.ramGb} GB RAM, ${plan.diskGb} GB SSD) is ${formatHourlyUsd(plan.hourlyUsd)} an hour`,
+      `${plan.label} (${plan.vcpu} vCPU, ${plan.ramGb} GB RAM, ${plan.diskGb} GB SSD) is ${formatHourlyUsd(fullHourUsd(plan))} an hour`,
   )
   .join("; ");
 

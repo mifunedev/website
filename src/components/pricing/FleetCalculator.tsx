@@ -11,6 +11,7 @@ import {
   fleetTotalUsd,
   formatHourlyUsd,
   formatUsdTotal,
+  fullHourUsd,
   isDefault,
   isFreeTierEligible,
   monthlyHourPresets,
@@ -29,7 +30,7 @@ function clampQuantity(value: number): number {
 function describeFleet(fleet: FleetQuantities, hours: number): string {
   const count = fleetNodeCount(fleet);
   if (count === 0) {
-    return `No nodes selected. Nodes start at ${formatHourlyUsd(entryPlan.hourlyUsd)} an hour.`;
+    return `No nodes selected. Nodes start at ${formatHourlyUsd(fullHourUsd(entryPlan))} an hour.`;
   }
   const nodeWord = count === 1 ? "node" : "nodes";
   return `${count} ${nodeWord}. ${formatHourlyUsd(fleetHourlyUsd(fleet))} per hour, or ${formatUsdTotal(fleetTotalUsd(fleet, hours))} for ${hours} running hours in a month — an estimate, and there is no monthly plan.`;
@@ -104,7 +105,7 @@ export default function FleetCalculator() {
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
                   <p className="flex flex-wrap items-baseline gap-1 font-montserrat text-foreground">
                     <span className="text-2xl font-bold tabular-nums">
-                      {formatHourlyUsd(plan.hourlyUsd)}
+                      {formatHourlyUsd(fullHourUsd(plan))}
                     </span>
                     <span className="font-mono text-sm font-semibold text-muted-foreground">
                       /hr
@@ -157,7 +158,7 @@ export default function FleetCalculator() {
 
               {quantity > 0 ? (
                 <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
-                  {quantity} × {formatHourlyUsd(plan.hourlyUsd)} ={" "}
+                  {quantity} × {formatHourlyUsd(fullHourUsd(plan))} ={" "}
                   <span className="tabular-nums text-foreground">
                     {formatHourlyUsd(fleetHourlyUsd(rowFleet))}
                   </span>
@@ -210,7 +211,7 @@ export default function FleetCalculator() {
               Add a node above to price a fleet.
             </p>
             <p className="mt-2 font-montserrat text-sm leading-relaxed text-muted-foreground">
-              Nodes start at {formatHourlyUsd(entryPlan.hourlyUsd)} an hour.
+              Nodes start at {formatHourlyUsd(fullHourUsd(entryPlan))} an hour.
             </p>
           </div>
         ) : (

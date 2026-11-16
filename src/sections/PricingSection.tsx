@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, Check, ExternalLink, Headphones } from "lucide-react";
 import AgroBrandBar from "@/components/brand/AgroBrandBar";
-import { entryPlan, formatHourlyUsd } from "@/config/cloud-pricing";
+import {
+  entryPlan,
+  formatHourlyUsd,
+  fullHourUsd,
+} from "@/config/cloud-pricing";
 import {
   cloudOptions,
   OFFERING_URLS,
@@ -28,7 +32,7 @@ export default function PricingSection() {
             engineering support when adoption needs hands-on help.
           </p>
           <p className="mx-auto mt-5 font-montserrat text-base text-muted-foreground">
-            Nodes start at {formatHourlyUsd(entryPlan.hourlyUsd)} an hour.{" "}
+            Nodes start at {formatHourlyUsd(fullHourUsd(entryPlan))} an hour.{" "}
             <Link
               href={OFFERING_URLS.pricing}
               className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"

@@ -8,6 +8,7 @@ import {
   fleetTotalUsd,
   formatHourlyUsd,
   formatUsdTotal,
+  fullHourUsd,
   HOURS_PER_MONTH,
 } from "../src/config/cloud-pricing.ts";
 
@@ -18,7 +19,7 @@ const rootDir = path.resolve(__dirname, "..");
 const HOURLY_RATES = cloudNodePlans
   .map(
     (plan) =>
-      `- ${plan.label} (${plan.vcpu} vCPU / ${plan.ramGb} GB RAM / ${plan.diskGb} GB SSD): ${formatHourlyUsd(plan.hourlyUsd)}`,
+      `- ${plan.label} (${plan.vcpu} vCPU / ${plan.ramGb} GB RAM / ${plan.diskGb} GB SSD): ${formatHourlyUsd(fullHourUsd(plan))}`,
   )
   .join("\n");
 
