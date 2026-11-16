@@ -37,8 +37,9 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "de9c68edb985ab46d6e1c8ebbad5b6840bb510f3",
+      "notes": "Advisor verification on the dev host worktree at de9c68e. (1) to (3) executed: a node value check of src/config/cloud-pricing.ts prints full hour n2 0.0310, n4 0.0600, n8 0.0950, n16 0.2360, n32 0.4690, n64 0.5890; compute sum 1.318 and storage sum 0.162 equal the sums of the approved prices; fullHourUsd adds compute and storage in ten-thousandths. (4) executed: MINIMUM_BILLED_SECONDS prints 60. (5) executed: PAUSED_DISK_USD_PER_GB_MONTH 0.16, FREE_PAUSED_DAYS 14. (6) executed: FREE_TIER_NODE_COUNT 2, FREE_TIER_NODE_SPEC n4, FREE_TIER_RUNNING_HOURS_PER_MONTH 24, FREE_TIER_PAUSED_RETENTION_DAYS 14. (7) executed: npm run lint exit 0; npx tsc --noEmit exit 0. npm run build runs one time at the end of the run, because the host has little free memory and next build shares .next with the running dev server; the final build result is recorded on US-007. Scope: the story also replaces plan.hourlyUsd with fullHourUsd(plan) in PricingSection.tsx, FleetCalculator.tsx, faqs.ts, and generate-llm-txt.mjs so that each commit compiles. PricingSection.tsx is not in the copy deck; its string stays unchanged and now shows the n2 full-hour price.",
       "dependsOn": [
         "US-001"
       ],
