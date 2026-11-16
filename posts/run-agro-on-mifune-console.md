@@ -22,7 +22,7 @@ Open [https://console.mifune.dev](https://console.mifune.dev) and select **Conti
 
 <img src="/blog/run-agro-on-mifune-console/console-sign-in.png" alt="The Mifune Console sign-in card with the Continue with GitHub button" width="560" height="330" />
 
-Mifune Console is in public beta. Expect rough edges and frequent changes. During the beta, payments are off, so you can use only the free tier.
+Mifune Console is in public beta. Expect rough edges and frequent changes.
 
 The free tier belongs to your personal context. If you also belong to an organization, use the context switcher in the sidebar to select your personal context before you create a free node. In an organization context, the create form shows "The free tier is not available for this account."
 
@@ -30,25 +30,26 @@ The free tier belongs to your personal context. If you also belong to an organiz
 
 The free tier lets you try a node without a card. The terms are:
 
-- You can hold up to **three free nodes** at the same time. Each free node uses the `n4` spec.
+- You can hold **two free nodes** at the same time. Each free node uses the `n4` spec.
 - A free node needs no card and no SSH key.
 - All your free nodes share **24 running hours each UTC calendar month**. Two running free nodes use the allowance twice as fast.
 - The allowance resets at 00:00 UTC on the 1st of each month. Unused hours do not carry over.
 - Only running time counts. Queued time and build time are free.
-- When the allowance runs out, the Console pauses each running free node. A pause archives the node's files and deletes the VM. No process state and no memory state survive a pause.
-- A paused free node keeps its workspace for **60 days**. After 60 days without a resume, the Console deletes the files.
+- When the allowance runs out, the Console pauses each running free node. A pause keeps the node's files. No process state and no memory state survive a pause.
+- A paused free node keeps its workspace for **14 days**. After 14 days without a resume, the Console deletes the files.
 - A paused node does not resume by itself after the monthly reset. You resume it.
-- A paused free node still counts toward the limit of three. Destroy a free node to free its place.
+- A paused free node still counts toward the limit of two. Destroy a free node to free its place.
 
-When payments open, paid nodes are billed a la carte per node, by the hour. The meter counts whole running UTC hours. There is no monthly plan, and destroying a node stops the charge.
+Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. See [Pricing](/pricing) for top-ups, the low-balance email, and the grace window.
 
-| Spec | vCPU | RAM | Disk | Each running hour |
-| --- | --- | --- | --- | --- |
-| `n4` (default) | 2 | 4 GB | 50 GB SSD | $0.0450 |
-| `n8` | 4 | 8 GB | 50 GB SSD | $0.1000 |
-| `n16` | 4 | 16 GB | 100 GB SSD | $0.2100 |
-| `n32` | 8 | 32 GB | 200 GB SSD | $0.4500 |
-| `n64` | 8 | 64 GB | 200 GB SSD | $0.6000 |
+| Spec | vCPU | RAM | Disk | Compute per hour, billed per second | Storage per started hour | Full running hour |
+| --- | --- | --- | --- | --- | --- | --- |
+| `n2` | 1 | 2 GB | 20 GB SSD | $0.0230 | $0.0080 | $0.0310 |
+| `n4` (default) | 2 | 4 GB | 50 GB SSD | $0.0450 | $0.0150 | $0.0600 |
+| `n8` | 4 | 8 GB | 50 GB SSD | $0.0800 | $0.0150 | $0.0950 |
+| `n16` | 4 | 16 GB | 100 GB SSD | $0.2100 | $0.0260 | $0.2360 |
+| `n32` | 8 | 32 GB | 200 GB SSD | $0.4200 | $0.0490 | $0.4690 |
+| `n64` | 8 | 64 GB | 200 GB SSD | $0.5400 | $0.0490 | $0.5890 |
 
 The node price covers the machine and the workspace. It does not include AI usage. You sign in to your AI provider with your own account, and the provider bills you directly. See [Pricing](/pricing) for current prices.
 
@@ -56,7 +57,7 @@ The node price covers the machine and the workspace. It does not include AI usag
 
 On the **Nodes** page, select **Create node**. The form has five parts:
 
-- **Billing.** **Free** is selected. The option shows the free hours left this month, the reset date, and how many of your three free nodes are in use. At three free nodes, the form disables the free option.
+- **Billing.** **Free** is selected. The option shows the free hours left this month, the reset date, and how many of your two free nodes are in use. At two free nodes, the form disables the free option.
 - **Setup.** **Agro** is the default: Ubuntu with `agro` and the web terminal. **Sandbox** is Ubuntu with your SSH keys.
 - **Browser apps.** The web terminal is always available. **Browser editor (code-server)** and **T3 Code** are off by default. Each app uses memory on the node: about 70 MiB for code-server and about 175 MiB for T3 Code.
 - **Tools.** **Docker** is on by default and uses about 40 MiB.
