@@ -170,8 +170,9 @@
         "`npm run build` regenerates `public/llm.txt` with no diff after the commit."
       ],
       "priority": 7,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "c04f8522a5514e2e444da3443a88886f7ccd5f78",
+      "notes": "Advisor verification at c04f852. (1), (2) executed: public/llm.txt states Nodes run from prepaid credit, Compute bills per second, with a minimum of 60 seconds for each run, storage for each started clock hour, the pause terms, and the free tier; the script takes each number from cloud-pricing.ts exports. (3) executed: the six rate lines list compute, storage, and full-hour prices from $0.0310 to $0.5890. (4) executed: grep counts 0 for whole running UTC hours, up to three n4 nodes, 60 days, and whole hours. (5) executed: npm run build exit 0 at c04f852, run one time from a git archive export of HEAD with node_modules linked, niced and with oom_score_adj 1000, because next build in the worktree would replace the .next directory of the running dev server; the build regenerated public/llm.txt, and cmp against the committed file shows no diff. This build is the npm run build evidence for US-002 to US-006. The dev server still returned 200 on /pricing after the build. CI: gh pr checks 101 exit 0 at c04f852; the Vercel check skipped the build through its Ignored Build Step.",
       "dependsOn": [
         "US-002"
       ],
