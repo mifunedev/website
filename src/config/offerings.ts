@@ -1,3 +1,10 @@
+import {
+  countWord,
+  FREE_TIER_NODE_COUNT,
+  FREE_TIER_NODE_SPEC,
+  FREE_TIER_RUNNING_HOURS_PER_MONTH,
+} from "@/config/cloud-pricing";
+
 export const OFFERING_URLS = {
   cloud: "https://console.mifune.dev",
   openSource: "https://github.com/mifunedev/agro",
@@ -32,7 +39,8 @@ export const offeringPaths: OfferingPath[] = [
       "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
       "Persistent workspace for coding agents",
-      "Free: up to three n4 nodes that share 24 running hours a month",
+      `Free: ${countWord(FREE_TIER_NODE_COUNT)} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours a month`,
+      "Paid nodes: compute per second, storage per started hour, from prepaid credit",
       "Browser terminal and editor, no SSH key",
     ],
     cta: "Open Mifune Console",
