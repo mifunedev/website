@@ -81,6 +81,17 @@ export const TOP_UP_AMOUNTS_USD: readonly number[] = [10, 25, 50, 100];
 export const LOW_BALANCE_WARNING_HOURS = 24;
 export const GRACE_WINDOW_HOURS = 24;
 
+const numberWords = ["zero", "one", "two", "three", "four", "five"];
+
+export function countWord(count: number): string {
+  return numberWords[count] ?? String(count);
+}
+
+export function formatTopUpAmounts(amounts: readonly number[]): string {
+  const dollars = amounts.map((amount) => `$${amount}`);
+  return `${dollars.slice(0, -1).join(", ")}, or ${dollars[dollars.length - 1]}`;
+}
+
 function toTenThousandths(usd: number): number {
   return Math.round(usd * 10000);
 }

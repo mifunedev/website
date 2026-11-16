@@ -7,6 +7,8 @@ import FleetCalculator from "@/components/pricing/FleetCalculator";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/config/app";
 import {
+  countWord,
+  formatTopUpAmounts,
   FREE_PAUSED_DAYS,
   FREE_TIER_NODE_COUNT,
   FREE_TIER_NODE_SPEC,
@@ -53,17 +55,6 @@ export const metadata: Metadata = {
     description,
   },
 };
-
-const numberWords = ["zero", "one", "two", "three", "four", "five"];
-
-function countWord(count: number): string {
-  return numberWords[count] ?? String(count);
-}
-
-function formatTopUpAmounts(amounts: readonly number[]): string {
-  const dollars = amounts.map((amount) => `$${amount}`);
-  return `${dollars.slice(0, -1).join(", ")}, or ${dollars[dollars.length - 1]}`;
-}
 
 const freeNodeWord = countWord(FREE_TIER_NODE_COUNT);
 
