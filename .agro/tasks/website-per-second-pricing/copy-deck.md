@@ -29,46 +29,49 @@ Each value comes from `mifunedev/agro-console` `.agro/tasks/per-second-prepaid-b
 | `n32` compute price | `0.42` USD per hour | operator pricing decision, 2026-11-14, relayed by the supervisor |
 | `n64` compute price | `0.54` USD per hour | operator pricing decision, 2026-11-14, relayed by the supervisor |
 | `n2` storage price | `0.008` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n4` storage price | `0.015` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n8` storage price | `0.015` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n16` storage price | `0.026` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n32` storage price | `0.049` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n64` storage price | `0.049` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
+| `n2` included data disk | `20` GB | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n4`, `n8`, `n16`, `n32`, `n64` included data disk | `25` GB | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| Disk sizes | the included size plus each multiple of `10` GB above it, up to `500` GB | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n4` storage price | `0.009` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n8` storage price | `0.009` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n16` storage price | `0.009` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n32` storage price | `0.009` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n64` storage price | `0.009` USD per started clock hour | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
 | `n2` full running hour | `0.031` USD (`0.023` + `0.008`) | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n4` full running hour | `0.060` USD (`0.045` + `0.015`) | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n8` full running hour | `0.095` USD (`0.08` + `0.015`) | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n16` full running hour | `0.236` USD (`0.21` + `0.026`) | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n32` full running hour | `0.469` USD (`0.42` + `0.049`) | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
-| `n64` full running hour | `0.589` USD (`0.54` + `0.049`) | agro-console PROGRAM.md Decisions, 2026-11-15 (E8); provider-catalog.yaml |
+| `n4` full running hour | `0.054` USD (`0.045` + `0.009`) | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n8` full running hour | `0.089` USD (`0.08` + `0.009`) | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n16` full running hour | `0.219` USD (`0.21` + `0.009`) | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n32` full running hour | `0.429` USD (`0.42` + `0.009`) | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| `n64` full running hour | `0.549` USD (`0.54` + `0.009`) | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
 | Compute unit | per second, with a minimum of `60` seconds for each run | operator pricing decision, 2026-11-14, relayed by the supervisor |
 | Storage unit | per started clock hour while the node runs, for the node volumes | operator pricing decision, 2026-11-14, relayed by the supervisor |
 | Hot paused disk price | `0.16` USD per GB-month, prorated per second | US-004, line 47; US-009, line 110 |
-| Extra disk | `0.16` USD per GB-month, billed per started hour while the node runs; free nodes get no extra disk | PROGRAM.md Decisions, 2026-11-15 (#775); console-config.json platform.pause.diskPriceUsdPerGbMonth |
-| Disposable hand boot storage | about `0.003` USD per started hour, plus the compute price of its spec. A disposable hand has no data volume. It cannot pause or fork. | PROGRAM.md Decisions, 2026-11-15 (E7, ADR agro-console#784); provider-catalog.yaml bootStorageHourlyCustomerPriceUsd |
-| Free paused days for a paid node | `14` | `platform.pause.freeDays`; supervisor answer (b), 2026-11-14 |
-| Top-up amounts | `10`, `25`, `50`, `100` USD | US-007, line 84; line 302 |
-| Automatic top-up | optional, at a threshold and an amount that the org sets | US-010, line 122 |
+| Extra disk | `0.16` USD per GB-month, billed per started hour while the node runs, on every node with a data volume, free nodes included. On a free node, extra disk bills from prepaid credit, and the included size stays free. | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| Disposable hand boot storage | about `0.003` USD per started hour, plus the compute price of its spec. A disposable hand has no data volume. It cannot pause or fork. The platform deletes it at the end of the grace window or of the free allowance. | PROGRAM.md Decisions, 2026-11-15 (E7, ADR agro-console#784); agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| Free paused days for a paid node | `3`. A paused paid node bills nothing for the first 3 days of a pause. After 3 days, it bills its whole disk at `0.16` USD per GB-month until resume or destroy. Each new pause starts a new 3-day period. | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| Top-up amounts | `25`, `50`, `100` USD; minimum top-up `25` USD | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
+| Automatic top-up | optional, at a threshold that the org sets, in the same amounts as a top-up | US-010, line 122; agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
 | Low-balance warning | email when the balance covers less than 24 hours of the current org spend rate | US-010, lines 123 and 124 |
 | Low-balance email recipients | each org admin and each verified billing account manager | US-010, line 123 |
 | Grace window | `24` hours after the balance goes negative | US-011, line 134 |
-| Free nodes | `2`, live or paused | US-005, lines 53, 58, and 60; line 302 |
-| Free node spec | `n4` | Not in the Console prd. Source: website `src/config/cloud-pricing.ts`, `FREE_TIER_NODE_SPEC`, line 57 |
+| Free nodes | `2`, live and paused together | US-005, lines 53, 58, and 60; line 302 |
+| Free node spec | `n2` or `n4`. Both specs share the same free limits. | agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at 83bf4de8 |
 | Shared free running time | `86400` seconds (24 hours) each month | US-005, line 59; line 302 |
 | Paused free retention | `14` days | `platform.pause.freeRetentionDays`; supervisor answer (c), 2026-11-14 |
 | Card for a paid node | a card-verified Stripe Checkout buys the credit | Summary, line 210; US-007, line 84 |
 
-The operator pricing decision replaces the single hourly price and the per-run minimum in the Console prd. The website `prd.md` Open Questions paragraph states the new compute, storage, and full-hour prices. The paragraph also restates the disk price, top-ups, warning, grace window, free node count, and retention. The Console prd and the website `prd.md` agree on each of those other values. The E8 decision of 2026-11-15 replaces the storage prices of 2026-11-14 and adds the `n2` plan. The E7 decision adds the disposable hand price.
+The operator pricing decision replaces the single hourly price and the per-run minimum in the Console prd. The website `prd.md` Open Questions paragraph states the new compute, storage, and full-hour prices. The paragraph also restates the disk price, top-ups, warning, grace window, free node count, and retention. The Console prd and the website `prd.md` agree on each of those other values. The E8 decision of 2026-11-15 replaces the storage prices of 2026-11-14 and adds the `n2` plan. The E7 decision adds the disposable hand price. The decision of 2026-11-16 (PR #793 and PR #795) replaces the included disk sizes, the storage prices for `n4` to `n64`, and the extra disk rule. It also replaces the free paused days, the top-up amounts, and the free node spec. The compute prices, the 60-second minimum, the warning, and the grace window stay unchanged.
 
 The rendered monthly estimates below use `HOURS_PER_MONTH` (`730`) and the new prices. A node that runs without a stop starts 730 clock hours, so the estimate is compute times 730 plus storage times 730. The code computes these numbers. The deck shows them for review only.
 
 | Spec | Compute, 730 hours | Storage, 730 started hours | Total |
 |---|---|---|---|
 | `n2` | `$16.79` | `$5.84` | `$22.63` |
-| `n4` | `$32.85` | `$10.95` | `$43.80` |
-| `n8` | `$58.40` | `$10.95` | `$69.35` |
-| `n16` | `$153.30` | `$18.98` | `$172.28` |
-| `n32` | `$306.60` | `$35.77` | `$342.37` |
-| `n64` | `$394.20` | `$35.77` | `$429.97` |
+| `n4` | `$32.85` | `$6.57` | `$39.42` |
+| `n8` | `$58.40` | `$6.57` | `$64.97` |
+| `n16` | `$153.30` | `$6.57` | `$159.87` |
+| `n32` | `$306.60` | `$6.57` | `$313.17` |
+| `n64` | `$394.20` | `$6.57` | `$400.77` |
 
 ## 1. `src/config/cloud-pricing.ts`
 
@@ -82,27 +85,31 @@ This file holds values, not visible copy. Each page reads the values from this f
 | `cloudNodePlans[2]` (`n16`) compute price, `hourlyUsd` at line 37 | `0.21` | `0.21` |
 | `cloudNodePlans[3]` (`n32`) compute price, `hourlyUsd` at line 45 | `0.45` | `0.42` |
 | `cloudNodePlans[4]` (`n64`) compute price, `hourlyUsd` at line 53 | `0.6` | `0.54` |
-| `cloudNodePlans[0]` (`n4`) storage price per started hour, new field | none | `0.015` |
-| `cloudNodePlans[1]` (`n8`) storage price per started hour, new field | none | `0.015` |
-| `cloudNodePlans[2]` (`n16`) storage price per started hour, new field | none | `0.026` |
-| `cloudNodePlans[3]` (`n32`) storage price per started hour, new field | none | `0.049` |
-| `cloudNodePlans[4]` (`n64`) storage price per started hour, new field | none | `0.049` |
-| full-hour price, derived as compute plus storage | none | `0.031`, `0.060`, `0.095`, `0.236`, `0.469`, `0.589` |
+| `cloudNodePlans[0]` (`n4`) storage price per started hour, new field | none | `0.009` |
+| `cloudNodePlans[1]` (`n8`) storage price per started hour, new field | none | `0.009` |
+| `cloudNodePlans[2]` (`n16`) storage price per started hour, new field | none | `0.009` |
+| `cloudNodePlans[3]` (`n32`) storage price per started hour, new field | none | `0.009` |
+| `cloudNodePlans[4]` (`n64`) storage price per started hour, new field | none | `0.009` |
+| `diskGb` for `n4`, `n8`, `n16`, `n32`, `n64` | `50`, `50`, `100`, `200`, `200` | `25` for each spec |
+| full-hour price, derived as compute plus storage | none | `0.031`, `0.054`, `0.089`, `0.219`, `0.429`, `0.549` |
 | `MINIMUM_BILLED_SECONDS`, new export | none | `60` |
 | paused disk price per GB-month, new export | none | `0.16` |
 | extra disk price per GB-month, new export | none | `0.16` |
+| disk size step in GB, new export `DISK_SIZE_STEP_GB` | none | `10` |
+| largest disk in GB, new export `MAX_DISK_GB` | none | `500` |
 | disposable hand boot storage per started hour, new export | none | `0.003` |
-| free paused days, new export | none | `14` |
+| free paused days, new export | none | `3` |
 | free node count, new export | none | `2` |
+| free node specs, `FREE_TIER_NODE_SPECS` replaces `FREE_TIER_NODE_SPEC` | `"n4"` | `["n2", "n4"]`; `formatSpecList` renders `n2 or n4` |
 | free running hours each UTC month, new export | none | `24` |
 | paused free retention days, new export | none | `14` |
-| top-up amounts in USD, new export | none | `[10, 25, 50, 100]` |
+| top-up amounts in USD, new export | none | `[25, 50, 100]` |
 | low-balance warning hours, new export | none | `24` |
 | grace window hours, new export | none | `24` |
 
 US-002 names only `MINIMUM_BILLED_SECONDS`. The implementer names the other exports and fields. In the new text below, `plan.computeHourlyUsd`, `plan.storageHourlyUsd`, and `fullHourUsd(plan)` stand for the compute price, the storage price, and the full-hour price. `fleetTotalUsd` adds compute and storage for each hour.
 
-`FREE_TIER_NODE_SPEC`, `formatHourlyUsd`, `HOURS_PER_MONTH`, and `monthlyHourPresets` stay unchanged. The labels `Always on`, `Weekdays, 12 h`, and `Weekdays, 8 h` stay unchanged.
+`isFreeTierEligible` reads `FREE_TIER_NODE_SPECS`, so the calculator marks `n2` and `n4` as free-tier eligible. `formatHourlyUsd`, `HOURS_PER_MONTH`, and `monthlyHourPresets` stay unchanged. The labels `Always on`, `Weekdays, 12 h`, and `Weekdays, 8 h` stay unchanged.
 
 ## 2. `src/app/pricing/page.tsx`
 
@@ -179,7 +186,7 @@ Free for personal accounts: up to three n4 nodes that share 24 running hours a m
 New:
 
 ```text
-Free for personal accounts: two n4 nodes that share 24 running hours each UTC month, no card, 14 days of paused retention · Limited free spots · Paid nodes run from prepaid credit
+Free for personal accounts: two n2 or n4 nodes that share 24 running hours each UTC month, no card, 14 days of paused retention · Limited free spots · Paid nodes run from prepaid credit
 ```
 
 ### 2.6 Free-tier card
@@ -195,7 +202,7 @@ Personal accounts get up to three n4 nodes that share 24 running hours each UTC 
 New:
 
 ```text
-Personal accounts get two free n4 nodes that share 24 running hours each UTC month. No credit card. No SSH key. A paused free node keeps its workspace for 14 days.
+Personal accounts get two free n2 or n4 nodes that share 24 running hours each UTC month. No credit card. No SSH key. A paused free node keeps its workspace for 14 days.
 ```
 
 ### 2.7 Billing facts
@@ -227,14 +234,14 @@ Fact 2b, new:
 
 ```text
 title: Storage by the started hour
-detail: Storage for the node volumes meters for each started clock hour while your node runs, at the storage price for its size. A full running hour costs the compute price plus the storage price.
+detail: Storage for the node volumes meters for each started clock hour while your node runs, at the storage price for its size. A full running hour costs the compute price plus the storage price. Extra disk, in steps of 10 GB up to 500 GB, costs $0.16 per GB-month on every node with a data volume, free nodes included.
 ```
 
 Fact 3, new. The current list has no fact for credit:
 
 ```text
 title: Prepaid credit
-detail: Paid nodes run from prepaid credit. Add $10, $25, $50, or $100 at a time, or turn on automatic top-up. When your balance covers less than 24 hours of spend, your org admins get an email. A negative balance starts a 24-hour grace window. If no top-up arrives in that window, the Console pauses your running paid nodes.
+detail: Paid nodes run from prepaid credit. Add $25, $50, or $100 at a time, or turn on automatic top-up in the same amounts. When your balance covers less than 24 hours of spend, your org admins get an email. A negative balance starts a 24-hour grace window. If no top-up arrives in that window, the Console pauses your running paid nodes.
 ```
 
 Fact 4, `unchanged`:
@@ -255,7 +262,7 @@ Fact 5, new. The sentence `Pause does not keep running processes, memory, or Doc
 
 ```text
 title: Pause or destroy to stop the running charge
-detail: Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for 14 days, then pays $0.16 per GB-month, billed per second. Destroy a node to delete it for good.
+detail: Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node pays nothing for the first 3 days of a pause, then pays $0.16 per GB-month for its whole disk, billed per second. Each new pause starts a new 3-day period. Destroy a node to delete it for good.
 ```
 
 ### 2.8 Other page text
@@ -316,7 +323,7 @@ New:
 `${count} ${nodeWord}. ${formatHourlyUsd(fleetComputeHourlyUsd(fleet))} compute per hour, billed per second, plus ${formatHourlyUsd(fleetStorageHourlyUsd(fleet))} storage for each started hour, ${formatHourlyUsd(fleetHourlyUsd(fleet))} for a full running hour, or ${formatUsdTotal(fleetTotalUsd(fleet, hours))} for ${hours} running hours in a month — an estimate, and there is no monthly plan.`
 ```
 
-Rendered for one `n4` node at 730 hours: `1 node. $0.0450 compute per hour, billed per second, plus $0.0150 storage for each started hour, $0.0600 for a full running hour, or $43.80 for 730 running hours in a month — an estimate, and there is no monthly plan.`
+Rendered for one `n4` node at 730 hours: `1 node. $0.0450 compute per hour, billed per second, plus $0.0090 storage for each started hour, $0.0540 for a full running hour, or $39.42 for 730 running hours in a month — an estimate, and there is no monthly plan.`
 
 ### 3.3 Fleet summary
 
@@ -355,11 +362,11 @@ Rendered rows:
 
 ```text
 2 GB   $0.0310 /hr   Compute $0.0230/hr, billed per second · Storage $0.0080 per started hour
-4 GB   $0.0600 /hr   Compute $0.0450/hr, billed per second · Storage $0.0150 per started hour
-8 GB   $0.0950 /hr   Compute $0.0800/hr, billed per second · Storage $0.0150 per started hour
-16 GB  $0.2360 /hr   Compute $0.2100/hr, billed per second · Storage $0.0260 per started hour
-32 GB  $0.4690 /hr   Compute $0.4200/hr, billed per second · Storage $0.0490 per started hour
-64 GB  $0.5890 /hr   Compute $0.5400/hr, billed per second · Storage $0.0490 per started hour
+4 GB   $0.0540 /hr   Compute $0.0450/hr, billed per second · Storage $0.0090 per started hour
+8 GB   $0.0890 /hr   Compute $0.0800/hr, billed per second · Storage $0.0090 per started hour
+16 GB  $0.2190 /hr   Compute $0.2100/hr, billed per second · Storage $0.0090 per started hour
+32 GB  $0.4290 /hr   Compute $0.4200/hr, billed per second · Storage $0.0090 per started hour
+64 GB  $0.5490 /hr   Compute $0.5400/hr, billed per second · Storage $0.0090 per started hour
 ```
 
 ### 3.5 Row subtotal
@@ -378,7 +385,7 @@ New:
 {quantity} × {formatHourlyUsd(fullHourUsd(plan))} = {formatHourlyUsd(fleetHourlyUsd(rowFleet))}/hr
 ```
 
-Rendered for two `n4` nodes: `2 × $0.0600 = $0.1200/hr`.
+Rendered for two `n4` nodes: `2 × $0.0540 = $0.1080/hr`.
 
 ### 3.6 Fleet cost breakdown
 
@@ -392,9 +399,9 @@ New:
 Compute {formatHourlyUsd(fleetComputeHourlyUsd(fleet))}/hr, billed per second, 60-second minimum for each run · Storage {formatHourlyUsd(fleetStorageHourlyUsd(fleet))} for each started hour · Total {formatHourlyUsd(hourlyUsd)} for a full running hour
 ```
 
-Rendered for one `n4` node: `Compute $0.0450/hr, billed per second, 60-second minimum for each run · Storage $0.0150 for each started hour · Total $0.0600 for a full running hour`.
+Rendered for one `n4` node: `Compute $0.0450/hr, billed per second, 60-second minimum for each run · Storage $0.0090 for each started hour · Total $0.0540 for a full running hour`.
 
-Rendered estimate for one `n4` node at 730 hours, from the `unchanged` estimate line at lines 234 to 239: `About $43.80 for 730 running hours in a month — an estimate from the hourly rates above, and there is no monthly plan.`
+Rendered estimate for one `n4` node at 730 hours, from the `unchanged` estimate line at lines 234 to 239: `About $39.42 for 730 running hours in a month — an estimate from the hourly rates above, and there is no monthly plan.`
 
 The estimate line at lines 234 to 239 stays `unchanged`. The labels `/hr`, `Free tier eligible`, `Default`, `Running hours a month`, and `Add a node above to price a fleet.` stay `unchanged`.
 
@@ -413,7 +420,7 @@ Open console.mifune.dev and start free with a personal account: up to three n4 n
 New:
 
 ```text
-Open console.mifune.dev and start free with a personal account: two n4 nodes that share 24 running hours each UTC month, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.
+Open console.mifune.dev and start free with a personal account: two free n2 or n4 nodes that share 24 running hours each UTC month, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at agro.mifune.dev for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.
 ```
 
 ### 4.2 `pricingFaqs`, "How does billing work?"
@@ -429,7 +436,7 @@ You pay for the hours your node runs. Only whole running UTC hours meter, so any
 New. The value `60` comes from `MINIMUM_BILLED_SECONDS`:
 
 ```text
-You pay from prepaid credit for two parts while your node runs. Compute bills for each second, at the compute price for its size, with a minimum of 60 seconds for each run. Storage for the node volumes bills for each started clock hour, at the storage price for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node keeps its disk free for 14 days, then pays $0.16 per GB-month.
+You pay from prepaid credit for two parts while your node runs. Compute bills for each second, at the compute price for its size, with a minimum of 60 seconds for each run. Storage for the node volumes bills for each started clock hour, at the storage price for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node pays nothing for the first 3 days of a pause. After 3 days, it pays $0.16 per GB-month for its whole disk until you resume or destroy it. Each new pause starts a new 3-day period.
 ```
 
 ### 4.3 `pricingFaqs`, "What does a node cost?"
@@ -459,12 +466,12 @@ Current:
 New:
 
 ```text
-`Each size has a compute price, billed per second with a 60-second minimum for each run, and a storage price, billed for each started clock hour while the node runs: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own. Left running for a full ${HOURS_PER_MONTH}-hour month that works out to roughly ${monthlyEstimateList}, which is an estimate derived from the hourly rate and not a monthly plan, because there is no monthly plan. A disposable hand has no data volume, so it pays only a boot storage fee of about $0.003 for each started hour on top of compute. A disposable hand cannot pause or fork.`
+`Each size has a compute price, billed per second with a 60-second minimum for each run, and a storage price, billed for each started clock hour while the node runs: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own. Left running for a full ${HOURS_PER_MONTH}-hour month that works out to roughly ${monthlyEstimateList}, which is an estimate derived from the hourly rate and not a monthly plan, because there is no monthly plan. The storage price covers the included data disk of each size. You can choose a larger data disk in steps of 10 GB, up to 500 GB. Extra disk costs $0.16 per GB-month, billed for each started hour while the node runs, on every node with a data volume. On a free node, the included disk stays free, and extra disk bills from prepaid credit. A disposable hand costs less: it has no data volume, so it pays only a boot storage fee of about $0.003 for each started hour on top of compute. A disposable hand cannot pause or fork. The Console deletes a disposable hand at the end of the grace window or when the free allowance runs out.`
 ```
 
-Rendered rates: `2 GB (1 vCPU, 2 GB RAM, 20 GB SSD) is $0.0230 an hour for compute plus $0.0080 for each started hour of storage, $0.0310 for a full running hour; 4 GB (2 vCPU, 4 GB RAM, 50 GB SSD) is $0.0450 an hour for compute plus $0.0150 for each started hour of storage, $0.0600 for a full running hour; 8 GB (4 vCPU, 8 GB RAM, 50 GB SSD) is $0.0800 an hour for compute plus $0.0150 for each started hour of storage, $0.0950 for a full running hour; 16 GB (4 vCPU, 16 GB RAM, 100 GB SSD) is $0.2100 an hour for compute plus $0.0260 for each started hour of storage, $0.2360 for a full running hour; 32 GB (8 vCPU, 32 GB RAM, 200 GB SSD) is $0.4200 an hour for compute plus $0.0490 for each started hour of storage, $0.4690 for a full running hour; 64 GB (8 vCPU, 64 GB RAM, 200 GB SSD) is $0.5400 an hour for compute plus $0.0490 for each started hour of storage, $0.5890 for a full running hour`.
+Rendered rates: `2 GB (1 vCPU, 2 GB RAM, 20 GB SSD) is $0.0230 an hour for compute plus $0.0080 for each started hour of storage, $0.0310 for a full running hour; 4 GB (2 vCPU, 4 GB RAM, 25 GB SSD) is $0.0450 an hour for compute plus $0.0090 for each started hour of storage, $0.0540 for a full running hour; 8 GB (4 vCPU, 8 GB RAM, 25 GB SSD) is $0.0800 an hour for compute plus $0.0090 for each started hour of storage, $0.0890 for a full running hour; 16 GB (4 vCPU, 16 GB RAM, 25 GB SSD) is $0.2100 an hour for compute plus $0.0090 for each started hour of storage, $0.2190 for a full running hour; 32 GB (8 vCPU, 32 GB RAM, 25 GB SSD) is $0.4200 an hour for compute plus $0.0090 for each started hour of storage, $0.4290 for a full running hour; 64 GB (8 vCPU, 64 GB RAM, 25 GB SSD) is $0.5400 an hour for compute plus $0.0090 for each started hour of storage, $0.5490 for a full running hour`.
 
-Rendered estimates: `2 GB about $22.63, 4 GB about $43.80, 8 GB about $69.35, 16 GB about $172.28, 32 GB about $342.37, 64 GB about $429.97`.
+Rendered estimates: `2 GB about $22.63, 4 GB about $39.42, 8 GB about $64.97, 16 GB about $159.87, 32 GB about $313.17, 64 GB about $400.77`.
 
 ### 4.4 `pricingFaqs`, "Do I need a card to start?"
 
@@ -479,7 +486,7 @@ No, not for the free tier. A personal account gets up to three n4 nodes that sha
 New:
 
 ```text
-No, not for the free tier. A personal account gets two n4 nodes that share 24 running hours each UTC month, and no card. At the limit, the nodes pause, and each workspace is kept for 14 days. A paid node runs from prepaid credit, which you buy with a card. Free spots are limited.
+No, not for the free tier. A personal account gets two free n2 or n4 nodes that share 24 running hours each UTC month, and no card. At the limit, the nodes pause, and each workspace is kept for 14 days. A paid node runs from prepaid credit, which you buy with a card. Free spots are limited.
 ```
 
 ### 4.5 New question, "How does prepaid credit work?"
@@ -492,7 +499,7 @@ New:
 
 ```text
 question: How does prepaid credit work?
-answer: A paid node runs from your organization's prepaid credit. The Console debits compute for each second the node runs, with a 60-second minimum for each run, and storage for each started clock hour. Buy credit in the Console in amounts of $10, $25, $50, or $100. Turn on automatic top-up to charge your saved card when the balance falls below a threshold that you set. When the balance covers less than 24 hours at your current spend, each org admin and billing account manager gets an email, and the Console shows a banner. A negative balance starts a 24-hour grace window. A top-up during the window keeps your nodes running. At the end of the window, the Console pauses each running paid node.
+answer: A paid node runs from your organization's prepaid credit. The Console debits compute for each second the node runs, with a 60-second minimum for each run, and storage for each started clock hour. Buy credit in the Console in amounts of $25, $50, or $100. Turn on automatic top-up to charge your saved card, in the same amounts, when the balance falls below a threshold that you set. When the balance covers less than 24 hours at your current spend, each org admin and billing account manager gets an email, and the Console shows a banner. A negative balance starts a 24-hour grace window. A top-up during the window keeps your nodes running. At the end of the window, the Console pauses each running paid node.
 ```
 
 ### 4.6 `pricingFaqs`, "What happens when my free hours run out?"
@@ -531,7 +538,7 @@ New. The list grows from three bullets to four:
 
 ```text
 Persistent workspace for coding agents
-Free: two n4 nodes that share 24 running hours a month
+Free: two n2 or n4 nodes that share 24 running hours a month
 Paid nodes: compute per second, storage per started hour, from prepaid credit
 Browser terminal and editor, no SSH key
 ```
@@ -569,7 +576,7 @@ Line 33, current:
 Line 33, new:
 
 ```text
-- You can hold **two free nodes** at the same time. Each free node uses the `n4` spec.
+- You can hold **two free nodes** at the same time. Each free node uses the `n2` spec or the `n4` spec. Both specs have the same free limits.
 ```
 
 Line 35, `unchanged`:
@@ -627,12 +634,12 @@ When payments open, paid nodes are billed a la carte per node, by the hour. The 
 New:
 
 ```text
-Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. See [Pricing](/pricing) for top-ups, the low-balance email, and the grace window.
+Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. Top-ups are $25, $50, or $100. A paused paid node pays nothing for the first 3 days of a pause. After 3 days, it pays $0.16 per GB-month for its whole disk until you resume or destroy it. Each new pause starts a new 3-day period. See [Pricing](/pricing) for the low-balance email and the grace window.
 ```
 
 ### 6.4 Price table
 
-Location: lines 45 to 51. The vCPU, RAM, and disk columns stay `unchanged`. The new table holds three price columns.
+Location: lines 45 to 51. The vCPU and RAM columns stay `unchanged`. The disk column becomes "Included disk" with the 2026-11-16 sizes. The new table holds three price columns. A new paragraph under the table states the extra disk rule.
 
 Current:
 
@@ -649,14 +656,16 @@ Current:
 New:
 
 ```text
-| Spec | vCPU | RAM | Disk | Compute per hour, billed per second | Storage per started hour | Full running hour |
+| Spec | vCPU | RAM | Included disk | Compute per hour, billed per second | Storage per started hour | Full running hour |
 | --- | --- | --- | --- | --- | --- | --- |
 | `n2` | 1 | 2 GB | 20 GB SSD | $0.0230 | $0.0080 | $0.0310 |
-| `n4` (default) | 2 | 4 GB | 50 GB SSD | $0.0450 | $0.0150 | $0.0600 |
-| `n8` | 4 | 8 GB | 50 GB SSD | $0.0800 | $0.0150 | $0.0950 |
-| `n16` | 4 | 16 GB | 100 GB SSD | $0.2100 | $0.0260 | $0.2360 |
-| `n32` | 8 | 32 GB | 200 GB SSD | $0.4200 | $0.0490 | $0.4690 |
-| `n64` | 8 | 64 GB | 200 GB SSD | $0.5400 | $0.0490 | $0.5890 |
+| `n4` (default) | 2 | 4 GB | 25 GB SSD | $0.0450 | $0.0090 | $0.0540 |
+| `n8` | 4 | 8 GB | 25 GB SSD | $0.0800 | $0.0090 | $0.0890 |
+| `n16` | 4 | 16 GB | 25 GB SSD | $0.2100 | $0.0090 | $0.2190 |
+| `n32` | 8 | 32 GB | 25 GB SSD | $0.4200 | $0.0090 | $0.4290 |
+| `n64` | 8 | 64 GB | 25 GB SSD | $0.5400 | $0.0090 | $0.5490 |
+
+You can choose a larger disk in steps of 10 GB above the included size, up to 500 GB. Extra disk costs $0.16 per GB-month, billed for each started hour while the node runs. This rule applies to every node with a data volume, free nodes included. On a free node, the included disk stays free, and extra disk bills from prepaid credit.
 ```
 
 ### 6.5 Create form description
@@ -673,6 +682,22 @@ New:
 
 ```text
 - **Billing.** **Free** is selected. The option shows the free hours left this month, the reset date, and how many of your two free nodes are in use. At two free nodes, the form disables the free option.
+```
+
+### 6.6 Free node size
+
+Location: the **Node 1** item of the create form list.
+
+Current:
+
+```text
+A free node always uses the `n4` size: 2 vCPU, 4 GB RAM, and 50 GB disk.
+```
+
+New:
+
+```text
+A free node uses the `n2` size or the `n4` size. The `n2` size has 1 vCPU, 2 GB RAM, and a 20 GB disk. The `n4` size has 2 vCPU, 4 GB RAM, and a 25 GB disk.
 ```
 
 Line 53, the link to `/pricing` at line 179, and the rest of the guide stay `unchanged`.
@@ -694,7 +719,7 @@ Nodes are billed by the hour they run, each on a dedicated VM rather than shared
 New. The clause `keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data` is `unchanged: E4-00`:
 
 ```text
-Nodes run from prepaid credit, each on a dedicated VM rather than shared infrastructure. Compute bills per second, with a minimum of 60 seconds for each run. Storage for the node volumes bills for each started clock hour while the node runs. Queued, building, and failed time is free. Credit comes in top-ups of 10, 25, 50, or 100 USD, with an optional automatic top-up. When the balance covers less than 24 hours of spend, the org admins get an email; a negative balance starts a 24-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for 14 days, then pays 0.16 USD per GB-month, prorated per second. A disposable hand has no data volume, so it pays only a boot storage fee of about 0.003 USD for each started hour on top of compute. A disposable hand cannot pause or fork. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
+Nodes run from prepaid credit, each on a dedicated VM rather than shared infrastructure. Compute bills per second, with a minimum of 60 seconds for each run. Storage for the node volumes bills for each started clock hour while the node runs. Queued, building, and failed time is free. The storage price covers the included data disk of each size. A larger data disk comes in steps of 10 GB, up to 500 GB. Extra disk costs 0.16 USD per GB-month, billed for each started hour while the node runs, on every node with a data volume; on a free node, the included disk stays free and extra disk bills from prepaid credit. Credit comes in top-ups of 25, 50, or 100 USD, with an optional automatic top-up in the same amounts. When the balance covers less than 24 hours of spend, the org admins get an email; a negative balance starts a 24-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node pays nothing for the first 3 days of a pause, then pays 0.16 USD per GB-month for its whole disk, prorated per second, until it is resumed or destroyed; each new pause starts a new 3-day period. A disposable hand costs less: it has no data volume, so it pays only a boot storage fee of about 0.003 USD for each started hour on top of compute. A disposable hand cannot pause or fork, and the Console deletes it at the end of the grace window or when the free allowance runs out. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
 ```
 
 ### 7.2 Rates heading
@@ -729,11 +754,11 @@ Rendered rates in `public/llm.txt`:
 
 ```text
 - 2 GB (1 vCPU / 2 GB RAM / 20 GB SSD): compute $0.0230 per hour, storage $0.0080 per started hour, $0.0310 per full running hour
-- 4 GB (2 vCPU / 4 GB RAM / 50 GB SSD): compute $0.0450 per hour, storage $0.0150 per started hour, $0.0600 per full running hour
-- 8 GB (4 vCPU / 8 GB RAM / 50 GB SSD): compute $0.0800 per hour, storage $0.0150 per started hour, $0.0950 per full running hour
-- 16 GB (4 vCPU / 16 GB RAM / 100 GB SSD): compute $0.2100 per hour, storage $0.0260 per started hour, $0.2360 per full running hour
-- 32 GB (8 vCPU / 32 GB RAM / 200 GB SSD): compute $0.4200 per hour, storage $0.0490 per started hour, $0.4690 per full running hour
-- 64 GB (8 vCPU / 64 GB RAM / 200 GB SSD): compute $0.5400 per hour, storage $0.0490 per started hour, $0.5890 per full running hour
+- 4 GB (2 vCPU / 4 GB RAM / 25 GB SSD): compute $0.0450 per hour, storage $0.0090 per started hour, $0.0540 per full running hour
+- 8 GB (4 vCPU / 8 GB RAM / 25 GB SSD): compute $0.0800 per hour, storage $0.0090 per started hour, $0.0890 per full running hour
+- 16 GB (4 vCPU / 16 GB RAM / 25 GB SSD): compute $0.2100 per hour, storage $0.0090 per started hour, $0.2190 per full running hour
+- 32 GB (8 vCPU / 32 GB RAM / 25 GB SSD): compute $0.4200 per hour, storage $0.0090 per started hour, $0.4290 per full running hour
+- 64 GB (8 vCPU / 64 GB RAM / 25 GB SSD): compute $0.5400 per hour, storage $0.0090 per started hour, $0.5490 per full running hour
 ```
 
 ### 7.3 Free-tier paragraph
@@ -749,7 +774,7 @@ A personal free tier gives up to three n4 nodes that share 24 running hours per 
 New:
 
 ```text
-A personal free tier gives two n4 nodes that share 24 running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept 14 days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
+A personal free tier gives two n2 or n4 nodes that share 24 running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept 14 days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
 ```
 
 ### 7.4 Monthly estimate lead
@@ -772,11 +797,11 @@ Rendered estimates in `public/llm.txt`:
 
 ```text
 - 2 GB: about $22.63 for 730 running hours — an estimate from the hourly rate, not a monthly plan
-- 4 GB: about $43.80 for 730 running hours — an estimate from the hourly rate, not a monthly plan
-- 8 GB: about $69.35 for 730 running hours — an estimate from the hourly rate, not a monthly plan
-- 16 GB: about $172.28 for 730 running hours — an estimate from the hourly rate, not a monthly plan
-- 32 GB: about $342.37 for 730 running hours — an estimate from the hourly rate, not a monthly plan
-- 64 GB: about $429.97 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 4 GB: about $39.42 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 8 GB: about $64.97 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 16 GB: about $159.87 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 32 GB: about $313.17 for 730 running hours — an estimate from the hourly rate, not a monthly plan
+- 64 GB: about $400.77 for 730 running hours — an estimate from the hourly rate, not a monthly plan
 ```
 
 Line 76 and the rest of the script stay `unchanged`.
@@ -807,3 +832,13 @@ No text change. `faqPageSchema` reads `pricingFaqs`, so the `FAQPage` JSON-LD ca
 15. The operator changed the prices on 2026-11-14, and the supervisor relayed the change. Resolved. The Console bills two components. Compute bills per second, with a 60-second minimum for each run: `n4` `0.045`, `n8` `0.08`, `n16` `0.21`, `n32` `0.42`, `n64` `0.54` USD per hour. Storage for the node volumes bills for each started clock hour while the node runs: `n4` `0.023`, `n8` `0.023`, `n16` `0.045`, `n32` `0.09`, `n64` `0.09` USD. A full running hour costs `n4` `0.068`, `n8` `0.103`, `n16` `0.255`, `n32` `0.51`, `n64` `0.63` USD. The disk price, top-ups, warning, grace window, free tier, free paused days, and retention stay unchanged. The deck uses these values on each surface.
 16. Open. The agro-console `.agro/tasks/per-second-prepaid-billing/prd.md` still states the single hourly price (US-003, line 37) and the 300-second minimum (US-008, line 99). US-001 criterion 2 requires each new value to match that prd. Criterion 2 cannot pass until that prd states the two-component prices and the 60-second minimum.
 17. Resolved. The E8 storage prices (agro-console PROGRAM.md Decisions, 2026-11-15) replace the 2026-11-14 storage prices in item 15. E8 also adds the `n2` plan (1 vCPU, 2 GB RAM, 20 GB SSD) at `0.023` USD per hour of compute. Storage per started clock hour: `n2` `0.008`, `n4` `0.015`, `n8` `0.015`, `n16` `0.026`, `n32` `0.049`, `n64` `0.049` USD. A full running hour costs `n2` `0.031`, `n4` `0.060`, `n8` `0.095`, `n16` `0.236`, `n32` `0.469`, `n64` `0.589` USD. The compute prices of item 15 stay unchanged. Extra disk costs `0.16` USD per GB-month, and free nodes get no extra disk. A disposable hand (ADR agro-console#784) pays the compute price of its spec plus a boot storage fee of about `0.003` USD for each started hour. A disposable hand cannot pause or fork. The copy can state that a disposable hand costs less than a persistent node. The copy must not state that a disposable hand starts sooner than a persistent node. The measured warm start is 21.5 s for a disposable hand and 19.6 s for a persistent node.
+18. Resolved. Source: agro-console PROGRAM.md Decisions, 2026-11-16; PR #793 / #795; provider-catalog.yaml and config.yaml at `83bf4de8`. That decision replaces these values from item 17 and earlier items:
+    - Included data disk: `n2` `20` GB; `n4`, `n8`, `n16`, `n32`, and `n64` `25` GB. Disk sizes are the included size plus each multiple of `10` GB above it, up to `500` GB.
+    - Storage per started clock hour: `n4` to `n64` `0.009` USD. The `n2` storage price stays `0.008` USD.
+    - Full running hour: `n2` `0.031`, `n4` `0.054`, `n8` `0.089`, `n16` `0.219`, `n32` `0.429`, `n64` `0.549` USD. The 730-hour totals are `22.63`, `39.42`, `64.97`, `159.87`, `313.17`, and `400.77` USD.
+    - Extra disk: `0.16` USD per GB-month, billed per started hour while the node runs, on every node with a data volume. The rule covers free nodes too. On a free node, extra disk bills from prepaid credit, and the included size stays free. This rule replaces "free nodes get no extra disk" in item 17.
+    - Free nodes: size `n2` or `n4`. Both sizes share the same limits: `2` free nodes, live and paused together, and `24` running hours (`86400` s) each UTC month, with no card. Paused free retention stays `14` days. This value resolves item 4.
+    - Paid paused nodes: a paused paid node bills nothing for the first `3` days of a pause. After 3 days, it bills its whole disk at `0.16` USD per GB-month until resume or destroy. Each new pause starts a new 3-day period. This value replaces the `14` days in item 2.
+    - Top-ups: `25`, `50`, or `100` USD. The minimum top-up is `25` USD. Automatic top-up uses the same amounts.
+    - Disposable hands: the platform deletes a disposable hand at the end of the grace window or of the free allowance. The copy can state that a disposable hand costs less. The copy must not state that a disposable hand starts first.
+    - The compute prices, the 60-second minimum, the 24-hour low-balance warning, and the 24-hour grace window stay unchanged.

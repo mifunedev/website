@@ -30,7 +30,7 @@ The free tier belongs to your personal context. If you also belong to an organiz
 
 The free tier lets you try a node without a card. The terms are:
 
-- You can hold **two free nodes** at the same time. Each free node uses the `n4` spec.
+- You can hold **two free nodes** at the same time. Each free node uses the `n2` spec or the `n4` spec. Both specs have the same free limits.
 - A free node needs no card and no SSH key.
 - All your free nodes share **24 running hours each UTC calendar month**. Two running free nodes use the allowance twice as fast.
 - The allowance resets at 00:00 UTC on the 1st of each month. Unused hours do not carry over.
@@ -40,16 +40,18 @@ The free tier lets you try a node without a card. The terms are:
 - A paused node does not resume by itself after the monthly reset. You resume it.
 - A paused free node still counts toward the limit of two. Destroy a free node to free its place.
 
-Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. See [Pricing](/pricing) for top-ups, the low-balance email, and the grace window.
+Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. Top-ups are $25, $50, or $100. A paused paid node pays nothing for the first 3 days of a pause. After 3 days, it pays $0.16 per GB-month for its whole disk until you resume or destroy it. Each new pause starts a new 3-day period. See [Pricing](/pricing) for the low-balance email and the grace window.
 
-| Spec | vCPU | RAM | Disk | Compute per hour, billed per second | Storage per started hour | Full running hour |
+| Spec | vCPU | RAM | Included disk | Compute per hour, billed per second | Storage per started hour | Full running hour |
 | --- | --- | --- | --- | --- | --- | --- |
 | `n2` | 1 | 2 GB | 20 GB SSD | $0.0230 | $0.0080 | $0.0310 |
-| `n4` (default) | 2 | 4 GB | 50 GB SSD | $0.0450 | $0.0150 | $0.0600 |
-| `n8` | 4 | 8 GB | 50 GB SSD | $0.0800 | $0.0150 | $0.0950 |
-| `n16` | 4 | 16 GB | 100 GB SSD | $0.2100 | $0.0260 | $0.2360 |
-| `n32` | 8 | 32 GB | 200 GB SSD | $0.4200 | $0.0490 | $0.4690 |
-| `n64` | 8 | 64 GB | 200 GB SSD | $0.5400 | $0.0490 | $0.5890 |
+| `n4` (default) | 2 | 4 GB | 25 GB SSD | $0.0450 | $0.0090 | $0.0540 |
+| `n8` | 4 | 8 GB | 25 GB SSD | $0.0800 | $0.0090 | $0.0890 |
+| `n16` | 4 | 16 GB | 25 GB SSD | $0.2100 | $0.0090 | $0.2190 |
+| `n32` | 8 | 32 GB | 25 GB SSD | $0.4200 | $0.0090 | $0.4290 |
+| `n64` | 8 | 64 GB | 25 GB SSD | $0.5400 | $0.0090 | $0.5490 |
+
+You can choose a larger disk in steps of 10 GB above the included size, up to 500 GB. Extra disk costs $0.16 per GB-month, billed for each started hour while the node runs. This rule applies to every node with a data volume, free nodes included. On a free node, the included disk stays free, and extra disk bills from prepaid credit.
 
 The node price covers the machine and the workspace. It does not include AI usage. You sign in to your AI provider with your own account, and the provider bills you directly. See [Pricing](/pricing) for current prices.
 
@@ -61,7 +63,7 @@ On the **Nodes** page, select **Create node**. The form has five parts:
 - **Setup.** **Agro** is the default: Ubuntu with `agro` and the web terminal. **Sandbox** is Ubuntu with your SSH keys.
 - **Browser apps.** The web terminal is always available. **Browser editor (code-server)** and **T3 Code** are off by default. Each app uses memory on the node: about 70 MiB for code-server and about 175 MiB for T3 Code.
 - **Tools.** **Docker** is on by default and uses about 40 MiB.
-- **Node 1.** The name is optional. Without a name, the Console shows the node alias. SSH keys are optional, under **Advanced: direct SSH access**. A free node always uses the `n4` size: 2 vCPU, 4 GB RAM, and 50 GB disk.
+- **Node 1.** The name is optional. Without a name, the Console shows the node alias. SSH keys are optional, under **Advanced: direct SSH access**. A free node uses the `n2` size or the `n4` size. The `n2` size has 1 vCPU, 2 GB RAM, and a 20 GB disk. The `n4` size has 2 vCPU, 4 GB RAM, and a 25 GB disk.
 
 <img src="/blog/run-agro-on-mifune-console/create-form.png" alt="The Create your free node form with Free billing, the Agro setup, code-server and Docker selected, and the fixed n4 size" width="712" height="1310" />
 

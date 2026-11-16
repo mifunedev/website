@@ -5,20 +5,24 @@ import { fileURLToPath } from "url";
 import {
   cloudNodePlans,
   countWord,
+  DISK_SIZE_STEP_GB,
   DISPOSABLE_BOOT_STORAGE_HOURLY_USD,
   emptyFleet,
+  EXTRA_DISK_USD_PER_GB_MONTH,
   fleetTotalUsd,
   formatHourlyUsd,
+  formatSpecList,
   formatUsdTotal,
   FREE_PAUSED_DAYS,
   FREE_TIER_NODE_COUNT,
-  FREE_TIER_NODE_SPEC,
+  FREE_TIER_NODE_SPECS,
   FREE_TIER_PAUSED_RETENTION_DAYS,
   FREE_TIER_RUNNING_HOURS_PER_MONTH,
   fullHourUsd,
   GRACE_WINDOW_HOURS,
   HOURS_PER_MONTH,
   LOW_BALANCE_WARNING_HOURS,
+  MAX_DISK_GB,
   MINIMUM_BILLED_SECONDS,
   PAUSED_DISK_USD_PER_GB_MONTH,
   TOP_UP_AMOUNTS_USD,
@@ -76,13 +80,13 @@ The Mifune Console gives coding agents an isolated, persistent workspace while M
 - Mifune Console: https://console.mifune.dev
 - Pricing: https://mifune.dev/pricing
 
-Nodes run from prepaid credit, each on a dedicated VM rather than shared infrastructure. Compute bills per second, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour while the node runs. Queued, building, and failed time is free. Credit comes in top-ups of ${TOP_UP_AMOUNTS}, with an optional automatic top-up. When the balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours of spend, the org admins get an email; a negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for ${FREE_PAUSED_DAYS} days, then pays ${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} USD per GB-month, prorated per second. A disposable hand has no data volume, so it pays only a boot storage fee of about ${DISPOSABLE_BOOT_STORAGE_HOURLY_USD.toFixed(3)} USD for each started hour on top of compute. A disposable hand cannot pause or fork. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
+Nodes run from prepaid credit, each on a dedicated VM rather than shared infrastructure. Compute bills per second, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour while the node runs. Queued, building, and failed time is free. The storage price covers the included data disk of each size. A larger data disk comes in steps of ${DISK_SIZE_STEP_GB} GB, up to ${MAX_DISK_GB} GB. Extra disk costs ${EXTRA_DISK_USD_PER_GB_MONTH.toFixed(2)} USD per GB-month, billed for each started hour while the node runs, on every node with a data volume; on a free node, the included disk stays free and extra disk bills from prepaid credit. Credit comes in top-ups of ${TOP_UP_AMOUNTS}, with an optional automatic top-up in the same amounts. When the balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours of spend, the org admins get an email; a negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node pays nothing for the first ${FREE_PAUSED_DAYS} days of a pause, then pays ${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} USD per GB-month for its whole disk, prorated per second, until it is resumed or destroyed; each new pause starts a new ${FREE_PAUSED_DAYS}-day period. A disposable hand costs less: it has no data volume, so it pays only a boot storage fee of about ${DISPOSABLE_BOOT_STORAGE_HOURLY_USD.toFixed(3)} USD for each started hour on top of compute. A disposable hand cannot pause or fork, and the Console deletes it at the end of the grace window or when the free allowance runs out. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
 
 Hourly rates: compute bills per second with a ${MINIMUM_BILLED_SECONDS}-second minimum for each run, and storage bills for each started clock hour while the node runs:
 
 ${HOURLY_RATES}
 
-A personal free tier gives ${countWord(FREE_TIER_NODE_COUNT)} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept ${FREE_TIER_PAUSED_RETENTION_DAYS} days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
+A personal free tier gives ${countWord(FREE_TIER_NODE_COUNT)} ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept ${FREE_TIER_PAUSED_RETENTION_DAYS} days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
 
 A node left running for a whole month pays compute for ${HOURS_PER_MONTH} hours and storage for ${HOURS_PER_MONTH} started hours at the rates above, which works out to:
 

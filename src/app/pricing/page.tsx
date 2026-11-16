@@ -8,14 +8,18 @@ import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/config/app";
 import {
   countWord,
+  DISK_SIZE_STEP_GB,
+  EXTRA_DISK_USD_PER_GB_MONTH,
+  formatSpecList,
   formatTopUpAmounts,
   FREE_PAUSED_DAYS,
   FREE_TIER_NODE_COUNT,
-  FREE_TIER_NODE_SPEC,
+  FREE_TIER_NODE_SPECS,
   FREE_TIER_PAUSED_RETENTION_DAYS,
   FREE_TIER_RUNNING_HOURS_PER_MONTH,
   GRACE_WINDOW_HOURS,
   LOW_BALANCE_WARNING_HOURS,
+  MAX_DISK_GB,
   MINIMUM_BILLED_SECONDS,
   PAUSED_DISK_USD_PER_GB_MONTH,
   TOP_UP_AMOUNTS_USD,
@@ -70,12 +74,11 @@ const billingFacts = [
   },
   {
     title: "Storage by the started hour",
-    detail:
-      "Storage for the node volumes meters for each started clock hour while your node runs, at the storage price for its size. A full running hour costs the compute price plus the storage price.",
+    detail: `Storage for the node volumes meters for each started clock hour while your node runs, at the storage price for its size. A full running hour costs the compute price plus the storage price. Extra disk, in steps of ${DISK_SIZE_STEP_GB} GB up to ${MAX_DISK_GB} GB, costs $${EXTRA_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month on every node with a data volume, free nodes included.`,
   },
   {
     title: "Prepaid credit",
-    detail: `Paid nodes run from prepaid credit. Add ${formatTopUpAmounts(TOP_UP_AMOUNTS_USD)} at a time, or turn on automatic top-up. When your balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours of spend, your org admins get an email. A negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window. If no top-up arrives in that window, the Console pauses your running paid nodes.`,
+    detail: `Paid nodes run from prepaid credit. Add ${formatTopUpAmounts(TOP_UP_AMOUNTS_USD)} at a time, or turn on automatic top-up in the same amounts. When your balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours of spend, your org admins get an email. A negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window. If no top-up arrives in that window, the Console pauses your running paid nodes.`,
   },
   {
     title: "Queued and failed time is free",
@@ -84,7 +87,7 @@ const billingFacts = [
   },
   {
     title: "Pause or destroy to stop the running charge",
-    detail: `Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for ${FREE_PAUSED_DAYS} days, then pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month, billed per second. Destroy a node to delete it for good.`,
+    detail: `Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node pays nothing for the first ${FREE_PAUSED_DAYS} days of a pause, then pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month for its whole disk, billed per second. Each new pause starts a new ${FREE_PAUSED_DAYS}-day period. Destroy a node to delete it for good.`,
   },
 ];
 
@@ -154,7 +157,7 @@ export default function PricingPage() {
             </div>
 
             <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-              {`Free for personal accounts: ${freeNodeWord} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month, no card, ${FREE_TIER_PAUSED_RETENTION_DAYS} days of paused retention · Limited free spots · Paid nodes run from prepaid credit`}
+              {`Free for personal accounts: ${freeNodeWord} ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month, no card, ${FREE_TIER_PAUSED_RETENTION_DAYS} days of paused retention · Limited free spots · Paid nodes run from prepaid credit`}
             </p>
           </div>
         </section>
@@ -172,7 +175,7 @@ export default function PricingPage() {
                 Start your free workspace
               </h2>
               <p className="mt-3 max-w-xl font-montserrat text-sm leading-relaxed text-muted-foreground">
-                {`Personal accounts get ${freeNodeWord} free ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month. No credit card. No SSH key. A paused free node keeps its workspace for ${FREE_TIER_PAUSED_RETENTION_DAYS} days.`}
+                {`Personal accounts get ${freeNodeWord} free ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month. No credit card. No SSH key. A paused free node keeps its workspace for ${FREE_TIER_PAUSED_RETENTION_DAYS} days.`}
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-start gap-2 sm:items-center">

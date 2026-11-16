@@ -1,27 +1,31 @@
 import {
   cloudNodePlans,
   countWord,
+  DISK_SIZE_STEP_GB,
   DISPOSABLE_BOOT_STORAGE_HOURLY_USD,
   emptyFleet,
+  EXTRA_DISK_USD_PER_GB_MONTH,
   fleetTotalUsd,
   formatHourlyUsd,
+  formatSpecList,
   formatTopUpAmounts,
   formatUsdTotal,
   FREE_PAUSED_DAYS,
   FREE_TIER_NODE_COUNT,
-  FREE_TIER_NODE_SPEC,
+  FREE_TIER_NODE_SPECS,
   FREE_TIER_PAUSED_RETENTION_DAYS,
   FREE_TIER_RUNNING_HOURS_PER_MONTH,
   fullHourUsd,
   GRACE_WINDOW_HOURS,
   HOURS_PER_MONTH,
   LOW_BALANCE_WARNING_HOURS,
+  MAX_DISK_GB,
   MINIMUM_BILLED_SECONDS,
   PAUSED_DISK_USD_PER_GB_MONTH,
   TOP_UP_AMOUNTS_USD,
 } from "@/config/cloud-pricing";
 
-const freeTierOffer = `${countWord(FREE_TIER_NODE_COUNT)} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month`;
+const freeTierOffer = `${countWord(FREE_TIER_NODE_COUNT)} free ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month`;
 
 export interface Faq {
   question: string;
@@ -79,11 +83,11 @@ const monthlyEstimateList = cloudNodePlans
 export const pricingFaqs: Faq[] = [
   {
     question: "How does billing work?",
-    answer: `You pay from prepaid credit for two parts while your node runs. Compute bills for each second, at the compute price for its size, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour, at the storage price for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node keeps its disk free for ${FREE_PAUSED_DAYS} days, then pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month.`,
+    answer: `You pay from prepaid credit for two parts while your node runs. Compute bills for each second, at the compute price for its size, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour, at the storage price for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node pays nothing for the first ${FREE_PAUSED_DAYS} days of a pause. After ${FREE_PAUSED_DAYS} days, it pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month for its whole disk until you resume or destroy it. Each new pause starts a new ${FREE_PAUSED_DAYS}-day period.`,
   },
   {
     question: "What does a node cost?",
-    answer: `Each size has a compute price, billed per second with a ${MINIMUM_BILLED_SECONDS}-second minimum for each run, and a storage price, billed for each started clock hour while the node runs: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own. Left running for a full ${HOURS_PER_MONTH}-hour month that works out to roughly ${monthlyEstimateList}, which is an estimate derived from the hourly rate and not a monthly plan, because there is no monthly plan. A disposable hand has no data volume, so it pays only a boot storage fee of about $${DISPOSABLE_BOOT_STORAGE_HOURLY_USD.toFixed(3)} for each started hour on top of compute. A disposable hand cannot pause or fork.`,
+    answer: `Each size has a compute price, billed per second with a ${MINIMUM_BILLED_SECONDS}-second minimum for each run, and a storage price, billed for each started clock hour while the node runs: ${hourlyRateSentence}. Every node is a dedicated VM rather than shared infrastructure, and if you run more than one, each meters on its own. Left running for a full ${HOURS_PER_MONTH}-hour month that works out to roughly ${monthlyEstimateList}, which is an estimate derived from the hourly rate and not a monthly plan, because there is no monthly plan. The storage price covers the included data disk of each size. You can choose a larger data disk in steps of ${DISK_SIZE_STEP_GB} GB, up to ${MAX_DISK_GB} GB. Extra disk costs $${EXTRA_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month, billed for each started hour while the node runs, on every node with a data volume. On a free node, the included disk stays free, and extra disk bills from prepaid credit. A disposable hand costs less: it has no data volume, so it pays only a boot storage fee of about $${DISPOSABLE_BOOT_STORAGE_HOURLY_USD.toFixed(3)} for each started hour on top of compute. A disposable hand cannot pause or fork. The Console deletes a disposable hand at the end of the grace window or when the free allowance runs out.`,
   },
   {
     question: "Is AI usage included?",
@@ -96,7 +100,7 @@ export const pricingFaqs: Faq[] = [
   },
   {
     question: "How does prepaid credit work?",
-    answer: `A paid node runs from your organization's prepaid credit. The Console debits compute for each second the node runs, with a ${MINIMUM_BILLED_SECONDS}-second minimum for each run, and storage for each started clock hour. Buy credit in the Console in amounts of ${formatTopUpAmounts(TOP_UP_AMOUNTS_USD)}. Turn on automatic top-up to charge your saved card when the balance falls below a threshold that you set. When the balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours at your current spend, each org admin and billing account manager gets an email, and the Console shows a banner. A negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window. A top-up during the window keeps your nodes running. At the end of the window, the Console pauses each running paid node.`,
+    answer: `A paid node runs from your organization's prepaid credit. The Console debits compute for each second the node runs, with a ${MINIMUM_BILLED_SECONDS}-second minimum for each run, and storage for each started clock hour. Buy credit in the Console in amounts of ${formatTopUpAmounts(TOP_UP_AMOUNTS_USD)}. Turn on automatic top-up to charge your saved card, in the same amounts, when the balance falls below a threshold that you set. When the balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours at your current spend, each org admin and billing account manager gets an email, and the Console shows a banner. A negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window. A top-up during the window keeps your nodes running. At the end of the window, the Console pauses each running paid node.`,
   },
   {
     question: "What happens when my free hours run out?",

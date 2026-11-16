@@ -1,7 +1,8 @@
 import {
   countWord,
+  formatSpecList,
   FREE_TIER_NODE_COUNT,
-  FREE_TIER_NODE_SPEC,
+  FREE_TIER_NODE_SPECS,
   FREE_TIER_RUNNING_HOURS_PER_MONTH,
 } from "@/config/cloud-pricing";
 
@@ -39,7 +40,7 @@ export const offeringPaths: OfferingPath[] = [
       "Give coding agents an isolated, persistent AGRO workspace while Mifune operates the managed environment.",
     bullets: [
       "Persistent workspace for coding agents",
-      `Free: ${countWord(FREE_TIER_NODE_COUNT)} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours a month`,
+      `Free: ${countWord(FREE_TIER_NODE_COUNT)} ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours a month`,
       "Paid nodes: compute per second, storage per started hour, from prepaid credit",
       "Browser terminal and editor, no SSH key",
     ],

@@ -27,57 +27,59 @@ export const cloudNodePlans: CloudNodePlan[] = [
     label: "4 GB",
     vcpu: 2,
     ramGb: 4,
-    diskGb: 50,
+    diskGb: 25,
     computeHourlyUsd: 0.045,
-    storageHourlyUsd: 0.015,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n8",
     label: "8 GB",
     vcpu: 4,
     ramGb: 8,
-    diskGb: 50,
+    diskGb: 25,
     computeHourlyUsd: 0.08,
-    storageHourlyUsd: 0.015,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n16",
     label: "16 GB",
     vcpu: 4,
     ramGb: 16,
-    diskGb: 100,
+    diskGb: 25,
     computeHourlyUsd: 0.21,
-    storageHourlyUsd: 0.026,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n32",
     label: "32 GB",
     vcpu: 8,
     ramGb: 32,
-    diskGb: 200,
+    diskGb: 25,
     computeHourlyUsd: 0.42,
-    storageHourlyUsd: 0.049,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n64",
     label: "64 GB",
     vcpu: 8,
     ramGb: 64,
-    diskGb: 200,
+    diskGb: 25,
     computeHourlyUsd: 0.54,
-    storageHourlyUsd: 0.049,
+    storageHourlyUsd: 0.009,
   },
 ];
 
 export const MINIMUM_BILLED_SECONDS = 60;
 export const PAUSED_DISK_USD_PER_GB_MONTH = 0.16;
 export const EXTRA_DISK_USD_PER_GB_MONTH = 0.16;
+export const DISK_SIZE_STEP_GB = 10;
+export const MAX_DISK_GB = 500;
 export const DISPOSABLE_BOOT_STORAGE_HOURLY_USD = 0.003;
-export const FREE_PAUSED_DAYS = 14;
+export const FREE_PAUSED_DAYS = 3;
 export const FREE_TIER_NODE_COUNT = 2;
 export const FREE_TIER_RUNNING_HOURS_PER_MONTH = 24;
 export const FREE_TIER_PAUSED_RETENTION_DAYS = 14;
-export const TOP_UP_AMOUNTS_USD: readonly number[] = [10, 25, 50, 100];
+export const TOP_UP_AMOUNTS_USD: readonly number[] = [25, 50, 100];
 export const LOW_BALANCE_WARNING_HOURS = 24;
 export const GRACE_WINDOW_HOURS = 24;
 
@@ -104,10 +106,15 @@ export function fullHourUsd(plan: CloudNodePlan): number {
   );
 }
 
-export const FREE_TIER_NODE_SPEC: NodeSpec = "n4";
+export const FREE_TIER_NODE_SPECS: readonly NodeSpec[] = ["n2", "n4"];
+
+export function formatSpecList(specs: readonly NodeSpec[]): string {
+  if (specs.length < 2) return specs.join("");
+  return `${specs.slice(0, -1).join(", ")} or ${specs[specs.length - 1]}`;
+}
 
 export function isFreeTierEligible(spec: NodeSpec): boolean {
-  return spec === FREE_TIER_NODE_SPEC;
+  return FREE_TIER_NODE_SPECS.includes(spec);
 }
 
 export function isDefault(spec: NodeSpec): boolean {
