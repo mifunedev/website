@@ -71,8 +71,9 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "d8ed8fc93f4b28f047d5d88b72f80afab2e3477e",
+      "notes": "Advisor verification at c2d7b86 (US-003 plus US-004, because the FAQ text on /pricing held the old billing sentence). (1) executed: curl /pricing on the dev host, comments stripped: \"Whole running hours\" 0, \"Only whole running UTC hours meter\" 0. (2), (3), (6), (8) executed: agent-browser on /pricing shows the facts Per-second compute (at least 60 seconds, from MINIMUM_BILLED_SECONDS), Storage by the started hour, Prepaid credit ($10, $25, $50, or $100, automatic top-up, 24-hour email threshold, 24-hour grace window), and the pause fact with 14 free days and $0.16 per GB-month. (4) executed: each of the six rate rows shows the full-hour price and Compute .../hr, billed per second · Storage ... per started hour. (5) executed: after one 4 GB node is added, the fleet block shows Compute $0.0450/hr, Storage $0.0150, Total $0.0600, and $43.80 for 730 hours; the live region text equals deck 3.2. (7) reasoned: exports verified in US-002. (9) executed: the CTA strip and the free-tier card state two n4 nodes, 24 running hours each UTC month, no card, and 14 days. (10) executed: grep \"whole\" in FleetCalculator.tsx finds nothing; the summary reads every second it runs. (11) executed: agent-browser desktop 1280x720 and mobile 414x896, page scrollWidth 414. (12) executed: npm run lint exit 0, npx tsc --noEmit exit 0; npm run build runs one time at the end (see US-007). Layout: billing facts grid is lg:grid-cols-3 for six facts (deck question 9, open to the design team).",
       "dependsOn": [
         "US-002"
       ],
@@ -98,8 +99,9 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "c2d7b86b1e871f9b568b02052c7607a98ab36e5d",
+      "notes": "Advisor verification at c2d7b86. (1) executed: curl /pricing: \"whole running UTC hours\" 0; agent-browser shows the billing answer with compute for each second and the 60-second minimum. (2), (3) executed: the rates answer builds each price from cloudNodePlans through computeHourlyUsd, storageHourlyUsd, and fullHourUsd; agent-browser shows billed per second with a 60-second minimum and billed for each started clock hour. (4) executed: the card answer states no card for the free tier and prepaid credit, which you buy with a card. (5) executed: curl \"60 days\" 0; the free-hours answer states 14 days. (6) executed: the new question follows the card question and states the top-ups, automatic top-up, the email, and the 24-hour grace window. (7) executed: the FAQPage JSON-LD on /pricing lists all 8 questions in order with How does prepaid credit work? fifth. (8) executed: agent-browser opened each changed FAQ item at 1280x720. (9) executed: npm run lint exit 0, npx tsc --noEmit exit 0; npm run build runs one time at the end (see US-007). countWord and formatTopUpAmounts moved to cloud-pricing.ts; schema.ts needed no change.",
       "dependsOn": [
         "US-002"
       ],
@@ -121,8 +123,9 @@
         "`npm run lint` and `npm run build` exit 0."
       ],
       "priority": 5,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "600e8f6b3a77641a571db94f750dcfe0230561f6",
+      "notes": "Advisor verification at 600e8f6. (1) executed: agent-browser on / finds no \"up to three\" and the bullet Free: two n4 nodes that share 24 running hours a month. (2) executed: the bullet Paid nodes: compute per second, storage per started hour, from prepaid credit. (3) executed: agent-browser at 414x896 shows four bullets in the Console card, scrollWidth 414. (4) executed: npm run lint exit 0, npx tsc --noEmit exit 0; npm run build runs one time at the end (see US-007).",
       "dependsOn": [
         "US-002"
       ],
@@ -143,8 +146,10 @@
         "Verify in browser using agent-browser skill."
       ],
       "priority": 6,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "commit": "873d109ec5a63106030e78c085c1c8ef1c0fa979",
+      "notes": "Advisor verification at 873d109. (1) executed: agent-browser on /blog/run-agro-on-mifune-console finds two free nodes, 24 running hours each UTC calendar month, and 14 days. (2) executed: the page text has no three free nodes, 60 days, or archives the node. (3) executed: the billing paragraph starts Paid nodes run from prepaid credit. The Console debits compute for each running second, and a Pricing link points to /pricing. (4) executed: no payments are off. (5) executed: agent-browser at 1280x720 shows the seven-column price table with the n2 row $0.0230, $0.0080, $0.0310.",
+
       "dependsOn": [
         "US-002"
       ],
