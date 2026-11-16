@@ -6,6 +6,18 @@ import TopNavBar from "@/components/nav/TopNavBar";
 import FleetCalculator from "@/components/pricing/FleetCalculator";
 import JsonLd from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/config/app";
+import {
+  FREE_PAUSED_DAYS,
+  FREE_TIER_NODE_COUNT,
+  FREE_TIER_NODE_SPEC,
+  FREE_TIER_PAUSED_RETENTION_DAYS,
+  FREE_TIER_RUNNING_HOURS_PER_MONTH,
+  GRACE_WINDOW_HOURS,
+  LOW_BALANCE_WARNING_HOURS,
+  MINIMUM_BILLED_SECONDS,
+  PAUSED_DISK_USD_PER_GB_MONTH,
+  TOP_UP_AMOUNTS_USD,
+} from "@/config/cloud-pricing";
 import { OFFERING_URLS } from "@/config/offerings";
 import { pricingFaqs } from "@/data/faqs";
 import {
@@ -21,7 +33,7 @@ import FooterSection from "@/sections/FooterSection";
 const title = "Mifune Console pricing";
 
 const description =
-  "Mifune Console nodes are billed by the hour they run, on a dedicated VM. AI usage is not included — you sign in to each agent CLI you use, such as Claude Code, Codex, or Hermes, with your own account. Or self-host the Apache-2.0 licensed project yourself.";
+  "Mifune Console nodes bill compute per second they run and storage for each started hour, from prepaid credit, on a dedicated VM. AI usage is not included — you sign in to each agent CLI you use, such as Claude Code, Codex, or Hermes, with your own account. Or self-host the Apache-2.0 licensed project yourself.";
 
 export const metadata: Metadata = {
   title,
@@ -42,6 +54,19 @@ export const metadata: Metadata = {
   },
 };
 
+const numberWords = ["zero", "one", "two", "three", "four", "five"];
+
+function countWord(count: number): string {
+  return numberWords[count] ?? String(count);
+}
+
+function formatTopUpAmounts(amounts: readonly number[]): string {
+  const dollars = amounts.map((amount) => `$${amount}`);
+  return `${dollars.slice(0, -1).join(", ")}, or ${dollars[dollars.length - 1]}`;
+}
+
+const freeNodeWord = countWord(FREE_TIER_NODE_COUNT);
+
 const billingFacts = [
   {
     title: "A dedicated VM",
@@ -49,9 +74,17 @@ const billingFacts = [
       "One node is a dedicated virtual machine, not shared infrastructure. Its vCPU, memory, and disk are yours for as long as the node exists.",
   },
   {
-    title: "Whole running hours",
+    title: "Per-second compute",
+    detail: `Compute meters for each second your node runs, at the compute price for its size. Each run pays for at least ${MINIMUM_BILLED_SECONDS} seconds of compute.`,
+  },
+  {
+    title: "Storage by the started hour",
     detail:
-      "Only whole running UTC hours meter. Any UTC hour in which your node was running counts as one full hour, at the rate for its size.",
+      "Storage for the node volumes meters for each started clock hour while your node runs, at the storage price for its size. A full running hour costs the compute price plus the storage price.",
+  },
+  {
+    title: "Prepaid credit",
+    detail: `Paid nodes run from prepaid credit. Add ${formatTopUpAmounts(TOP_UP_AMOUNTS_USD)} at a time, or turn on automatic top-up. When your balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours of spend, your org admins get an email. A negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window. If no top-up arrives in that window, the Console pauses your running paid nodes.`,
   },
   {
     title: "Queued and failed time is free",
@@ -59,9 +92,8 @@ const billingFacts = [
       "Time spent queued, building, or on a build that failed is not billed. The meter starts when the node is running.",
   },
   {
-    title: "Pause or destroy to stop paying",
-    detail:
-      "Only running time is billed. Pause a node to stop billing and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. Destroy a node to delete it for good.",
+    title: "Pause or destroy to stop the running charge",
+    detail: `Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for ${FREE_PAUSED_DAYS} days, then pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month, billed per second. Destroy a node to delete it for good.`,
   },
 ];
 
@@ -96,11 +128,12 @@ export default function PricingPage() {
               className="mx-auto mb-7 w-fit justify-center text-foreground"
             />
             <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              Pay by the hour your node runs.
+              Pay by the second your node runs.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
               A node is a dedicated cloud VM running your AGRO
-              workspace, and you pay for the hours it runs. AI usage is not
+              workspace, and you pay from prepaid credit for each second of
+              compute and each started hour of storage while it runs. AI usage is not
               included: you sign in to each agent CLI you use, such as Claude
               Code, Codex, or Hermes, inside the workspace with your own
               account, and pay that provider directly. Mifune holds no model
@@ -130,9 +163,7 @@ export default function PricingPage() {
             </div>
 
             <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-              Free for personal accounts: up to three n4 nodes that share 24
-              running hours a month, no card · Limited free spots · Paid nodes
-              need a card
+              {`Free for personal accounts: ${freeNodeWord} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month, no card, ${FREE_TIER_PAUSED_RETENTION_DAYS} days of paused retention · Limited free spots · Paid nodes run from prepaid credit`}
             </p>
           </div>
         </section>
@@ -150,8 +181,7 @@ export default function PricingPage() {
                 Start your free workspace
               </h2>
               <p className="mt-3 max-w-xl font-montserrat text-sm leading-relaxed text-muted-foreground">
-                Personal accounts get up to three n4 nodes that share 24
-                running hours each UTC month. No credit card. No SSH key.
+                {`Personal accounts get ${freeNodeWord} free ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month. No credit card. No SSH key. A paused free node keeps its workspace for ${FREE_TIER_PAUSED_RETENTION_DAYS} days.`}
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-start gap-2 sm:items-center">
@@ -189,7 +219,7 @@ export default function PricingPage() {
               </h2>
             </div>
 
-            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {billingFacts.map((fact) => (
                 <li
                   key={fact.title}

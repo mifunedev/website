@@ -6,14 +6,17 @@ import {
   cloudNodePlans,
   emptyFleet,
   entryPlan,
+  fleetComputeHourlyUsd,
   fleetHourlyUsd,
   fleetNodeCount,
+  fleetStorageHourlyUsd,
   fleetTotalUsd,
   formatHourlyUsd,
   formatUsdTotal,
   fullHourUsd,
   isDefault,
   isFreeTierEligible,
+  MINIMUM_BILLED_SECONDS,
   monthlyHourPresets,
   type FleetQuantities,
   type NodeSpec,
@@ -30,10 +33,10 @@ function clampQuantity(value: number): number {
 function describeFleet(fleet: FleetQuantities, hours: number): string {
   const count = fleetNodeCount(fleet);
   if (count === 0) {
-    return `No nodes selected. Nodes start at ${formatHourlyUsd(fullHourUsd(entryPlan))} an hour.`;
+    return `No nodes selected. Nodes start at ${formatHourlyUsd(fullHourUsd(entryPlan))} for a full running hour: ${formatHourlyUsd(entryPlan.computeHourlyUsd)} compute, billed per second, plus ${formatHourlyUsd(entryPlan.storageHourlyUsd)} storage for each started hour.`;
   }
   const nodeWord = count === 1 ? "node" : "nodes";
-  return `${count} ${nodeWord}. ${formatHourlyUsd(fleetHourlyUsd(fleet))} per hour, or ${formatUsdTotal(fleetTotalUsd(fleet, hours))} for ${hours} running hours in a month — an estimate, and there is no monthly plan.`;
+  return `${count} ${nodeWord}. ${formatHourlyUsd(fleetComputeHourlyUsd(fleet))} compute per hour, billed per second, plus ${formatHourlyUsd(fleetStorageHourlyUsd(fleet))} storage for each started hour, ${formatHourlyUsd(fleetHourlyUsd(fleet))} for a full running hour, or ${formatUsdTotal(fleetTotalUsd(fleet, hours))} for ${hours} running hours in a month — an estimate, and there is no monthly plan.`;
 }
 
 export default function FleetCalculator() {
@@ -103,14 +106,21 @@ export default function FleetCalculator() {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-                  <p className="flex flex-wrap items-baseline gap-1 font-montserrat text-foreground">
-                    <span className="text-2xl font-bold tabular-nums">
-                      {formatHourlyUsd(fullHourUsd(plan))}
-                    </span>
-                    <span className="font-mono text-sm font-semibold text-muted-foreground">
-                      /hr
-                    </span>
-                  </p>
+                  <div className="min-w-0">
+                    <p className="flex flex-wrap items-baseline gap-1 font-montserrat text-foreground">
+                      <span className="text-2xl font-bold tabular-nums">
+                        {formatHourlyUsd(fullHourUsd(plan))}
+                      </span>
+                      <span className="font-mono text-sm font-semibold text-muted-foreground">
+                        /hr
+                      </span>
+                    </p>
+                    <p className="mt-1 font-mono text-xs leading-relaxed text-muted-foreground">
+                      Compute {formatHourlyUsd(plan.computeHourlyUsd)}/hr,
+                      billed per second · Storage{" "}
+                      {formatHourlyUsd(plan.storageHourlyUsd)} per started hour
+                    </p>
+                  </div>
 
                   <div className="flex items-center gap-1">
                     <button
@@ -211,7 +221,11 @@ export default function FleetCalculator() {
               Add a node above to price a fleet.
             </p>
             <p className="mt-2 font-montserrat text-sm leading-relaxed text-muted-foreground">
-              Nodes start at {formatHourlyUsd(fullHourUsd(entryPlan))} an hour.
+              Nodes start at {formatHourlyUsd(fullHourUsd(entryPlan))} for a
+              full running hour: {formatHourlyUsd(entryPlan.computeHourlyUsd)}{" "}
+              compute, billed per second, plus{" "}
+              {formatHourlyUsd(entryPlan.storageHourlyUsd)} storage for each
+              started hour.
             </p>
           </div>
         ) : (
@@ -227,9 +241,16 @@ export default function FleetCalculator() {
                 /hr
               </span>
             </p>
+            <p className="mt-2 font-mono text-xs leading-relaxed text-muted-foreground">
+              Compute {formatHourlyUsd(fleetComputeHourlyUsd(fleet))}/hr, billed
+              per second, {MINIMUM_BILLED_SECONDS}-second minimum for each run ·
+              Storage {formatHourlyUsd(fleetStorageHourlyUsd(fleet))} for each
+              started hour · Total {formatHourlyUsd(hourlyUsd)} for a full
+              running hour
+            </p>
             <p className="mt-3 font-montserrat text-sm leading-relaxed text-muted-foreground">
               {nodeCount} {nodeCount === 1 ? "node" : "nodes"}, each metering on
-              its own for every whole hour it runs.
+              its own for every second it runs.
             </p>
             <p className="mt-4 border-t border-border pt-4 font-montserrat text-base leading-relaxed text-muted-foreground">
               About{" "}
