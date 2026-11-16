@@ -4,12 +4,24 @@ import path from "path";
 import { fileURLToPath } from "url";
 import {
   cloudNodePlans,
+  countWord,
+  DISPOSABLE_BOOT_STORAGE_HOURLY_USD,
   emptyFleet,
   fleetTotalUsd,
   formatHourlyUsd,
   formatUsdTotal,
+  FREE_PAUSED_DAYS,
+  FREE_TIER_NODE_COUNT,
+  FREE_TIER_NODE_SPEC,
+  FREE_TIER_PAUSED_RETENTION_DAYS,
+  FREE_TIER_RUNNING_HOURS_PER_MONTH,
   fullHourUsd,
+  GRACE_WINDOW_HOURS,
   HOURS_PER_MONTH,
+  LOW_BALANCE_WARNING_HOURS,
+  MINIMUM_BILLED_SECONDS,
+  PAUSED_DISK_USD_PER_GB_MONTH,
+  TOP_UP_AMOUNTS_USD,
 } from "../src/config/cloud-pricing.ts";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,9 +31,11 @@ const rootDir = path.resolve(__dirname, "..");
 const HOURLY_RATES = cloudNodePlans
   .map(
     (plan) =>
-      `- ${plan.label} (${plan.vcpu} vCPU / ${plan.ramGb} GB RAM / ${plan.diskGb} GB SSD): ${formatHourlyUsd(fullHourUsd(plan))}`,
+      `- ${plan.label} (${plan.vcpu} vCPU / ${plan.ramGb} GB RAM / ${plan.diskGb} GB SSD): compute ${formatHourlyUsd(plan.computeHourlyUsd)} per hour, storage ${formatHourlyUsd(plan.storageHourlyUsd)} per started hour, ${formatHourlyUsd(fullHourUsd(plan))} per full running hour`,
   )
   .join("\n");
+
+const TOP_UP_AMOUNTS = `${TOP_UP_AMOUNTS_USD.slice(0, -1).join(", ")}, or ${TOP_UP_AMOUNTS_USD[TOP_UP_AMOUNTS_USD.length - 1]} USD`;
 
 const MONTHLY_ESTIMATES = cloudNodePlans
   .map(
@@ -62,15 +76,15 @@ The Mifune Console gives coding agents an isolated, persistent workspace while M
 - Mifune Console: https://console.mifune.dev
 - Pricing: https://mifune.dev/pricing
 
-Nodes are billed by the hour they run, each on a dedicated VM rather than shared infrastructure. Only whole running UTC hours meter; queued, building, and failed time is free. Pausing a node stops billing and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
+Nodes run from prepaid credit, each on a dedicated VM rather than shared infrastructure. Compute bills per second, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour while the node runs. Queued, building, and failed time is free. Credit comes in top-ups of ${TOP_UP_AMOUNTS}, with an optional automatic top-up. When the balance covers less than ${LOW_BALANCE_WARNING_HOURS} hours of spend, the org admins get an email; a negative balance starts a ${GRACE_WINDOW_HOURS}-hour grace window, and running paid nodes pause at its end. Pausing a node stops the running charge and keeps /home/sandbox, where the repositories live; it does not keep running processes, memory, or Docker volume data. A paused paid node keeps its disk free for ${FREE_PAUSED_DAYS} days, then pays ${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} USD per GB-month, prorated per second. A disposable hand has no data volume, so it pays only a boot storage fee of about ${DISPOSABLE_BOOT_STORAGE_HOURLY_USD.toFixed(3)} USD for each started hour on top of compute. A disposable hand cannot pause or fork. Destroying a node deletes it. Each node opens in the browser with a terminal and an editor, and needs no SSH key. AI usage is not included: you sign in to each agent CLI you use, such as Claude Code, Codex, Pi, OpenCode, Hermes, or any other supported harness, inside the workspace with your own account and pay that provider directly. Mifune holds no model credential and does not mark up tokens.
 
-Hourly rates, per whole hour a node is running:
+Hourly rates: compute bills per second with a ${MINIMUM_BILLED_SECONDS}-second minimum for each run, and storage bills for each started clock hour while the node runs:
 
 ${HOURLY_RATES}
 
-A personal free tier gives up to three n4 nodes that share 24 running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept 60 days after each pause. Free spots are limited, and a paid node needs a card. There is no monthly plan.
+A personal free tier gives ${countWord(FREE_TIER_NODE_COUNT)} ${FREE_TIER_NODE_SPEC} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept ${FREE_TIER_PAUSED_RETENTION_DAYS} days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
 
-A node left running for a whole month is billed as ${HOURS_PER_MONTH} whole hours at the rate above, which works out to:
+A node left running for a whole month pays compute for ${HOURS_PER_MONTH} hours and storage for ${HOURS_PER_MONTH} started hours at the rates above, which works out to:
 
 ${MONTHLY_ESTIMATES}
 
