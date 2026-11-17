@@ -1,4 +1,4 @@
-export type NodeSpec = "n4" | "n8" | "n16" | "n32" | "n64";
+export type NodeSpec = "n2" | "n4" | "n8" | "n16" | "n32" | "n64";
 
 export type CloudNodePlan = {
   spec: NodeSpec;
@@ -6,58 +6,138 @@ export type CloudNodePlan = {
   vcpu: number;
   ramGb: number;
   diskGb: number;
-  hourlyUsd: number;
+  computeHourlyUsd: number;
+  storageHourlyUsd: number;
 };
 
 export const DEFAULT_NODE_SPEC: NodeSpec = "n4";
 
 export const cloudNodePlans: CloudNodePlan[] = [
   {
+    spec: "n2",
+    label: "2 GB",
+    vcpu: 1,
+    ramGb: 2,
+    diskGb: 20,
+    computeHourlyUsd: 0.023,
+    storageHourlyUsd: 0.008,
+  },
+  {
     spec: "n4",
     label: "4 GB",
     vcpu: 2,
     ramGb: 4,
-    diskGb: 50,
-    hourlyUsd: 0.045,
+    diskGb: 25,
+    computeHourlyUsd: 0.045,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n8",
     label: "8 GB",
     vcpu: 4,
     ramGb: 8,
-    diskGb: 50,
-    hourlyUsd: 0.1,
+    diskGb: 25,
+    computeHourlyUsd: 0.08,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n16",
     label: "16 GB",
     vcpu: 4,
     ramGb: 16,
-    diskGb: 100,
-    hourlyUsd: 0.21,
+    diskGb: 25,
+    computeHourlyUsd: 0.21,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n32",
     label: "32 GB",
     vcpu: 8,
     ramGb: 32,
-    diskGb: 200,
-    hourlyUsd: 0.45,
+    diskGb: 25,
+    computeHourlyUsd: 0.42,
+    storageHourlyUsd: 0.009,
   },
   {
     spec: "n64",
     label: "64 GB",
     vcpu: 8,
     ramGb: 64,
-    diskGb: 200,
-    hourlyUsd: 0.6,
+    diskGb: 25,
+    computeHourlyUsd: 0.54,
+    storageHourlyUsd: 0.009,
   },
 ];
 
-export const FREE_TIER_NODE_SPEC: NodeSpec = "n4";
+export const MINIMUM_BILLED_SECONDS = 60;
+export const PAUSED_DISK_USD_PER_GB_MONTH = 0.14;
+export const EXTRA_DISK_USD_PER_GB_MONTH = 0.14;
+export const DISK_SIZE_STEP_GB = 10;
+export const MAX_DISK_GB = 500;
+export const DISPOSABLE_BOOT_STORAGE_HOURLY_USD = 0.003;
+export const FREE_PAUSED_DAYS = 3;
+export const FREE_TIER_NODE_COUNT = 2;
+export const FREE_TIER_RUNNING_HOURS_PER_MONTH = 24;
+export const FREE_TIER_PAUSED_RETENTION_DAYS = 14;
+export const TOP_UP_AMOUNTS_USD: readonly number[] = [25, 50, 100];
+export const LOW_BALANCE_WARNING_HOURS = 24;
+export const GRACE_WINDOW_HOURS = 24;
+export const PAID_NODE_LIMIT_PER_ORG = 10;
+export const NODE_LIMIT_SUPPORT_EMAIL = "support@mifune.dev";
+
+const numberWords = ["zero", "one", "two", "three", "four", "five"];
+
+export function countWord(count: number): string {
+  return numberWords[count] ?? String(count);
+}
+
+export function formatTopUpAmounts(amounts: readonly number[]): string {
+  const dollars = amounts.map((amount) => `$${amount}`);
+  return `${dollars.slice(0, -1).join(", ")}, or ${dollars[dollars.length - 1]}`;
+}
+
+function toTenThousandths(usd: number): number {
+  return Math.round(usd * 10000);
+}
+
+export function fullHourUsd(plan: CloudNodePlan): number {
+  return (
+    (toTenThousandths(plan.computeHourlyUsd) +
+      toTenThousandths(plan.storageHourlyUsd)) /
+    10000
+  );
+}
+
+export function pausedMonthlyUsd(plan: CloudNodePlan): number {
+  return (plan.diskGb * toTenThousandths(PAUSED_DISK_USD_PER_GB_MONTH)) / 10000;
+}
+
+export function formatPausedMonthlyList(): string {
+  const groups: CloudNodePlan[][] = [];
+  for (const plan of cloudNodePlans) {
+    const last = groups[groups.length - 1];
+    if (last && last[0].diskGb === plan.diskGb) last.push(plan);
+    else groups.push([plan]);
+  }
+  return groups
+    .map((group) => {
+      const first = group[0].spec;
+      const final = group[group.length - 1].spec;
+      const specs = group.length === 1 ? first : `${first} to ${final}`;
+      return `$${pausedMonthlyUsd(group[0]).toFixed(2)} a month for ${specs}`;
+    })
+    .join(" and ");
+}
+
+export const FREE_TIER_NODE_SPECS: readonly NodeSpec[] = ["n2", "n4"];
+
+export function formatSpecList(specs: readonly NodeSpec[]): string {
+  if (specs.length < 2) return specs.join("");
+  return `${specs.slice(0, -1).join(", ")} or ${specs[specs.length - 1]}`;
+}
 
 export function isFreeTierEligible(spec: NodeSpec): boolean {
-  return spec === FREE_TIER_NODE_SPEC;
+  return FREE_TIER_NODE_SPECS.includes(spec);
 }
 
 export function isDefault(spec: NodeSpec): boolean {
@@ -69,7 +149,8 @@ export function formatHourlyUsd(hourlyUsd: number): string {
 }
 
 export const entryPlan: CloudNodePlan = cloudNodePlans.reduce(
-  (cheapest, plan) => (plan.hourlyUsd < cheapest.hourlyUsd ? plan : cheapest),
+  (cheapest, plan) =>
+    fullHourUsd(plan) < fullHourUsd(cheapest) ? plan : cheapest,
 );
 
 export const HOURS_PER_MONTH = 730;
@@ -100,12 +181,30 @@ export function fleetNodeCount(fleet: FleetQuantities): number {
   );
 }
 
-function fleetHourlyTenThousandths(fleet: FleetQuantities): number {
+function fleetTenThousandths(
+  fleet: FleetQuantities,
+  hourlyUsd: (plan: CloudNodePlan) => number,
+): number {
   return cloudNodePlans.reduce(
     (total, plan) =>
-      total + Math.round(plan.hourlyUsd * 10000) * (fleet[plan.spec] ?? 0),
+      total + toTenThousandths(hourlyUsd(plan)) * (fleet[plan.spec] ?? 0),
     0,
   );
+}
+
+function fleetHourlyTenThousandths(fleet: FleetQuantities): number {
+  return (
+    fleetTenThousandths(fleet, (plan) => plan.computeHourlyUsd) +
+    fleetTenThousandths(fleet, (plan) => plan.storageHourlyUsd)
+  );
+}
+
+export function fleetComputeHourlyUsd(fleet: FleetQuantities): number {
+  return fleetTenThousandths(fleet, (plan) => plan.computeHourlyUsd) / 10000;
+}
+
+export function fleetStorageHourlyUsd(fleet: FleetQuantities): number {
+  return fleetTenThousandths(fleet, (plan) => plan.storageHourlyUsd) / 10000;
 }
 
 export function fleetHourlyUsd(fleet: FleetQuantities): number {
