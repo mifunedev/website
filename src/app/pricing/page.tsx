@@ -22,6 +22,8 @@ import {
   LOW_BALANCE_WARNING_HOURS,
   MAX_DISK_GB,
   MINIMUM_BILLED_SECONDS,
+  NODE_LIMIT_SUPPORT_EMAIL,
+  PAID_NODE_LIMIT_PER_ORG,
   PAUSED_DISK_USD_PER_GB_MONTH,
   TOP_UP_AMOUNTS_USD,
 } from "@/config/cloud-pricing";
@@ -147,11 +149,11 @@ export default function PricingPage() {
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
               <a
-                href="#deploy"
+                href={`mailto:${NODE_LIMIT_SUPPORT_EMAIL}`}
                 className="decoration-oh-accent/40 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-md px-1 font-montserrat text-sm font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
                 <span>
-                  Running more than three nodes? Talk to us{" "}
+                  {`Need more than ${PAID_NODE_LIMIT_PER_ORG} paid nodes? Email ${NODE_LIMIT_SUPPORT_EMAIL}`}{" "}
                   <span aria-hidden="true">→</span>
                 </span>
               </a>

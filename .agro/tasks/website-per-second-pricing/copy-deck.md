@@ -166,13 +166,19 @@ A node is a dedicated cloud VM running your AGRO workspace, and you pay from pre
 
 Location: hero link, line 126.
 
-Current and new, `unchanged`:
+Current:
 
 ```text
 Running more than three nodes? Talk to us
 ```
 
-"Questions for review" item 6 covers the paid node limit.
+New. The link opens `mailto:support@mifune.dev`:
+
+```text
+Need more than 10 paid nodes? Email support@mifune.dev
+```
+
+"Questions for review" item 6 records the paid node limit.
 
 ### 2.5 CTA strip
 
@@ -521,7 +527,23 @@ Your free nodes pause automatically, and nothing is billed. Add credit to contin
 
 ### 4.7 Other answers
 
-"Is AI usage included?" and "Do I need an SSH key?" stay `unchanged`. "How many nodes can I run?" stays `unchanged` at this stage. "Questions for review" item 6 covers that answer.
+"Is AI usage included?" and "Do I need an SSH key?" stay `unchanged`.
+
+"How many nodes can I run?" changes. "Questions for review" item 6 records the paid node limit.
+
+Current:
+
+```text
+Three by default. If you need more than that, tell us what you are planning to run in the deployment form on this page and we will work it out with you.
+```
+
+New:
+
+```text
+Each org can run 10 paid nodes by default. To request more, email support@mifune.dev. The free-tier limits are separate.
+```
+
+`llm.txt` adds the same three sentences as a new paragraph after the free-tier paragraph.
 
 ## 5. `src/config/offerings.ts`
 
@@ -822,6 +844,7 @@ No text change. `faqPageSchema` reads `pricingFaqs`, so the `FAQPage` JSON-LD ca
 4. The Console prd does not name the free node spec. The deck uses `n4` from the website `FREE_TIER_NODE_SPEC`. The operator confirms `n4`.
 5. Superseded by item 15. The Console prd Open Question 2 asks whether the Console US-001 confirms the 300-second minimum. The operator pricing decision sets a 60-second compute minimum for each run, and the deck uses `60`.
 6. The hero link "Running more than three nodes? Talk to us" and the answer "How many nodes can I run?" state a default of three paid nodes. No approved value names a paid node limit. Agro-console `config.yaml` sets `platform.pause.maxPausedNodesPerOrg: 3`, which is a pause limit. The deck keeps both strings. The operator confirms the paid node limit.
+   Answer (operator, 2026-11-17): Resolved. The operator decided on 2026-11-17 a default of 10 paid nodes per org, more on request at support@mifune.dev. The free-tier limits stay unchanged. Sections 2.4 and 4.7 state the new strings.
 7. US-006 removes "archives the node's files" from the guide. The accurate pause fact belongs to story E4-00. The deck writes "A pause keeps the node's files." as a neutral bridge. The design team confirms the bridge, or the plan owner moves line 38 to E4-00.
 8. The Console prd Open Question 1 leaves credit expiry and refunds open (issue #486). The deck states no expiry and no refund term.
 9. The billing facts grid uses `lg:grid-cols-4`. The new list holds six facts. The design team picks the layout.

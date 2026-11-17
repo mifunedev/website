@@ -41,6 +41,8 @@ Hourly rates: compute bills per second with a 60-second minimum for each run, an
 
 A personal free tier gives two n2 or n4 nodes that share 24 running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept 14 days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
 
+Each org can run 10 paid nodes by default. To request more, email support@mifune.dev. The free-tier limits are separate.
+
 A node left running for a whole month pays compute for 730 hours and storage for 730 started hours at the rates above, which works out to:
 
 - 2 GB: about $22.63 for 730 running hours — an estimate from the hourly rate, not a monthly plan

@@ -25,6 +25,8 @@ import {
   LOW_BALANCE_WARNING_HOURS,
   MAX_DISK_GB,
   MINIMUM_BILLED_SECONDS,
+  NODE_LIMIT_SUPPORT_EMAIL,
+  PAID_NODE_LIMIT_PER_ORG,
   PAUSED_DISK_USD_PER_GB_MONTH,
   TOP_UP_AMOUNTS_USD,
 } from "../src/config/cloud-pricing.ts";
@@ -88,6 +90,8 @@ Hourly rates: compute bills per second with a ${MINIMUM_BILLED_SECONDS}-second m
 ${HOURLY_RATES}
 
 A personal free tier gives ${countWord(FREE_TIER_NODE_COUNT)} ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours per UTC month, with no card; the nodes auto-pause at the limit and each workspace is kept ${FREE_TIER_PAUSED_RETENTION_DAYS} days after each pause. Free spots are limited, and a paid node runs from prepaid credit. There is no monthly plan.
+
+Each org can run ${PAID_NODE_LIMIT_PER_ORG} paid nodes by default. To request more, email ${NODE_LIMIT_SUPPORT_EMAIL}. The free-tier limits are separate.
 
 A node left running for a whole month pays compute for ${HOURS_PER_MONTH} hours and storage for ${HOURS_PER_MONTH} started hours at the rates above, which works out to:
 

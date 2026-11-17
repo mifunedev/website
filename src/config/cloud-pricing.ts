@@ -82,6 +82,8 @@ export const FREE_TIER_PAUSED_RETENTION_DAYS = 14;
 export const TOP_UP_AMOUNTS_USD: readonly number[] = [25, 50, 100];
 export const LOW_BALANCE_WARNING_HOURS = 24;
 export const GRACE_WINDOW_HOURS = 24;
+export const PAID_NODE_LIMIT_PER_ORG = 10;
+export const NODE_LIMIT_SUPPORT_EMAIL = "support@mifune.dev";
 
 const numberWords = ["zero", "one", "two", "three", "four", "five"];
 

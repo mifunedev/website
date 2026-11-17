@@ -22,6 +22,8 @@ import {
   LOW_BALANCE_WARNING_HOURS,
   MAX_DISK_GB,
   MINIMUM_BILLED_SECONDS,
+  NODE_LIMIT_SUPPORT_EMAIL,
+  PAID_NODE_LIMIT_PER_ORG,
   PAUSED_DISK_USD_PER_GB_MONTH,
   TOP_UP_AMOUNTS_USD,
 } from "@/config/cloud-pricing";
@@ -114,7 +116,6 @@ export const pricingFaqs: Faq[] = [
   },
   {
     question: "How many nodes can I run?",
-    answer:
-      "Three by default. If you need more than that, tell us what you are planning to run in the deployment form on this page and we will work it out with you.",
+    answer: `Each org can run ${PAID_NODE_LIMIT_PER_ORG} paid nodes by default. To request more, email ${NODE_LIMIT_SUPPORT_EMAIL}. The free-tier limits are separate.`,
   },
 ];
