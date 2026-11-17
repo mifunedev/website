@@ -10,6 +10,7 @@ import {
   countWord,
   DISK_SIZE_STEP_GB,
   EXTRA_DISK_USD_PER_GB_MONTH,
+  formatPausedMonthlyList,
   formatSpecList,
   formatTopUpAmounts,
   FREE_PAUSED_DAYS,
@@ -87,7 +88,7 @@ const billingFacts = [
   },
   {
     title: "Pause or destroy to stop the running charge",
-    detail: `Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. A paused paid node pays nothing for the first ${FREE_PAUSED_DAYS} days of a pause, then pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month for its whole disk, billed per second. Each new pause starts a new ${FREE_PAUSED_DAYS}-day period. Destroy a node to delete it for good.`,
+    detail: `Pause a node to stop the running charge and keep /home/sandbox, where your repositories live. Pause does not keep running processes, memory, or Docker volume data. Each paid node gets ${FREE_PAUSED_DAYS} free paused days per UTC calendar month, summed across all its pauses that month. A new pause does not restart the free days. After the free days, a paused paid node pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month for its whole disk, billed per second, and each billable paused second bills once. With the included disk, the paused price is ${formatPausedMonthlyList()}. Destroy a node to delete it for good.`,
   },
 ];
 

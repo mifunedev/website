@@ -70,8 +70,8 @@ export const cloudNodePlans: CloudNodePlan[] = [
 ];
 
 export const MINIMUM_BILLED_SECONDS = 60;
-export const PAUSED_DISK_USD_PER_GB_MONTH = 0.16;
-export const EXTRA_DISK_USD_PER_GB_MONTH = 0.16;
+export const PAUSED_DISK_USD_PER_GB_MONTH = 0.14;
+export const EXTRA_DISK_USD_PER_GB_MONTH = 0.14;
 export const DISK_SIZE_STEP_GB = 10;
 export const MAX_DISK_GB = 500;
 export const DISPOSABLE_BOOT_STORAGE_HOURLY_USD = 0.003;
@@ -104,6 +104,27 @@ export function fullHourUsd(plan: CloudNodePlan): number {
       toTenThousandths(plan.storageHourlyUsd)) /
     10000
   );
+}
+
+export function pausedMonthlyUsd(plan: CloudNodePlan): number {
+  return (plan.diskGb * toTenThousandths(PAUSED_DISK_USD_PER_GB_MONTH)) / 10000;
+}
+
+export function formatPausedMonthlyList(): string {
+  const groups: CloudNodePlan[][] = [];
+  for (const plan of cloudNodePlans) {
+    const last = groups[groups.length - 1];
+    if (last && last[0].diskGb === plan.diskGb) last.push(plan);
+    else groups.push([plan]);
+  }
+  return groups
+    .map((group) => {
+      const first = group[0].spec;
+      const final = group[group.length - 1].spec;
+      const specs = group.length === 1 ? first : `${first} to ${final}`;
+      return `$${pausedMonthlyUsd(group[0]).toFixed(2)} a month for ${specs}`;
+    })
+    .join(" and ");
 }
 
 export const FREE_TIER_NODE_SPECS: readonly NodeSpec[] = ["n2", "n4"];

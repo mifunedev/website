@@ -7,6 +7,7 @@ import {
   EXTRA_DISK_USD_PER_GB_MONTH,
   fleetTotalUsd,
   formatHourlyUsd,
+  formatPausedMonthlyList,
   formatSpecList,
   formatTopUpAmounts,
   formatUsdTotal,
@@ -83,7 +84,7 @@ const monthlyEstimateList = cloudNodePlans
 export const pricingFaqs: Faq[] = [
   {
     question: "How does billing work?",
-    answer: `You pay from prepaid credit for two parts while your node runs. Compute bills for each second, at the compute price for its size, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour, at the storage price for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. A paused paid node pays nothing for the first ${FREE_PAUSED_DAYS} days of a pause. After ${FREE_PAUSED_DAYS} days, it pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month for its whole disk until you resume or destroy it. Each new pause starts a new ${FREE_PAUSED_DAYS}-day period.`,
+    answer: `You pay from prepaid credit for two parts while your node runs. Compute bills for each second, at the compute price for its size, with a minimum of ${MINIMUM_BILLED_SECONDS} seconds for each run. Storage for the node volumes bills for each started clock hour, at the storage price for its size. Time spent queued, building, or on a build that failed is not billed. Pause a node in the Console to stop the running charge and keep its workspace, or destroy it to delete it for good. Each paid node gets ${FREE_PAUSED_DAYS} free paused days per UTC calendar month, summed across all its pauses that month. A new pause does not restart the free days. After the free days, a paused paid node pays $${PAUSED_DISK_USD_PER_GB_MONTH.toFixed(2)} per GB-month for its whole disk until you resume or destroy the node. With the included disk, the paused price is ${formatPausedMonthlyList()}.`,
   },
   {
     question: "What does a node cost?",

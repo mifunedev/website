@@ -40,7 +40,7 @@ The free tier lets you try a node without a card. The terms are:
 - A paused node does not resume by itself after the monthly reset. You resume it.
 - A paused free node still counts toward the limit of two. Destroy a free node to free its place.
 
-Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. Top-ups are $25, $50, or $100. A paused paid node pays nothing for the first 3 days of a pause. After 3 days, it pays $0.16 per GB-month for its whole disk until you resume or destroy it. Each new pause starts a new 3-day period. See [Pricing](/pricing) for the low-balance email and the grace window.
+Paid nodes run from prepaid credit. The Console debits compute for each running second at the compute price for the node spec, with a minimum of 60 seconds for each run. The Console also debits storage for each started clock hour while the node runs. There is no monthly plan, and destroying a node stops the charge. Top-ups are $25, $50, or $100. Each paid node gets 3 free paused days per UTC calendar month, summed across all its pauses that month. A new pause does not restart the free days. After the free days, a paused paid node pays $0.14 per GB-month for its whole disk until you resume or destroy the node. With the included disk, the paused price is $2.80 a month for n2 and $3.50 a month for n4 to n64. See [Pricing](/pricing) for the low-balance email and the grace window.
 
 | Spec | vCPU | RAM | Included disk | Compute per hour, billed per second | Storage per started hour | Full running hour |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ Paid nodes run from prepaid credit. The Console debits compute for each running 
 | `n32` | 8 | 32 GB | 25 GB SSD | $0.4200 | $0.0090 | $0.4290 |
 | `n64` | 8 | 64 GB | 25 GB SSD | $0.5400 | $0.0090 | $0.5490 |
 
-You can choose a larger disk in steps of 10 GB above the included size, up to 500 GB. Extra disk costs $0.16 per GB-month, billed for each started hour while the node runs. This rule applies to every node with a data volume, free nodes included. On a free node, the included disk stays free, and extra disk bills from prepaid credit.
+You can choose a larger disk in steps of 10 GB above the included size, up to 500 GB. Extra disk costs $0.14 per GB-month, billed for each started hour while the node runs. This rule applies to every node with a data volume, free nodes included. On a free node, the included disk stays free, and extra disk bills from prepaid credit.
 
 The node price covers the machine and the workspace. It does not include AI usage. You sign in to your AI provider with your own account, and the provider bills you directly. See [Pricing](/pricing) for current prices.
 
