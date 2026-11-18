@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "project": "website",
+  "branchName": "feat/102-ga-consent-banner",
+  "description": "Lane CK: load Google Analytics only after visitor consent, with a consent banner and a footer control to change the choice.",
+  "review": true,
+  "issue": 102,
+  "pr": null,
+  "reviewed": "",
+  "blocked": "",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Add the consent banner and gate Google Analytics",
+      "priority": 1,
+      "dependsOn": [],
+      "files": [
+        "src/lib/analytics-consent.ts",
+        "src/lib/analytics-consent.test.ts",
+        "src/components/consent/AnalyticsConsent.tsx",
+        "src/app/layout.tsx",
+        "src/sections/FooterSection.tsx",
+        "package.json",
+        "tsconfig.json",
+        ".agro/tasks/ga-consent-banner/evidence/"
+      ],
+      "acceptanceCriteria": [
+        "npm test runs the consent tests with node --test and exits 0; the tests cover no choice, reject, and accept.",
+        "npm run lint exits 0.",
+        "npm run build exits 0.",
+        "Local production build, no choice: the banner shows, no googletagmanager.com request, no _ga cookie.",
+        "After reject and reload: no googletagmanager.com request, no _ga cookie.",
+        "After accept: the Google Analytics script loads and the _ga cookie exists.",
+        "The footer Cookie settings control opens the banner again.",
+        "Agent-browser screenshots of the banner, accepted, and rejected states are in .agro/tasks/ga-consent-banner/evidence/."
+      ],
+      "passes": false,
+      "rounds": 0,
+      "commit": "",
+      "notes": ""
+    }
+  ]
+}
