@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ExternalLink, Mail } from "lucide-react";
 import MifuneLockup from "@/components/brand/MifuneLockup";
+import { CookieSettingsButton } from "@/components/consent/AnalyticsConsent";
 import { socialIcons } from "@/config/app";
 import { OFFERING_URLS } from "@/config/offerings";
 
@@ -119,6 +120,9 @@ const FooterSection = () => {
                 <Link href="/socials" className={footerLinkClass}>
                   Socials
                 </Link>
+              </li>
+              <li>
+                <CookieSettingsButton className={footerLinkClass} />
               </li>
             </ul>
           </div>
