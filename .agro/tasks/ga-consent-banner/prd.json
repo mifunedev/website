@@ -5,7 +5,7 @@
   "description": "Lane CK: load Google Analytics only after visitor consent, with a consent banner and a footer control to change the choice.",
   "review": true,
   "issue": 102,
-  "pr": null,
+  "pr": 103,
   "reviewed": "",
   "blocked": "",
   "userStories": [
@@ -34,10 +34,10 @@
         "The footer Cookie settings control opens the banner again.",
         "Agent-browser screenshots of the banner, accepted, and rejected states are in .agro/tasks/ga-consent-banner/evidence/."
       ],
-      "passes": false,
-      "rounds": 0,
-      "commit": "",
-      "notes": ""
+      "passes": true,
+      "rounds": 1,
+      "commit": "9159497a",
+      "notes": "Executed by advisor: npm test exit 0 (8 pass); npm run lint exit 0; NEXT_PUBLIC_GA_ID=G-CONSENTTEST0 npm run build exit 0. Agent-browser on next start port 3231: no choice banner=true gtm=0 cookie empty; reject+reload banner=false gtm=0 cookie empty choice=denied; accept gtm=1 _ga and _ga_CONSENTTEST0 set choice=granted; accept+reload GA loads, no banner. Cookie settings event reopened the banner (advisor dispatched mifune:cookie-settings; worker clicked the footer control, cookie-settings-reopen.png). Screenshots reviewed: banner.png, banner-light.png, accepted.png, rejected.png, cookie-settings-reopen.png, banner-mobile.png. Server and browser session stopped."
     }
   ]
 }
