@@ -38,6 +38,7 @@ them commented unless the feature is configured:
 # YOUTUBE_CHANNEL_ID=
 ```
 
-`NEXT_PUBLIC_GA_ID` enables Google Analytics in production. The Google site
+In production, `NEXT_PUBLIC_GA_ID` shows the cookie consent banner. Google
+Analytics loads only after the visitor accepts. The Google site
 verification value enables Search Console verification. `YOUTUBE_CHANNEL_ID`
 enables the optional YouTube feed; without it, the site simply shows no feed.

@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import InitialLoadActiveUsers from "@/components/users/InitialLoadActiveUsers";
+import AnalyticsConsent from "@/components/consent/AnalyticsConsent";
 import JsonLd from "@/components/seo/JsonLd";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GA_ID, NODE_ENV, SITE_URL } from "@/config/app";
@@ -113,10 +112,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         {NODE_ENV === "production" && GA_ID ? (
-          <>
-            <GoogleAnalytics gaId={GA_ID} />
-            <InitialLoadActiveUsers />
-          </>
+          <AnalyticsConsent gaId={GA_ID} />
         ) : null}
       </body>
     </html>
