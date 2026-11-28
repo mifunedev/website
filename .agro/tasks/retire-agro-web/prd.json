@@ -40,8 +40,8 @@
         "Verify in browser using agent-browser skill: `/`, `/pricing`, `/blog`, and one post render at 1280 px and 414 px. The layout matches the `fbf7bf1` production pages."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "executed on hand via agro run at a17cfe9: npm ci 0, npm test 0, npm run lint (eslint . flat config) 0, npm run build (next build --webpack) 0. reasoned: package.json next 16.4.6, react ^19.2.0, eslint-config-next 16.4.6, tailwindcss ^4.3.5. executed (worker): next-pwa builds on Next 16 with --webpack; plugin cannot scope aggressiveFrontEndNavCaching per path, so it is false for all routes, which excludes /docs. executed: docs/deployment.md names Vercel. executed (worker): agent-browser full-page shots of /, /pricing, /blog, one post at 1280/414 vs production, evidence/US-002. Out-of-owned-path: tsconfig.json forced by Next 16. REOPENED by review (PR #106 round 1).",
+      "passes": true,
+      "notes": "executed on hand via agro run at a17cfe9: npm ci 0, npm test 0, npm run lint (eslint . flat config) 0, npm run build (next build --webpack) 0. reasoned: package.json next 16.4.6, react ^19.2.0, eslint-config-next 16.4.6, tailwindcss ^4.3.5. executed (worker): next-pwa builds on Next 16 with --webpack; plugin cannot scope aggressiveFrontEndNavCaching per path, so it is false for all routes, which excludes /docs. executed: docs/deployment.md names Vercel. executed (worker): agent-browser full-page shots of /, /pricing, /blog, one post at 1280/414 vs production, evidence/US-002. Out-of-owned-path: tsconfig.json forced by Next 16. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
       "dependsOn": [],
       "files": [
         "package.json",
@@ -56,7 +56,7 @@
         "src/",
         "docs/deployment.md"
       ],
-      "commit": "a17cfe9",
+      "commit": "37c897a",
       "rounds": 1
     },
     {
@@ -71,8 +71,8 @@
         "The `prebuild` script in `package.json` runs the sync script before `next build`."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "executed on hand at 98ec51b: npm test 0 (includes sync-agro-docs and oh-source tests); AGRO_SCRIPTS_REF=v0.40.0 node scripts/sync-agro-docs.mjs exit 0, 35 pages into content/docs/agro with meta.json per folder. executed: .gitignore line 51 /content/docs/agro/. executed (worker): empty AGRO_SCRIPTS_REF resolves latest release v0.40.0. reasoned: prebuild = generate-llm-txt && sync-agro-docs runs before next build. REOPENED by review (PR #106 round 1).",
+      "passes": true,
+      "notes": "executed on hand at 98ec51b: npm test 0 (includes sync-agro-docs and oh-source tests); AGRO_SCRIPTS_REF=v0.40.0 node scripts/sync-agro-docs.mjs exit 0, 35 pages into content/docs/agro with meta.json per folder. executed: .gitignore line 51 /content/docs/agro/. executed (worker): empty AGRO_SCRIPTS_REF resolves latest release v0.40.0. reasoned: prebuild = generate-llm-txt && sync-agro-docs runs before next build. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
       "dependsOn": [
         "US-002"
       ],
@@ -84,7 +84,7 @@
         ".gitignore",
         "package.json"
       ],
-      "commit": "98ec51b",
+      "commit": "826d4c3",
       "rounds": 1
     },
     {
@@ -104,8 +104,8 @@
         "Verify in browser using agent-browser skill: the sidebar, search, a mermaid page, and image zoom work at 1280 px and 414 px. Check light mode and dark mode."
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "executed on hand at 41d63aa: npm ci 0, npm test 0, lint 0, build 0; GET /docs/agro/intro 200; GET /api/search?query=quickstart first result /docs/agro/quickstart. reasoned: fumadocs-core/ui 16.19.7, fumadocs-mdx 15.6.4 (latest; peer ^16.18.3) - criterion corrected. executed (worker): two sidebar roots, blog posts indexed (evidence/US-004/search.txt), mermaid via MermaidDiagram, ImageZoom, browser 1280/414 light/dark. Note: .gitignore /.source/ added outside owned paths; console stub pages for US-005. REOPENED round 1: docs sidebar is not sticky; scrolling a long page leaves the sidebar behind with an empty dark gap (evidence/US-005/docs-console-getting-started-image-1280.png). REPAIRED 7be6625: body overflow-x-hidden -> overflow-x-clip; executed (advisor, hand): lint 0, build 0; screenshot evidence/US-004/sticky-1280-dark.png shows pinned sidebar. REOPENED by review (PR #106 round 1).",
+      "passes": true,
+      "notes": "executed on hand at 41d63aa: npm ci 0, npm test 0, lint 0, build 0; GET /docs/agro/intro 200; GET /api/search?query=quickstart first result /docs/agro/quickstart. reasoned: fumadocs-core/ui 16.19.7, fumadocs-mdx 15.6.4 (latest; peer ^16.18.3) - criterion corrected. executed (worker): two sidebar roots, blog posts indexed (evidence/US-004/search.txt), mermaid via MermaidDiagram, ImageZoom, browser 1280/414 light/dark. Note: .gitignore /.source/ added outside owned paths; console stub pages for US-005. REOPENED round 1: docs sidebar is not sticky; scrolling a long page leaves the sidebar behind with an empty dark gap (evidence/US-005/docs-console-getting-started-image-1280.png). REPAIRED 7be6625: body overflow-x-hidden -> overflow-x-clip; executed (advisor, hand): lint 0, build 0; screenshot evidence/US-004/sticky-1280-dark.png shows pinned sidebar. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
       "dependsOn": [
         "US-002",
         "US-003"
@@ -123,7 +123,7 @@
         "src/app/globals.css",
         "tsconfig.json"
       ],
-      "commit": "46a8c73",
+      "commit": "72f837a",
       "rounds": 2
     },
     {
@@ -192,8 +192,8 @@
         "After `npm run build && npm start`, `curl -s localhost:3000/install.sh | head -1` prints a line that starts with `#!`."
       ],
       "priority": 7,
-      "passes": false,
-      "notes": "executed (advisor, hand at 6706afe): npm test 0 (includes both new tests), lint 0, build 0; after npm start: install.sh first line #!/usr/bin/env bash; all four paths 200 with text/plain (.sh) and application/javascript (.js). executed (worker): sw.js has no precache entry for the four files and a NetworkOnly route; .gitignore lists them; prebuild order docs sync -> installer sync -> CLI build. REOPENED by review (PR #106 round 1).",
+      "passes": true,
+      "notes": "executed (advisor, hand at 6706afe): npm test 0 (includes both new tests), lint 0, build 0; after npm start: install.sh first line #!/usr/bin/env bash; all four paths 200 with text/plain (.sh) and application/javascript (.js). executed (worker): sw.js has no precache entry for the four files and a NetworkOnly route; .gitignore lists them; prebuild order docs sync -> installer sync -> CLI build. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
       "dependsOn": [
         "US-003"
       ],
@@ -206,7 +206,7 @@
         "next.config.mjs",
         "package.json"
       ],
-      "commit": "6706afe",
+      "commit": "826d4c3",
       "rounds": 1
     },
     {
@@ -254,8 +254,8 @@
         "`src/app/sitemap.ts` lists each docs page."
       ],
       "priority": 9,
-      "passes": false,
-      "notes": "executed (advisor, hand at 74ed1df): npm test 0 (agro-redirects.test: every fixture URL mapped, legacy one hop, installers not redirected), lint 0, drift 0, ste 0, build 0; Host agro.mifune.dev: / /docs/intro /docs/agro/intro /docs/console/nodes /blog/2026/05/19/four-words-multi-agent /blog/open-harness-demo-guide /docs/harnesses/codex /nope -> 308 to correct mifune.dev page; /install.sh /agro.js 200. executed: git grep agro.mifune.dev prints only the host guard. executed (worker): sitemap lists 47 /docs URLs. Successor mapping: /docs/agro/runtimes/openshell -> runtimes/overview. Repair round 1: faqs link, Docs internal in nav/footer/services. REOPENED by review (PR #106 round 1).",
+      "passes": true,
+      "notes": "executed (advisor, hand at 74ed1df): npm test 0 (agro-redirects.test: every fixture URL mapped, legacy one hop, installers not redirected), lint 0, drift 0, ste 0, build 0; Host agro.mifune.dev: / /docs/intro /docs/agro/intro /docs/console/nodes /blog/2026/05/19/four-words-multi-agent /blog/open-harness-demo-guide /docs/harnesses/codex /nope -> 308 to correct mifune.dev page; /install.sh /agro.js 200. executed: git grep agro.mifune.dev prints only the host guard. executed (worker): sitemap lists 47 /docs URLs. Successor mapping: /docs/agro/runtimes/openshell -> runtimes/overview. Repair round 1: faqs link, Docs internal in nav/footer/services. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
       "dependsOn": [
         "US-005",
         "US-006",
@@ -281,7 +281,7 @@
         "src/lib/schema.ts"
       ],
       "rounds": 2,
-      "commit": "74ed1df"
+      "commit": "b8da2d5"
     },
     {
       "id": "US-010",
