@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "feat/105-retire-agro-web",
+  "description": "Retire agro-web and move AGRO docs and blog into the website with fumadocs.",
+  "review": true,
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Apache-2.0 license",
+      "description": "As the operator, I want the website repository under Apache-2.0 so that the AGRO docs keep the license that agro-web gives them today.",
+      "acceptanceCriteria": [
+        "`LICENSE` at the repository root holds the full Apache-2.0 text.",
+        "`NOTICE` at the repository root carries the copyright line from agro-web `NOTICE` at `74b27f2`.",
+        "`README.md` has a `License` section that links to `LICENSE`."
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "LICENSE",
+        "NOTICE",
+        "README.md"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Framework upgrade to Next 16, React 19.2, and Tailwind 4",
+      "description": "As a docs maintainer, I want the website on the framework versions that `fumadocs-ui@16` requires so that the docs work starts on a current stack.",
+      "acceptanceCriteria": [
+        "`package.json` pins `next` 16.x, `react` and `react-dom` at `^19.2.0` or later, `eslint-config-next` 16.x, and `tailwindcss` 4.x.",
+        "`npm run build` exits 0.",
+        "`npm run lint` exits 0.",
+        "`npm test` exits 0.",
+        "If `@ducanh2912/next-pwa` builds on Next 16, the production build registers the service worker and excludes `/docs` from `aggressiveFrontEndNavCaching`.",
+        "If `@ducanh2912/next-pwa` does not build on Next 16, the story removes the plugin, `src/app/offline/`, and the generated worker files. The story records the result in `notes`.",
+        "`docs/deployment.md` names Vercel as the host and contains no Netlify instructions.",
+        "Verify in browser using agent-browser skill: `/`, `/pricing`, `/blog`, and one post render at 1280 px and 414 px. The layout matches the `fbf7bf1` production pages."
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "next.config.mjs",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "postcss.config.mjs",
+        ".eslintrc.json",
+        "eslint.config.mjs",
+        "components.json",
+        "src/",
+        "docs/deployment.md"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "Harness docs sync script",
+      "description": "As a docs maintainer, I want the build to copy harness `docs/` from one release tag so that the harness stays the only docs source.",
+      "acceptanceCriteria": [
+        "`scripts/sync-agro-docs.mjs` and `scripts/oh-source.mjs` exist, ported from agro-web at `74b27f2`, with the Docusaurus-specific rewrites replaced by fumadocs `meta.json` output.",
+        "The script writes to `content/docs/agro/`, and `.gitignore` lists that directory.",
+        "The script reads the release tag from `AGRO_SCRIPTS_REF`. When the variable is empty, the script uses the latest release.",
+        "`node --test scripts/sync-agro-docs.test.mjs` exits 0. The test covers title frontmatter, link rewrites, and `_category_.json` to `meta.json` conversion.",
+        "The `prebuild` script in `package.json` runs the sync script before `next build`."
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "scripts/sync-agro-docs.mjs",
+        "scripts/sync-agro-docs.test.mjs",
+        "scripts/oh-source.mjs",
+        "scripts/oh-source.test.mjs",
+        ".gitignore",
+        "package.json"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "fumadocs at `/docs`",
+      "description": "As a reader, I want AGRO and Mifune Console docs at `mifune.dev/docs` so that the docs and the product pages share one site.",
+      "acceptanceCriteria": [
+        "`fumadocs-core`, `fumadocs-ui`, and `fumadocs-mdx` are dependencies at the same major version.",
+        "`source.config.ts`, `src/lib/source.ts`, `src/app/docs/layout.tsx`, and `src/app/docs/[[...slug]]/page.tsx` exist.",
+        "`/docs/agro/intro` renders the synced harness page.",
+        "The docs sidebar has two roots: `Console` and `AGRO`.",
+        "The docs search returns `/docs/agro/quickstart` for the query `quickstart`.",
+        "The search index includes each blog post in `posts/`. A query for a word in one post title returns that post.",
+        "A fenced `mermaid` block renders through the existing `MermaidDiagram` component.",
+        "A click on a docs image opens the fumadocs `ImageZoom` view.",
+        "`npm run build` exits 0.",
+        "Verify in browser using agent-browser skill: the sidebar, search, a mermaid page, and image zoom work at 1280 px and 414 px. Check light mode and dark mode."
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-002",
+        "US-003"
+      ],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "source.config.ts",
+        "src/lib/source.ts",
+        "src/app/docs/",
+        "src/app/api/search/",
+        "mdx-components.tsx",
+        "src/components/docs/",
+        "next.config.mjs",
+        "src/app/globals.css",
+        "tsconfig.json"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "Port the Mifune-owned docs pages",
+      "description": "As a reader, I want the Console guide and the four standalone pages on the website so that agro-web holds no unique docs content.",
+      "acceptanceCriteria": [
+        "The 9 files in agro-web `docs/console/` at `74b27f2` exist under `content/docs/console/`.",
+        "`glossary`, `model-selection`, `open-core`, and `resources` exist under `content/docs/`.",
+        "Each image under agro-web `static/img/console/` exists under `public/docs/console/`, and each ported page resolves each image.",
+        "`/docs` renders the Console introduction, as agro-web `slug: /` does today.",
+        "`npm run build` exits 0 with no broken internal links.",
+        "Verify in browser using agent-browser skill: each ported page renders at 1280 px."
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-004"
+      ],
+      "files": [
+        "content/docs/",
+        "public/docs/"
+      ]
+    },
+    {
+      "id": "US-006",
+      "title": "Merge the two blogs",
+      "description": "As a reader, I want one AGRO blog at `mifune.dev/blog` so that no post exists in two places.",
+      "acceptanceCriteria": [
+        "Each other post in agro-web `blog/` at `74b27f2`, including `blog/archive/`, exists in `posts/` with its images under `public/blog/`.",
+        "The story does not port agro-web `blog/2026-07-11-deploy-open-harness-with-docker.md` or `blog/2026-07-07-open-harness-demo-guide.md`. The website posts `agro-getting-started` and `daily-work-with-agro` are the canonical posts.",
+        "The redirect map in US-009 sends the old URLs of the two skipped posts to the two canonical posts.",
+        "Author data from agro-web `blog/authors.yml` renders on each ported post.",
+        "`src/app/sitemap.ts` lists each post.",
+        "Verify in browser using agent-browser skill: `/blog` lists every post, and two ported posts render with images."
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-004"
+      ],
+      "files": [
+        "posts/",
+        "public/blog/",
+        "src/lib/posts.ts",
+        "src/app/blog/",
+        "src/types/post.ts",
+        "src/app/sitemap.ts",
+        "src/app/api/search/",
+        "src/config/authors.ts"
+      ]
+    },
+    {
+      "id": "US-007",
+      "title": "Serve the installer and CLI files",
+      "description": "As a user with an old install command, I want the website to serve the four installer files so that no install breaks.",
+      "acceptanceCriteria": [
+        "`scripts/sync-external-scripts.mjs` and `scripts/build-oh-cli.mjs` exist, ported from agro-web at `74b27f2`, and write the four files to `public/`.",
+        "`node --test scripts/sync-external-scripts.test.mjs scripts/build-oh-cli.test.mjs` exits 0.",
+        "`.gitignore` lists the four generated files.",
+        "The PWA configuration excludes the four files from the service-worker cache.",
+        "After `npm run build && npm start`, `curl -s localhost:3000/install.sh | head -1` prints a line that starts with `#!`."
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-003"
+      ],
+      "files": [
+        "scripts/sync-external-scripts.mjs",
+        "scripts/sync-external-scripts.test.mjs",
+        "scripts/build-oh-cli.mjs",
+        "scripts/build-oh-cli.test.mjs",
+        ".gitignore",
+        "next.config.mjs",
+        "package.json"
+      ]
+    },
+    {
+      "id": "US-008",
+      "title": "CI gates and release rebuild",
+      "description": "As the operator, I want the website CI to run the agro-web checks so that the website keeps each gate.",
+      "acceptanceCriteria": [
+        "`scripts/check-docs-drift.mjs` and `scripts/check-ste.mjs` exist, ported from agro-web at `74b27f2`, with their tests.",
+        "`check-ste.mjs` reads the STE checker from the release tag of the docs sync. The script scans `posts/` and `content/docs/`, and it skips `content/docs/agro/`.",
+        "`package.json` has the scripts `check:docs-drift` and `check:ste`.",
+        "`.github/workflows/ci.yml` runs `npm ci`, `npm test`, `npm run lint`, `npm run check:docs-drift`, `npm run check:ste`, and `npm run build` on each pull request to `master`.",
+        "`.github/workflows/rebuild.yml` runs on `repository_dispatch` type `agro-release`, on a daily schedule, and on `workflow_dispatch`. The workflow sends an HTTP POST to the Vercel deploy hook in the secret `VERCEL_DEPLOY_HOOK_URL`.",
+        "Each existing page and post passes `npm run check:ste`.",
+        "`external`: The operator adds the secret `VERCEL_DEPLOY_HOOK_URL` to the website repository before the PR merges."
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-005",
+        "US-006"
+      ],
+      "files": [
+        "scripts/check-docs-drift.mjs",
+        "scripts/check-docs-drift.test.mjs",
+        "scripts/check-ste.mjs",
+        "scripts/check-ste.test.mjs",
+        "package.json",
+        ".github/workflows/",
+        "content/docs/",
+        "posts/"
+      ]
+    },
+    {
+      "id": "US-009",
+      "title": "Host redirects and internal links",
+      "description": "As a reader with an old `agro.mifune.dev` link, I want each old URL to reach its new page so that links and ranking survive.",
+      "acceptanceCriteria": [
+        "`src/config/agro-redirects.ts` maps each URL in the agro-web sitemap fixture to a `mifune.dev` path. Each of the 44 legacy client redirects in agro-web `docusaurus.config.ts` reaches its final page in one hop.",
+        "`next.config.mjs` applies the map as permanent redirects, guarded by `has: [{ type: \"host\", value: \"agro.mifune.dev\" }]`.",
+        "`next.config.mjs` serves `/install.sh`, `/get-agro.sh`, `/agro.js`, and `/oh.js` on host `agro.mifune.dev` with HTTP 200 and no redirect.",
+        "`node --test src/config/agro-redirects.test.ts` exits 0. The test reads `.agro/tasks/retire-agro-web/evidence/agro-web-sitemap.xml` and fails when one sitemap URL has no mapping.",
+        "`src/config/offerings.ts`, `src/sections/AgentPickerSection.tsx`, `scripts/generate-llm-txt.mjs`, and `posts/agro-getting-started.md` link to `mifune.dev/docs` paths. `git grep -n \"agro.mifune.dev\" -- src scripts posts` prints only the redirect host guard.",
+        "`src/app/sitemap.ts` lists each docs page."
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-005",
+        "US-006",
+        "US-007"
+      ],
+      "files": [
+        "src/config/agro-redirects.ts",
+        "src/config/agro-redirects.test.ts",
+        "next.config.mjs",
+        "src/config/offerings.ts",
+        "src/sections/AgentPickerSection.tsx",
+        "scripts/generate-llm-txt.mjs",
+        "public/llm.txt",
+        "posts/agro-getting-started.md",
+        "src/app/sitemap.ts",
+        ".agro/tasks/retire-agro-web/evidence/agro-web-sitemap.xml",
+        "package.json"
+      ]
+    },
+    {
+      "id": "US-010",
+      "title": "Harness release dispatch and skill links",
+      "description": "As the operator, I want the harness to notify and link to the website so that nothing points at agro-web.",
+      "acceptanceCriteria": [
+        "`external`: The operator creates a fine-grained token for `mifunedev/website` and stores it in the harness as the secret `WEBSITE_DISPATCH_TOKEN`.",
+        "`external`: In the harness repository, `.github/workflows/release.yml` sends the `agro-release` dispatch with `WEBSITE_DISPATCH_TOKEN`. The target is `repos/mifunedev/website/dispatches`.",
+        "`external`: In the harness repository, `.agro/scripts/__tests__/release-dispatch.test.ts` asserts the new target and passes.",
+        "`external`: In the harness repository, `.agro/skills/agent-browser/SKILL.md` and `.agro/skills/agent-browser/references/recording.md` link to `https://mifune.dev/docs/agro/integrations/agent-browser`.",
+        "`external`: The harness change ships as its own pull request after US-009 deploys."
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-009"
+      ],
+      "files": [],
+      "external": true
+    },
+    {
+      "id": "US-011",
+      "title": "Domain cutover and archive",
+      "description": "As the operator, I want `agro.mifune.dev` served by the website and agro-web archived so that one site remains.",
+      "acceptanceCriteria": [
+        "`external`: The operator adds `agro.mifune.dev` to the Vercel website project and points the Cloudflare DNS record at Vercel.",
+        "`external`: `curl -sI https://agro.mifune.dev/docs/agro/intro` returns HTTP 308 with `location: https://mifune.dev/docs/agro/intro`.",
+        "`external`: `curl -s https://agro.mifune.dev/install.sh | head -1` prints a line that starts with `#!`.",
+        "`external`: After 4 weeks with no kill criterion met, the operator disables GitHub Pages on agro-web and archives the repository.",
+        "`external`: The DNS record for `agro.mifune.dev` stays in place for 12 months after the archive.",
+        "`external`: After the archive, the operator deletes the harness secret `AGRO_WEB_DISPATCH_TOKEN`."
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-009",
+        "US-010"
+      ],
+      "files": [],
+      "external": true
+    },
+    {
+      "id": "US-012",
+      "title": "Manual review evidence",
+      "description": "As the reviewer, I want a browser journey and a redirect transcript so that I can accept the move without a second check.",
+      "acceptanceCriteria": [
+        "Verify in browser using agent-browser skill: a journey goes from `/` to `/docs`, then through search to an AGRO page. The journey ends at `/blog` and one ported post. Annotated screenshots go to `.agro/tasks/retire-agro-web/evidence/`.",
+        "Before the local boot, the story confirms that port 3000 is free. If the port is busy, the story sets `blocked` and names the process.",
+        "`.agro/tasks/retire-agro-web/evidence/manual-review.md` holds a transcript of `npm run build && npm start`. The transcript then runs `curl -sI -H 'Host: agro.mifune.dev' localhost:3000<path>` for 10 sampled sitemap URLs and the four installer paths."
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-008",
+        "US-009"
+      ],
+      "files": [
+        ".agro/tasks/retire-agro-web/evidence/"
+      ]
+    }
+  ]
+}
