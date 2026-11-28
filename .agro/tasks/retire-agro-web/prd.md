@@ -257,3 +257,16 @@ None. The operator accepted these decisions on 2026-11-28:
 - [ ] `git grep -n "agro.mifune.dev" -- src scripts posts` prints only the redirect host guard.
 
 ## Lessons
+
+1. Claim: synced README links pointed at `/docs/agro`, which had no page on `mifune.dev`. Evidence: review finding 1. Outcome: fixed in this PR (`55a7a8d`).
+2. Claim: the three prebuild mirror scripts resolved the latest release one at a time, so one build could mix releases. Evidence: review finding 2. Outcome: fixed in this PR (`826d4c3`). The script `scripts/prebuild.mjs` resolves the tag one time.
+3. Claim: a GitHub rate limit fails a Vercel build, because the mirrored files are not in git. Evidence: review finding 3, and one rate-limited run on the hand. Outcome: dropped. The operator adds `GITHUB_TOKEN` to the Vercel build environment before the cutover in US-011.
+4. Claim: the search index listed archived posts. Evidence: review finding 4. Outcome: fixed in this PR (`72f837a`).
+5. Claim: the AGRO links on `/services` and in the FAQ opened the Console introduction. Evidence: review finding 5. Outcome: fixed in this PR (`b8da2d5`).
+6. Claim: `scrollbar-none` is not a Tailwind 4 utility. Evidence: review finding 6. Outcome: fixed in this PR (`6904249`).
+7. Claim: ESLint scanned generated build files. Evidence: review finding 7. Outcome: fixed in this PR (`37c897a`).
+8. Claim: CI runs `ste-check.sh` from the AGRO release. Evidence: review finding 8. Outcome: dropped. The script comes from the same organization, the tag matches the synced docs, and agro-web used the same design.
+9. Claim: `docs/deployment.md` omitted `agro.mifune.dev`. Evidence: review finding 9. Outcome: fixed in this PR (`e4c742d`).
+10. Claim: `fumadocs-mdx` has no major version 16. Evidence: `npm view`. Outcome: fixed in this PR. The US-004 criterion now requires a peer-compatible version.
+11. Claim: an `agro` CLI upgrade on the hand pulled a 1.7 GB image and filled the disk. Evidence: hand `df` showed 0 bytes free during US-004. Outcome: dropped. The advisor removed the unused `agro:0.37.0` image, and the hand environment is outside this task.
+12. Claim: the Vercel preview build did not run, because the Ignored Build Step skipped it. Evidence: PR checks. Outcome: dropped. "What remains unverified" in the PR lists the Vercel build.
