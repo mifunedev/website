@@ -47,7 +47,7 @@ Status: DRAFT
 
 **Acceptance Criteria:**
 
-- [ ] `fumadocs-core`, `fumadocs-ui`, and `fumadocs-mdx` are dependencies at the same major version.
+- [ ] `fumadocs-core` and `fumadocs-ui` are dependencies at the same major version, and `fumadocs-mdx` satisfies their peer range.
 - [ ] `source.config.ts`, `src/lib/source.ts`, `src/app/docs/layout.tsx`, and `src/app/docs/[[...slug]]/page.tsx` exist.
 - [ ] `/docs/agro/intro` renders the synced harness page.
 - [ ] The docs sidebar has two roots: `Console` and `AGRO`.
