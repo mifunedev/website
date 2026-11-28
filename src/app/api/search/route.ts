@@ -17,7 +17,7 @@ function docsIndexes(): AdvancedIndex[] {
 function postIndexes(): AdvancedIndex[] {
   return getAllPostSlugs()
     .map((slug) => getPostBySlug(slug))
-    .filter((post): post is Post => post !== null)
+    .filter((post): post is Post => post !== null && !post.archived)
     .map((post) => ({
       id: `/blog/${post.slug}`,
       title: post.title,
