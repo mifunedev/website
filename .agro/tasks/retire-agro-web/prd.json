@@ -15,14 +15,15 @@
         "`README.md` has a `License` section that links to `LICENSE`."
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed: cmp LICENSE vs agro-web LICENSE@74b27f2 exit 0; executed: NOTICE carries 'Copyright (c) 2026 Ryan Eggleston' (product line 'Mifune Website'); executed: grep '^## License' README.md line 89 links LICENSE.",
       "dependsOn": [],
       "files": [
         "LICENSE",
         "NOTICE",
         "README.md"
-      ]
+      ],
+      "commit": "5784370"
     },
     {
       "id": "US-002",
