@@ -23,11 +23,11 @@ export default async function OpenSourceSignalSection() {
             </p>
             <h2
               id="open-source-signal-heading"
-              className="mt-3 text-balance font-montserrat text-2xl font-bold leading-tight text-foreground sm:text-3xl"
+              className="mt-3 text-balance font-montserrat text-2xl font-bold leading-tight text-foreground sm:text-3xl sm:leading-9"
             >
               Help more agent builders find AGRO.
             </h2>
-            <p className="mt-3 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-3 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground sm:text-base sm:leading-6">
               If the workspace model saves you from one broken local agent
               setup, star the repo so the next Claude Code, Codex, OpenCode, or
               Hermes user can find it faster.

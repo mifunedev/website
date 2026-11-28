@@ -214,7 +214,7 @@ export default function AgentPickerSection() {
           >
             Pick your agent.
           </h2>
-          <p className="mx-auto mt-4 font-montserrat text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-4 font-montserrat text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-7">
             The workspace starts with no agent. Run{" "}
             <code className="font-mono text-sm text-foreground">
               agro harness install &lt;id&gt;

@@ -96,8 +96,8 @@ export default function PricingSection() {
                       <p
                         className={`mt-4 max-w-3xl font-montserrat leading-relaxed text-muted-foreground ${
                           isCloud
-                            ? "text-base sm:text-lg"
-                            : "text-sm sm:text-base"
+                            ? "text-base sm:text-lg sm:leading-7"
+                            : "text-sm sm:text-base sm:leading-6"
                         }`}
                       >
                         {offering.description}

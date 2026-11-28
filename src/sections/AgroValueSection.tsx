@@ -42,7 +42,7 @@ export default function AgroValueSection() {
           </p>
           <h2
             id="agro-value-heading"
-            className="text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl"
+            className="text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl sm:leading-none"
           >
             One repo. One workspace.
           </h2>

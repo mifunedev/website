@@ -42,7 +42,7 @@ export default function CaseStudiesPage() {
               </span>
             </div>
 
-            <h1 className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl md:leading-none lg:text-6xl lg:leading-none">
               <span className="font-montserrat text-foreground">
                 Case Studies
               </span>
@@ -52,7 +52,7 @@ export default function CaseStudiesPage() {
               </span>
             </h1>
 
-            <p className="mx-auto mb-10 max-w-2xl font-montserrat text-lg font-light leading-relaxed text-muted-foreground lg:text-xl">
+            <p className="mx-auto mb-10 max-w-2xl font-montserrat text-lg font-light leading-relaxed text-muted-foreground lg:text-xl lg:leading-7">
               How The Workflow Academy reclaimed{" "}
               <span className="font-medium text-foreground">
                 hours every week

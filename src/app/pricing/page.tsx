@@ -124,7 +124,7 @@ export default function PricingPage() {
               status="Console pricing by Mifune"
               className="mx-auto mb-7 w-fit justify-center text-foreground"
             />
-            <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl md:leading-none lg:text-6xl lg:leading-none">
               Pay by the second your node runs.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground">
@@ -159,7 +159,7 @@ export default function PricingPage() {
               </a>
             </div>
 
-            <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            <p className="mx-auto mt-7 max-w-2xl font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-5">
               {`Free for personal accounts: ${freeNodeWord} ${formatSpecList(FREE_TIER_NODE_SPECS)} nodes that share ${FREE_TIER_RUNNING_HOURS_PER_MONTH} running hours each UTC month, no card, ${FREE_TIER_PAUSED_RETENTION_DAYS} days of paused retention · Limited free spots · Paid nodes run from prepaid credit`}
             </p>
           </div>
@@ -294,7 +294,7 @@ export default function PricingPage() {
                 >
                   Or run it yourself.
                 </h2>
-                <p className="mt-5 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
+                <p className="mt-5 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg sm:leading-7">
                   AGRO is Apache-2.0 licensed and genuinely free. Clone
                   it, run the workspace on your own laptop or VM, and pay Mifune
                   nothing. The Console is for teams that would rather not operate the

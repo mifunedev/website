@@ -52,7 +52,7 @@ export default function PainSection() {
           <p className="mb-4 font-montserrat text-sm font-medium uppercase tracking-widest text-muted-foreground">
             The Problem
           </p>
-          <h2 className="mx-auto max-w-3xl text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+          <h2 className="mx-auto max-w-3xl text-3xl font-bold leading-tight tracking-tight md:text-4xl md:leading-10">
             <span className="font-montserrat text-foreground">
               Your team is losing hours to work{" "}
             </span>

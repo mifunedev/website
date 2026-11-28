@@ -109,13 +109,13 @@ export default function ServicesPage() {
                 context="FOR CONSOLE · MIFUNE ENGINEERING"
                 className="mx-auto mb-6 w-fit text-foreground lg:mx-0"
               />
-              <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl sm:leading-none lg:text-6xl lg:leading-none">
                 Adopt the Mifune Console with our engineers{" "}
                 <span className="font-space text-oh-accent">
                   alongside your team.
                 </span>
               </h1>
-              <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
+              <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl lg:leading-7">
                 Support is useful when your team wants help translating its
                 workflow and constraints into a Console deployment, integrating
                 current systems, troubleshooting adoption, or preparing a clear

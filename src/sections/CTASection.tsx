@@ -88,11 +88,11 @@ export default function CTASection({
           </p>
           <h2
             id="deployment-heading"
-            className="mt-4 text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl"
+            className="mt-4 text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl sm:leading-none"
           >
             Discuss your AGRO deployment.
           </h2>
-          <p className="mt-6 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
+          <p className="mt-6 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg sm:leading-7">
             Tell us how your team plans to run coding agents. We’ll use the
             details to discuss the Mifune Console and, for Console customers,
             optional hands-on deployment support.
@@ -102,7 +102,7 @@ export default function CTASection({
             {deploymentBenefits.map((benefit) => (
               <li
                 key={benefit}
-                className="flex min-w-0 items-start gap-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base"
+                className="flex min-w-0 items-start gap-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base sm:leading-6"
               >
                 <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-green-500/40 bg-green-500/10">
                   <Check
@@ -120,7 +120,7 @@ export default function CTASection({
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent-raised">
               What happens next
             </p>
-            <p className="mt-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base">
+            <p className="mt-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base sm:leading-6">
               We’ll review your request and reply within 24 hours with a
               practical next step.
             </p>

@@ -37,11 +37,11 @@ const HeroSection = () => {
 
       <div className="relative mx-auto my-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="text-center lg:text-left">
-          <h1 className="mb-6 text-balance font-montserrat text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="mb-6 text-balance font-montserrat text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl sm:leading-none lg:text-6xl lg:leading-none">
             A portable home for autonomous coding agents.
           </h1>
 
-          <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl lg:leading-7">
             Persistent workspaces for Claude Code, Codex, Pi, or any harness:
             isolated, and still working after you disconnect. Self-host it, or
             start free in your browser.
@@ -70,7 +70,7 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <p className="mb-5 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+          <p className="mb-5 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-5">
             Free for personal accounts · No card · No SSH key
           </p>
 
@@ -82,7 +82,7 @@ const HeroSection = () => {
             Need hands-on help? Explore Mifune engineering support
           </a>
 
-          <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+          <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-5">
             Apache-2.0 · Agent Governance Runtime Orchestrator · works with any
             coding harness
           </p>
