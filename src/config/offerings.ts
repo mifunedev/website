@@ -9,7 +9,7 @@ import {
 export const OFFERING_URLS = {
   cloud: "https://console.mifune.dev",
   openSource: "https://github.com/mifunedev/agro",
-  docs: "https://agro.mifune.dev",
+  docs: "/docs",
   pricing: "/pricing",
   support: "/services",
   supportEmail: "hello@mifune.dev",

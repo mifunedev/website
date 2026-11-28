@@ -85,3 +85,7 @@ for chunk in agent.stream(
 	if "messages" in chunk:
 		chunk["messages"][-1].pretty_print()
 ```
+
+## License
+
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

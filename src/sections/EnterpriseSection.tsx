@@ -50,7 +50,7 @@ export default function EnterpriseSection() {
   };
 
   return (
-    <section id="audit" className="relative py-24 px-4 bg-gradient-to-b from-background to-green-500/5">
+    <section id="audit" className="relative py-24 px-4 bg-linear-to-b from-background to-green-500/5">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="h-[500px] w-[500px] rounded-full bg-green-500/5 blur-3xl" />
       </div>
@@ -97,7 +97,7 @@ export default function EnterpriseSection() {
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <span className="mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
+                  <span className="mt-1 shrink-0 h-5 w-5 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
                     <svg
                       className="h-3 w-3 text-green-400"
                       fill="none"
@@ -159,7 +159,7 @@ export default function EnterpriseSection() {
                   className="mb-6 flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-4"
                 >
                   <svg
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-400"
+                    className="mt-0.5 h-5 w-5 shrink-0 text-green-400"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -187,7 +187,7 @@ export default function EnterpriseSection() {
                   className="mb-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-4"
                 >
                   <svg
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-400"
+                    className="mt-0.5 h-5 w-5 shrink-0 text-red-400"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -228,7 +228,7 @@ export default function EnterpriseSection() {
                     value={Name}
                     onChange={(e) => setName(e.target.value)}
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-none focus:border-green-500 transition-colors disabled:opacity-50"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-hidden focus:border-green-500 transition-colors disabled:opacity-50"
                   />
                 </div>
 
@@ -247,7 +247,7 @@ export default function EnterpriseSection() {
                     value={Email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-none focus:border-green-500 transition-colors disabled:opacity-50"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-hidden focus:border-green-500 transition-colors disabled:opacity-50"
                   />
                 </div>
 
@@ -266,7 +266,7 @@ export default function EnterpriseSection() {
                     value={Phone}
                     onChange={(e) => setPhone(e.target.value)}
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-none focus:border-green-500 transition-colors disabled:opacity-50"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-hidden focus:border-green-500 transition-colors disabled:opacity-50"
                   />
                 </div>
 
@@ -286,7 +286,7 @@ export default function EnterpriseSection() {
                     value={Message}
                     onChange={(e) => setMessage(e.target.value)}
                     disabled={loading}
-                    className="w-full resize-none px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-none focus:border-green-500 transition-colors disabled:opacity-50"
+                    className="w-full resize-none px-4 py-3 rounded-xl bg-background border border-border font-montserrat text-sm text-foreground focus:outline-hidden focus:border-green-500 transition-colors disabled:opacity-50"
                   />
                 </div>
 

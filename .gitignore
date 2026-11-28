@@ -46,3 +46,15 @@ public/workbox-*.js
 
 # claude code agent artifacts (screenshots, scratch)
 .claude/
+
+# synced from the AGRO release at build time
+/content/docs/agro/
+
+# fumadocs-mdx generated collections
+/.source/
+
+# mirrored from the AGRO release at build time
+/public/install.sh
+/public/get-agro.sh
+/public/agro.js
+/public/oh.js

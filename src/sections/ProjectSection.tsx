@@ -48,7 +48,7 @@ const ProjectSection = () => {
               key={index}
               className="group flex flex-col overflow-hidden rounded-lg bg-gray-800 shadow-md"
             >
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <Image
                   className="h-auto w-full"
                   src={project.image}
@@ -59,7 +59,7 @@ const ProjectSection = () => {
                   style={{ maxHeight: "405px", width: "100%", height: "auto" }}
                 />
               </div>
-              <div className="flex-grow p-4">
+              <div className="grow p-4">
                 <h3 className="text-2xl font-bold text-white">
                   {project.title}
                 </h3>

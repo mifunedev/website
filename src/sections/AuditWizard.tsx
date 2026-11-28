@@ -110,9 +110,9 @@ export default function AuditWizard() {
   return (
     <section
       id="audit"
-      className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-background to-green-500/5 px-4 py-24"
+      className="relative scroll-mt-20 overflow-hidden bg-linear-to-b from-background to-green-500/5 px-4 py-24"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808014_1px,transparent_1px),linear-gradient(to_bottom,#80808014_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,#000_60%,transparent_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808014_1px,transparent_1px),linear-gradient(to_bottom,#80808014_1px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_60%_60%_at_50%_40%,#000_60%,transparent_100%)]" />
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[420px] w-[620px] -translate-x-1/2 rounded-full bg-green-500/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-2xl">
@@ -129,7 +129,7 @@ export default function AuditWizard() {
           </h2>
         </div>
 
-        <div className="rounded-3xl border border-green-500/20 bg-card/80 p-6 shadow-2xl backdrop-blur-sm md:p-10">
+        <div className="rounded-3xl border border-green-500/20 bg-card/80 p-6 shadow-2xl backdrop-blur-xs md:p-10">
           <AnimatePresence mode="wait">
             {status === "success" ? (
               <SuccessScreen key="success" email={answers.email} />
@@ -204,7 +204,7 @@ export default function AuditWizard() {
                                     )}
                                   </span>
                                   <span
-                                    className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border transition-colors ${
+                                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors ${
                                       selected
                                         ? "border-green-500 bg-green-500 text-black"
                                         : "border-border text-transparent group-hover:border-green-500/50"
@@ -229,7 +229,7 @@ export default function AuditWizard() {
                             value={value}
                             placeholder={step.placeholder}
                             onChange={(e) => setAnswer(step.id, e.target.value)}
-                            className="w-full resize-none rounded-2xl border border-border bg-background px-5 py-4 font-montserrat text-base text-foreground transition-colors focus:border-green-500 focus:outline-none"
+                            className="w-full resize-none rounded-2xl border border-border bg-background px-5 py-4 font-montserrat text-base text-foreground transition-colors focus:border-green-500 focus:outline-hidden"
                           />
                         )}
 
@@ -242,7 +242,7 @@ export default function AuditWizard() {
                             value={value}
                             placeholder={step.placeholder}
                             onChange={(e) => setAnswer(step.id, e.target.value)}
-                            className="w-full rounded-2xl border border-border bg-background px-5 py-4 font-montserrat text-lg text-foreground transition-colors focus:border-green-500 focus:outline-none"
+                            className="w-full rounded-2xl border border-border bg-background px-5 py-4 font-montserrat text-lg text-foreground transition-colors focus:border-green-500 focus:outline-hidden"
                           />
                         )}
                       </div>

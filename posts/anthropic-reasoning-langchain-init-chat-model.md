@@ -13,7 +13,7 @@ author:
 
 Anthropic's Claude models support **extended thinking**—a feature that exposes the model's step-by-step reasoning process before it produces a final answer. This guide shows you how to enable extended thinking in Langchain using `init_chat_model`, persist reasoning blocks in LangGraph state, and export them to disk.
 
-This is especially useful for:
+Extended thinking helps with:
 
 - **Debugging agent behavior** — See exactly how Claude reasoned through a problem
 - **Audit trails** — Capture and store the reasoning chain for compliance or review
@@ -330,7 +330,7 @@ print("Done! Check reasoning_export.json")
 |-------|----------|
 | No reasoning blocks returned | Ensure `thinking.type` is `"enabled"`, not `"disabled"` |
 | `max_tokens` error | Set `max_tokens` higher than `budget_tokens` |
-| Empty reasoning list | Check that you're iterating over `ai_msg.content`, not `ai_msg.content_blocks` |
+| Empty reasoning list | Confirm that you iterate over `ai_msg.content`, not `ai_msg.content_blocks` |
 | Model doesn't support thinking | Use a compatible model like `claude-sonnet-4-5-20250929` or newer |
 | Serialization errors | Use `default=str` in `json.dumps()` for non-serializable objects |
 

@@ -28,7 +28,7 @@ That’s what our `/team` workflow is for:
 - **Phase 0**: load baseline context (the repo’s guiding docs) so agents don’t reinvent conventions
 - **Phase 1**: spawn a small council of specialists (architecture, craftsmanship, security/testing)
 - **Phase 2**: synthesize a unified approach and resolve tradeoffs
-- **Phase 3**: produce a task contract (`TASKS.md`) that is ordered, atomic, and verifiable
+- **Phase 3**: produce an ordered, atomic, and verifiable task contract (`TASKS.md`)
 
 Here’s the simplest mental model for `/team`:
 
@@ -49,7 +49,7 @@ flowchart TD
   F -.-> G["(Optional) Phase 6: Reflection<br/>Generate review questions for next run"]
 ```
 
-The point isn’t to “ask AI what to do.” The point is to **maximize surface area**, gather options, and then deliberately converge.
+The point isn’t to “ask AI what to do.” The point is to **maximize surface area**, gather options, then deliberately converge.
 
 - **Reference**: `/team` command spec lives at [`.claude/commands/team.md`](https://github.com/mifunedev/orchestra/blob/development/.claude/commands/team.md)
 
@@ -57,12 +57,12 @@ The point isn’t to “ask AI what to do.” The point is to **maximize surface
 
 - New feature where there are multiple legitimate architectures
 - Refactors where the blast radius isn’t obvious yet
-- Anything with tricky edges (auth, streaming, state machines, permissions)
+- Features with tricky edges (auth, streaming, state machines, permissions)
 
 #### What `/team` produces that matters
 
 - A shared vocabulary for the change (“here are the tradeoffs we considered”)
-- A plan that can be handed to a human *or* used as the seed for an execution loop
+- A plan that you can hand to a human *or* use as the seed for an execution loop
 - A clear boundary between “exploration” and “implementation”
 
 ---
@@ -79,9 +79,10 @@ Once the problem has a home (a GitHub issue), I want my workflow to stop being a
 - Generate a changelog commit to anchor the branch
 - Generate user stories with acceptance criteria
 - Invoke `/team` using the issue + stories as input
-- Push and open a PR with a body derived from the artifacts
+- Push the branch
+- Open a PR with a body derived from the artifacts
 
-If you’ve ever lost an hour to “branch naming + worktree + boilerplate PR body,” this is the fix.
+If you’ve ever lost an hour to “branch naming + worktree + boilerplate PR body,” `/ticket` is the fix.
 
 - **Reference**: `/ticket` command spec lives at [`.claude/commands/ticket.md`](https://github.com/mifunedev/orchestra/blob/development/.claude/commands/ticket.md)
 
@@ -103,16 +104,16 @@ And that’s what turns “agent output” into “engineering output.”
 
 `/team` is for exploration and convergence. Ralph is for **execution, iteration, and bookkeeping**.
 
-Ralph is an autonomous agent loop that operates on a very specific constraint: **each iteration has a limited context window**. So instead of pretending one run can do everything, Ralph works from a PRD turned into small, verifiable user stories (`prd.json`) and executes **one story per iteration**.
+Ralph is an autonomous agent loop that operates on a very specific constraint: **each iteration has a limited context window**. Ralph does not pretend that one run can do everything. Ralph works from a PRD split into small, verifiable user stories (`prd.json`) and executes **one story per iteration**.
 
 Key mechanics:
 
-- **PRD → `prd.json`**: break work into stories that can finish in one run
+- **PRD → `prd.json`**: break work into stories, each small enough for one run
 - **One story at a time**: pick the highest priority `passes: false`
 - **Quality gates**: run checks (typecheck/lint/tests) before committing
 - **Progress logging**: append a progress note, and consolidate reusable patterns over time
 
-This is how you get reliable momentum without the “context window cliff” where the agent forgets what it was doing halfway through.
+Ralph gets reliable momentum this way, without the “context window cliff” where the agent loses track of its task halfway through.
 
 - **Reference**: Ralph lives in this repo under [`/.ralph`](https://github.com/mifunedev/orchestra/tree/development/.ralph)
 - **Reference**: It’s based on the excellent starting point from [`github.com/snarktank/ralph`](https://github.com/snarktank/ralph)
@@ -132,21 +133,21 @@ If you’re going to rely on an agent, you want the same thing you want from any
 
 ### 4) `AGENTS.md`: keep the agent in Geoff Huntley’s “Smart Zone”
 
-This is the unsexy one—and it’s the one that compounds.
+`AGENTS.md` is the unsexy one—and it’s the one that compounds.
 
 Every serious agentic workflow eventually crashes into the same limit: **context**. Not tokens in the abstract, but *useful context*.
 
-The trick is to keep your “always-on instructions” small, accurate, and high-signal. In this repo, that’s `AGENTS.md` (and any local `AGENTS.md` files nearer to the work). When those files are clean, the agent stays in what Geoff Huntley calls the **“Smart Zone”** of the context window: enough constraints to behave like a senior engineer, not so much noise that it misses the important parts.
+The trick is to keep your “always-on instructions” small, accurate, and high-signal. In this repo, that’s `AGENTS.md` (and any local `AGENTS.md` files nearer to the work). When those files are clean, the agent stays in what Geoff Huntley calls the **“Smart Zone”** of the context window. The Smart Zone has enough constraints to behave like a senior engineer, but not so much noise that the agent misses the important parts.
 
 In practice, `AGENTS.md` should contain:
 
-- how the project is structured
+- the project structure
 - how to run tests / formatters
-- conventions that are easy to miss
+- easy-to-miss conventions
 - “when you touch X, don’t forget Y” gotchas
 - security do’s and don’ts
 
-And it should *not* contain:
+And `AGENTS.md` should *not* contain:
 
 - long narratives
 - outdated instructions
@@ -158,7 +159,7 @@ And it should *not* contain:
 
 ## The workflow: from idea → plan → PR (without chaos)
 
-Here’s the loop as I actually run it:
+Here’s my loop:
 
 1. **Explore and converge** with `/team` until the approach feels “boring”
 2. Decide the execution mode:
@@ -166,7 +167,7 @@ Here’s the loop as I actually run it:
    - **Ticketed work**: run `/ticket` so you get worktree + artifacts + PR scaffolding
    - **Multi-iteration work**: convert the plan into Ralph-sized stories and run the loop
 3. Keep context “sharp”:
-   - prune and update `AGENTS.md` when you learn something reusable
+   - prune and update `AGENTS.md` when you learn a reusable lesson
    - keep acceptance criteria verifiable and binary
    - make the workflow observable (logs, hooks, CI gates)
 4. *(Optional)* **Reflect and generate review questions**:
@@ -179,7 +180,7 @@ The goal isn’t “AI writes the code.” The goal is **a system that reliably 
 
 ## How to get better results (fast)
 
-If you want to copy this workflow, here are the two highest-leverage habits:
+If you want to copy this workflow, here are the two highest-value habits:
 
 ### Habit 1: Treat plans like contracts
 
@@ -189,16 +190,16 @@ The moment your “plan” becomes a checklist with acceptance criteria, you can
 - review quickly
 - recover from failures without re-explaining everything
 
-This is why `/team` ends in a task contract, and why Ralph runs one story at a time.
+For this reason, `/team` ends in a task contract, and Ralph runs one story at a time.
 
 ### Habit 2: Design your context window on purpose
 
 Most agent failures aren’t “the model is bad.” They’re:
 
-- the repo is undocumented
+- the repo has no documentation
 - instructions are stale
 - acceptance criteria are vague
-- the agent is asked to do too much in one run
+- you ask the agent to do too much in one run
 
 Fix those, and your success rate spikes.
 

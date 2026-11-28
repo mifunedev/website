@@ -1,0 +1,39 @@
+import { createSearchAPI, type AdvancedIndex } from "fumadocs-core/search/server";
+import { source } from "@/lib/source";
+import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
+import type { Post } from "@/types/post";
+
+function docsIndexes(): AdvancedIndex[] {
+  return source.getPages().map((page) => ({
+    id: page.url,
+    title: page.data.title ?? page.url,
+    description: page.data.description,
+    url: page.url,
+    tag: "docs",
+    structuredData: page.data.structuredData,
+  }));
+}
+
+function postIndexes(): AdvancedIndex[] {
+  return getAllPostSlugs()
+    .map((slug) => getPostBySlug(slug))
+    .filter((post): post is Post => post !== null && !post.archived)
+    .map((post) => ({
+      id: `/blog/${post.slug}`,
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      tag: "blog",
+      breadcrumbs: ["Blog"],
+      structuredData: {
+        headings: [],
+        contents: post.excerpt
+          ? [{ heading: undefined, content: post.excerpt }]
+          : [],
+      },
+    }));
+}
+
+export const { GET } = createSearchAPI("advanced", {
+  indexes: () => [...docsIndexes(), ...postIndexes()],
+});

@@ -9,6 +9,7 @@ import {
   Settings,
   Waypoints,
 } from "lucide-react";
+import Link from "next/link";
 import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
 import JsonLd from "@/components/seo/JsonLd";
@@ -96,8 +97,8 @@ export default function ServicesPage() {
         className="scroll-mt-20 bg-background"
       >
         <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:pt-32">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_90%_60%_at_50%_0%,#000_65%,transparent_100%)]" />
-          <div className="absolute left-1/2 top-1/4 h-[28rem] w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/15 blur-[120px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_90%_60%_at_50%_0%,#000_65%,transparent_100%)]" />
+          <div className="absolute left-1/2 top-1/4 h-112 w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/15 blur-[120px]" />
 
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="text-center lg:text-left">
@@ -109,13 +110,13 @@ export default function ServicesPage() {
                 context="FOR CONSOLE · MIFUNE ENGINEERING"
                 className="mx-auto mb-6 w-fit text-foreground lg:mx-0"
               />
-              <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="text-balance font-montserrat text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl sm:leading-none lg:text-6xl lg:leading-none">
                 Adopt the Mifune Console with our engineers{" "}
                 <span className="font-space text-oh-accent">
                   alongside your team.
                 </span>
               </h1>
-              <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
+              <p className="mx-auto mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl lg:leading-7">
                 Support is useful when your team wants help translating its
                 workflow and constraints into a Console deployment, integrating
                 current systems, troubleshooting adoption, or preparing a clear
@@ -125,7 +126,7 @@ export default function ServicesPage() {
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                 <a
                   href={OFFERING_URLS.supportContact}
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   Discuss your Console deployment
@@ -134,7 +135,7 @@ export default function ServicesPage() {
                   href={OFFERING_URLS.cloud}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   Explore the Mifune Console
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -144,16 +145,12 @@ export default function ServicesPage() {
 
               <p className="mt-7 font-montserrat text-sm leading-relaxed text-muted-foreground">
                 For Console customers · No established deployment required ·{" "}
-                <a
-                  href={OFFERING_URLS.docs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                <Link
+                  href="/docs/agro/intro"
+                  className="inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
                 >
                   Read the AGRO docs
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                </Link>
               </p>
             </div>
 
@@ -162,7 +159,7 @@ export default function ServicesPage() {
               aria-labelledby="support-workflow-caption"
             >
               <div className="absolute -inset-6 rounded-3xl bg-green-500/10 blur-3xl" />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card/90 shadow-2xl backdrop-blur-sm">
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card/90 shadow-2xl backdrop-blur-xs">
                 <div className="flex min-h-11 min-w-0 items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-5">
                   <div className="flex min-w-0 items-center gap-2">
                     <span
@@ -396,7 +393,7 @@ export default function ServicesPage() {
                 href={OFFERING_URLS.cloud}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
                 Explore the Mifune Console
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -406,7 +403,7 @@ export default function ServicesPage() {
                 href={OFFERING_URLS.openSource}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
                 Explore AGRO on GitHub
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -452,7 +449,7 @@ export default function ServicesPage() {
         </section>
 
         <section className="px-4 pb-24 pt-8">
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-green-500/30 bg-gradient-to-br from-green-500/10 to-card p-8 text-center sm:p-12 md:p-16">
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-green-500/30 bg-linear-to-br from-green-500/10 to-card p-8 text-center sm:p-12 md:p-16">
             <p className="font-montserrat text-sm font-medium uppercase tracking-[0.22em] text-oh-accent">
               Mifune engineering
             </p>
@@ -466,7 +463,7 @@ export default function ServicesPage() {
             </p>
             <a
               href={OFFERING_URLS.supportContact}
-              className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               Discuss your Console deployment

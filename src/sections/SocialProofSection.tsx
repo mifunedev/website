@@ -63,7 +63,7 @@ export default function SocialProofSection() {
             {metrics.map((metric) => (
               <li key={metric} className="flex items-center gap-3 font-montserrat text-muted-foreground">
                 <svg
-                  className="h-4 w-4 flex-shrink-0 text-green-500"
+                  className="h-4 w-4 shrink-0 text-green-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

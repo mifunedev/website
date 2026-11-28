@@ -14,7 +14,7 @@ export default async function OpenSourceSignalSection() {
     <section className="px-4 pt-20 sm:pt-24">
       <div className="mx-auto max-w-5xl">
         <aside
-          className="grid min-w-0 gap-6 rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-7 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.6fr)] lg:items-center"
+          className="grid min-w-0 gap-6 rounded-2xl border border-border bg-card p-5 shadow-xs sm:p-7 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.6fr)] lg:items-center"
           aria-labelledby="open-source-signal-heading"
         >
           <div className="min-w-0">
@@ -23,18 +23,18 @@ export default async function OpenSourceSignalSection() {
             </p>
             <h2
               id="open-source-signal-heading"
-              className="mt-3 text-balance font-montserrat text-2xl font-bold leading-tight text-foreground sm:text-3xl"
+              className="mt-3 text-balance font-montserrat text-2xl font-bold leading-tight text-foreground sm:text-3xl sm:leading-9"
             >
               Help more agent builders find AGRO.
             </h2>
-            <p className="mt-3 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-3 max-w-3xl font-montserrat text-sm leading-relaxed text-muted-foreground sm:text-base sm:leading-6">
               If the workspace model saves you from one broken local agent
               setup, star the repo so the next Claude Code, Codex, OpenCode, or
               Hermes user can find it faster.
             </p>
           </div>
 
-          <div className="min-w-0 rounded-xl border border-border bg-background/70 p-5 shadow-sm">
+          <div className="min-w-0 rounded-xl border border-border bg-background/70 p-5 shadow-xs">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground sm:text-xs">
               GITHUB STARS
             </p>
@@ -43,7 +43,7 @@ export default async function OpenSourceSignalSection() {
                 className="h-7 w-7 shrink-0 text-green-500"
                 aria-hidden="true"
               />
-              <span className="min-w-0 break-words">{starCount}</span>
+              <span className="min-w-0 wrap-break-word">{starCount}</span>
             </p>
             <p className="mt-1 break-all font-mono text-xs text-muted-foreground">
               mifunedev/agro
@@ -52,7 +52,7 @@ export default async function OpenSourceSignalSection() {
               href={OFFERING_URLS.openSource}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex min-h-11 items-center rounded-md font-montserrat text-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              className="mt-4 inline-flex min-h-11 items-center rounded-md font-montserrat text-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
             >
               Star on GitHub →
               <span className="sr-only">(opens in a new tab)</span>

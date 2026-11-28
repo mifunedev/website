@@ -1,17 +1,32 @@
 import withPWAInit from "@ducanh2912/next-pwa";
+import { createMDX } from "fumadocs-mdx/next";
+import { agroHostRedirects } from "./src/config/agro-redirects.ts";
+
+const withMDX = createMDX();
+
+const INSTALLER_FILES = ["install.sh", "get-agro.sh", "agro.js", "oh.js"];
 
 const withPWA = withPWAInit({
   cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
+  aggressiveFrontEndNavCaching: false,
   reloadOnOnline: true,
   swcMinify: true,
   dest: "public",
+  publicExcludes: ["!noprecache/**/*", ...INSTALLER_FILES.map((file) => `!${file}`)],
+  extendDefaultRuntimeCaching: true,
   disable: process.env.NODE_ENV !== "production",
   fallbacks: {
     document: "/offline",
   },
   workboxOptions: {
     disableDevLogs: true,
+    runtimeCaching: [
+      {
+        urlPattern: /^https?:\/\/[^/]+\/(?:install\.sh|get-agro\.sh|agro\.js|oh\.js)(?:[?#].*)?$/i,
+        handler: "NetworkOnly",
+        options: { cacheName: "agro-installers" },
+      },
+    ],
   },
 });
 
@@ -46,8 +61,24 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return INSTALLER_FILES.map((file) => ({
+      source: `/${file}`,
+      headers: [
+        {
+          key: "Content-Type",
+          value: file.endsWith(".sh")
+            ? "text/plain; charset=utf-8"
+            : "application/javascript; charset=utf-8",
+        },
+        { key: "Cache-Control", value: "no-cache" },
+      ],
+    }));
+  },
   async redirects() {
     return [
+      ...agroHostRedirects(INSTALLER_FILES),
+      { source: "/docs/agro", destination: "/docs/agro/intro", permanent: true },
       { source: "/case-studies", destination: "/", permanent: false },
       {
         source: "/blog/openharness-getting-started",
@@ -58,4 +89,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+export default withMDX(withPWA(nextConfig));

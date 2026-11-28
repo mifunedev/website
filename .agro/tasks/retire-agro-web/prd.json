@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "project": "mifunedev/website",
+  "branchName": "feat/105-retire-agro-web",
+  "description": "Retire agro-web and move AGRO docs and blog into the website with fumadocs.",
+  "review": true,
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Apache-2.0 license",
+      "description": "As the operator, I want the website repository under Apache-2.0 so that the AGRO docs keep the license that agro-web gives them today.",
+      "acceptanceCriteria": [
+        "`LICENSE` at the repository root holds the full Apache-2.0 text.",
+        "`NOTICE` at the repository root carries the copyright line from agro-web `NOTICE` at `74b27f2`.",
+        "`README.md` has a `License` section that links to `LICENSE`."
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "executed: cmp LICENSE vs agro-web LICENSE@74b27f2 exit 0; executed: NOTICE carries 'Copyright (c) 2026 Ryan Eggleston' (product line 'Mifune Website'); executed: grep '^## License' README.md line 89 links LICENSE.",
+      "dependsOn": [],
+      "files": [
+        "LICENSE",
+        "NOTICE",
+        "README.md"
+      ],
+      "commit": "5784370"
+    },
+    {
+      "id": "US-002",
+      "title": "Framework upgrade to Next 16, React 19.2, and Tailwind 4",
+      "description": "As a docs maintainer, I want the website on the framework versions that `fumadocs-ui@16` requires so that the docs work starts on a current stack.",
+      "acceptanceCriteria": [
+        "`package.json` pins `next` 16.x, `react` and `react-dom` at `^19.2.0` or later, `eslint-config-next` 16.x, and `tailwindcss` 4.x.",
+        "`npm run build` exits 0.",
+        "`npm run lint` exits 0.",
+        "`npm test` exits 0.",
+        "If `@ducanh2912/next-pwa` builds on Next 16, the production build registers the service worker and excludes `/docs` from `aggressiveFrontEndNavCaching`.",
+        "If `@ducanh2912/next-pwa` does not build on Next 16, the story removes the plugin, `src/app/offline/`, and the generated worker files. The story records the result in `notes`.",
+        "`docs/deployment.md` names Vercel as the host and contains no Netlify instructions.",
+        "Verify in browser using agent-browser skill: `/`, `/pricing`, `/blog`, and one post render at 1280 px and 414 px. The layout matches the `fbf7bf1` production pages."
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "executed on hand via agro run at a17cfe9: npm ci 0, npm test 0, npm run lint (eslint . flat config) 0, npm run build (next build --webpack) 0. reasoned: package.json next 16.4.6, react ^19.2.0, eslint-config-next 16.4.6, tailwindcss ^4.3.5. executed (worker): next-pwa builds on Next 16 with --webpack; plugin cannot scope aggressiveFrontEndNavCaching per path, so it is false for all routes, which excludes /docs. executed: docs/deployment.md names Vercel. executed (worker): agent-browser full-page shots of /, /pricing, /blog, one post at 1280/414 vs production, evidence/US-002. Out-of-owned-path: tsconfig.json forced by Next 16. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
+      "dependsOn": [],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "next.config.mjs",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "postcss.config.mjs",
+        ".eslintrc.json",
+        "eslint.config.mjs",
+        "components.json",
+        "src/",
+        "docs/deployment.md"
+      ],
+      "commit": "37c897a",
+      "rounds": 1
+    },
+    {
+      "id": "US-003",
+      "title": "Harness docs sync script",
+      "description": "As a docs maintainer, I want the build to copy harness `docs/` from one release tag so that the harness stays the only docs source.",
+      "acceptanceCriteria": [
+        "`scripts/sync-agro-docs.mjs` and `scripts/oh-source.mjs` exist, ported from agro-web at `74b27f2`, with the Docusaurus-specific rewrites replaced by fumadocs `meta.json` output.",
+        "The script writes to `content/docs/agro/`, and `.gitignore` lists that directory.",
+        "The script reads the release tag from `AGRO_SCRIPTS_REF`. When the variable is empty, the script uses the latest release.",
+        "`node --test scripts/sync-agro-docs.test.mjs` exits 0. The test covers title frontmatter, link rewrites, and `_category_.json` to `meta.json` conversion.",
+        "The `prebuild` script in `package.json` runs the sync script before `next build`."
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "executed on hand at 98ec51b: npm test 0 (includes sync-agro-docs and oh-source tests); AGRO_SCRIPTS_REF=v0.40.0 node scripts/sync-agro-docs.mjs exit 0, 35 pages into content/docs/agro with meta.json per folder. executed: .gitignore line 51 /content/docs/agro/. executed (worker): empty AGRO_SCRIPTS_REF resolves latest release v0.40.0. reasoned: prebuild = generate-llm-txt && sync-agro-docs runs before next build. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
+      "dependsOn": [
+        "US-002"
+      ],
+      "files": [
+        "scripts/sync-agro-docs.mjs",
+        "scripts/sync-agro-docs.test.mjs",
+        "scripts/oh-source.mjs",
+        "scripts/oh-source.test.mjs",
+        ".gitignore",
+        "package.json"
+      ],
+      "commit": "826d4c3",
+      "rounds": 1
+    },
+    {
+      "id": "US-004",
+      "title": "fumadocs at `/docs`",
+      "description": "As a reader, I want AGRO and Mifune Console docs at `mifune.dev/docs` so that the docs and the product pages share one site.",
+      "acceptanceCriteria": [
+        "`fumadocs-core` and `fumadocs-ui` are dependencies at the same major version, and `fumadocs-mdx` satisfies their peer range.",
+        "`source.config.ts`, `src/lib/source.ts`, `src/app/docs/layout.tsx`, and `src/app/docs/[[...slug]]/page.tsx` exist.",
+        "`/docs/agro/intro` renders the synced harness page.",
+        "The docs sidebar has two roots: `Console` and `AGRO`.",
+        "The docs search returns `/docs/agro/quickstart` for the query `quickstart`.",
+        "The search index includes each blog post in `posts/`. A query for a word in one post title returns that post.",
+        "A fenced `mermaid` block renders through the existing `MermaidDiagram` component.",
+        "A click on a docs image opens the fumadocs `ImageZoom` view.",
+        "`npm run build` exits 0.",
+        "Verify in browser using agent-browser skill: the sidebar, search, a mermaid page, and image zoom work at 1280 px and 414 px. Check light mode and dark mode."
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "executed on hand at 41d63aa: npm ci 0, npm test 0, lint 0, build 0; GET /docs/agro/intro 200; GET /api/search?query=quickstart first result /docs/agro/quickstart. reasoned: fumadocs-core/ui 16.19.7, fumadocs-mdx 15.6.4 (latest; peer ^16.18.3) - criterion corrected. executed (worker): two sidebar roots, blog posts indexed (evidence/US-004/search.txt), mermaid via MermaidDiagram, ImageZoom, browser 1280/414 light/dark. Note: .gitignore /.source/ added outside owned paths; console stub pages for US-005. REOPENED round 1: docs sidebar is not sticky; scrolling a long page leaves the sidebar behind with an empty dark gap (evidence/US-005/docs-console-getting-started-image-1280.png). REPAIRED 7be6625: body overflow-x-hidden -> overflow-x-clip; executed (advisor, hand): lint 0, build 0; screenshot evidence/US-004/sticky-1280-dark.png shows pinned sidebar. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
+      "dependsOn": [
+        "US-002",
+        "US-003"
+      ],
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "source.config.ts",
+        "src/lib/source.ts",
+        "src/app/docs/",
+        "src/app/api/search/",
+        "mdx-components.tsx",
+        "src/components/docs/",
+        "next.config.mjs",
+        "src/app/globals.css",
+        "tsconfig.json"
+      ],
+      "commit": "72f837a",
+      "rounds": 2
+    },
+    {
+      "id": "US-005",
+      "title": "Port the Mifune-owned docs pages",
+      "description": "As a reader, I want the Console guide and the four standalone pages on the website so that agro-web holds no unique docs content.",
+      "acceptanceCriteria": [
+        "The 9 files in agro-web `docs/console/` at `74b27f2` exist under `content/docs/console/`.",
+        "`glossary`, `model-selection`, `open-core`, and `resources` exist under `content/docs/`.",
+        "Each image under agro-web `static/img/console/` exists under `public/docs/console/`, and each ported page resolves each image.",
+        "`/docs` renders the Console introduction, as agro-web `slug: /` does today.",
+        "`npm run build` exits 0 with no broken internal links.",
+        "Verify in browser using agent-browser skill: each ported page renders at 1280 px."
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "executed (worker, on hand at 18f2e68): build 0; 13 ported pages 200 via npm start; 26 internal hrefs from their HTML all 200; 21 PNGs in public/docs/console all 200; GET /docs renders Introduction. reasoned divergence: Console intro is content/docs/index.md (fumadocs has no slug frontmatter), listed first in console/meta.json; other 8 console pages under content/docs/console/. executed: agent-browser 1280 viewport shots of 13 pages, evidence/US-005.",
+      "dependsOn": [
+        "US-004"
+      ],
+      "files": [
+        "content/docs/",
+        "public/docs/"
+      ],
+      "commit": "18f2e68"
+    },
+    {
+      "id": "US-006",
+      "title": "Merge the two blogs",
+      "description": "As a reader, I want one AGRO blog at `mifune.dev/blog` so that no post exists in two places.",
+      "acceptanceCriteria": [
+        "Each other post in agro-web `blog/` at `74b27f2`, including `blog/archive/`, exists in `posts/` with its images under `public/blog/`.",
+        "The story does not port agro-web `blog/2026-07-11-deploy-open-harness-with-docker.md` or `blog/2026-07-07-open-harness-demo-guide.md`. The website posts `agro-getting-started` and `daily-work-with-agro` are the canonical posts.",
+        "The redirect map in US-009 sends the old URLs of the two skipped posts to the two canonical posts.",
+        "Author data from agro-web `blog/authors.yml` renders on each ported post.",
+        "`src/app/sitemap.ts` lists each post.",
+        "Verify in browser using agent-browser skill: `/blog` lists every post, and two ported posts render with images."
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "executed (advisor, hand at cedba48): npm test 0, lint 0, build 0. executed (worker): 7 agro-web posts ported (byoh archived), 2 duplicates skipped, authors render via src/config/authors.ts, sitemap lists all 10 non-archived posts, /blog lists 10, two posts render with covers (evidence/US-006). divergence: agro-web posts had no images, so new 1200x630 covers were generated; archived byoh hidden from index and sitemap per existing archive mechanism.",
+      "dependsOn": [
+        "US-004"
+      ],
+      "files": [
+        "posts/",
+        "public/blog/",
+        "src/lib/posts.ts",
+        "src/app/blog/",
+        "src/types/post.ts",
+        "src/app/sitemap.ts",
+        "src/app/api/search/",
+        "src/config/authors.ts"
+      ],
+      "commit": "cedba48"
+    },
+    {
+      "id": "US-007",
+      "title": "Serve the installer and CLI files",
+      "description": "As a user with an old install command, I want the website to serve the four installer files so that no install breaks.",
+      "acceptanceCriteria": [
+        "`scripts/sync-external-scripts.mjs` and `scripts/build-oh-cli.mjs` exist, ported from agro-web at `74b27f2`, and write the four files to `public/`.",
+        "`node --test scripts/sync-external-scripts.test.mjs scripts/build-oh-cli.test.mjs` exits 0.",
+        "`.gitignore` lists the four generated files.",
+        "The PWA configuration excludes the four files from the service-worker cache.",
+        "After `npm run build && npm start`, `curl -s localhost:3000/install.sh | head -1` prints a line that starts with `#!`."
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "executed (advisor, hand at 6706afe): npm test 0 (includes both new tests), lint 0, build 0; after npm start: install.sh first line #!/usr/bin/env bash; all four paths 200 with text/plain (.sh) and application/javascript (.js). executed (worker): sw.js has no precache entry for the four files and a NetworkOnly route; .gitignore lists them; prebuild order docs sync -> installer sync -> CLI build. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
+      "dependsOn": [
+        "US-003"
+      ],
+      "files": [
+        "scripts/sync-external-scripts.mjs",
+        "scripts/sync-external-scripts.test.mjs",
+        "scripts/build-oh-cli.mjs",
+        "scripts/build-oh-cli.test.mjs",
+        ".gitignore",
+        "next.config.mjs",
+        "package.json"
+      ],
+      "commit": "826d4c3",
+      "rounds": 1
+    },
+    {
+      "id": "US-008",
+      "title": "CI gates and release rebuild",
+      "description": "As the operator, I want the website CI to run the agro-web checks so that the website keeps each gate.",
+      "acceptanceCriteria": [
+        "`scripts/check-docs-drift.mjs` and `scripts/check-ste.mjs` exist, ported from agro-web at `74b27f2`, with their tests.",
+        "`check-ste.mjs` reads the STE checker from the release tag of the docs sync. The script scans `posts/` and `content/docs/`, and it skips `content/docs/agro/`.",
+        "`package.json` has the scripts `check:docs-drift` and `check:ste`.",
+        "`.github/workflows/ci.yml` runs `npm ci`, `npm test`, `npm run lint`, `npm run check:docs-drift`, `npm run check:ste`, and `npm run build` on each pull request to `master`.",
+        "`.github/workflows/rebuild.yml` runs on `repository_dispatch` type `agro-release`, on a daily schedule, and on `workflow_dispatch`. The workflow sends an HTTP POST to the Vercel deploy hook in the secret `VERCEL_DEPLOY_HOOK_URL`.",
+        "Each existing page and post passes `npm run check:ste`.",
+        "`external`: The operator adds the secret `VERCEL_DEPLOY_HOOK_URL` to the website repository before the PR merges."
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "executed (advisor, hand at e72f046): npm ci 0, npm test 0, lint 0, check:docs-drift 0, check:ste 0 (checker pinned to resolveReleaseTag, v0.41.0), build 0. executed (worker): yaml.safe_load + actionlint 1.7.7 pass on ci.yml and rebuild.yml; 93 STE findings fixed across 4 console pages and 10 posts without weakening the checker. external pending: operator adds VERCEL_DEPLOY_HOOK_URL.",
+      "dependsOn": [
+        "US-005",
+        "US-006"
+      ],
+      "files": [
+        "scripts/check-docs-drift.mjs",
+        "scripts/check-docs-drift.test.mjs",
+        "scripts/check-ste.mjs",
+        "scripts/check-ste.test.mjs",
+        "package.json",
+        ".github/workflows/",
+        "content/docs/",
+        "posts/"
+      ],
+      "commit": "e72f046"
+    },
+    {
+      "id": "US-009",
+      "title": "Host redirects and internal links",
+      "description": "As a reader with an old `agro.mifune.dev` link, I want each old URL to reach its new page so that links and ranking survive.",
+      "acceptanceCriteria": [
+        "`src/config/agro-redirects.ts` maps each URL in the agro-web sitemap fixture to a `mifune.dev` path. Each of the 44 legacy client redirects in agro-web `docusaurus.config.ts` reaches its final page in one hop.",
+        "`next.config.mjs` applies the map as permanent redirects, guarded by `has: [{ type: \"host\", value: \"agro.mifune.dev\" }]`.",
+        "`next.config.mjs` serves `/install.sh`, `/get-agro.sh`, `/agro.js`, and `/oh.js` on host `agro.mifune.dev` with HTTP 200 and no redirect.",
+        "`node --test src/config/agro-redirects.test.ts` exits 0. The test reads `.agro/tasks/retire-agro-web/evidence/agro-web-sitemap.xml` and fails when one sitemap URL has no mapping.",
+        "`src/config/offerings.ts`, `src/sections/AgentPickerSection.tsx`, `scripts/generate-llm-txt.mjs`, and `posts/agro-getting-started.md` link to `mifune.dev/docs` paths. `git grep -n \"agro.mifune.dev\" -- src scripts posts` prints only the redirect host guard.",
+        "`src/app/sitemap.ts` lists each docs page."
+      ],
+      "priority": 9,
+      "passes": true,
+      "notes": "executed (advisor, hand at 74ed1df): npm test 0 (agro-redirects.test: every fixture URL mapped, legacy one hop, installers not redirected), lint 0, drift 0, ste 0, build 0; Host agro.mifune.dev: / /docs/intro /docs/agro/intro /docs/console/nodes /blog/2026/05/19/four-words-multi-agent /blog/open-harness-demo-guide /docs/harnesses/codex /nope -> 308 to correct mifune.dev page; /install.sh /agro.js 200. executed: git grep agro.mifune.dev prints only the host guard. executed (worker): sitemap lists 47 /docs URLs. Successor mapping: /docs/agro/runtimes/openshell -> runtimes/overview. Repair round 1: faqs link, Docs internal in nav/footer/services. REOPENED by review (PR #106 round 1). REPAIRED in review round 1 (55a7a8d..e4c742d); executed (advisor, hand at e4c742d): npm test 0, build 0 (prebuild pinned v0.41.0), lint-after-build 0, drift 0; /docs/agro 308 -> /docs/agro/intro; search byoh []; Host agro.mifune.dev /docs/agro 308 -> mifune.dev/docs/agro/intro, /install.sh 200.",
+      "dependsOn": [
+        "US-005",
+        "US-006",
+        "US-007"
+      ],
+      "files": [
+        "src/config/agro-redirects.ts",
+        "src/config/agro-redirects.test.ts",
+        "next.config.mjs",
+        "src/config/offerings.ts",
+        "src/sections/AgentPickerSection.tsx",
+        "scripts/generate-llm-txt.mjs",
+        "public/llm.txt",
+        "posts/agro-getting-started.md",
+        "src/app/sitemap.ts",
+        ".agro/tasks/retire-agro-web/evidence/agro-web-sitemap.xml",
+        "package.json",
+        "src/data/faqs.ts",
+        "src/components/nav/TopNavBar.tsx",
+        "src/sections/Footer.tsx",
+        "src/components/footer/",
+        "src/app/services/page.tsx",
+        "src/lib/schema.ts"
+      ],
+      "rounds": 2,
+      "commit": "b8da2d5"
+    },
+    {
+      "id": "US-010",
+      "title": "Harness release dispatch and skill links",
+      "description": "As the operator, I want the harness to notify and link to the website so that nothing points at agro-web.",
+      "acceptanceCriteria": [
+        "`external`: The operator creates a fine-grained token for `mifunedev/website` and stores it in the harness as the secret `WEBSITE_DISPATCH_TOKEN`.",
+        "`external`: In the harness repository, `.github/workflows/release.yml` sends the `agro-release` dispatch with `WEBSITE_DISPATCH_TOKEN`. The target is `repos/mifunedev/website/dispatches`.",
+        "`external`: In the harness repository, `.agro/scripts/__tests__/release-dispatch.test.ts` asserts the new target and passes.",
+        "`external`: In the harness repository, `.agro/skills/agent-browser/SKILL.md` and `.agro/skills/agent-browser/references/recording.md` link to `https://mifune.dev/docs/agro/integrations/agent-browser`.",
+        "`external`: The harness change ships as its own pull request after US-009 deploys."
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-009"
+      ],
+      "files": [],
+      "external": true
+    },
+    {
+      "id": "US-011",
+      "title": "Domain cutover and archive",
+      "description": "As the operator, I want `agro.mifune.dev` served by the website and agro-web archived so that one site remains.",
+      "acceptanceCriteria": [
+        "`external`: The operator adds `agro.mifune.dev` to the Vercel website project and points the Cloudflare DNS record at Vercel.",
+        "`external`: `curl -sI https://agro.mifune.dev/docs/agro/intro` returns HTTP 308 with `location: https://mifune.dev/docs/agro/intro`.",
+        "`external`: `curl -s https://agro.mifune.dev/install.sh | head -1` prints a line that starts with `#!`.",
+        "`external`: After 4 weeks with no kill criterion met, the operator disables GitHub Pages on agro-web and archives the repository.",
+        "`external`: The DNS record for `agro.mifune.dev` stays in place for 12 months after the archive.",
+        "`external`: After the archive, the operator deletes the harness secret `AGRO_WEB_DISPATCH_TOKEN`."
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": "",
+      "dependsOn": [
+        "US-009",
+        "US-010"
+      ],
+      "files": [],
+      "external": true
+    },
+    {
+      "id": "US-012",
+      "title": "Manual review evidence",
+      "description": "As the reviewer, I want a browser journey and a redirect transcript so that I can accept the move without a second check.",
+      "acceptanceCriteria": [
+        "Verify in browser using agent-browser skill: a journey goes from `/` to `/docs`, then through search to an AGRO page. The journey ends at `/blog` and one ported post. Annotated screenshots go to `.agro/tasks/retire-agro-web/evidence/`.",
+        "Before the local boot, the story confirms that port 3000 is free. If the port is busy, the story sets `blocked` and names the process.",
+        "`.agro/tasks/retire-agro-web/evidence/manual-review.md` holds a transcript of `npm run build && npm start`. The transcript then runs `curl -sI -H 'Host: agro.mifune.dev' localhost:3000<path>` for 10 sampled sitemap URLs and the four installer paths."
+      ],
+      "priority": 12,
+      "passes": true,
+      "notes": "executed (worker, hand): agent-browser journey / -> nav Docs (same tab) -> Ctrl+K quickstart -> /docs/agro/quickstart -> /blog -> /blog/first-sandbox-agent-auth, 7 annotated 1280 shots + 1 at 414 in evidence/US-012; ports 3000 (container) and 3105 (brain) free; evidence/manual-review.md holds build+start transcript and 10 sitemap curls (308 correct) + 4 installer curls (200). Advisor cross-checked the same redirects in US-009 acceptance.",
+      "dependsOn": [
+        "US-008",
+        "US-009"
+      ],
+      "files": [
+        ".agro/tasks/retire-agro-web/evidence/"
+      ],
+      "commit": "d013039"
+    }
+  ],
+  "pr": 106,
+  "reviewed": "590dc4720f5df11d304aac174bea888e17dfef45"
+}

@@ -13,7 +13,7 @@ export default function RegisterButton({
   variant = "primary",
 }: RegisterButtonProps) {
   const baseStyles =
-    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-8 py-3 font-montserrat font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus";
+    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-8 py-3 font-montserrat font-medium tracking-wide transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus";
 
   const variantStyles = {
     primary: "bg-green-500 text-black hover:bg-green-400 shadow-lg",

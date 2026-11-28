@@ -11,7 +11,7 @@ export default function VideoPlaceholder({
 }: VideoPlaceholderProps) {
   return (
     <div
-      className={`aspect-video bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border-2 border-dashed border-gray-700 flex items-center justify-center ${className}`}
+      className={`aspect-video bg-linear-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border-2 border-dashed border-gray-700 flex items-center justify-center ${className}`}
     >
       <div className="text-center p-8">
         <MdPlayCircle className="w-16 h-16 mx-auto mb-4 text-gray-500" />

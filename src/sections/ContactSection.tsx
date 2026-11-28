@@ -37,7 +37,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-24 bg-gray-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-blue-900/20 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-purple-900/20 to-blue-900/20 pointer-events-none"></div>
       
       <div className="container mx-auto px-4">
         <motion.div
@@ -73,7 +73,7 @@ export default function ContactSection() {
                   </span>
                   <input
                     required
-                    className="w-full appearance-none rounded-lg border border-gray-600 bg-gray-700/70 px-4 py-4 pl-12 text-lg text-gray-200 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200"
+                    className="w-full appearance-none rounded-lg border border-gray-600 bg-gray-700/70 px-4 py-4 pl-12 text-lg text-gray-200 shadow-inner focus:border-indigo-500 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 transition-all duration-200"
                     id="name"
                     type="text"
                     placeholder="Enter Name..."
@@ -93,7 +93,7 @@ export default function ContactSection() {
                   </span>
                   <input
                     required
-                    className="w-full appearance-none rounded-lg border border-gray-600 bg-gray-700/70 px-4 py-4 pl-12 text-lg text-gray-200 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200"
+                    className="w-full appearance-none rounded-lg border border-gray-600 bg-gray-700/70 px-4 py-4 pl-12 text-lg text-gray-200 shadow-inner focus:border-indigo-500 focus:outline-hidden focus:ring-1 focus:ring-indigo-500 transition-all duration-200"
                     id="email"
                     type="email"
                     placeholder="Enter Email..."
@@ -111,9 +111,9 @@ export default function ContactSection() {
                   disabled={loading || successful}
                   className={`w-full rounded-lg px-6 py-4 text-xl font-bold text-white shadow-lg transition-all duration-300 ${
                     !successful 
-                      ? 'bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-700 hover:to-blue-600 shadow-indigo-500/30' 
-                      : 'bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 shadow-green-500/30'
-                  } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                      ? 'bg-linear-to-r from-indigo-600 to-blue-500 hover:from-indigo-700 hover:to-blue-600 shadow-indigo-500/30' 
+                      : 'bg-linear-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 shadow-green-500/30'
+                  } focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                   type="submit"
                 >
                   {loading ? (

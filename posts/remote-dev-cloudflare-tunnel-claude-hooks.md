@@ -11,11 +11,11 @@ author:
   linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
-You're deep in a coding session with Claude Code. The agent just refactored your authentication module, and you want to verify the changes on your phone while grabbing coffee. Or maybe you're pair-programming with a teammate across the globe who needs to see your local dev server.
+You're deep in a coding session with Claude Code. The agent just refactored your authentication module, and you want to verify the changes on your phone while grabbing coffee. Or you're pair-programming with a teammate across the globe who needs to see your local dev server.
 
-The problem? Your development servers are trapped on `localhost`. Quick tunnels like `ngrok` generate random URLs that change every session. What you need is a **persistent, secure connection** to your local environment—and ideally, an automated way to know when Claude has finished making changes.
+The problem? Your development servers stay trapped on `localhost`. Quick tunnels like `ngrok` generate random URLs that change every session. What you need is a **persistent, secure connection** to your local environment—and an automated signal when Claude finishes its changes.
 
-This guide shows you how to set up **static Cloudflare Tunnels** for remote access to your frontend and backend, then wire in **Claude Code hooks** to create an automated feedback loop that notifies you, runs builds, and keeps your remote preview always up-to-date.
+This guide shows you how to set up **static Cloudflare Tunnels** for remote access to your frontend and backend. Then you wire in **Claude Code hooks** to create an automated feedback loop. The loop notifies you, runs builds, and keeps your remote preview up to date.
 
 ---
 
@@ -55,7 +55,7 @@ This opens a browser window. Select the domain you want to use and authorize clo
 
 ### Step 2: Create the Tunnel
 
-Create a named tunnel that will persist across sessions:
+Create a named tunnel, which persists across sessions:
 
 ```bash
 cloudflared tunnel create dev-tunnel
@@ -90,8 +90,8 @@ ingress:
 
 **Key points:**
 - Each service gets its own subdomain
-- The `ingress` rules are evaluated top-to-bottom
-- The catch-all rule is **required**—cloudflared won't start without it
+- cloudflared evaluates the `ingress` rules top-to-bottom
+- cloudflared **requires** the catch-all rule and won't start without it
 
 ### Step 4: Create DNS Records
 
@@ -371,7 +371,7 @@ Stop your tunnel when not in use:
 cloudflared tunnel stop dev-tunnel
 ```
 
-Or use the system service to control it:
+Or use the systemd service to control the tunnel:
 
 ```bash
 sudo systemctl stop cloudflared
@@ -406,7 +406,7 @@ tail -f ~/.claude/logs/claude-code.log
 
 ### Frontend not updating
 
-If your frontend uses HMR (Hot Module Replacement), you may need to configure it to accept external connections:
+If your frontend uses HMR (Hot Module Replacement), you may need to configure the dev server to accept external connections:
 
 ```javascript
 // vite.config.js

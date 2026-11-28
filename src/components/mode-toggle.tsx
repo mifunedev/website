@@ -18,11 +18,18 @@ const THEME_OPTIONS = [
   { value: "system", label: "System" },
 ] as const;
 
+function subscribeToNothing() {
+  return () => {};
+}
+
 export function ModeToggle() {
   const { theme, resolvedTheme, setTheme: chooseTheme } = useTheme();
 
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  const mounted = React.useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false,
+  );
 
   const selected = THEME_OPTIONS.find((option) => option.value === theme);
   const triggerLabel =

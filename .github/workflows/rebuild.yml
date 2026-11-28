@@ -1,0 +1,30 @@
+name: Rebuild on AGRO release
+
+on:
+  repository_dispatch:
+    types: [agro-release]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: rebuild
+  cancel-in-progress: false
+
+jobs:
+  deploy-hook:
+    name: Trigger the Vercel deploy hook
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST to the Vercel deploy hook
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "::error::The secret VERCEL_DEPLOY_HOOK_URL is empty. Add the Vercel deploy hook URL as a repository secret."
+            exit 1
+          fi
+          curl --fail --silent --show-error --retry 3 --retry-all-errors -X POST -o /dev/null "$VERCEL_DEPLOY_HOOK_URL"
+          echo "The Vercel deploy hook accepted the request."

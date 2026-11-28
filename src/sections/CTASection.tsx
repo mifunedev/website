@@ -15,7 +15,7 @@ const deploymentBenefits = [
 ];
 
 const fieldClassName =
-  "min-h-11 w-full min-w-0 rounded-xl border border-[var(--oh-control-border)] bg-oh-paper px-4 py-3 font-montserrat text-base text-oh-ink placeholder:text-oh-muted focus-visible:border-oh-focus focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus disabled:cursor-not-allowed disabled:opacity-60";
+  "min-h-11 w-full min-w-0 rounded-xl border border-(--oh-control-border) bg-oh-paper px-4 py-3 font-montserrat text-base text-oh-ink placeholder:text-oh-muted focus-visible:border-oh-focus focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus disabled:cursor-not-allowed disabled:opacity-60";
 
 type CTASectionProps = {
   referrer?: string;
@@ -78,7 +78,7 @@ export default function CTASection({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-size-[32px_32px] opacity-20"
       />
 
       <div className="relative mx-auto grid min-w-0 max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-14">
@@ -88,11 +88,11 @@ export default function CTASection({
           </p>
           <h2
             id="deployment-heading"
-            className="mt-4 text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl"
+            className="mt-4 text-balance font-montserrat text-4xl font-bold leading-tight tracking-tight text-oh-ink sm:text-5xl sm:leading-none"
           >
             Discuss your AGRO deployment.
           </h2>
-          <p className="mt-6 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg">
+          <p className="mt-6 max-w-2xl font-montserrat text-base leading-relaxed text-oh-muted sm:text-lg sm:leading-7">
             Tell us how your team plans to run coding agents. We’ll use the
             details to discuss the Mifune Console and, for Console customers,
             optional hands-on deployment support.
@@ -102,7 +102,7 @@ export default function CTASection({
             {deploymentBenefits.map((benefit) => (
               <li
                 key={benefit}
-                className="flex min-w-0 items-start gap-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base"
+                className="flex min-w-0 items-start gap-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base sm:leading-6"
               >
                 <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-green-500/40 bg-green-500/10">
                   <Check
@@ -120,7 +120,7 @@ export default function CTASection({
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-oh-accent-raised">
               What happens next
             </p>
-            <p className="mt-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base">
+            <p className="mt-3 font-montserrat text-sm leading-relaxed text-oh-ink sm:text-base sm:leading-6">
               We’ll review your request and reply within 24 hours with a
               practical next step.
             </p>
@@ -144,7 +144,7 @@ export default function CTASection({
               role="status"
               aria-live="polite"
               tabIndex={-1}
-              className="mt-6 break-words rounded-xl border border-green-500/40 bg-green-500/10 px-4 py-4 font-montserrat text-sm leading-relaxed text-[var(--oh-success-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              className="mt-6 wrap-break-word rounded-xl border border-green-500/40 bg-green-500/10 px-4 py-4 font-montserrat text-sm leading-relaxed text-(--oh-success-text) focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
             >
               Thanks — we received your deployment request. We’ll reply to{" "}
               {Email} within 24 hours.
@@ -156,7 +156,7 @@ export default function CTASection({
               ref={resultRef}
               role="alert"
               tabIndex={-1}
-              className="mt-6 break-words rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-4 font-montserrat text-sm leading-relaxed text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus dark:text-red-300"
+              className="mt-6 wrap-break-word rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-4 font-montserrat text-sm leading-relaxed text-red-700 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus dark:text-red-300"
             >
               Something went wrong. Please try again, or email{" "}
               <a
@@ -268,7 +268,7 @@ export default function CTASection({
             <button
               type="submit"
               disabled={controlsDisabled}
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-oh-raised disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-oh-solid px-6 py-3 font-montserrat text-base font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-oh-raised disabled:cursor-not-allowed disabled:opacity-60"
             >
               {successful
                 ? "Request sent"

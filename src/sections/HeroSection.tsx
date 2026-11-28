@@ -31,17 +31,17 @@ const HeroSection = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-4 pb-16 pt-28 sm:pt-32">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_0%,transparent_65%,hsl(var(--background))_100%),linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] [background-size:100%_100%,24px_24px,24px_24px]" />
-      <div className="absolute left-1/2 top-1/4 h-[28rem] w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(34,197,94,0.16),rgba(16,185,129,0.07)_55%,transparent)]" />
+    <section className="relative flex min-h-svh flex-col overflow-hidden px-4 pb-16 pt-28 sm:pt-32">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_0%,transparent_65%,hsl(var(--background))_100%),linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-size-[100%_100%,24px_24px,24px_24px]" />
+      <div className="absolute left-1/2 top-1/4 h-112 w-[min(50rem,100vw)] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(34,197,94,0.16),rgba(16,185,129,0.07)_55%,transparent)]" />
 
       <div className="relative mx-auto my-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="text-center lg:text-left">
-          <h1 className="mb-6 text-balance font-montserrat text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="mb-6 text-balance font-montserrat text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl sm:leading-none lg:text-6xl lg:leading-none">
             A portable home for autonomous coding agents.
           </h1>
 
-          <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl font-montserrat text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-xl lg:leading-7">
             Persistent workspaces for Claude Code, Codex, Pi, or any harness:
             isolated, and still working after you disconnect. Self-host it, or
             start free in your browser.
@@ -52,7 +52,7 @@ const HeroSection = () => {
               href={OFFERING_URLS.cloud}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Start your free workspace
               <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -62,7 +62,7 @@ const HeroSection = () => {
               href={OFFERING_URLS.openSource}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 text-center font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/60 px-7 py-3 text-center font-montserrat text-base font-medium text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Self-host AGRO on GitHub
               <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -70,19 +70,19 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <p className="mb-5 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+          <p className="mb-5 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-5">
             Free for personal accounts · No card · No SSH key
           </p>
 
           <a
             href={OFFERING_URLS.support}
-            className="decoration-current/40 inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-1 font-montserrat text-sm font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+            className="decoration-current/40 inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-1 font-montserrat text-sm font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
           >
             <Headphones className="h-4 w-4" aria-hidden="true" />
             Need hands-on help? Explore Mifune engineering support
           </a>
 
-          <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+          <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-5">
             Apache-2.0 · Agent Governance Runtime Orchestrator · works with any
             coding harness
           </p>
@@ -159,10 +159,10 @@ const HeroSection = () => {
                         ) : null}
                       </span>
                       <span className="min-w-0">
-                        <span className="block break-words font-montserrat text-sm font-semibold text-foreground">
+                        <span className="block wrap-break-word font-montserrat text-sm font-semibold text-foreground">
                           {node.label}
                         </span>
-                        <span className="mt-0.5 block break-words font-montserrat text-xs leading-relaxed text-muted-foreground">
+                        <span className="mt-0.5 block wrap-break-word font-montserrat text-xs leading-relaxed text-muted-foreground">
                           {node.detail}
                         </span>
                       </span>

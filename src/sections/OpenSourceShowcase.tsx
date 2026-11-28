@@ -58,7 +58,7 @@ export default function OpenSourceShowcase({
                       ease: "easeOut",
                     }
               }
-              className="group flex min-h-11 flex-col rounded-xl border border-border bg-card p-6 transition-colors hover:border-green-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="group flex min-h-11 flex-col rounded-xl border border-border bg-card p-6 transition-colors hover:border-green-500/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-green-500/30 bg-green-500/10">
@@ -106,7 +106,7 @@ export default function OpenSourceShowcase({
             href={GITHUB_ORG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-6 py-3 font-montserrat text-sm font-medium text-foreground transition-colors hover:border-green-500/40 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-6 py-3 font-montserrat text-sm font-medium text-foreground transition-colors hover:border-green-500/40 hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <FaGithub className="h-4 w-4" aria-hidden="true" />
             Explore all our projects on GitHub
