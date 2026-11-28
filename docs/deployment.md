@@ -6,11 +6,12 @@ through **Cloudflare** (DNS + proxy / orange-cloud). Vercel builds the
 
 ## Live domains
 
-| Domain           | Behavior                                  |
-| ---------------- | ----------------------------------------- |
-| `mifune.dev`     | primary domain, served by Vercel          |
-| `www.mifune.dev` | Vercel redirects to `https://mifune.dev/` |
-| `mifune.io`      | redirects to `https://mifune.dev/`        |
+| Domain            | Behavior                                                                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mifune.dev`      | primary domain, served by Vercel                                                                                                                               |
+| `www.mifune.dev`  | Vercel redirects to `https://mifune.dev/`                                                                                                                      |
+| `mifune.io`       | redirects to `https://mifune.dev/`                                                                                                                             |
+| `agro.mifune.dev` | redirect-only host on the Vercel website project: `308` to the matching `https://mifune.dev` page; HTTP `200` for `/install.sh`, `/get-agro.sh`, `/agro.js`, `/oh.js` |
 
 ## DNS pattern (Cloudflare → Vercel)
 
@@ -23,6 +24,28 @@ sibling** (e.g. `mifune.dev`). Vercel's standard targets:
 
 Then add the domain in the Vercel project: **Settings → Domains**. Vercel
 issues the TLS certificate after DNS resolves.
+
+### `agro.mifune.dev` cutover
+
+The operator runs this cutover (US-011). The host rules live in
+`src/config/agro-redirects.ts` and apply only when the `Host` header is
+`agro.mifune.dev`.
+
+1. Add `agro.mifune.dev` to the Vercel website project: **Settings → Domains**.
+2. In Cloudflare, change the `agro` record from the agro-web GitHub Pages
+   target to `CNAME → cname.vercel-dns.com`, **Proxied**, like the `www`
+   record.
+3. Verify:
+
+   ```sh
+   curl -sI https://agro.mifune.dev/docs/agro | grep -iE '^(HTTP|location)'
+   # expect 308 and location: https://mifune.dev/docs/agro/intro
+   curl -s -o /dev/null -w '%{http_code}\n' https://agro.mifune.dev/install.sh
+   # expect 200
+   ```
+
+Keep the `agro` DNS record for 12 months after the agro-web repository is
+archived.
 
 > **SSL/TLS mode must be Full (or Full strict)** in the Cloudflare zone — **not
 > Flexible**. Flexible in front of Vercel causes redirect loops.
