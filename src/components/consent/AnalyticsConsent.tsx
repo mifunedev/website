@@ -59,6 +59,7 @@ export default function AnalyticsConsent({ gaId }: { gaId: string }) {
   useEffect(() => {
     const consent = readAnalyticsConsent(browserStorage());
     if (consent === null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBannerOpen(true);
     } else if (mayLoadAnalytics(consent)) {
       loadAnalytics();
