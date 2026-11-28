@@ -78,6 +78,7 @@ const nextConfig = {
   async redirects() {
     return [
       ...agroHostRedirects(INSTALLER_FILES),
+      { source: "/docs/agro", destination: "/docs/agro/intro", permanent: true },
       { source: "/case-studies", destination: "/", permanent: false },
       {
         source: "/blog/openharness-getting-started",

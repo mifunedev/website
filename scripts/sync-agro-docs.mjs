@@ -72,7 +72,7 @@ function linkTarget(target, pagePath, tag) {
   if (resolved.startsWith("docs/")) {
     if (!PAGE.test(resolved)) return null;
     const slug = resolved.slice("docs/".length).replace(PAGE, "");
-    return `${slug === "README" ? ROUTE : `${ROUTE}/${slug}`}${fragment}`;
+    return `${ROUTE}/${slug === "README" ? "intro" : slug}${fragment}`;
   }
   if (resolved === "docs") return null;
   return `https://github.com/${REPO}/blob/${tag}/${resolved}${fragment}`;

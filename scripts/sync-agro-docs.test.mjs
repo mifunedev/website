@@ -56,7 +56,7 @@ test("a relative page link becomes a /docs/agro route without the .md suffix", (
   const page = "[a](../connecting.md) [b](./pi.md#x) [c](codex.mdx) [d](../README.md)\n";
   assert.equal(
     rewriteLinks(page, "harnesses/pi.md", TAG),
-    "[a](/docs/agro/connecting) [b](/docs/agro/harnesses/pi#x) [c](/docs/agro/harnesses/codex) [d](/docs/agro)\n",
+    "[a](/docs/agro/connecting) [b](/docs/agro/harnesses/pi#x) [c](/docs/agro/harnesses/codex) [d](/docs/agro/intro)\n",
   );
   assert.equal(
     rewriteLinks("[h](./integrations/herdr.md#install)", "quickstart.md", TAG),
