@@ -24,7 +24,7 @@ Each step says **on the host** or **inside the sandbox**. The host is the machin
 
 ## 1. Check the host prerequisites — on the host
 
-The host needs three things:
+The host needs three programs:
 
 - [Docker](https://docs.docker.com/get-docker/) with the Compose plugin
 - [Git](https://git-scm.com/)
@@ -50,7 +50,7 @@ To read the script before it runs, download it first, then run `bash install.sh`
 
 ## 3. Create the sandbox — on the host
 
-Run this from any directory. You do not need a checkout of AGRO:
+Run the command from any directory. You do not need a checkout of AGRO:
 
 ```bash
 agro sandbox install docker
@@ -60,7 +60,7 @@ The wizard asks for the sandbox name, the timezone, your git identity, SSH, the 
 
 ![The terminal runs agro sandbox install docker, accepts each default in the wizard, starts the agro-sbx-1 container, and prints the next command: agro shell agro-sbx-1.](/blog/agro-getting-started/quickstart-sandbox-install.png)
 
-*The wizard with every default. Screenshots in this post come from the AGRO docs and were captured with an earlier release (0.18.1). The commands are the same in v0.24.0.*
+*The wizard with every default. Screenshots in this post come from the AGRO docs and show an earlier release (0.18.1). The commands are the same in v0.24.0.*
 
 Without `--checkout <dir>`, the sandbox runs the published image and needs no project checkout. To bind your own checkout instead, see [Installation → Create the sandbox](https://github.com/mifunedev/agro/blob/main/docs/installation.md#create-the-sandbox).
 
@@ -72,13 +72,13 @@ agro shell <name>
 
 You get `zsh` inside the container, as the `sandbox` user, in `/home/sandbox/harness`. You can omit `<name>` when you have only one sandbox. `agro sandbox list` shows every sandbox you created.
 
-![The agro shell banner for agro-sbx-1 lists the onboarding status of gh and each harness, tells you to run herdr next, and ends at a zsh prompt inside the sandbox.](/blog/agro-getting-started/quickstart-shell.png)
+![The agro shell banner for agro-sbx-1 lists the onboarding status of gh and each harness. The banner tells you to run herdr next and ends at a zsh prompt inside the sandbox.](/blog/agro-getting-started/quickstart-shell.png)
 
-The banner lists what is installed and what is authenticated, and names the next step. To attach VS Code, or to connect from another machine, see [Connecting to the sandbox](https://github.com/mifunedev/agro/blob/main/docs/connecting.md).
+The banner lists each installed tool and its authentication status, and names the next step. To attach VS Code, or to connect from another machine, see [Connecting to the sandbox](https://github.com/mifunedev/agro/blob/main/docs/connecting.md).
 
 ## 5. Start Herdr — inside the sandbox
 
-A fresh sandbox has no `herdr`. Install it, then start it:
+A fresh sandbox has no `herdr`. Install Herdr, then start Herdr:
 
 ```bash
 agro tool install herdr
@@ -107,9 +107,9 @@ Run `agro harness list` to see every harness id. Each install goes into `~/.loca
   <source src="/blog/agro-getting-started/agro-cli.mp4" type="video/mp4" />
 </video>
 
-*A real recording with the v0.24.0 CLI: `agro --version` prints `0.24.0`, and `agro harness list` shows each harness and whether it is installed.*
+*A real recording with the v0.24.0 CLI: `agro --version` prints `0.24.0`, and `agro harness list` shows each harness and its install status.*
 
-![A Herdr pane runs agro harness install claude-code and reports that claude-code is installed, with a link to its authentication guide.](/blog/agro-getting-started/quickstart-harness-install.png)
+![A Herdr pane runs agro harness install claude-code and reports a successful claude-code install, with a link to its authentication guide.](/blog/agro-getting-started/quickstart-harness-install.png)
 
 On a remote or headless sandbox, use device login: start the agent, run `/login`, and choose device mode. Open the printed URL on any device. Each [harness guide](https://github.com/mifunedev/agro/blob/main/docs/harnesses/overview.md) gives its own login command.
 
@@ -147,13 +147,13 @@ agro sandbox install docker --name <name>   # start it again
 
 ## 10. Destroy the sandbox — on the host
 
-> **Warning: data loss.** `agro destroy` deletes the sandbox home volume, with every agent login and every install in it. The command has no undo. Push any work you want to keep before you run it.
+> **Warning: data loss.** `agro destroy` deletes the sandbox home volume, with every agent login and every install in it. The command has no undo. Push any work you want to keep before you run the command.
 
 ```bash
 agro destroy <name>
 ```
 
-`agro destroy` names the volumes it will delete and asks you to type the sandbox name. Any other input aborts and removes nothing. After the delete, it removes the registry entry, so the name is free again.
+`agro destroy` names the volumes that the command will delete and asks you to type the sandbox name. Any other input aborts and removes nothing. After the delete, `agro destroy` removes the registry entry, so the name is free again.
 
 ## Where to go next
 

@@ -51,7 +51,7 @@ A paid node needs a card on file. Before you create the first paid node of a con
 1. On the **Billing** page, find the **Payment method** card.
 2. Select **Add card**. The checkout page of Stripe opens.
 3. Enter the card details and complete the checkout. The Console opens the **Billing** page again.
-4. Make sure that the **Payment method** card shows "Card on file."
+4. Confirm that the **Payment method** card shows "Card on file."
 
 If you try to create a paid node and the context has no card, the Console opens the checkout page.
 

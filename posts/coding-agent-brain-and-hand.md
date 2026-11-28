@@ -29,11 +29,11 @@ flowchart TB
     failure -.->|Failure stays on the hand| investigate
 ```
 
-The names come from Anthropic’s design for Claude Managed Agents, where the brain is Claude and its harness and the hands are the tools and sandboxes it uses. [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/research/managed-agents)
+The names come from Anthropic’s design for Claude Managed Agents. In that design, the brain is Claude and its harness, and the hands are the tools and sandboxes it uses. [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/research/managed-agents)
 
 ## Rehearse a database migration on a fork
 
-A migration can finish successfully and still mark a paid invoice as unpaid. Suppose you’re changing how your app stores payment status. Pick a paid invoice in the hand’s seeded development database. Open it in the app and record its ID, line items, and $120 total. That gives you a baseline you can check after the migration.
+A migration can finish successfully and still mark a paid invoice as unpaid. Suppose you’re changing how your app stores payment status. Pick a paid invoice in the hand’s seeded development database. Open the invoice in the app and record its ID, line items, and $120 total. That gives you a baseline you can check after the migration.
 
 Stop writes and shut down the hand’s local database cleanly. With your approval, the brain forks the hand, copying its disk, including the database files and any credentials stored there. Start each hand’s database and point each app at its own local copy. On the fork alone, apply the migration and run the new app revision. AGRO manages hands on Mifune Console or exe.dev. [Hand lifecycle](https://github.com/mifunedev/agro/blob/development/docs/lifecycle-commands.md#hands-from-a-brain-agro-hands)
 
@@ -50,7 +50,7 @@ Open the recorded invoice ID on both hands. Do the line items still match? Does 
 
 A Git worktree gives a worker a separate checkout. It doesn’t copy the database that checkout connects to. I’d use worktrees to write the migration and its tests, then fork the hand when I need both database states side by side.
 
-AGRO’s current guide assigns separate hands to parallel agents on the same project. One workflow I’d try is to have an advisor in Herdr delegate edits to workers on the brain, each using its own worktree on a shared hand. Workers can build and test in those worktrees. The advisor queues final verification in the repo’s primary checkout and checks each integrated commit in turn. On a small hand, running one heavy job at a time leaves room for workers to keep editing. [AGRO hands guide](https://github.com/mifunedev/agro/blob/development/.agro/skills/sandbox/references/hands.md#choose-when)
+AGRO’s current guide assigns separate hands to parallel agents on the same project. One workflow I’d try has an advisor in Herdr delegate edits to workers on the brain. Each worker uses its own worktree on a shared hand. Workers can build and test in those worktrees. The advisor queues final verification in the repo’s primary checkout and checks each integrated commit in turn. On a small hand, running one heavy job at a time leaves room for workers to keep editing. [AGRO hands guide](https://github.com/mifunedev/agro/blob/development/.agro/skills/sandbox/references/hands.md#choose-when)
 
 ## Dispose of the rehearsal. Pause the workspace you’ll reuse.
 

@@ -18,7 +18,7 @@ The [introduction](/docs) tells you what the Console is.
 ## Open the Connect menu
 
 1. Open the node page.
-2. Make sure that the node is running. The browser editor and the browser terminal open only on a running node.
+2. Confirm that the node is running. The browser editor and the browser terminal open only on a running node.
 3. To open the default way, click **Connect**.
 4. To select a different way, click the arrow next to **Connect**. The menu shows the four items.
 
@@ -147,7 +147,7 @@ When you create a node, open **Advanced: direct SSH access (optional)** and sele
    ![The SSH dialog shows the SSH command and the host fingerprint for web-app.](/docs/console/connect-2.png)
    Callouts: 1 is the SSH command. 2 is the host fingerprint.
 
-5. Replace `<your-key-file>` with your private key file. Make sure that the file has the permissions `600`.
+5. Replace `<your-key-file>` with your private key file. Confirm that the file has the permissions `600`.
 6. Run the command in the terminal on your computer.
 7. Compare the host fingerprint with the fingerprint in the dialog. If the two fingerprints are different, stop and do not connect.
 

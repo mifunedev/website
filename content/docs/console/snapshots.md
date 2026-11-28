@@ -37,7 +37,7 @@ A name has at most 80 characters.
 
 ## Create a snapshot
 
-Before you start, make sure that the node is running. You cannot create a snapshot of a free node.
+Before you start, confirm that the node is running. You cannot create a snapshot of a free node.
 
 1. Open the node page.
 2. In the **Snapshot** card, select **Create snapshot**.
@@ -49,7 +49,7 @@ The card shows **Creating snapshot** until the snapshot is ready.
 
 ## Replace a snapshot
 
-When the node already has a snapshot, the card shows **Replace snapshot** instead of **Create snapshot**. Before you start, make sure that the node is running.
+When the node already has a snapshot, the card shows **Replace snapshot** instead of **Create snapshot**. Before you start, confirm that the node is running.
 
 > **Warning:** After the new snapshot is ready, Replace deletes the current snapshot. You cannot get the current snapshot back.
 
@@ -66,7 +66,7 @@ The current snapshot stays available until the new snapshot is ready. If the new
 
 ## Restore a snapshot
 
-Restore rebuilds the node from its snapshot. Before you start, make sure that the node is running or failed.
+Restore rebuilds the node from its snapshot. Before you start, confirm that the node is running or failed.
 
 > **Warning:** Restore overwrites the workspace of the node. Restore removes each change that you made after the time of the snapshot. Before you restore, copy each file that you want to keep out of the node.
 

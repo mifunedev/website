@@ -51,7 +51,7 @@ The MCP Inspector lets you browse and test any MCP server before wiring it into 
 npx @modelcontextprotocol/inspector
 ```
 
-This launches a local web UI (usually at `http://localhost:6274`).
+This launches a local web UI (by default at `http://localhost:6274`).
 
 ### Connect to Orchestra's MCP Endpoint
 
@@ -76,7 +76,7 @@ Cursor natively supports MCP. Add Orchestra's endpoint to your MCP config:
 
 ### Cursor MCP Config
 
-Create or edit your Cursor MCP configuration file (usually `~/.cursor/mcp.json` or via Cursor settings):
+Create or edit your Cursor MCP configuration file (`~/.cursor/mcp.json`, or the Cursor settings):
 
 ```json
 {
@@ -195,9 +195,9 @@ Each `data:` line is a Server-Sent Event (SSE) containing an array with a label 
 
 - **401 Unauthorized**: Verify your `x-api-key` header is correct and the key is active.
 - **404 Not Found**: Confirm the URL is `https://chat.ruska.ai/mcp` (not `/api/mcp`).
-- **Connection refused in Inspector**: Ensure `transport` is set to `http`, not `stdio`.
+- **Connection refused in Inspector**: Set `transport` to `http`, not `stdio`.
 - **Cursor doesn't see tools**: Restart Cursor after editing `mcp.json`. Check for JSON syntax errors.
-- **SSE buffering issues**: If using a proxy (nginx, Cloudflare), ensure SSE passthrough is enabled. Disable response buffering.
+- **SSE buffering issues**: If you use a proxy (nginx, Cloudflare), enable SSE passthrough. Disable response buffering.
 - **Tool timeout**: Some tools (like `python_sandbox`) have execution limits. Simplify your request or check rate limits.
 - **CORS errors (browser)**: The MCP endpoint is not designed for browser-side calls. Use a backend proxy or the CLI.
 
@@ -213,7 +213,7 @@ The inline MCP pattern unlocks serious flexibility:
 4. **Streaming by Default** — Real-time feedback on tool execution, not just final results.
 5. **Vendor-Neutral** — MCP is an open standard. Your config works across compatible clients.
 
-This is how production agent systems work: dynamic tool registries, inline configuration, and streaming execution.
+Production agent systems work the same way: dynamic tool registries, inline configuration, and streaming execution.
 
 ---
 

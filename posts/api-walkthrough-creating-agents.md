@@ -13,7 +13,7 @@ author:
 
 Building production-grade AI agents is hard. This practical guide shows you, step-by-step, how to use Orchestra’s API to:
 
-- Register and test a powerful API tool (with validation for LLMs)
+- Register and test an API tool (with validation for LLMs)
 - Wire tools into a persistent agent “Assistant”
 - Run your agent with a streaming response
 - Create a persistent thread for long-term context
@@ -54,7 +54,7 @@ curl -X POST "https://chat.enso.sh/api/tools" \
   }'
 ```
 
-This endpoint registers the tool and its required arguments for model-safe calling.
+This endpoint registers `create_post` and its required arguments for model-safe calling.
 
 ## Step 2: Test the Tool Directly
 
@@ -97,7 +97,7 @@ curl -X POST "https://chat.enso.sh/api/llm/invoke" \
   }'
 ```
 
-The model should call the `create_post` tool—check its arguments in the output.
+The model should call `create_post`. Check the arguments of that call in the output.
 
 ## Step 4: Create a Production-Ready Assistant
 
@@ -119,7 +119,7 @@ curl -X POST "https://chat.enso.sh/api/assistants" \
   }'
 ```
 
-You’ll get back an `assistant_id`—save it!
+The response contains an `assistant_id`. Save the `assistant_id`.
 
 ## Step 5: Run the Agent, See the Stream
 
@@ -141,7 +141,7 @@ curl -X POST "https://chat.enso.sh/api/llm/stream" \
   }'
 ```
 
-You’ll see the agent reason, call the tool, and emit a confirmation.
+You’ll see the agent reason, call `create_post`, and emit a confirmation.
 
 ## Step 6: (Optional) Persistent Memory with Threads
 

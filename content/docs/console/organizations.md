@@ -86,7 +86,7 @@ You must have the `admin` role. This procedure adds the member immediately. The 
 2. In **GitHub username**, type the username.
 3. In **Role**, select a role.
 4. Select **Add to** and the organization name.
-5. In the confirmation, open the GitHub profile link. Make sure that the profile is the person that you want to add.
+5. In the confirmation, open the GitHub profile link. Confirm that the profile is the person that you want to add.
 6. Select **Add member**.
 
 ## Manage pending invitations

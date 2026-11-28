@@ -48,7 +48,7 @@ The `/worktrees` skill owns the procedure. Its description reads: "Manage .workt
 
 ## 2. Isolate each change in a worktree
 
-Each repository keeps its worktrees at its own root. For a project clone, that is `projects/<owner>/<repo>/.worktrees/`. The subfolder names follow the branch prefix: `feat/`, `bug/`, `task/`, `audit/`, and `skill/`.
+Each repository keeps its worktrees at its own root. For a project clone, the path is `projects/<owner>/<repo>/.worktrees/`. The subfolder names follow the branch prefix: `feat/`, `bug/`, `task/`, `audit/`, and `skill/`.
 
 Ask for a workspace for an issue:
 
@@ -79,7 +79,7 @@ The clip below is a real Herdr session in this sandbox. The left pane lists the 
 
 ![A Herdr session with two panes. The left pane lists four story worktrees and the feat/88 branches. The right pane, in the feat/88-us-004 worktree, shows the five user stories of the plan.](/blog/daily-work-with-agro/herdr-two-panes.png)
 
-Herdr detects agents in panes without extra setup. The `/herdr` skill lets one agent inspect other panes from the command line. Its description reads: "Drive the Herdr terminal workspace manager from the CLI inside the AGRO sandbox — inspect and control workspaces, tabs, panes, agents, and git worktrees over the Herdr socket API, and read or steer other running agents headlessly."
+Herdr detects agents in panes without extra setup. The `/herdr` skill lets one agent inspect other panes from the command line. The skill drives the Herdr terminal workspace manager from the CLI inside the AGRO sandbox. The skill inspects and controls workspaces, tabs, panes, agents, and git worktrees over the Herdr socket API. The skill also reads or steers other running agents headlessly.
 
 Two commands do most of the work:
 
@@ -88,13 +88,13 @@ herdr agent list | jq -r '.result.agents[] | "\(.pane_id)\t\(.agent)\t\(.agent_s
 herdr agent read w1:p1E --source recent --lines 80 | jq -r '.result.read.text'
 ```
 
-The skill also sets limits. An agent does not run bare `herdr` from inside a run, does not stop the Herdr server, and does not close or type into a pane that it did not create.
+The skill also sets limits. An agent does not run bare `herdr` from inside a run. The agent does not stop the Herdr server. The agent also does not close or type into a pane that the agent did not create.
 
 Headless services, such as the Slack gateway and Cloudflared tunnels, do not belong in Herdr. They stay in their own named tmux sessions.
 
 ## 4. Decide scope with `/council`
 
-Some decisions have more than one reasonable answer. Use `/council` for those decisions before you write a plan. The skill description reads: "Compare independent perspectives on a bounded question and return one Council Brief. The active advisor owns verification and synthesis."
+Some decisions have more than one valid answer. Use `/council` for those decisions before you write a plan. The skill description reads: "Compare independent perspectives on a bounded question and return one Council Brief. The active advisor owns verification and synthesis."
 
 ```text
 /council Should the blog archive old posts or delete them?
@@ -106,7 +106,7 @@ A council gives advice only. The skill states: "Council advice does not authoriz
 
 ## 5. Write the plan with `/prd`
 
-`/prd` turns the decision into a plan. The skill description reads: "Write or revise a repository-grounded plan for one task at `.agro/tasks/<slug>/prd.md`, with user stories, binary acceptance criteria, and the section headings of the feature issue template." The skill plans only. It never implements the plan.
+`/prd` turns the decision into a plan. The skill writes or revises a repository-grounded plan for one task at `.agro/tasks/<slug>/prd.md`. The plan has user stories, binary acceptance criteria, and the section headings of the feature issue template. The skill plans only. It never implements the plan.
 
 ```text
 /prd archive stale posts and publish three AGRO guides
