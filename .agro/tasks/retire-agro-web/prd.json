@@ -161,8 +161,8 @@
         "Verify in browser using agent-browser skill: `/blog` lists every post, and two ported posts render with images."
       ],
       "priority": 6,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed (advisor, hand at cedba48): npm test 0, lint 0, build 0. executed (worker): 7 agro-web posts ported (byoh archived), 2 duplicates skipped, authors render via src/config/authors.ts, sitemap lists all 10 non-archived posts, /blog lists 10, two posts render with covers (evidence/US-006). divergence: agro-web posts had no images, so new 1200x630 covers were generated; archived byoh hidden from index and sitemap per existing archive mechanism.",
       "dependsOn": [
         "US-004"
       ],
@@ -175,7 +175,8 @@
         "src/app/sitemap.ts",
         "src/app/api/search/",
         "src/config/authors.ts"
-      ]
+      ],
+      "commit": "cedba48"
     },
     {
       "id": "US-007",
