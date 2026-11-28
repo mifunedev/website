@@ -235,7 +235,7 @@
   }
   html,
   body {
-    @apply overflow-x-hidden;
+    @apply overflow-x-clip;
   }
   body {
     @apply bg-background text-foreground;
