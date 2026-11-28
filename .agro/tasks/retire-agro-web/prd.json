@@ -220,8 +220,8 @@
         "`external`: The operator adds the secret `VERCEL_DEPLOY_HOOK_URL` to the website repository before the PR merges."
       ],
       "priority": 8,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed (advisor, hand at e72f046): npm ci 0, npm test 0, lint 0, check:docs-drift 0, check:ste 0 (checker pinned to resolveReleaseTag, v0.41.0), build 0. executed (worker): yaml.safe_load + actionlint 1.7.7 pass on ci.yml and rebuild.yml; 93 STE findings fixed across 4 console pages and 10 posts without weakening the checker. external pending: operator adds VERCEL_DEPLOY_HOOK_URL.",
       "dependsOn": [
         "US-005",
         "US-006"
@@ -235,7 +235,8 @@
         ".github/workflows/",
         "content/docs/",
         "posts/"
-      ]
+      ],
+      "commit": "e72f046"
     },
     {
       "id": "US-009",
