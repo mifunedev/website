@@ -102,8 +102,8 @@
         "Verify in browser using agent-browser skill: the sidebar, search, a mermaid page, and image zoom work at 1280 px and 414 px. Check light mode and dark mode."
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "executed on hand at 41d63aa: npm ci 0, npm test 0, lint 0, build 0; GET /docs/agro/intro 200; GET /api/search?query=quickstart first result /docs/agro/quickstart. reasoned: fumadocs-core/ui 16.19.7, fumadocs-mdx 15.6.4 (latest; peer ^16.18.3) - criterion corrected. executed (worker): two sidebar roots, blog posts indexed (evidence/US-004/search.txt), mermaid via MermaidDiagram, ImageZoom, browser 1280/414 light/dark. Note: .gitignore /.source/ added outside owned paths; console stub pages for US-005. REOPENED round 1: docs sidebar is not sticky; scrolling a long page leaves the sidebar behind with an empty dark gap (evidence/US-005/docs-console-getting-started-image-1280.png).",
+      "passes": true,
+      "notes": "executed on hand at 41d63aa: npm ci 0, npm test 0, lint 0, build 0; GET /docs/agro/intro 200; GET /api/search?query=quickstart first result /docs/agro/quickstart. reasoned: fumadocs-core/ui 16.19.7, fumadocs-mdx 15.6.4 (latest; peer ^16.18.3) - criterion corrected. executed (worker): two sidebar roots, blog posts indexed (evidence/US-004/search.txt), mermaid via MermaidDiagram, ImageZoom, browser 1280/414 light/dark. Note: .gitignore /.source/ added outside owned paths; console stub pages for US-005. REOPENED round 1: docs sidebar is not sticky; scrolling a long page leaves the sidebar behind with an empty dark gap (evidence/US-005/docs-console-getting-started-image-1280.png). REPAIRED 7be6625: body overflow-x-hidden -> overflow-x-clip; executed (advisor, hand): lint 0, build 0; screenshot evidence/US-004/sticky-1280-dark.png shows pinned sidebar.",
       "dependsOn": [
         "US-002",
         "US-003"
@@ -121,7 +121,7 @@
         "src/app/globals.css",
         "tsconfig.json"
       ],
-      "commit": "41d63aa",
+      "commit": "46a8c73",
       "rounds": 1
     },
     {
