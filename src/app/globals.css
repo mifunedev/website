@@ -273,6 +273,10 @@
   --tw-prose-kbd: var(--color-fd-foreground);
 }
 
+#nd-page .prose :where(h1, h2, h3, h4, h5, h6) a {
+  text-decoration: none;
+}
+
 #nd-page .prose :where(code)::before,
 #nd-page .prose :where(code)::after {
   content: none;
