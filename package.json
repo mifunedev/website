@@ -7,11 +7,11 @@
   },
   "scripts": {
     "dev": "next dev --webpack",
-    "prebuild": "node scripts/generate-llm-txt.mjs && node scripts/sync-agro-docs.mjs",
+    "prebuild": "node scripts/generate-llm-txt.mjs && node scripts/sync-agro-docs.mjs && node scripts/sync-external-scripts.mjs && node scripts/build-oh-cli.mjs",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
-    "test": "node --test src/lib/analytics-consent.test.ts scripts/oh-source.test.mjs scripts/sync-agro-docs.test.mjs"
+    "test": "node --test src/lib/analytics-consent.test.ts scripts/oh-source.test.mjs scripts/sync-agro-docs.test.mjs scripts/sync-external-scripts.test.mjs scripts/build-oh-cli.test.mjs"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.5",

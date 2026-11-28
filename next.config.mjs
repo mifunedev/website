@@ -3,18 +3,29 @@ import { createMDX } from "fumadocs-mdx/next";
 
 const withMDX = createMDX();
 
+const INSTALLER_FILES = ["install.sh", "get-agro.sh", "agro.js", "oh.js"];
+
 const withPWA = withPWAInit({
   cacheOnFrontEndNav: true,
   aggressiveFrontEndNavCaching: false,
   reloadOnOnline: true,
   swcMinify: true,
   dest: "public",
+  publicExcludes: ["!noprecache/**/*", ...INSTALLER_FILES.map((file) => `!${file}`)],
+  extendDefaultRuntimeCaching: true,
   disable: process.env.NODE_ENV !== "production",
   fallbacks: {
     document: "/offline",
   },
   workboxOptions: {
     disableDevLogs: true,
+    runtimeCaching: [
+      {
+        urlPattern: /^https?:\/\/[^/]+\/(?:install\.sh|get-agro\.sh|agro\.js|oh\.js)(?:[?#].*)?$/i,
+        handler: "NetworkOnly",
+        options: { cacheName: "agro-installers" },
+      },
+    ],
   },
 });
 
@@ -48,6 +59,20 @@ const nextConfig = {
         hostname: "i.ytimg.com",
       },
     ],
+  },
+  async headers() {
+    return INSTALLER_FILES.map((file) => ({
+      source: `/${file}`,
+      headers: [
+        {
+          key: "Content-Type",
+          value: file.endsWith(".sh")
+            ? "text/plain; charset=utf-8"
+            : "application/javascript; charset=utf-8",
+        },
+        { key: "Cache-Control", value: "no-cache" },
+      ],
+    }));
   },
   async redirects() {
     return [
