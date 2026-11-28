@@ -1,4 +1,7 @@
 import withPWAInit from "@ducanh2912/next-pwa";
+import { createMDX } from "fumadocs-mdx/next";
+
+const withMDX = createMDX();
 
 const withPWA = withPWAInit({
   cacheOnFrontEndNav: true,
@@ -58,4 +61,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+export default withMDX(withPWA(nextConfig));

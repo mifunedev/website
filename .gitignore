@@ -49,3 +49,6 @@ public/workbox-*.js
 
 # synced from the AGRO release at build time
 /content/docs/agro/
+
+# fumadocs-mdx generated collections
+/.source/

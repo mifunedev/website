@@ -23,6 +23,9 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.4.7",
+    "fumadocs-core": "^16.19.7",
+    "fumadocs-mdx": "^15.6.4",
+    "fumadocs-ui": "^16.19.7",
     "gray-matter": "^4.0.3",
     "htmlparser2": "^10.0.0",
     "lucide-react": "^0.556.0",
@@ -43,6 +46,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.5",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

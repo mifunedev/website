@@ -3,6 +3,9 @@
 
 @plugin '@tailwindcss/typography';
 
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -242,6 +245,14 @@
     outline: 2px solid var(--oh-focus);
     outline-offset: 3px;
   }
+}
+
+:root,
+.dark {
+  --color-fd-background: hsl(var(--background));
+  --color-fd-foreground: hsl(var(--foreground));
+  --color-fd-border: hsl(var(--border));
+  --color-fd-primary: var(--oh-accent);
 }
 
 @layer utilities {
