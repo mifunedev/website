@@ -332,15 +332,16 @@
         "`.agro/tasks/retire-agro-web/evidence/manual-review.md` holds a transcript of `npm run build && npm start`. The transcript then runs `curl -sI -H 'Host: agro.mifune.dev' localhost:3000<path>` for 10 sampled sitemap URLs and the four installer paths."
       ],
       "priority": 12,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed (worker, hand): agent-browser journey / -> nav Docs (same tab) -> Ctrl+K quickstart -> /docs/agro/quickstart -> /blog -> /blog/first-sandbox-agent-auth, 7 annotated 1280 shots + 1 at 414 in evidence/US-012; ports 3000 (container) and 3105 (brain) free; evidence/manual-review.md holds build+start transcript and 10 sitemap curls (308 correct) + 4 installer curls (200). Advisor cross-checked the same redirects in US-009 acceptance.",
       "dependsOn": [
         "US-008",
         "US-009"
       ],
       "files": [
         ".agro/tasks/retire-agro-web/evidence/"
-      ]
+      ],
+      "commit": "d013039"
     }
   ]
 }
