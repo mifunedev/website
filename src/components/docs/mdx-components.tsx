@@ -7,7 +7,9 @@ import { MermaidDiagram } from "@/components/ui/MermaidDiagram";
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
-    img: (props: ComponentProps<typeof ImageZoom>) => <ImageZoom {...props} />,
+    img: (props) => (
+      <ImageZoom {...(props as ComponentProps<typeof ImageZoom>)} />
+    ),
     Mermaid: ({ chart }: { chart: string }) => <MermaidDiagram chart={chart} />,
     ...components,
   };
