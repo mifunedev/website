@@ -9,6 +9,7 @@ import {
   Settings,
   Waypoints,
 } from "lucide-react";
+import Link from "next/link";
 import AgroBrandBar from "@/components/brand/AgroBrandBar";
 import TopNavBar from "@/components/nav/TopNavBar";
 import JsonLd from "@/components/seo/JsonLd";
@@ -144,16 +145,12 @@ export default function ServicesPage() {
 
               <p className="mt-7 font-montserrat text-sm leading-relaxed text-muted-foreground">
                 For Console customers · No established deployment required ·{" "}
-                <a
+                <Link
                   href={OFFERING_URLS.docs}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
                 >
                   Read the AGRO docs
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                </Link>
               </p>
             </div>
 

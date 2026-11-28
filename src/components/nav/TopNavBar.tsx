@@ -23,7 +23,7 @@ const menuItems = [
   {
     href: OFFERING_URLS.docs,
     label: "Docs",
-    external: true,
+    external: false,
   },
   { href: "/blog", label: "Blog", external: false },
   {

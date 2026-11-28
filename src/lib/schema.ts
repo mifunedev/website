@@ -83,7 +83,7 @@ export function cloudServiceSchema(): Record<string, unknown> {
     subjectOf: {
       "@type": "WebSite",
       name: "AGRO Documentation",
-      url: OFFERING_URLS.docs,
+      url: `${SITE_URL}${OFFERING_URLS.docs}`,
     },
   };
 }

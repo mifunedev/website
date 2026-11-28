@@ -70,16 +70,9 @@ const FooterSection = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href={OFFERING_URLS.docs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={footerLinkClass}
-                >
+                <Link href={OFFERING_URLS.docs} className={footerLinkClass}>
                   Documentation
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
