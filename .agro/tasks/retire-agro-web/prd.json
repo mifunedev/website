@@ -190,8 +190,8 @@
         "After `npm run build && npm start`, `curl -s localhost:3000/install.sh | head -1` prints a line that starts with `#!`."
       ],
       "priority": 7,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed (advisor, hand at 6706afe): npm test 0 (includes both new tests), lint 0, build 0; after npm start: install.sh first line #!/usr/bin/env bash; all four paths 200 with text/plain (.sh) and application/javascript (.js). executed (worker): sw.js has no precache entry for the four files and a NetworkOnly route; .gitignore lists them; prebuild order docs sync -> installer sync -> CLI build.",
       "dependsOn": [
         "US-003"
       ],
@@ -203,7 +203,8 @@
         ".gitignore",
         "next.config.mjs",
         "package.json"
-      ]
+      ],
+      "commit": "6706afe"
     },
     {
       "id": "US-008",
