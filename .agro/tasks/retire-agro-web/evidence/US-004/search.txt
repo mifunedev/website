@@ -1,0 +1,33 @@
+== GET /api/search?query=quickstart
+page /docs/agro/quickstart
+page /docs/agro/installation
+page /docs/agro/intro
+page /docs/agro/contributing
+page /docs/agro/harnesses/roder
+page /docs/agro/integrations/github
+== GET /api/search?query=langchain
+page /blog/anthropic-reasoning-langchain-init-chat-model
+== GET /api/search?query=SWE Toolkit
+page /blog/swe-toolkit-2026
+== GET /api/search?query=Cloudflare Tunnels
+page /blog/remote-dev-cloudflare-tunnel-claude-hooks
+page /docs/agro/intro
+page /docs/agro/connecting
+page /docs/agro/integrations/herdr
+page /docs/agro/installation
+page /docs/agro/harnesses/openclaw
+page /docs/agro/harnesses/t3code
+page /docs/agro/configuration
+page /docs/agro/harnesses/hermes
+page /docs/agro/security-considerations
+== blog pages in index:
+agro-getting-started query='Self-host AGRO: Your Coding-Agent' hits=2
+anthropic-reasoning-langchain-init-chat-model query='How to Configure Anthropic' hits=2
+api-walkthrough-creating-agents query='How to Build and' hits=2
+coding-agent-brain-and-hand query='Brain + Hands starts' hits=2
+connect-mcp-tools-to-orchestra-agents query='How to Connect MCP' hits=2
+daily-work-with-agro query='Daily work with AGRO:' hits=2
+remote-dev-cloudflare-tunnel-claude-hooks query='Remote Agent Development with' hits=2
+rendering-interactive-charts query='Rendering Interactive Charts with' hits=1
+run-agro-on-mifune-console query='Run AGRO on Mifune' hits=2
+swe-toolkit-2026 query='SWE Toolkit (2026): A' hits=2
