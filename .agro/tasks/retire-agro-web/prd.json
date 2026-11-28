@@ -40,8 +40,8 @@
         "Verify in browser using agent-browser skill: `/`, `/pricing`, `/blog`, and one post render at 1280 px and 414 px. The layout matches the `fbf7bf1` production pages."
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed on hand via agro run at a17cfe9: npm ci 0, npm test 0, npm run lint (eslint . flat config) 0, npm run build (next build --webpack) 0. reasoned: package.json next 16.4.6, react ^19.2.0, eslint-config-next 16.4.6, tailwindcss ^4.3.5. executed (worker): next-pwa builds on Next 16 with --webpack; plugin cannot scope aggressiveFrontEndNavCaching per path, so it is false for all routes, which excludes /docs. executed: docs/deployment.md names Vercel. executed (worker): agent-browser full-page shots of /, /pricing, /blog, one post at 1280/414 vs production, evidence/US-002. Out-of-owned-path: tsconfig.json forced by Next 16.",
       "dependsOn": [],
       "files": [
         "package.json",
@@ -55,7 +55,8 @@
         "components.json",
         "src/",
         "docs/deployment.md"
-      ]
+      ],
+      "commit": "a17cfe9"
     },
     {
       "id": "US-003",
