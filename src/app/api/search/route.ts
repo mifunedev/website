@@ -1,6 +1,7 @@
 import { createSearchAPI, type AdvancedIndex } from "fumadocs-core/search/server";
 import { source } from "@/lib/source";
-import { getSortedPosts } from "@/lib/posts";
+import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
+import type { Post } from "@/types/post";
 
 function docsIndexes(): AdvancedIndex[] {
   return source.getPages().map((page) => ({
@@ -14,18 +15,23 @@ function docsIndexes(): AdvancedIndex[] {
 }
 
 function postIndexes(): AdvancedIndex[] {
-  return getSortedPosts().map((post) => ({
-    id: `/blog/${post.slug}`,
-    title: post.title,
-    description: post.excerpt,
-    url: `/blog/${post.slug}`,
-    tag: "blog",
-    breadcrumbs: ["Blog"],
-    structuredData: {
-      headings: [],
-      contents: post.excerpt ? [{ heading: undefined, content: post.excerpt }] : [],
-    },
-  }));
+  return getAllPostSlugs()
+    .map((slug) => getPostBySlug(slug))
+    .filter((post): post is Post => post !== null)
+    .map((post) => ({
+      id: `/blog/${post.slug}`,
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      tag: "blog",
+      breadcrumbs: ["Blog"],
+      structuredData: {
+        headings: [],
+        contents: post.excerpt
+          ? [{ heading: undefined, content: post.excerpt }]
+          : [],
+      },
+    }));
 }
 
 export const { GET } = createSearchAPI("advanced", {

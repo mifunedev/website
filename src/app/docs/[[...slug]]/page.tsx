@@ -18,10 +18,11 @@ export default async function Page({ params }: Props) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const hasHeading = page.data.toc.some((item) => item.depth === 1);
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
+      {hasHeading ? null : <DocsTitle>{page.data.title}</DocsTitle>}
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDX

@@ -255,6 +255,29 @@
   --color-fd-primary: var(--oh-accent);
 }
 
+#nd-page .prose {
+  --tw-prose-body: color-mix(in oklab, var(--color-fd-foreground) 90%, transparent);
+  --tw-prose-headings: var(--color-fd-foreground);
+  --tw-prose-lead: var(--color-fd-foreground);
+  --tw-prose-links: var(--color-fd-foreground);
+  --tw-prose-bold: var(--color-fd-foreground);
+  --tw-prose-counters: var(--color-fd-muted-foreground);
+  --tw-prose-bullets: var(--color-fd-muted-foreground);
+  --tw-prose-hr: var(--color-fd-border);
+  --tw-prose-quotes: var(--color-fd-foreground);
+  --tw-prose-quote-borders: var(--color-fd-border);
+  --tw-prose-captions: var(--color-fd-foreground);
+  --tw-prose-code: var(--color-fd-foreground);
+  --tw-prose-th-borders: var(--color-fd-border);
+  --tw-prose-td-borders: var(--color-fd-border);
+  --tw-prose-kbd: var(--color-fd-foreground);
+}
+
+#nd-page .prose :where(code)::before,
+#nd-page .prose :where(code)::after {
+  content: none;
+}
+
 @layer utilities {
   @media (prefers-reduced-motion: reduce) {
     html {
