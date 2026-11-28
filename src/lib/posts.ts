@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { Post } from '@/types/post';
+import { resolveAuthors } from '@/config/authors';
 
 function extractFirstImage(content: string): string | null {
   const mdMatch = content.match(/!\[.*?\]\((.*?)\)/);
@@ -9,6 +10,28 @@ function extractFirstImage(content: string): string | null {
   const htmlMatch = content.match(/<img[^>]+src=["'](.*?)["']/);
   if (htmlMatch) return htmlMatch[1];
   return null;
+}
+
+function parsePost(slug: string, fileContents: string): Post {
+  const { content, data } = matter(fileContents);
+  const authors = Array.isArray(data.authors) ? resolveAuthors(data.authors) : undefined;
+  const author = authors?.[0]
+    ? { name: authors[0].name, picture: authors[0].imageUrl }
+    : (data.author as { name: string; picture: string } | undefined);
+
+  return {
+    slug,
+    title: data.title as string,
+    date: data.date as string,
+    excerpt: data.excerpt as string | undefined,
+    content,
+    coverImage: data.coverImage as string | undefined,
+    socialImage: (data.coverImage || extractFirstImage(content)) as string | undefined,
+    categories: data.categories as string[] | undefined,
+    authors,
+    author,
+    archived: data.archived === true,
+  };
 }
 
 export function getSortedPosts(): Post[] {
@@ -35,22 +58,7 @@ export function getSortedPosts(): Post[] {
       const slug = fileName.replace(/\.md$/, '');
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { content, data } = matter(fileContents);
-
-      const socialImage = data.coverImage || extractFirstImage(content);
-
-      return {
-        slug,
-        title: data.title as string,
-        date: data.date as string,
-        excerpt: data.excerpt as string | undefined,
-        content,
-        coverImage: data.coverImage as string | undefined,
-        socialImage: socialImage as string | undefined,
-        categories: data.categories as string[] | undefined,
-        author: data.author as { name: string; picture: string } | undefined,
-        archived: data.archived === true,
-      };
+      return parsePost(slug, fileContents);
     })
     .filter((post) => !post.archived);
 
@@ -72,22 +80,7 @@ export function getPostBySlug(slug: string): Post | null {
     }
 
     const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { content, data } = matter(fileContents);
-
-    const socialImage = data.coverImage || extractFirstImage(content);
-
-    return {
-      slug: realSlug,
-      title: data.title as string,
-      date: data.date as string,
-      excerpt: data.excerpt as string | undefined,
-      content,
-      coverImage: data.coverImage as string | undefined,
-      socialImage: socialImage as string | undefined,
-      categories: data.categories as string[] | undefined,
-      author: data.author as { name: string; picture: string } | undefined,
-      archived: data.archived === true,
-    };
+    return parsePost(realSlug, fileContents);
   } catch (e) {
     console.error(e);
     return null;

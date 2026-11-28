@@ -1,3 +1,5 @@
+import type { Author } from "@/config/authors";
+
 export interface Post {
   slug: string;
   title: string;
@@ -8,9 +10,9 @@ export interface Post {
   socialImage?: string;
   categories?: string[];
   archived?: boolean;
+  authors?: Author[];
   author?: {
     name: string;
     picture: string;
   };
 }
-

@@ -61,14 +61,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     keywords: post.categories,
     robots: post.archived ? { index: false } : undefined,
-    authors: post.author ? [{ name: post.author.name }] : undefined,
+    authors:
+      post.authors?.map((author) => ({ name: author.name, url: author.url })) ??
+      (post.author ? [{ name: post.author.name }] : undefined),
     openGraph: {
       title: post.title,
       description: description,
       type: "article",
       url: `${siteUrl}/blog/${post.slug}`,
       publishedTime: post.date,
-      authors: post.author ? [post.author.name] : undefined,
+      authors:
+        post.authors?.map((author) => author.name) ??
+        (post.author ? [post.author.name] : undefined),
       images: [
         {
           url: imageUrl,
@@ -133,7 +137,25 @@ export default async function BlogPost({ params }: Props) {
             </h1>
 
             <div className="flex items-center font-montserrat text-muted-foreground">
-              {post.author && (
+              {post.authors?.map((author) => (
+                <a
+                  key={author.key}
+                  href={author.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mr-6 flex items-center hover:text-green-500"
+                >
+                  <Image
+                    src={author.imageUrl}
+                    alt={author.name}
+                    width={40}
+                    height={40}
+                    className="mr-3 rounded-full"
+                  />
+                  <span>{author.name}</span>
+                </a>
+              ))}
+              {!post.authors && post.author && (
                 <div className="mr-6 flex items-center">
                   {post.author.picture && (
                     <Image

@@ -1,0 +1,96 @@
+---
+title: "BYOH — stop installing agent CLIs on your laptop"
+date: "2026-04-28"
+excerpt: "My laptop had 14 Node versions, 3 Pythons, and a Rust toolchain that I never asked for. One Docker sandbox replaced all of it and let me run Claude, Codex, and Gemini in parallel."
+categories: ["AGRO", "Agents", "Docker"]
+coverImage: "/blog/byoh/cover.png"
+authors: ["ryan"]
+archived: true
+---
+
+> **Note**
+>
+> Updated on 2026-10-08. Open Harness is now AGRO. This post uses the current names and commands.
+
+> **Archived.** This post shows the April 2026 multi-agent model. AGRO now gives one repository one sandbox. The image contains no agent CLI. You install each agent with `agro harness install <id>`. This page keeps the post for history.
+
+# BYOH — stop installing agent CLIs on your laptop
+
+Last week I ran `ls ~/.nvm/versions/node` and counted **14 Node versions**. `pyenv` held three Pythons. A Rust toolchain from one Tauri experiment in 2023 was still there. npm did not list my `~/.local/share/pnpm/global` directory. My laptop held years of old dependencies.
+
+Codex started the problem. I wanted to try the OpenAI CLI next to Claude Code. The Codex install asked for Node 20. The Gemini CLI install asked for Node 22. Pi, the agent runtime that I wanted for the glue, asked for a clean Python 3.11 venv. Each agent CLI added new dependencies and a new chance to break the other two.
+
+I stopped and put the whole setup in a container. Now my laptop runs Docker and one binary. **Each** agent CLI lives inside a sandbox, and I delete the sandbox in seconds.
+
+The project is AGRO. The pattern is BYOH: Bring Your Own Harness. The next sections show the change to my workflow.
+
+## Three commands for each agent
+
+Run these commands on the host:
+
+```bash
+agro sandbox install docker --name my-agent   # create and start the sandbox
+agro shell my-agent                           # open zsh inside the sandbox
+agro destroy my-agent                         # delete the sandbox and its volumes
+```
+
+The sandbox is a Debian container with `gh`, `tmux`, Node, and the rest of the toolchain. In April 2026, the image also contained Claude Code, Codex, the Gemini CLI, and Pi. Today, the image contains no agent CLI. Inside the sandbox, install each agent that you use:
+
+```bash
+agro harness install claude
+agro harness install codex
+agro harness install pi
+```
+
+Each install lands in `~/.local` in the home volume, so the install survives a container recreate. Then sign in to each agent once. See the [Quickstart](/docs/agro/quickstart).
+
+You no longer upgrade brew first. A CLI for Node 22 no longer breaks on Node 24. The host stays clean, and the sandbox does the work.
+
+## What you get
+
+In April 2026, the container gave me these features on day one. Each item states the current equivalent.
+
+- **Agent CLIs.** The image held `claude`, `codex`, `gemini`, and `pi`. Today, `agro harness install <id>` installs each agent. Run `agro harness list` for each id.
+- **Identity files.** `SOUL.md`, `MEMORY.md`, and `AGENTS.md` gave each agent the same context. Today, the root `AGENTS.md` sets the rules, and each agent reads the root `AGENTS.md`.
+- **Scheduled prompts.** Heartbeat files ran on a schedule. Today, the cron runtime reads the schedules in `crons/`.
+- **A Slack bot.** The bot connected the agent to a channel. You mentioned the bot and got a reply in a thread. Today, `agro gateway pi` starts the Slack bridge. See [Slack](/docs/agro/integrations/slack).
+- **A public tunnel.** The sandbox put a development server on a public HTTPS URL. Today, `agro tool install cloudflared` installs the tunnel client. See [Connecting](/docs/agro/connecting).
+- **A Docker socket.** The agent started its own containers for tests, builds, and browsers. Today, the host Docker socket is off by default. Set `access.dockerSocket` to `true` to mount the socket. See [Security considerations](/docs/agro/security-considerations).
+
+The sandbox is the unit. You can keep one sandbox for work, one for a weekend project, and one for an AI experiment.
+
+## Agents in a race
+
+This result surprised me.
+
+When each CLI lives inside one sandbox, **parallel runs are easy**. I open three tmux panes. In April 2026, the third pane ran `gemini`. The current catalog has no Gemini CLI, so the third pane runs `agy`, the Antigravity CLI:
+
+```bash
+tmux new-session  -d -s race 'cd .worktrees/feat-x-claude  && claude'
+tmux split-window -t race    'cd .worktrees/feat-x-codex   && codex'
+tmux split-window -t race    'cd .worktrees/feat-x-agy     && agy'
+```
+
+Each agent gets its own worktree and its own branch, with the same prompt. Twenty minutes later, I run `git diff` on the branches. I keep the best implementation, or I cherry-pick the good ideas from all three. In my April runs, Claude was strongest on architecture, and Codex was strongest on test coverage. Gemini found a corner case from time to time. The winner is not the point. The point is that **a comparison now costs little**.
+
+This race fails when each CLI needs a different Node version on the host. The race works when all CLIs share one well-tuned container. That shared container is the actual product.
+
+## Try it
+
+Run these commands on the host:
+
+```bash
+npm install -g @mifune/agro
+agro sandbox install docker --name my-agent
+agro shell my-agent
+```
+
+Without Node on the host, install `agro` with the bootstrap script instead of npm:
+
+```bash
+curl -fsSL https://github.com/mifunedev/agro/releases/latest/download/install.sh | bash
+```
+
+`agro sandbox install docker` runs from any directory. The full docs are in the [Quickstart](/docs/agro/quickstart). The source is at [github.com/mifunedev/agro](https://github.com/mifunedev/agro). Send issues and pull requests. To improve BYOH, bring _your_ harness rules and tell me what is missing.
+
+The next post covers **one worktree per agent**. That git pattern makes the three-pane race above safe on your real codebase.
