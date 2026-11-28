@@ -90,7 +90,7 @@
       "title": "fumadocs at `/docs`",
       "description": "As a reader, I want AGRO and Mifune Console docs at `mifune.dev/docs` so that the docs and the product pages share one site.",
       "acceptanceCriteria": [
-        "`fumadocs-core`, `fumadocs-ui`, and `fumadocs-mdx` are dependencies at the same major version.",
+        "`fumadocs-core` and `fumadocs-ui` are dependencies at the same major version, and `fumadocs-mdx` satisfies their peer range.",
         "`source.config.ts`, `src/lib/source.ts`, `src/app/docs/layout.tsx`, and `src/app/docs/[[...slug]]/page.tsx` exist.",
         "`/docs/agro/intro` renders the synced harness page.",
         "The docs sidebar has two roots: `Console` and `AGRO`.",
@@ -102,8 +102,8 @@
         "Verify in browser using agent-browser skill: the sidebar, search, a mermaid page, and image zoom work at 1280 px and 414 px. Check light mode and dark mode."
       ],
       "priority": 4,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed on hand at 41d63aa: npm ci 0, npm test 0, lint 0, build 0; GET /docs/agro/intro 200; GET /api/search?query=quickstart first result /docs/agro/quickstart. reasoned: fumadocs-core/ui 16.19.7, fumadocs-mdx 15.6.4 (latest; peer ^16.18.3) - criterion corrected. executed (worker): two sidebar roots, blog posts indexed (evidence/US-004/search.txt), mermaid via MermaidDiagram, ImageZoom, browser 1280/414 light/dark. Note: .gitignore /.source/ added outside owned paths; console stub pages for US-005.",
       "dependsOn": [
         "US-002",
         "US-003"
@@ -120,7 +120,8 @@
         "next.config.mjs",
         "src/app/globals.css",
         "tsconfig.json"
-      ]
+      ],
+      "commit": "41d63aa"
     },
     {
       "id": "US-005",
