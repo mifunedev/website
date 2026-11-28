@@ -1,5 +1,20 @@
 {
   "title": "Console",
   "root": true,
-  "pages": ["index"]
+  "pages": [
+    "../index",
+    "getting-started",
+    "nodes",
+    "connect",
+    "snapshots",
+    "free-tier",
+    "billing",
+    "organizations",
+    "api-tokens",
+    "---More---",
+    "../open-core",
+    "../model-selection",
+    "../glossary",
+    "../resources"
+  ]
 }
