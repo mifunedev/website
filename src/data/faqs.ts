@@ -63,7 +63,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "How do I start?",
-    answer: `Open console.mifune.dev and start free with a personal account: ${freeTierOffer}, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at mifune.dev/docs for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.`,
+    answer: `Open console.mifune.dev and start free with a personal account: ${freeTierOffer}, no card, opened in your browser. Visit github.com/mifunedev/agro and read the docs at mifune.dev/docs/agro/intro for the self-hosted path. Email hello@mifune.dev to discuss engineering support for the Console.`,
   },
 ];
 

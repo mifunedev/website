@@ -146,7 +146,7 @@ export default function ServicesPage() {
               <p className="mt-7 font-montserrat text-sm leading-relaxed text-muted-foreground">
                 For Console customers · No established deployment required ·{" "}
                 <Link
-                  href={OFFERING_URLS.docs}
+                  href="/docs/agro/intro"
                   className="inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
                 >
                   Read the AGRO docs
