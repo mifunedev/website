@@ -13,7 +13,7 @@
     "lint": "eslint .",
     "check:docs-drift": "node scripts/check-docs-drift.mjs",
     "check:ste": "node scripts/check-ste.mjs",
-    "test": "node --test src/lib/analytics-consent.test.ts scripts/oh-source.test.mjs scripts/sync-agro-docs.test.mjs scripts/sync-external-scripts.test.mjs scripts/build-oh-cli.test.mjs scripts/check-docs-drift.test.mjs scripts/check-ste.test.mjs"
+    "test": "node --test src/lib/analytics-consent.test.ts src/config/agro-redirects.test.ts scripts/oh-source.test.mjs scripts/sync-agro-docs.test.mjs scripts/sync-external-scripts.test.mjs scripts/build-oh-cli.test.mjs scripts/check-docs-drift.test.mjs scripts/check-ste.test.mjs"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.5",

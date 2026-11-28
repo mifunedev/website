@@ -1,12 +1,11 @@
 import Image from "next/image";
 
-const DOCS_BASE_URL = "https://agro.mifune.dev";
+const DOCS_BASE_URL = "/docs/agro";
 
 type Agent = {
   name: string;
   description: string;
   docsPath?: string;
-  docsUrl?: string;
   logo:
     | "claude-code"
     | "codex"
@@ -26,74 +25,73 @@ const agents: Agent[] = [
   {
     name: "Claude Code",
     description: "Anthropic's terminal coding agent.",
-    docsPath: "/docs/harnesses/claude-code",
+    docsPath: "/harnesses/claude-code",
     logo: "claude-code",
   },
   {
     name: "Codex",
     description: "OpenAI's CLI coding agent.",
-    docsPath: "/docs/harnesses/codex",
+    docsPath: "/harnesses/codex",
     logo: "codex",
   },
   {
     name: "OpenCode",
     description: "Terminal agent with OpenAI OAuth support.",
-    docsPath: "/docs/harnesses/opencode",
+    docsPath: "/harnesses/opencode",
     logo: "opencode",
   },
   {
     name: "Pi",
     description: "A lightweight, customizable agent.",
-    docsPath: "/docs/harnesses/pi",
+    docsPath: "/harnesses/pi",
     logo: "pi",
   },
   {
     name: "Hermes",
     description: "Nous Research's self-improving agent CLI.",
-    docsPath: "/docs/harnesses/hermes",
+    docsPath: "/harnesses/hermes",
     logo: "hermes",
   },
   {
     name: "OpenClaw",
     description: "Gateway-first personal agent runtime.",
-    docsPath: "/docs/harnesses/openclaw",
+    docsPath: "/harnesses/openclaw",
     logo: "openclaw",
   },
   {
     name: "Grok Build",
     description: "xAI's terminal coding agent and CLI.",
-    docsPath: "/docs/harnesses/grok-build",
+    docsPath: "/harnesses/grok-build",
     logo: "grok-build",
   },
   {
     name: "Muse Code",
     description: "Meta's terminal coding agent.",
-    docsPath: "/docs/harnesses/muse-code",
+    docsPath: "/harnesses/muse-code",
     logo: "muse-code",
   },
   {
     name: "Antigravity CLI",
     description: "Google's terminal coding agent.",
-    docsPath: "/docs/harnesses/antigravity-cli",
+    docsPath: "/harnesses/antigravity-cli",
     logo: "antigravity-cli",
   },
   {
     name: "fx",
     description: "Vercel Labs' native coding agent (experimental).",
-    docsUrl: "https://github.com/mifunedev/agro/blob/main/docs/harnesses/fx.md",
+    docsPath: "/harnesses/fx",
     logo: "fx",
   },
   {
     name: "Prime Agent",
     description: "Prime Intellect's coding agent.",
-    docsUrl:
-      "https://github.com/mifunedev/agro/blob/main/docs/harnesses/prime-agent.md",
+    docsPath: "/harnesses/prime-agent",
     logo: "prime-agent",
   },
   {
     name: "T3 Code",
     description: "Browser UI over Claude/Codex/OpenCode (port 3773).",
-    docsPath: "/docs/harnesses/t3code",
+    docsPath: "/harnesses/t3code",
     logo: "t3-code",
   },
 ];
@@ -230,9 +228,9 @@ export default function AgentPickerSection() {
         >
           {agents.map((agent) => (
             <li key={agent.name} className="min-w-0">
-              {agent.docsPath || agent.docsUrl ? (
+              {agent.docsPath ? (
                 <a
-                  href={agent.docsUrl ?? `${DOCS_BASE_URL}${agent.docsPath}`}
+                  href={`${DOCS_BASE_URL}${agent.docsPath}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex h-full min-h-28 min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"

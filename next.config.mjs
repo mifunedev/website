@@ -1,5 +1,6 @@
 import withPWAInit from "@ducanh2912/next-pwa";
 import { createMDX } from "fumadocs-mdx/next";
+import { agroHostRedirects } from "./src/config/agro-redirects.ts";
 
 const withMDX = createMDX();
 
@@ -76,6 +77,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      ...agroHostRedirects(INSTALLER_FILES),
       { source: "/case-studies", destination: "/", permanent: false },
       {
         source: "/blog/openharness-getting-started",

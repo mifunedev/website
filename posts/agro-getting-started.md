@@ -10,13 +10,13 @@ author:
   linkedin: https://www.linkedin.com/in/ryan-eggleston
 ---
 
-> **As of AGRO v0.24.0.** AGRO ships often. If a command here disagrees with the [quickstart](https://github.com/mifunedev/agro/blob/main/docs/quickstart.md), the quickstart wins.
+> **As of AGRO v0.24.0.** AGRO ships often. If a command here disagrees with the [quickstart](/docs/agro/quickstart), the quickstart wins.
 
 AGRO gives AI coding agents a workspace you control. It packages a Docker sandbox and shared agent procedures. You choose the coding harness: Claude Code, Codex, Pi, or another. Your host stays clean, because the project toolchain and every agent CLI live inside the sandbox.
 
 This guide is the self-host path: you run Docker on your own laptop or VM. If you want Mifune to run the machine for you, use **Mifune Console** instead. See [Run AGRO on Mifune Console](/blog/run-agro-on-mifune-console).
 
-The guide walks the full lifecycle once, from a bare host to an agent in a sandbox, and back to nothing. It links to the [AGRO docs](https://agro.mifune.dev) for detail instead of copying it.
+The guide walks the full lifecycle once, from a bare host to an agent in a sandbox, and back to nothing. It links to the [AGRO docs](/docs/agro/intro) for detail instead of copying it.
 
 ## Where you type each command
 
@@ -30,7 +30,7 @@ The host needs three programs:
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) 20 or newer
 
-The host needs nothing else. pnpm, Python, and every agent CLI run inside the sandbox. See [Installation → Prerequisites](https://github.com/mifunedev/agro/blob/main/docs/installation.md#prerequisites).
+The host needs nothing else. pnpm, Python, and every agent CLI run inside the sandbox. See [Installation → Prerequisites](/docs/agro/installation#prerequisites).
 
 ## 2. Install the `agro` CLI — on the host
 
@@ -46,7 +46,7 @@ Without Node, use the release script. It installs `agro` to `~/.local/bin/agro` 
 curl -fsSL https://github.com/mifunedev/agro/releases/latest/download/install.sh | bash
 ```
 
-To read the script before it runs, download it first, then run `bash install.sh`. [Installation](https://github.com/mifunedev/agro/blob/main/docs/installation.md) covers the review-first install, the PATH rules, and upgrades. Run `agro --version` to confirm the install.
+To read the script before it runs, download it first, then run `bash install.sh`. [Installation](/docs/agro/installation) covers the review-first install, the PATH rules, and upgrades. Run `agro --version` to confirm the install.
 
 ## 3. Create the sandbox — on the host
 
@@ -62,7 +62,7 @@ The wizard asks for the sandbox name, the timezone, your git identity, SSH, the 
 
 *The wizard with every default. Screenshots in this post come from the AGRO docs and show an earlier release (0.18.1). The commands are the same in v0.24.0.*
 
-Without `--checkout <dir>`, the sandbox runs the published image and needs no project checkout. To bind your own checkout instead, see [Installation → Create the sandbox](https://github.com/mifunedev/agro/blob/main/docs/installation.md#create-the-sandbox).
+Without `--checkout <dir>`, the sandbox runs the published image and needs no project checkout. To bind your own checkout instead, see [Installation → Create the sandbox](/docs/agro/installation#create-the-sandbox).
 
 ## 4. Enter the sandbox — on the host
 
@@ -74,7 +74,7 @@ You get `zsh` inside the container, as the `sandbox` user, in `/home/sandbox/har
 
 ![The agro shell banner for agro-sbx-1 lists the onboarding status of gh and each harness. The banner tells you to run herdr next and ends at a zsh prompt inside the sandbox.](/blog/agro-getting-started/quickstart-shell.png)
 
-The banner lists each installed tool and its authentication status, and names the next step. To attach VS Code, or to connect from another machine, see [Connecting to the sandbox](https://github.com/mifunedev/agro/blob/main/docs/connecting.md).
+The banner lists each installed tool and its authentication status, and names the next step. To attach VS Code, or to connect from another machine, see [Connecting to the sandbox](/docs/agro/connecting).
 
 ## 5. Start Herdr — inside the sandbox
 
@@ -89,7 +89,7 @@ Herdr is the persistent terminal workspace for agents, tests, and development se
 
 ![Herdr shows the harness workspace in the spaces list and two panes side by side: one runs agro --version, the other runs claude --version.](/blog/agro-getting-started/herdr-two-panes.png)
 
-See [Herdr](https://github.com/mifunedev/agro/blob/main/docs/integrations/herdr.md) for panes, worktrees, and the optional provider integrations.
+See [Herdr](/docs/agro/integrations/herdr) for panes, worktrees, and the optional provider integrations.
 
 ## 6. Install a coding harness — inside the sandbox
 
@@ -111,7 +111,7 @@ Run `agro harness list` to see every harness id. Each install goes into `~/.loca
 
 ![A Herdr pane runs agro harness install claude-code and reports a successful claude-code install, with a link to its authentication guide.](/blog/agro-getting-started/quickstart-harness-install.png)
 
-On a remote or headless sandbox, use device login: start the agent, run `/login`, and choose device mode. Open the printed URL on any device. Each [harness guide](https://github.com/mifunedev/agro/blob/main/docs/harnesses/overview.md) gives its own login command.
+On a remote or headless sandbox, use device login: start the agent, run `/login`, and choose device mode. Open the printed URL on any device. Each [harness guide](/docs/agro/harnesses/overview) gives its own login command.
 
 The sandbox now works. The next step is optional.
 
@@ -134,7 +134,7 @@ agro ps <name>
 
 ![The terminal runs agro ps agro-sbx-1 and shows one container, agro-sbx-1, with status Up and healthy.](/blog/agro-getting-started/lifecycle-commands-ps.png)
 
-`agro ps` shows the sandbox container and its health. [Lifecycle commands](https://github.com/mifunedev/agro/blob/main/docs/lifecycle-commands.md) lists every verb.
+`agro ps` shows the sandbox container and its health. [Lifecycle commands](/docs/agro/lifecycle-commands) lists every verb.
 
 ## 9. Stop the sandbox — on the host
 
@@ -157,7 +157,7 @@ agro destroy <name>
 
 ## Where to go next
 
-- [Quickstart](https://github.com/mifunedev/agro/blob/main/docs/quickstart.md): the canonical version of these steps
-- [Connecting to the sandbox](https://github.com/mifunedev/agro/blob/main/docs/connecting.md): VS Code, SSH, and mobile access
-- [Harnesses overview](https://github.com/mifunedev/agro/blob/main/docs/harnesses/overview.md): every supported agent and how to sign in
+- [Quickstart](/docs/agro/quickstart): the canonical version of these steps
+- [Connecting to the sandbox](/docs/agro/connecting): VS Code, SSH, and mobile access
+- [Harnesses overview](/docs/agro/harnesses/overview): every supported agent and how to sign in
 - [Run AGRO on Mifune Console](/blog/run-agro-on-mifune-console): the managed path, with no Docker host to run
