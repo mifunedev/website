@@ -70,8 +70,8 @@
         "The `prebuild` script in `package.json` runs the sync script before `next build`."
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed on hand at 98ec51b: npm test 0 (includes sync-agro-docs and oh-source tests); AGRO_SCRIPTS_REF=v0.40.0 node scripts/sync-agro-docs.mjs exit 0, 35 pages into content/docs/agro with meta.json per folder. executed: .gitignore line 51 /content/docs/agro/. executed (worker): empty AGRO_SCRIPTS_REF resolves latest release v0.40.0. reasoned: prebuild = generate-llm-txt && sync-agro-docs runs before next build.",
       "dependsOn": [
         "US-002"
       ],
@@ -82,7 +82,8 @@
         "scripts/oh-source.test.mjs",
         ".gitignore",
         "package.json"
-      ]
+      ],
+      "commit": "98ec51b"
     },
     {
       "id": "US-004",
