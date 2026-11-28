@@ -217,7 +217,7 @@ const SuggestionSection = () => {
                           )}
                           <button
                             onClick={() => toggleDescription(feature.id)}
-                            className="ml-2 text-gray-400 focus:outline-none"
+                            className="ml-2 text-gray-400 focus:outline-hidden"
                           >
                             {expandedFeatures.has(feature.id) ? (
                               <FaChevronUp />
@@ -286,7 +286,7 @@ const SuggestionSection = () => {
                 </label>
                 <input
                   required
-                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow focus:outline-none"
+                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow-sm focus:outline-hidden"
                   id="name"
                   type="text"
                   placeholder="Jane Doe"
@@ -303,7 +303,7 @@ const SuggestionSection = () => {
                 </label>
                 <input
                   required
-                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow focus:outline-none"
+                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow-sm focus:outline-hidden"
                   id="email"
                   type="email"
                   placeholder="jane@example.com"
@@ -320,7 +320,7 @@ const SuggestionSection = () => {
                 </label>
                 <input
                   required
-                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow focus:outline-none"
+                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow-sm focus:outline-hidden"
                   id="title"
                   type="text"
                   placeholder="Feature Title"
@@ -337,7 +337,7 @@ const SuggestionSection = () => {
                 </label>
                 <textarea
                   required
-                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow focus:outline-none"
+                  className="focus:shadow-outline w-full appearance-none rounded border border-gray-600 bg-gray-700 px-3 py-2 leading-tight text-gray-300 shadow-sm focus:outline-hidden"
                   id="feature"
                   rows={4}
                   placeholder="Describe the feature you would like to see"
@@ -347,7 +347,7 @@ const SuggestionSection = () => {
               </div>
               <div className="flex items-center justify-between">
                 <button
-                  className="focus:shadow-outline flex items-center justify-center gap-2 rounded bg-indigo-500 px-4 py-2 font-bold text-white transition-colors duration-150 hover:bg-indigo-700 focus:outline-none"
+                  className="focus:shadow-outline flex items-center justify-center gap-2 rounded bg-indigo-500 px-4 py-2 font-bold text-white transition-colors duration-150 hover:bg-indigo-700 focus:outline-hidden"
                   type="submit"
                 >
                   Submit

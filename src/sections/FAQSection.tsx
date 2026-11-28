@@ -26,7 +26,7 @@ function FAQItem({
           aria-expanded={isOpen}
           aria-controls={panelId}
           onClick={() => setIsOpen((open) => !open)}
-          className="flex min-h-11 w-full items-center justify-between gap-4 py-5 text-left font-montserrat text-base font-semibold text-foreground transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-oh-focus sm:text-lg"
+          className="flex min-h-11 w-full items-center justify-between gap-4 py-5 text-left font-montserrat text-base font-semibold text-foreground transition-colors hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-oh-focus sm:text-lg"
         >
           <span>{faq.question}</span>
           <ChevronDown

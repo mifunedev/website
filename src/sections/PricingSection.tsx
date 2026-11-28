@@ -35,7 +35,7 @@ export default function PricingSection() {
             Nodes start at {formatHourlyUsd(fullHourUsd(entryPlan))} an hour.{" "}
             <Link
               href={OFFERING_URLS.pricing}
-              className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
             >
               See Console pricing <span aria-hidden="true">→</span>
             </Link>
@@ -124,7 +124,7 @@ export default function PricingSection() {
                         href={offering.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-center font-montserrat text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                        className={`mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-center font-montserrat text-sm font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                           isCloud
                             ? "bg-oh-solid text-black hover:bg-green-400"
                             : "border border-border bg-background text-foreground hover:border-green-500/50 hover:text-oh-accent"
@@ -167,7 +167,7 @@ export default function PricingSection() {
             </div>
             <a
               href={supportOffering.href}
-              className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-center font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-center font-montserrat text-sm font-semibold text-foreground transition-colors hover:border-green-500/50 hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
             >
               <Headphones className="h-4 w-4" aria-hidden="true" />
               Explore Mifune engineering support

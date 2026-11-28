@@ -6,7 +6,7 @@ import { socialIcons } from "@/config/app";
 import { OFFERING_URLS } from "@/config/offerings";
 
 const footerLinkClass =
-  "inline-flex min-h-11 items-center gap-1 rounded-md font-montserrat text-sm text-muted-foreground transition-colors hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus";
+  "inline-flex min-h-11 items-center gap-1 rounded-md font-montserrat text-sm text-muted-foreground transition-colors hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus";
 
 const FooterSection = () => {
   return (
@@ -16,7 +16,7 @@ const FooterSection = () => {
           <div className="max-w-sm">
             <Link
               href="/"
-              className="inline-flex min-h-11 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              className="inline-flex min-h-11 items-center rounded-md pr-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               aria-label="Mifune home"
             >
               <MifuneLockup size={36} />
@@ -143,7 +143,7 @@ const FooterSection = () => {
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
                     aria-label={`${social.tooltip} (opens in a new tab)`}
                   >
                     <Icon size={19} aria-hidden="true" />

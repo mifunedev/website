@@ -28,7 +28,7 @@ export default function AgroValueSection() {
       className="relative overflow-hidden border-y border-oh-rule bg-oh-paper px-4 py-20 text-oh-ink sm:py-24"
       aria-labelledby="agro-value-heading"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-size-[32px_32px] opacity-20" />
       <div className="relative mx-auto max-w-6xl">
         <AgroBrandBar
           density="card"

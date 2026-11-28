@@ -50,7 +50,7 @@ const TopNavbar = () => {
     <>
       <a
         href="#main-content"
-        className="sr-only rounded-md bg-background px-4 py-3 font-montserrat text-sm font-semibold text-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[100] focus:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="sr-only rounded-md bg-background px-4 py-3 font-montserrat text-sm font-semibold text-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-100 focus:shadow-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         Skip to main content
       </a>
@@ -67,7 +67,7 @@ const TopNavbar = () => {
             <Link
               href="/"
               aria-current={pathname === "/" ? "page" : undefined}
-              className="flex min-h-11 shrink-0 items-center rounded-md pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+              className="flex min-h-11 shrink-0 items-center rounded-md pr-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               aria-label="Mifune home"
             >
               <MifuneLockup size={34} />
@@ -89,7 +89,7 @@ const TopNavbar = () => {
                   {...(item.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 font-montserrat text-sm font-medium transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus xl:px-3 ${
+                  className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 font-montserrat text-sm font-medium transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus xl:px-3 ${
                     isCurrent
                       ? "bg-green-500/10 text-foreground shadow-[inset_0_-2px_0_0_var(--oh-accent)]"
                       : "text-muted-foreground"
@@ -113,7 +113,7 @@ const TopNavbar = () => {
               href={OFFERING_URLS.cloud}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-1.5 inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-oh-solid px-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:ml-2 xl:px-4"
+              className="ml-1.5 inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-oh-solid px-3 font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:ml-2 xl:px-4"
             >
               Open Console
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -132,7 +132,7 @@ const TopNavbar = () => {
                 <button
                   type="button"
                   aria-label="Toggle navigation menu"
-                  className="flex h-11 w-11 items-center justify-center rounded-md border border-input bg-background text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                  className="flex h-11 w-11 items-center justify-center rounded-md border border-input bg-background text-foreground transition-colors hover:bg-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
                 >
                   {menuOpen ? (
                     <X className="h-5 w-5" aria-hidden="true" />

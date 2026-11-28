@@ -202,7 +202,7 @@ export default function AgentPickerSection() {
       className="relative scroll-mt-20 overflow-hidden border-y border-border bg-card/25 px-4 py-20 sm:py-24"
       aria-labelledby="pick-your-agent-heading"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[32px_32px]" />
       <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto mb-10 max-w-4xl text-center">
           <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-oh-accent">
@@ -235,7 +235,7 @@ export default function AgentPickerSection() {
                   href={agent.docsUrl ?? `${DOCS_BASE_URL}${agent.docsPath}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-full min-h-28 min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="group flex h-full min-h-28 min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 text-foreground transition-colors hover:border-green-500/50 hover:bg-green-500/5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <span
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-background/70 text-green-500"
@@ -244,10 +244,10 @@ export default function AgentPickerSection() {
                     <AgentLogo logo={agent.logo} />
                   </span>
                   <span className="min-w-0 pt-0.5">
-                    <h3 className="break-words font-montserrat text-sm font-semibold text-current transition-colors group-hover:text-oh-accent">
+                    <h3 className="wrap-break-word font-montserrat text-sm font-semibold text-current transition-colors group-hover:text-oh-accent">
                       {agent.name}
                     </h3>
-                    <p className="mt-1 break-words font-montserrat text-xs leading-relaxed text-muted-foreground">
+                    <p className="mt-1 wrap-break-word font-montserrat text-xs leading-relaxed text-muted-foreground">
                       {agent.description}
                     </p>
                     <span className="sr-only">(opens in a new tab)</span>
@@ -266,10 +266,10 @@ export default function AgentPickerSection() {
                     <AgentLogo logo={agent.logo} />
                   </span>
                   <span className="min-w-0 pt-0.5">
-                    <h3 className="break-words font-montserrat text-sm font-semibold text-current">
+                    <h3 className="wrap-break-word font-montserrat text-sm font-semibold text-current">
                       {agent.name}
                     </h3>
-                    <p className="mt-1 break-words font-montserrat text-xs leading-relaxed text-muted-foreground">
+                    <p className="mt-1 wrap-break-word font-montserrat text-xs leading-relaxed text-muted-foreground">
                       {agent.description}
                     </p>
                   </span>

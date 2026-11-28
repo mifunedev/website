@@ -40,7 +40,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
   return (
     <div
       style={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
-      className="flex h-full cursor-pointer flex-col rounded-lg border border-border bg-card shadow transition duration-300 ease-in-out hover:shadow-lg"
+      className="flex h-full cursor-pointer flex-col rounded-lg border border-border bg-card shadow-sm transition duration-300 ease-in-out hover:shadow-lg"
     >
       <Link
         href={`/blog/${post.slug}`}
@@ -55,9 +55,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         />
       </Link>
 
-      <div className="flex flex-grow flex-col p-4 text-card-foreground">
+      <div className="flex grow flex-col p-4 text-card-foreground">
         {post.categories && (
-          <div className="no-scrollbar mb-2 flex flex-nowrap overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="no-scrollbar mb-2 flex flex-nowrap overflow-x-auto [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden">
             {post.categories.map((category: string, index: number) => (
               <div
                 key={index}
@@ -80,7 +80,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           </h3>
         </Link>
 
-        <p className="mb-4 line-clamp-3 flex-grow text-xs text-muted-foreground">
+        <p className="mb-4 line-clamp-3 grow text-xs text-muted-foreground">
           {post.excerpt}
         </p>
 

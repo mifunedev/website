@@ -128,7 +128,7 @@ export default function FleetCalculator() {
                       aria-disabled={atMin}
                       aria-label={`Remove one ${plan.label} node`}
                       onClick={() => adjustQuantity(plan.spec, -1)}
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border font-montserrat text-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus ${
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border font-montserrat text-lg font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus ${
                         atMin
                           ? "text-muted-foreground/40"
                           : "hover:border-oh-accent/50 text-foreground hover:text-oh-accent"
@@ -147,14 +147,14 @@ export default function FleetCalculator() {
                       onChange={(event) =>
                         setQuantity(plan.spec, Number(event.target.value))
                       }
-                      className="h-11 w-16 rounded-lg border border-border bg-background text-center font-montserrat text-base font-semibold tabular-nums text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                      className="h-11 w-16 rounded-lg border border-border bg-background text-center font-montserrat text-base font-semibold tabular-nums text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
                     />
                     <button
                       type="button"
                       aria-disabled={atMax}
                       aria-label={`Add one ${plan.label} node`}
                       onClick={() => adjustQuantity(plan.spec, 1)}
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border font-montserrat text-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus ${
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border font-montserrat text-lg font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus ${
                         atMax
                           ? "text-muted-foreground/40"
                           : "hover:border-oh-accent/50 text-foreground hover:text-oh-accent"
@@ -190,7 +190,7 @@ export default function FleetCalculator() {
             return (
               <label
                 key={preset.hours}
-                className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border px-4 py-2 font-montserrat text-sm transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-oh-focus has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-background ${
+                className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border px-4 py-2 font-montserrat text-sm transition-colors has-focus-visible:ring-2 has-focus-visible:ring-oh-focus has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-background ${
                   selected
                     ? "border-oh-accent/60 bg-oh-accent/10 font-semibold text-oh-accent"
                     : "hover:border-oh-accent/40 border-border text-muted-foreground hover:text-foreground"
@@ -267,7 +267,7 @@ export default function FleetCalculator() {
           href={OFFERING_URLS.cloud}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-5 py-3 text-center font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-5 py-3 text-center font-montserrat text-sm font-semibold text-black transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Open the Console
           <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />

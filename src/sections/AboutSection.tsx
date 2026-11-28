@@ -35,7 +35,7 @@ const AboutSection = () => {
           className="rounded-3xl border border-border bg-card p-8 md:p-12"
         >
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-            <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full border border-green-500/30 bg-green-500/10">
+            <div className="h-32 w-32 shrink-0 overflow-hidden rounded-full border border-green-500/30 bg-green-500/10">
               <Image
                 src="/images/ryan_egg.png"
                 alt="Ryan Eggleston"

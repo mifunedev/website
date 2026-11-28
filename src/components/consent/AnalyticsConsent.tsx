@@ -108,7 +108,7 @@ export default function AnalyticsConsent({ gaId }: { gaId: string }) {
           role="region"
           aria-label="Cookie consent"
           tabIndex={-1}
-          className="fixed inset-x-0 bottom-0 z-[60] pointer-events-none p-4 focus-visible:outline-none"
+          className="fixed inset-x-0 bottom-0 z-60 pointer-events-none p-4 focus-visible:outline-hidden"
         >
           <div className="pointer-events-auto mx-auto flex max-w-3xl flex-col gap-4 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-lg sm:flex-row sm:items-center sm:justify-between">
             <p className="font-montserrat text-sm leading-relaxed text-muted-foreground">
@@ -118,7 +118,7 @@ export default function AnalyticsConsent({ gaId }: { gaId: string }) {
                 href={PRIVACY_POLICY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-sm text-foreground underline underline-offset-4 hover:text-oh-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                className="rounded-sm text-foreground underline underline-offset-4 hover:text-oh-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
                 Privacy policy
                 <span className="sr-only"> (opens in a new tab)</span>

@@ -115,8 +115,8 @@ export default function PricingPage() {
         className="scroll-mt-20 bg-background"
       >
         <section className="relative overflow-hidden px-4 pb-16 pt-32">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_85%_60%_at_50%_0%,#000_65%,transparent_100%)]" />
-          <div className="absolute left-1/2 top-1/4 h-[25rem] w-[min(44rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/15 blur-[120px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_85%_60%_at_50%_0%,#000_65%,transparent_100%)]" />
+          <div className="absolute left-1/2 top-1/4 h-100 w-[min(44rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/15 blur-[120px]" />
 
           <div className="relative mx-auto max-w-4xl text-center">
             <AgroBrandBar
@@ -142,7 +142,7 @@ export default function PricingPage() {
                 href={OFFERING_URLS.cloud}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-7 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Open the Console
                 <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -150,7 +150,7 @@ export default function PricingPage() {
               </a>
               <a
                 href={`mailto:${NODE_LIMIT_SUPPORT_EMAIL}`}
-                className="decoration-oh-accent/40 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-md px-1 font-montserrat text-sm font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                className="decoration-oh-accent/40 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-md px-1 font-montserrat text-sm font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
                 <span>
                   {`Need more than ${PAID_NODE_LIMIT_PER_ORG} paid nodes? Email ${NODE_LIMIT_SUPPORT_EMAIL}`}{" "}
@@ -186,7 +186,7 @@ export default function PricingPage() {
                 href={OFFERING_URLS.cloud}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-oh-solid px-6 py-3 text-center font-montserrat text-base font-semibold text-black shadow-lg transition-colors hover:bg-green-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Create free node
                 <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -261,7 +261,7 @@ export default function PricingPage() {
               Console customers can add hands-on help with adoption from our team:{" "}
               <Link
                 href={OFFERING_URLS.support}
-                className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus"
+                className="decoration-oh-accent/40 inline-flex min-h-11 items-center gap-1 rounded-md font-semibold text-oh-accent underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus"
               >
                 Mifune engineering support <span aria-hidden="true">→</span>
               </Link>
@@ -275,7 +275,7 @@ export default function PricingPage() {
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--oh-rule)_1px,transparent_1px),linear-gradient(to_bottom,var(--oh-rule)_1px,transparent_1px)] bg-size-[32px_32px] opacity-20"
           />
           <div className="relative mx-auto max-w-6xl">
             <AgroBrandBar
@@ -304,7 +304,7 @@ export default function PricingPage() {
                   href={OFFERING_URLS.openSource}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:border-oh-accent/50 mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl border border-oh-rule bg-oh-raised px-5 py-3 text-center font-montserrat text-sm font-semibold text-oh-ink transition-colors hover:text-oh-accent-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-oh-paper"
+                  className="hover:border-oh-accent/50 mt-7 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl border border-oh-rule bg-oh-raised px-5 py-3 text-center font-montserrat text-sm font-semibold text-oh-ink transition-colors hover:text-oh-accent-raised focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-oh-focus focus-visible:ring-offset-2 focus-visible:ring-offset-oh-paper"
                 >
                   Explore AGRO on GitHub
                   <ExternalLink

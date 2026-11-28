@@ -74,7 +74,7 @@ export default function RoadmapSection() {
 
   return (
     <section id="roadmap" className="py-24 bg-gray-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-purple-900/20 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-blue-900/20 to-purple-900/20 pointer-events-none"></div>
       
       <div className="container mx-auto px-4">
         <motion.h2 
@@ -99,7 +99,7 @@ export default function RoadmapSection() {
                 className="mb-16 relative"
               >
                 <div 
-                  className={`absolute w-5 h-5 ${getStatusColor(item.status)} rounded-full -left-[44px] mt-1.5 
+                  className={`absolute w-5 h-5 ${getStatusColor(item.status)} rounded-full left-[-44px] mt-1.5 
                     shadow-lg shadow-${item.status === 'completed' ? 'green' : item.status === 'in-progress' ? 'blue' : 'purple'}-500/50
                     flex items-center justify-center transition-transform duration-300 hover:scale-125`}
                 >
@@ -110,7 +110,7 @@ export default function RoadmapSection() {
                   )}
                 </div>
                 
-                <div className="absolute h-8 w-8 border-t-2 border-blue-500/30 -left-[30px] top-2 border-dotted"></div>
+                <div className="absolute h-8 w-8 border-t-2 border-blue-500/30 left-[-30px] top-2 border-dotted"></div>
                 
                 <div 
                   className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500/50 

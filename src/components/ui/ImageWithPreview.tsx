@@ -38,21 +38,21 @@ export function ImageWithPreview({
       <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-black/80 transition-opacity duration-300 ease-out data-[closed]:opacity-0"
+          className="fixed inset-0 bg-black/80 transition-opacity duration-300 ease-out data-closed:opacity-0"
         />
         
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel 
               transition
-              className="relative max-w-7xl overflow-hidden rounded-lg p-1 shadow-xl transition-all duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+              className="relative max-w-7xl overflow-hidden rounded-lg p-1 shadow-xl transition-all duration-300 ease-out data-closed:scale-95 data-closed:opacity-0"
             >
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
                         setIsOpen(false);
                     }}
-                    className="absolute right-4 top-4 z-10 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
+                    className="absolute right-4 top-4 z-10 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors backdrop-blur-xs"
                 >
                     <X className="h-6 w-6" />
                     <span className="sr-only">Close</span>

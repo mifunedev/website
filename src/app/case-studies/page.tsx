@@ -28,8 +28,8 @@ export default function CaseStudiesPage() {
         className="scroll-mt-20 bg-background"
       >
         <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-20">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-          <div className="absolute left-1/2 top-1/4 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/10 blur-[120px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808024_1px,transparent_1px),linear-gradient(to_bottom,#80808024_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+          <div className="absolute left-1/2 top-1/4 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-r from-green-500/20 to-emerald-500/10 blur-[120px]" />
 
           <div className="relative mx-auto w-full max-w-4xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2">
@@ -72,7 +72,7 @@ export default function CaseStudiesPage() {
                     key={metric}
                     className="flex items-center gap-3 font-montserrat text-base text-foreground"
                   >
-                    <span className="flex-shrink-0 text-green-500">✓</span>
+                    <span className="shrink-0 text-green-500">✓</span>
                     {metric}
                   </li>
                 ))}
