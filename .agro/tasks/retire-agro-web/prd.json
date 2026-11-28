@@ -136,15 +136,16 @@
         "Verify in browser using agent-browser skill: each ported page renders at 1280 px."
       ],
       "priority": 5,
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "executed (worker, on hand at 18f2e68): build 0; 13 ported pages 200 via npm start; 26 internal hrefs from their HTML all 200; 21 PNGs in public/docs/console all 200; GET /docs renders Introduction. reasoned divergence: Console intro is content/docs/index.md (fumadocs has no slug frontmatter), listed first in console/meta.json; other 8 console pages under content/docs/console/. executed: agent-browser 1280 viewport shots of 13 pages, evidence/US-005.",
       "dependsOn": [
         "US-004"
       ],
       "files": [
         "content/docs/",
         "public/docs/"
-      ]
+      ],
+      "commit": "18f2e68"
     },
     {
       "id": "US-006",
