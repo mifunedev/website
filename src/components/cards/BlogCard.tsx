@@ -57,7 +57,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 
       <div className="flex grow flex-col p-4 text-card-foreground">
         {post.categories && (
-          <div className="no-scrollbar mb-2 flex flex-nowrap overflow-x-auto [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden">
+          <div className="no-scrollbar mb-2 flex flex-nowrap overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {post.categories.map((category: string, index: number) => (
               <div
                 key={index}
