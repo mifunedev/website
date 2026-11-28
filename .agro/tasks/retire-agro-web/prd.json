@@ -251,8 +251,8 @@
         "`src/app/sitemap.ts` lists each docs page."
       ],
       "priority": 9,
-      "passes": false,
-      "notes": "REOPENED round 1: git grep agro.mifune.dev matches src/data/faqs.ts:66; Docs nav/footer links still open in a new tab as external.",
+      "passes": true,
+      "notes": "executed (advisor, hand at 74ed1df): npm test 0 (agro-redirects.test: every fixture URL mapped, legacy one hop, installers not redirected), lint 0, drift 0, ste 0, build 0; Host agro.mifune.dev: / /docs/intro /docs/agro/intro /docs/console/nodes /blog/2026/05/19/four-words-multi-agent /blog/open-harness-demo-guide /docs/harnesses/codex /nope -> 308 to correct mifune.dev page; /install.sh /agro.js 200. executed: git grep agro.mifune.dev prints only the host guard. executed (worker): sitemap lists 47 /docs URLs. Successor mapping: /docs/agro/runtimes/openshell -> runtimes/overview. Repair round 1: faqs link, Docs internal in nav/footer/services.",
       "dependsOn": [
         "US-005",
         "US-006",
@@ -273,9 +273,12 @@
         "src/data/faqs.ts",
         "src/components/nav/TopNavBar.tsx",
         "src/sections/Footer.tsx",
-        "src/components/footer/"
+        "src/components/footer/",
+        "src/app/services/page.tsx",
+        "src/lib/schema.ts"
       ],
-      "rounds": 1
+      "rounds": 1,
+      "commit": "74ed1df"
     },
     {
       "id": "US-010",
