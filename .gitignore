@@ -46,3 +46,6 @@ public/workbox-*.js
 
 # claude code agent artifacts (screenshots, scratch)
 .claude/
+
+# synced from the AGRO release at build time
+/content/docs/agro/
